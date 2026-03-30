@@ -1,0 +1,131 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "search": "Suchen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "done": "Fertig",
+    "back": "Zurück",
+    "next": "Weiter",
+    "loading": "Laden...",
+    "retry": "Erneut versuchen",
+    "error": "Etwas ist schiefgelaufen",
+    "success": "Erfolgreich",
+    "yes": "Ja",
+    "no": "Nein",
+    "ok": "OK"
+  },
+  "tabs": {
+    "home": "Startseite",
+    "checkin": "Anwesenheit",
+    "people": "Personen",
+    "more": "Mehr"
+  },
+  "auth": {
+    "welcome": "Willkommen bei",
+    "appName": "St. Mina Connect",
+    "tagline": "Gemeinsam dienen",
+    "phoneLabel": "Telefonnummer",
+    "phonePlaceholder": "+49...",
+    "sendCode": "Code senden",
+    "otpLabel": "Bestätigungscode",
+    "otpPlaceholder": "6-stelligen Code eingeben",
+    "verify": "Bestätigen",
+    "resendCode": "Code erneut senden",
+    "invalidPhone": "Bitte geben Sie eine gültige Telefonnummer ein",
+    "invalidOtp": "Bitte geben Sie einen gültigen 6-stelligen Code ein"
+  },
+  "onboarding": {
+    "screen1Title": "Willkommen bei St. Mina Connect",
+    "screen1Body": "Wir helfen Dienern, jedes Mitglied zu betreuen.",
+    "screen2Title": "Schnelle Anwesenheit",
+    "screen2Body": "Anwesenheit in Sekunden erfassen, auch offline.",
+    "screen3Title": "Niemanden verlieren",
+    "screen3Body": "Erhalten Sie eine Benachrichtigung, wenn jemand länger nicht gesehen wurde.",
+    "getStarted": "Los geht's"
+  },
+  "home": {
+    "title": "Startseite",
+    "myGroup": "Meine Gruppe",
+    "pendingFollowUps": "Offene Nachverfolgungen",
+    "recentNewcomers": "Neue Mitglieder",
+    "totalMembers": "Mitglieder gesamt",
+    "newcomersThisMonth": "Neue diesen Monat",
+    "avgAttendance": "Durchschn. Anwesenheit",
+    "atRisk": "Gefährdet"
+  },
+  "checkin": {
+    "title": "Anwesenheit",
+    "todaysEvents": "Heutige Veranstaltungen",
+    "noEvents": "Keine Veranstaltungen heute",
+    "markPresent": "Anwesend",
+    "markAbsent": "Abwesend",
+    "saveAttendance": "Anwesenheit speichern",
+    "saved": "Anwesenheit gespeichert",
+    "searchMembers": "Alle Mitglieder suchen..."
+  },
+  "people": {
+    "title": "Personen",
+    "quickAdd": "Schnell hinzufügen",
+    "register": "Registrieren",
+    "searchMembers": "Mitglieder suchen...",
+    "noMembers": "Noch keine Mitglieder",
+    "quickAddGreeting": "Willkommen! Bitte geben Sie Ihre Daten ein.",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phone": "Telefon",
+    "region": "Region (optional)",
+    "language": "Bevorzugte Sprache",
+    "priority": "Priorität",
+    "assignedServant": "Zuständiger Diener",
+    "comments": "Kommentare (privat)",
+    "registered": "Mitglied registriert!",
+    "status": {
+      "new": "Neu",
+      "active": "Aktiv",
+      "inactive": "Inaktiv"
+    },
+    "priority_labels": {
+      "high": "Hoch",
+      "medium": "Mittel",
+      "low": "Niedrig",
+      "very_low": "Sehr niedrig"
+    }
+  },
+  "followUp": {
+    "title": "Nachverfolgungen",
+    "pending": "Offen",
+    "completed": "Abgeschlossen",
+    "snoozed": "Zurückgestellt",
+    "missedAlert": "{{name}} hat {{count}} aufeinanderfolgende {{event}} verpasst",
+    "welcomeBack": "{{name}} war heute bei {{event}} nach {{weeks}} Wochen Abwesenheit.",
+    "action": "Durchgeführte Aktion",
+    "notes": "Notizen",
+    "snoozeUntil": "Zurückstellen bis",
+    "markComplete": "Als erledigt markieren",
+    "actions": {
+      "called": "Angerufen",
+      "texted": "SMS gesendet",
+      "visited": "Besucht",
+      "no_answer": "Keine Antwort",
+      "other": "Sonstiges"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache",
+    "notifications": "Benachrichtigungen",
+    "account": "Konto",
+    "servants": "Diener verwalten",
+    "alerts": "Abwesenheitswarnungen",
+    "privacy": "Datenschutz",
+    "logout": "Abmelden",
+    "reports": "Berichte"
+  },
+  "sync": {
+    "synced": "Synchronisiert",
+    "pending": "{{count}} ausstehend",
+    "failed": "Synchronisation fehlgeschlagen"
+  }
+}

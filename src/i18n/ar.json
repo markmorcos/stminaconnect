@@ -1,0 +1,131 @@
+{
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "search": "بحث",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "done": "تم",
+    "back": "رجوع",
+    "next": "التالي",
+    "loading": "جاري التحميل...",
+    "retry": "إعادة المحاولة",
+    "error": "حدث خطأ",
+    "success": "تم بنجاح",
+    "yes": "نعم",
+    "no": "لا",
+    "ok": "حسنًا"
+  },
+  "tabs": {
+    "home": "الرئيسية",
+    "checkin": "تسجيل الحضور",
+    "people": "الأشخاص",
+    "more": "المزيد"
+  },
+  "auth": {
+    "welcome": "مرحبًا بك في",
+    "appName": "سانت مينا كونكت",
+    "tagline": "نخدم معًا",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "+٤٩...",
+    "sendCode": "إرسال الرمز",
+    "otpLabel": "رمز التحقق",
+    "otpPlaceholder": "أدخل الرمز المكون من ٦ أرقام",
+    "verify": "تحقق",
+    "resendCode": "إعادة إرسال الرمز",
+    "invalidPhone": "يرجى إدخال رقم هاتف صحيح",
+    "invalidOtp": "يرجى إدخال رمز مكون من ٦ أرقام"
+  },
+  "onboarding": {
+    "screen1Title": "مرحبًا بك في سانت مينا كونكت",
+    "screen1Body": "نساعد الخدّام في رعاية كل عضو.",
+    "screen2Title": "تسجيل حضور سريع",
+    "screen2Body": "سجّل الحضور في ثوانٍ، حتى بدون إنترنت.",
+    "screen3Title": "لا تفقد أحدًا",
+    "screen3Body": "احصل على تنبيه عندما لم يُرَ أحدٌ منذ فترة.",
+    "getStarted": "ابدأ الآن"
+  },
+  "home": {
+    "title": "الرئيسية",
+    "myGroup": "مجموعتي",
+    "pendingFollowUps": "المتابعات المعلقة",
+    "recentNewcomers": "المنضمون الجدد",
+    "totalMembers": "إجمالي الأعضاء",
+    "newcomersThisMonth": "المنضمون هذا الشهر",
+    "avgAttendance": "متوسط الحضور",
+    "atRisk": "بحاجة للمتابعة"
+  },
+  "checkin": {
+    "title": "تسجيل الحضور",
+    "todaysEvents": "أحداث اليوم",
+    "noEvents": "لا توجد أحداث اليوم",
+    "markPresent": "حاضر",
+    "markAbsent": "غائب",
+    "saveAttendance": "حفظ الحضور",
+    "saved": "تم حفظ الحضور",
+    "searchMembers": "البحث في جميع الأعضاء..."
+  },
+  "people": {
+    "title": "الأشخاص",
+    "quickAdd": "إضافة سريعة",
+    "register": "تسجيل",
+    "searchMembers": "البحث عن أعضاء...",
+    "noMembers": "لا يوجد أعضاء بعد",
+    "quickAddGreeting": "!مرحبًا! يرجى ملء بياناتك",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "phone": "الهاتف",
+    "region": "المنطقة (اختياري)",
+    "language": "اللغة المفضلة",
+    "priority": "الأولوية",
+    "assignedServant": "الخادم المسؤول",
+    "comments": "ملاحظات (خاصة)",
+    "registered": "تم تسجيل العضو!",
+    "status": {
+      "new": "جديد",
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "priority_labels": {
+      "high": "عالية",
+      "medium": "متوسطة",
+      "low": "منخفضة",
+      "very_low": "منخفضة جدًا"
+    }
+  },
+  "followUp": {
+    "title": "المتابعات",
+    "pending": "معلقة",
+    "completed": "مكتملة",
+    "snoozed": "مؤجلة",
+    "missedAlert": "{{name}} غاب عن {{count}} {{event}} متتالية",
+    "welcomeBack": "{{name}} حضر {{event}} اليوم بعد {{weeks}} أسابيع غياب.",
+    "action": "الإجراء المتخذ",
+    "notes": "ملاحظات",
+    "snoozeUntil": "تأجيل حتى",
+    "markComplete": "تم الإنجاز",
+    "actions": {
+      "called": "اتصال",
+      "texted": "رسالة نصية",
+      "visited": "زيارة",
+      "no_answer": "لا رد",
+      "other": "أخرى"
+    }
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "notifications": "الإشعارات",
+    "account": "الحساب",
+    "servants": "إدارة الخدّام",
+    "alerts": "تنبيهات الغياب",
+    "privacy": "الخصوصية والبيانات",
+    "logout": "تسجيل الخروج",
+    "reports": "التقارير"
+  },
+  "sync": {
+    "synced": "تمت المزامنة",
+    "pending": "{{count}} بانتظار المزامنة",
+    "failed": "فشلت المزامنة"
+  }
+}

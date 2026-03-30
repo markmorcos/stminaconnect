@@ -1,0 +1,131 @@
+{
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "search": "Search",
+    "delete": "Delete",
+    "edit": "Edit",
+    "done": "Done",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "retry": "Retry",
+    "error": "Something went wrong",
+    "success": "Success",
+    "yes": "Yes",
+    "no": "No",
+    "ok": "OK"
+  },
+  "tabs": {
+    "home": "Home",
+    "checkin": "Check In",
+    "people": "People",
+    "more": "More"
+  },
+  "auth": {
+    "welcome": "Welcome to",
+    "appName": "St. Mina Connect",
+    "tagline": "Serving Together",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "+49...",
+    "sendCode": "Send Code",
+    "otpLabel": "Verification Code",
+    "otpPlaceholder": "Enter 6-digit code",
+    "verify": "Verify",
+    "resendCode": "Resend Code",
+    "invalidPhone": "Please enter a valid phone number",
+    "invalidOtp": "Please enter a valid 6-digit code"
+  },
+  "onboarding": {
+    "screen1Title": "Welcome to St. Mina Connect",
+    "screen1Body": "Helping servants care for every member.",
+    "screen2Title": "Quick Check-In",
+    "screen2Body": "Take attendance in seconds, even offline.",
+    "screen3Title": "Never Lose Track",
+    "screen3Body": "Get alerted when someone hasn't been seen in a while.",
+    "getStarted": "Get Started"
+  },
+  "home": {
+    "title": "Home",
+    "myGroup": "My Group",
+    "pendingFollowUps": "Pending Follow-ups",
+    "recentNewcomers": "Recent Newcomers",
+    "totalMembers": "Total Members",
+    "newcomersThisMonth": "Newcomers This Month",
+    "avgAttendance": "Avg. Attendance",
+    "atRisk": "At Risk"
+  },
+  "checkin": {
+    "title": "Check In",
+    "todaysEvents": "Today's Events",
+    "noEvents": "No events today",
+    "markPresent": "Present",
+    "markAbsent": "Absent",
+    "saveAttendance": "Save Attendance",
+    "saved": "Attendance saved",
+    "searchMembers": "Search all members..."
+  },
+  "people": {
+    "title": "People",
+    "quickAdd": "Quick Add",
+    "register": "Register",
+    "searchMembers": "Search members...",
+    "noMembers": "No members yet",
+    "quickAddGreeting": "Welcome! Please fill in your details.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phone": "Phone",
+    "region": "Region (optional)",
+    "language": "Preferred Language",
+    "priority": "Priority",
+    "assignedServant": "Assigned Servant",
+    "comments": "Comments (private)",
+    "registered": "Member registered!",
+    "status": {
+      "new": "New",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "priority_labels": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "very_low": "Very Low"
+    }
+  },
+  "followUp": {
+    "title": "Follow-ups",
+    "pending": "Pending",
+    "completed": "Completed",
+    "snoozed": "Snoozed",
+    "missedAlert": "{{name}} has missed {{count}} consecutive {{event}}",
+    "welcomeBack": "{{name}} attended {{event}} today after {{weeks}} weeks away.",
+    "action": "Action Taken",
+    "notes": "Notes",
+    "snoozeUntil": "Snooze Until",
+    "markComplete": "Mark Complete",
+    "actions": {
+      "called": "Called",
+      "texted": "Texted",
+      "visited": "Visited",
+      "no_answer": "No Answer",
+      "other": "Other"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "notifications": "Notifications",
+    "account": "Account",
+    "servants": "Manage Servants",
+    "alerts": "Absence Alerts",
+    "privacy": "Privacy & Data",
+    "logout": "Log Out",
+    "reports": "Reports"
+  },
+  "sync": {
+    "synced": "All synced",
+    "pending": "{{count}} pending",
+    "failed": "Sync failed"
+  }
+}
