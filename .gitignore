@@ -42,3 +42,6 @@ yarn-error.*
 /ios
 /android
 .claude/
+
+# service account keys
+service-account.json

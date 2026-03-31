@@ -5,6 +5,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   name: "St. Mina Connect",
   slug: "stminaconnect",
   version: "1.0.0",
+  owner: "markmorcos",
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
@@ -43,5 +44,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     supabaseUrl: process.env.EXPO_PUBLIC_SUPABASE_URL,
     supabaseAnonKey: process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY,
+    eas: {
+      projectId: "709cf095-c8d1-4a89-b897-ee734c8d8acd",
+    },
   },
 });
