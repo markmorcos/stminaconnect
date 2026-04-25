@@ -38,6 +38,7 @@
     "expo-sqlite": "~16.0.10",
     "expo-status-bar": "~3.0.9",
     "i18next": "^26.0.8",
+    "lucide-react-native": "^1.11.0",
     "react": "19.1.0",
     "react-hook-form": "^7.73.1",
     "react-i18next": "^17.0.4",
@@ -64,6 +65,7 @@
     "jest-expo": "^55.0.16",
     "lint-staged": "^16.4.0",
     "prettier": "^3.8.3",
+    "react-test-renderer": "^19.1.0",
     "supabase": "^2.95.3",
     "typescript": "~5.9.2"
   },

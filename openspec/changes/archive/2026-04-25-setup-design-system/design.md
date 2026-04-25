@@ -36,6 +36,7 @@ This is the second-most architecturally consequential phase after offline sync â
 2. **Tokens are pure data.** `src/design/tokens.ts` exports literal values; no React, no Paper imports. This keeps tokens testable in isolation and lets us regenerate Paper themes deterministically.
 
 3. **Color palette (initial values; iterated in `add-brand-assets`):**
+
    ```ts
    light: {
      primary:        '#8B1E2D',  // deep liturgical red
@@ -72,6 +73,7 @@ This is the second-most architecturally consequential phase after offline sync â
      info:           '#7A8DC4',
    }
    ```
+
    These are starting values. `add-brand-assets` runs the WCAG verification and may nudge values 5â€“10% to hit AA against text pairings. The `avatarPalette` is 8 saturation-balanced colors derived from the primary/secondary/accent â€” chosen so that white text on any of them passes AA Large.
 
 4. **Typography pairing rationale**:
@@ -81,6 +83,7 @@ This is the second-most architecturally consequential phase after offline sync â
    - We do NOT use Cairo or Tajawal: too geometric, less reading rhythm at body sizes.
 
 5. **Typography scale (sizes in dp; line-height as multiplier):**
+
    ```
    displayLg : 32 / 1.2 / 700
    displayMd : 28 / 1.25 / 700
@@ -93,6 +96,7 @@ This is the second-most architecturally consequential phase after offline sync â
    caption   : 12 / 1.4 / 500
    label     : 12 / 1.3 / 600 (uppercase tracking +0.5)
    ```
+
    The `Text` component picks font family at render time based on `i18n.language === 'ar'` â†’ IBM Plex Sans Arabic; otherwise Inter.
 
 6. **Dark mode strategy**:
@@ -118,10 +122,11 @@ This is the second-most architecturally consequential phase after offline sync â
 11. **Font loading**: `expo-font.useFonts` returns a boolean ready flag; the `app/_layout.tsx` blocks rendering with the splash screen visible until fonts are loaded. Splash is auto-shown by `expo-splash-screen` on cold start; we call `SplashScreen.hideAsync()` only after fonts + theme are ready. This eliminates font-flash.
 
 12. **Component API conventions**:
-   - All variants exposed via `variant` prop (string union).
-   - All components accept `style` and forward to the outermost element.
-   - All components accept and forward `accessibilityLabel`.
-   - Components do not accept color or font-family as props â€” they read from tokens. If a screen needs an off-token color, that's a token gap to file as a design-system follow-up, not a one-off.
+
+- All variants exposed via `variant` prop (string union).
+- All components accept `style` and forward to the outermost element.
+- All components accept and forward `accessibilityLabel`.
+- Components do not accept color or font-family as props â€” they read from tokens. If a screen needs an off-token color, that's a token gap to file as a design-system follow-up, not a one-off.
 
 ## Risks / Trade-offs
 

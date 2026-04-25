@@ -1,0 +1,6436 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Component snapshots — RTL Avatar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Avatar for Mariam Saad"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#8A4A1F",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontSize": 14,
+              "fontWeight": "600",
+              "lineHeight": 15.400000000000002,
+            },
+          ]
+        }
+      >
+        MS
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Badge 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "backgroundColor": "#B0263C",
+            "borderRadius": 9999,
+            "paddingHorizontal": 8,
+            "paddingVertical": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        High
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Button 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#8B1E2D",
+            "borderColor": "transparent",
+            "borderRadius": 8,
+            "borderWidth": 0,
+            "flexDirection": "row",
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingHorizontal": 16,
+          },
+          null,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        Tap
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Card 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E5DED5",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "elevation": 1,
+            "padding": 12,
+            "shadowColor": "#000000",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.06,
+            "shadowRadius": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Inside
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Chip 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Selected"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 4,
+          "right": 4,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "backgroundColor": "#8B1E2D",
+            "borderColor": "#8B1E2D",
+            "borderRadius": 9999,
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 36,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 6,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Selected
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Divider 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no"
+      style={
+        [
+          {
+            "alignSelf": "stretch",
+            "backgroundColor": "#E5DED5",
+            "height": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL EmptyState 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "padding": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginBottom": 12,
+          }
+        }
+      >
+        <RNSVGSvgView
+          align="xMidYMid"
+          bbHeight={40}
+          bbWidth={40}
+          fill="none"
+          focusable={false}
+          height={40}
+          meetOrSlice={0}
+          minX={0}
+          minY={0}
+          stroke="#5C544D"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          style={
+            [
+              {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              {
+                "flex": 0,
+                "height": 40,
+                "width": 40,
+              },
+            ]
+          }
+          vbHeight={24}
+          vbWidth={24}
+          width={40}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <RNSVGGroup
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4284240973,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          >
+            <RNSVGPath
+              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M16 3.128a4 4 0 0 1 0 7.744"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M22 21v-2a4 4 0 0 0-3-3.87"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGCircle
+              cx="9"
+              cy="7"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              r="4"
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+      <Text
+        accessibilityRole="header"
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-SemiBold",
+              "fontSize": 18,
+              "letterSpacing": undefined,
+              "lineHeight": 24.3,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        No people
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "#5C544D",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 4,
+            },
+          ]
+        }
+      >
+        Add someone.
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL IconButton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Notifications"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 12,
+          "left": 12,
+          "right": 12,
+          "top": 12,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 9999,
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": 44,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        fill="none"
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        stroke="#1C1A18"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={24}
+        vbWidth={24}
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <RNSVGGroup
+          fill={null}
+          propList={
+            [
+              "fill",
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+              "strokeLinejoin",
+            ]
+          }
+          stroke={
+            {
+              "payload": 4280031768,
+              "type": 0,
+            }
+          }
+          strokeLinecap={1}
+          strokeLinejoin={1}
+          strokeWidth={2}
+        >
+          <RNSVGPath
+            d="M10.268 21a2 2 0 0 0 3.464 0"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4280031768,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+          <RNSVGPath
+            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4280031768,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Input 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "marginBottom": 8,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={{}}
+      >
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 6,
+              },
+              false,
+              {
+                "backgroundColor": "#FBF8F4",
+                "borderColor": "#E5DED5",
+                "borderRadius": 8,
+                "borderWidth": 1,
+              },
+              undefined,
+            ]
+          }
+          testID="text-input-outline"
+        />
+        <View
+          style={
+            [
+              {
+                "flexGrow": 1,
+                "paddingBottom": 0,
+              },
+              {
+                "minHeight": 56,
+                "paddingTop": 8,
+              },
+            ]
+          }
+        >
+          <View
+            pointerEvents="none"
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "zIndex": 3,
+                },
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": [
+                    {
+                      "translateX": 0,
+                    },
+                  ],
+                  "width": 750,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "width": 73,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  pointerEvents="none"
+                  style={
+                    {
+                      "backgroundColor": "#FBF8F4",
+                      "bottom": 8,
+                      "left": 10,
+                      "maxHeight": 2.6666666666666665,
+                      "opacity": -0.6666666666666667,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 6,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                      ],
+                      "width": 12,
+                    }
+                  }
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "backgroundColor": "#FBF8F4",
+                      "color": "transparent",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "height": 0,
+                      "left": 8,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "opacity": -0.6666666666666667,
+                      "paddingHorizontal": 0,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 33,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                        {
+                          "scaleY": 1,
+                        },
+                      ],
+                      "width": -16,
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-background"
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  onLayout={[Function]}
+                  onTextLayout={[Function]}
+                  style={
+                    {
+                      "color": "#8B1E2D",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-active"
+                >
+                  Name
+                </Text>
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "color": "#5C544D",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-inactive"
+                >
+                  Name
+                </Text>
+              </View>
+            </View>
+          </View>
+          <TextInput
+            accessibilityLabel="Name"
+            cursorColor="#8B1E2D"
+            editable={true}
+            maxFontSizeMultiplier={1.5}
+            multiline={false}
+            onBlur={[Function]}
+            onChangeText={[Function]}
+            onFocus={[Function]}
+            onLayout={[Function]}
+            placeholderTextColor="transparent"
+            selectionColor="#8B1E2D"
+            style={
+              [
+                {
+                  "flexGrow": 1,
+                  "margin": 0,
+                },
+                {
+                  "height": 48,
+                },
+                {
+                  "paddingBottom": 0,
+                  "paddingTop": 0,
+                },
+                {
+                  "color": "#1C1A18",
+                  "fontFamily": "Inter-Regular",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "letterSpacing": 0.15,
+                  "lineHeight": undefined,
+                  "minWidth": 65,
+                  "paddingHorizontal": 16,
+                  "textAlign": "left",
+                  "textAlignVertical": "center",
+                },
+                undefined,
+                [
+                  {},
+                ],
+                undefined,
+              ]
+            }
+            testID="text-input-outlined"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+      </View>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        onLayout={[Function]}
+        style={
+          {
+            "color": "#5C544D",
+            "fontFamily": "Inter-Regular",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 4,
+            "textAlign": "left",
+            "transform": [],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Helper
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Layout 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flex": undefined,
+            "margin": undefined,
+            "marginBottom": undefined,
+            "marginEnd": undefined,
+            "marginHorizontal": undefined,
+            "marginStart": undefined,
+            "marginTop": undefined,
+            "marginVertical": undefined,
+            "padding": undefined,
+            "paddingBottom": undefined,
+            "paddingEnd": undefined,
+            "paddingHorizontal": undefined,
+            "paddingStart": undefined,
+            "paddingTop": undefined,
+            "paddingVertical": undefined,
+          },
+          {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "justifyContent": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginTop": 0,
+          }
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": undefined,
+                "margin": undefined,
+                "marginBottom": undefined,
+                "marginEnd": undefined,
+                "marginHorizontal": undefined,
+                "marginStart": undefined,
+                "marginTop": undefined,
+                "marginVertical": undefined,
+                "padding": undefined,
+                "paddingBottom": undefined,
+                "paddingEnd": undefined,
+                "paddingHorizontal": undefined,
+                "paddingStart": undefined,
+                "paddingTop": undefined,
+                "paddingVertical": undefined,
+              },
+              {
+                "alignItems": undefined,
+                "flexDirection": "row",
+                "flexWrap": "nowrap",
+                "justifyContent": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "marginStart": 0,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#000",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              {
+                "marginStart": 8,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#888",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL LoadingSkeleton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "backgroundColor": "#E5DED5",
+            "borderRadius": 4,
+            "height": 12,
+            "opacity": 0.5,
+            "width": 100,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Modal 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 12,
+              "margin": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 12,
+                "flex": undefined,
+                "justifyContent": "center",
+                "padding": 16,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#1C1A18",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Modal body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Select 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+    >
+      <View
+        accessibilityLabel="A"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "#E5DED5",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 44,
+              "opacity": 1,
+              "paddingHorizontal": 12,
+              "paddingVertical": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "#1C1A18",
+                "fontFamily": "Inter-Regular",
+                "fontSize": 14,
+                "letterSpacing": undefined,
+                "lineHeight": 21,
+                "textAlign": undefined,
+                "textTransform": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          A
+        </Text>
+        <View
+          style={
+            {
+              "marginStart": 8,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={20}
+            bbWidth={20}
+            fill="none"
+            focusable={false}
+            height={20}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            stroke="#5C544D"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            style={
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                {
+                  "flex": 0,
+                  "height": 20,
+                  "width": 20,
+                },
+              ]
+            }
+            vbHeight={24}
+            vbWidth={24}
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <RNSVGGroup
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            >
+              <RNSVGPath
+                d="m6 9 6 6 6-6"
+                fill={null}
+                propList={
+                  [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                    "strokeLinecap",
+                    "strokeLinejoin",
+                  ]
+                }
+                stroke={
+                  {
+                    "payload": 4284240973,
+                    "type": 0,
+                  }
+                }
+                strokeLinecap={1}
+                strokeLinejoin={1}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Sheet 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            {
+              "justifyContent": "flex-end",
+            },
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#FFFFFF",
+              "borderTopLeftRadius": 16,
+              "borderTopRightRadius": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+                "flex": undefined,
+                "justifyContent": "center",
+                "paddingBottom": 24,
+                "paddingHorizontal": 16,
+                "paddingTop": 8,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <View
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no"
+                style={
+                  {
+                    "alignSelf": "center",
+                    "backgroundColor": "#E5DED5",
+                    "borderRadius": 2,
+                    "height": 4,
+                    "marginBottom": 12,
+                    "width": 40,
+                  }
+                }
+              />
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#1C1A18",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Sheet body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Snackbar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "position": "absolute",
+            "width": "100%",
+          },
+          {
+            "paddingBottom": 0,
+            "paddingHorizontal": 0,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "#1F1A16",
+            "borderRadius": 8,
+            "margin": 8,
+            "opacity": 0,
+            "shadowColor": "#000",
+            "shadowOffset": {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.15,
+            "shadowRadius": 6,
+            "transform": [
+              {
+                "scale": 0.9,
+              },
+            ],
+          }
+        }
+        testID="surface-outer-layer"
+      >
+        <View
+          accessibilityLiveRegion="polite"
+          collapsable={false}
+          pointerEvents="box-none"
+          style={
+            {
+              "backgroundColor": "#1F1A16",
+              "borderRadius": 8,
+              "flex": undefined,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 48,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.3,
+              "shadowRadius": 2,
+            }
+          }
+          testID="surface"
+        >
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#1C1A18",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "Inter-Regular",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flex": 1,
+                      "marginHorizontal": 16,
+                      "marginVertical": 14,
+                    },
+                    {
+                      "color": "#F5EFE7",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Message
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Spinner 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <ActivityIndicator
+      accessibilityLabel="Loading"
+      color="#8B1E2D"
+      size={24}
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — RTL Text 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#1C1A18",
+            "fontFamily": "Inter-SemiBold",
+            "fontSize": 22,
+            "letterSpacing": undefined,
+            "lineHeight": 28.6,
+            "textAlign": undefined,
+            "textTransform": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      Hello
+    </Text>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Avatar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Avatar for Mariam Saad"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#8A4A1F",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontSize": 14,
+              "fontWeight": "600",
+              "lineHeight": 15.400000000000002,
+            },
+          ]
+        }
+      >
+        MS
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Badge 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "backgroundColor": "#E47388",
+            "borderRadius": 9999,
+            "paddingHorizontal": 8,
+            "paddingVertical": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        High
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Button 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#D45D6E",
+            "borderColor": "transparent",
+            "borderRadius": 8,
+            "borderWidth": 0,
+            "flexDirection": "row",
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingHorizontal": 16,
+          },
+          null,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        Tap
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Card 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "#1F1A16",
+            "borderColor": "#3A322A",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "elevation": 1,
+            "padding": 12,
+            "shadowColor": "#000000",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.06,
+            "shadowRadius": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Inside
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Chip 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Selected"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 4,
+          "right": 4,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "backgroundColor": "#D45D6E",
+            "borderColor": "#D45D6E",
+            "borderRadius": 9999,
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 36,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 6,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Selected
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Divider 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no"
+      style={
+        [
+          {
+            "alignSelf": "stretch",
+            "backgroundColor": "#3A322A",
+            "height": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark EmptyState 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "padding": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginBottom": 12,
+          }
+        }
+      >
+        <RNSVGSvgView
+          align="xMidYMid"
+          bbHeight={40}
+          bbWidth={40}
+          fill="none"
+          focusable={false}
+          height={40}
+          meetOrSlice={0}
+          minX={0}
+          minY={0}
+          stroke="#B5ABA0"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          style={
+            [
+              {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              {
+                "flex": 0,
+                "height": 40,
+                "width": 40,
+              },
+            ]
+          }
+          vbHeight={24}
+          vbWidth={24}
+          width={40}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <RNSVGGroup
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4290096032,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          >
+            <RNSVGPath
+              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4290096032,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M16 3.128a4 4 0 0 1 0 7.744"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4290096032,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M22 21v-2a4 4 0 0 0-3-3.87"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4290096032,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGCircle
+              cx="9"
+              cy="7"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              r="4"
+              stroke={
+                {
+                  "payload": 4290096032,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+      <Text
+        accessibilityRole="header"
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-SemiBold",
+              "fontSize": 18,
+              "letterSpacing": undefined,
+              "lineHeight": 24.3,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        No people
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "#B5ABA0",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 4,
+            },
+          ]
+        }
+      >
+        Add someone.
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark IconButton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Notifications"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 12,
+          "left": 12,
+          "right": 12,
+          "top": 12,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 9999,
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": 44,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        fill="none"
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        stroke="#F5EFE7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={24}
+        vbWidth={24}
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <RNSVGGroup
+          fill={null}
+          propList={
+            [
+              "fill",
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+              "strokeLinejoin",
+            ]
+          }
+          stroke={
+            {
+              "payload": 4294307815,
+              "type": 0,
+            }
+          }
+          strokeLinecap={1}
+          strokeLinejoin={1}
+          strokeWidth={2}
+        >
+          <RNSVGPath
+            d="M10.268 21a2 2 0 0 0 3.464 0"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4294307815,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+          <RNSVGPath
+            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4294307815,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Input 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "marginBottom": 8,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={{}}
+      >
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 6,
+              },
+              false,
+              {
+                "backgroundColor": "#15110E",
+                "borderColor": "#3A322A",
+                "borderRadius": 8,
+                "borderWidth": 1,
+              },
+              undefined,
+            ]
+          }
+          testID="text-input-outline"
+        />
+        <View
+          style={
+            [
+              {
+                "flexGrow": 1,
+                "paddingBottom": 0,
+              },
+              {
+                "minHeight": 56,
+                "paddingTop": 8,
+              },
+            ]
+          }
+        >
+          <View
+            pointerEvents="none"
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "zIndex": 3,
+                },
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": [
+                    {
+                      "translateX": 0,
+                    },
+                  ],
+                  "width": 750,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "width": 73,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  pointerEvents="none"
+                  style={
+                    {
+                      "backgroundColor": "#15110E",
+                      "bottom": 8,
+                      "left": 10,
+                      "maxHeight": 2.6666666666666665,
+                      "opacity": -0.6666666666666667,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 6,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                      ],
+                      "width": 12,
+                    }
+                  }
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "backgroundColor": "#15110E",
+                      "color": "transparent",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "height": 0,
+                      "left": 8,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "opacity": -0.6666666666666667,
+                      "paddingHorizontal": 0,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 33,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                        {
+                          "scaleY": 1,
+                        },
+                      ],
+                      "width": -16,
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-background"
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  onLayout={[Function]}
+                  onTextLayout={[Function]}
+                  style={
+                    {
+                      "color": "#D45D6E",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-active"
+                >
+                  Name
+                </Text>
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "color": "#B5ABA0",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-inactive"
+                >
+                  Name
+                </Text>
+              </View>
+            </View>
+          </View>
+          <TextInput
+            accessibilityLabel="Name"
+            cursorColor="#D45D6E"
+            editable={true}
+            maxFontSizeMultiplier={1.5}
+            multiline={false}
+            onBlur={[Function]}
+            onChangeText={[Function]}
+            onFocus={[Function]}
+            onLayout={[Function]}
+            placeholderTextColor="transparent"
+            selectionColor="#D45D6E"
+            style={
+              [
+                {
+                  "flexGrow": 1,
+                  "margin": 0,
+                },
+                {
+                  "height": 48,
+                },
+                {
+                  "paddingBottom": 0,
+                  "paddingTop": 0,
+                },
+                {
+                  "color": "#F5EFE7",
+                  "fontFamily": "Inter-Regular",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "letterSpacing": 0.15,
+                  "lineHeight": undefined,
+                  "minWidth": 65,
+                  "paddingHorizontal": 16,
+                  "textAlign": "left",
+                  "textAlignVertical": "center",
+                },
+                undefined,
+                [
+                  {},
+                ],
+                undefined,
+              ]
+            }
+            testID="text-input-outlined"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+      </View>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        onLayout={[Function]}
+        style={
+          {
+            "color": "#B5ABA0",
+            "fontFamily": "Inter-Regular",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 4,
+            "textAlign": "left",
+            "transform": [],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Helper
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Layout 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flex": undefined,
+            "margin": undefined,
+            "marginBottom": undefined,
+            "marginEnd": undefined,
+            "marginHorizontal": undefined,
+            "marginStart": undefined,
+            "marginTop": undefined,
+            "marginVertical": undefined,
+            "padding": undefined,
+            "paddingBottom": undefined,
+            "paddingEnd": undefined,
+            "paddingHorizontal": undefined,
+            "paddingStart": undefined,
+            "paddingTop": undefined,
+            "paddingVertical": undefined,
+          },
+          {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "justifyContent": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginTop": 0,
+          }
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": undefined,
+                "margin": undefined,
+                "marginBottom": undefined,
+                "marginEnd": undefined,
+                "marginHorizontal": undefined,
+                "marginStart": undefined,
+                "marginTop": undefined,
+                "marginVertical": undefined,
+                "padding": undefined,
+                "paddingBottom": undefined,
+                "paddingEnd": undefined,
+                "paddingHorizontal": undefined,
+                "paddingStart": undefined,
+                "paddingTop": undefined,
+                "paddingVertical": undefined,
+              },
+              {
+                "alignItems": undefined,
+                "flexDirection": "row",
+                "flexWrap": "nowrap",
+                "justifyContent": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "marginStart": 0,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#000",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              {
+                "marginStart": 8,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#888",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark LoadingSkeleton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "backgroundColor": "#3A322A",
+            "borderRadius": 4,
+            "height": 12,
+            "opacity": 0.5,
+            "width": 100,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Modal 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#1F1A16",
+              "borderRadius": 12,
+              "margin": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#1F1A16",
+                "borderRadius": 12,
+                "flex": undefined,
+                "justifyContent": "center",
+                "padding": 16,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#F5EFE7",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Modal body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Select 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+    >
+      <View
+        accessibilityLabel="A"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#1F1A16",
+              "borderColor": "#3A322A",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 44,
+              "opacity": 1,
+              "paddingHorizontal": 12,
+              "paddingVertical": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "#F5EFE7",
+                "fontFamily": "Inter-Regular",
+                "fontSize": 14,
+                "letterSpacing": undefined,
+                "lineHeight": 21,
+                "textAlign": undefined,
+                "textTransform": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          A
+        </Text>
+        <View
+          style={
+            {
+              "marginStart": 8,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={20}
+            bbWidth={20}
+            fill="none"
+            focusable={false}
+            height={20}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            stroke="#B5ABA0"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            style={
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                {
+                  "flex": 0,
+                  "height": 20,
+                  "width": 20,
+                },
+              ]
+            }
+            vbHeight={24}
+            vbWidth={24}
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <RNSVGGroup
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4290096032,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            >
+              <RNSVGPath
+                d="m6 9 6 6 6-6"
+                fill={null}
+                propList={
+                  [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                    "strokeLinecap",
+                    "strokeLinejoin",
+                  ]
+                }
+                stroke={
+                  {
+                    "payload": 4290096032,
+                    "type": 0,
+                  }
+                }
+                strokeLinecap={1}
+                strokeLinejoin={1}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Sheet 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            {
+              "justifyContent": "flex-end",
+            },
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#1F1A16",
+              "borderTopLeftRadius": 16,
+              "borderTopRightRadius": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#1F1A16",
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+                "flex": undefined,
+                "justifyContent": "center",
+                "paddingBottom": 24,
+                "paddingHorizontal": 16,
+                "paddingTop": 8,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <View
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no"
+                style={
+                  {
+                    "alignSelf": "center",
+                    "backgroundColor": "#3A322A",
+                    "borderRadius": 2,
+                    "height": 4,
+                    "marginBottom": 12,
+                    "width": 40,
+                  }
+                }
+              />
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#F5EFE7",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Sheet body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Snackbar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "position": "absolute",
+            "width": "100%",
+          },
+          {
+            "paddingBottom": 0,
+            "paddingHorizontal": 0,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 8,
+            "margin": 8,
+            "opacity": 0,
+            "shadowColor": "#000",
+            "shadowOffset": {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.15,
+            "shadowRadius": 6,
+            "transform": [
+              {
+                "scale": 0.9,
+              },
+            ],
+          }
+        }
+        testID="surface-outer-layer"
+      >
+        <View
+          accessibilityLiveRegion="polite"
+          collapsable={false}
+          pointerEvents="box-none"
+          style={
+            {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 8,
+              "flex": undefined,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 48,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.3,
+              "shadowRadius": 2,
+            }
+          }
+          testID="surface"
+        >
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#F5EFE7",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "Inter-Regular",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flex": 1,
+                      "marginHorizontal": 16,
+                      "marginVertical": 14,
+                    },
+                    {
+                      "color": "#1C1A18",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Message
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Spinner 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <ActivityIndicator
+      accessibilityLabel="Loading"
+      color="#D45D6E"
+      size={24}
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — dark Text 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#F5EFE7",
+            "fontFamily": "Inter-SemiBold",
+            "fontSize": 22,
+            "letterSpacing": undefined,
+            "lineHeight": 28.6,
+            "textAlign": undefined,
+            "textTransform": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      Hello
+    </Text>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Avatar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Avatar for Mariam Saad"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#8A4A1F",
+            "borderRadius": 20,
+            "height": 40,
+            "justifyContent": "center",
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontSize": 14,
+              "fontWeight": "600",
+              "lineHeight": 15.400000000000002,
+            },
+          ]
+        }
+      >
+        MS
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Badge 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "backgroundColor": "#B0263C",
+            "borderRadius": 9999,
+            "paddingHorizontal": 8,
+            "paddingVertical": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        High
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Button 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "backgroundColor": "#8B1E2D",
+            "borderColor": "transparent",
+            "borderRadius": 8,
+            "borderWidth": 0,
+            "flexDirection": "row",
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingHorizontal": 16,
+          },
+          null,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            {
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        Tap
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Card 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderColor": "#E5DED5",
+            "borderRadius": 12,
+            "borderWidth": 0,
+            "elevation": 1,
+            "padding": 12,
+            "shadowColor": "#000000",
+            "shadowOffset": {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.06,
+            "shadowRadius": 2,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": undefined,
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Inside
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Chip 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Selected"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 8,
+          "left": 4,
+          "right": 4,
+          "top": 8,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "backgroundColor": "#8B1E2D",
+            "borderColor": "#8B1E2D",
+            "borderRadius": 9999,
+            "borderWidth": 1,
+            "justifyContent": "center",
+            "minHeight": 36,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 6,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Text
+        style={
+          [
+            {
+              "color": "#FBF8F4",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        Selected
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Divider 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no"
+      style={
+        [
+          {
+            "alignSelf": "stretch",
+            "backgroundColor": "#E5DED5",
+            "height": 1,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light EmptyState 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "alignItems": "center",
+            "justifyContent": "center",
+            "padding": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginBottom": 12,
+          }
+        }
+      >
+        <RNSVGSvgView
+          align="xMidYMid"
+          bbHeight={40}
+          bbWidth={40}
+          fill="none"
+          focusable={false}
+          height={40}
+          meetOrSlice={0}
+          minX={0}
+          minY={0}
+          stroke="#5C544D"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          style={
+            [
+              {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              {
+                "flex": 0,
+                "height": 40,
+                "width": 40,
+              },
+            ]
+          }
+          vbHeight={24}
+          vbWidth={24}
+          width={40}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <RNSVGGroup
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4284240973,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          >
+            <RNSVGPath
+              d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M16 3.128a4 4 0 0 1 0 7.744"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGPath
+              d="M22 21v-2a4 4 0 0 0-3-3.87"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+            <RNSVGCircle
+              cx="9"
+              cy="7"
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              r="4"
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            />
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+      <Text
+        accessibilityRole="header"
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-SemiBold",
+              "fontSize": 18,
+              "letterSpacing": undefined,
+              "lineHeight": 24.3,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            undefined,
+          ]
+        }
+      >
+        No people
+      </Text>
+      <Text
+        style={
+          [
+            {
+              "color": "#5C544D",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 4,
+            },
+          ]
+        }
+      >
+        Add someone.
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light IconButton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="Notifications"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 12,
+          "left": 12,
+          "right": 12,
+          "top": 12,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignItems": "center",
+            "borderRadius": 9999,
+            "height": 44,
+            "justifyContent": "center",
+            "opacity": 1,
+            "width": 44,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        fill="none"
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        stroke="#1C1A18"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={24}
+        vbWidth={24}
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <RNSVGGroup
+          fill={null}
+          propList={
+            [
+              "fill",
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+              "strokeLinejoin",
+            ]
+          }
+          stroke={
+            {
+              "payload": 4280031768,
+              "type": 0,
+            }
+          }
+          strokeLinecap={1}
+          strokeLinejoin={1}
+          strokeWidth={2}
+        >
+          <RNSVGPath
+            d="M10.268 21a2 2 0 0 0 3.464 0"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4280031768,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+          <RNSVGPath
+            d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"
+            fill={null}
+            propList={
+              [
+                "fill",
+                "stroke",
+                "strokeWidth",
+                "strokeLinecap",
+                "strokeLinejoin",
+              ]
+            }
+            stroke={
+              {
+                "payload": 4280031768,
+                "type": 0,
+              }
+            }
+            strokeLinecap={1}
+            strokeLinejoin={1}
+            strokeWidth={2}
+          />
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Input 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "marginBottom": 8,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={{}}
+      >
+        <View
+          pointerEvents="none"
+          style={
+            [
+              {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 6,
+              },
+              false,
+              {
+                "backgroundColor": "#FBF8F4",
+                "borderColor": "#E5DED5",
+                "borderRadius": 8,
+                "borderWidth": 1,
+              },
+              undefined,
+            ]
+          }
+          testID="text-input-outline"
+        />
+        <View
+          style={
+            [
+              {
+                "flexGrow": 1,
+                "paddingBottom": 0,
+              },
+              {
+                "minHeight": 56,
+                "paddingTop": 8,
+              },
+            ]
+          }
+        >
+          <View
+            pointerEvents="none"
+            style={
+              [
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                {
+                  "overflow": "hidden",
+                },
+                {
+                  "zIndex": 3,
+                },
+              ]
+            }
+          >
+            <View
+              collapsable={false}
+              pointerEvents="none"
+              style={
+                {
+                  "bottom": 0,
+                  "left": 0,
+                  "opacity": 1,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                  "transform": [
+                    {
+                      "translateX": 0,
+                    },
+                  ],
+                  "width": 750,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "width": 73,
+                  }
+                }
+              >
+                <View
+                  collapsable={false}
+                  pointerEvents="none"
+                  style={
+                    {
+                      "backgroundColor": "#FBF8F4",
+                      "bottom": 8,
+                      "left": 10,
+                      "maxHeight": 2.6666666666666665,
+                      "opacity": -0.6666666666666667,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 6,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                      ],
+                      "width": 12,
+                    }
+                  }
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "backgroundColor": "#FBF8F4",
+                      "color": "transparent",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "height": 0,
+                      "left": 8,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "opacity": -0.6666666666666667,
+                      "paddingHorizontal": 0,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 33,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                        {
+                          "scaleY": 1,
+                        },
+                      ],
+                      "width": -16,
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-background"
+                />
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  onLayout={[Function]}
+                  onTextLayout={[Function]}
+                  style={
+                    {
+                      "color": "#8B1E2D",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-active"
+                >
+                  Name
+                </Text>
+                <Text
+                  collapsable={false}
+                  maxFontSizeMultiplier={1.5}
+                  numberOfLines={1}
+                  style={
+                    {
+                      "color": "#5C544D",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 16,
+                      "fontWeight": undefined,
+                      "left": 0,
+                      "letterSpacing": 0.15,
+                      "lineHeight": undefined,
+                      "maxWidth": 73,
+                      "opacity": 0,
+                      "paddingHorizontal": 16,
+                      "position": "absolute",
+                      "textAlign": "left",
+                      "top": 32,
+                      "transform": [
+                        {
+                          "translateX": 0,
+                        },
+                        {
+                          "translateY": 0,
+                        },
+                        {
+                          "scale": 1,
+                        },
+                      ],
+                      "writingDirection": "ltr",
+                    }
+                  }
+                  testID="text-input-outlined-label-inactive"
+                >
+                  Name
+                </Text>
+              </View>
+            </View>
+          </View>
+          <TextInput
+            accessibilityLabel="Name"
+            cursorColor="#8B1E2D"
+            editable={true}
+            maxFontSizeMultiplier={1.5}
+            multiline={false}
+            onBlur={[Function]}
+            onChangeText={[Function]}
+            onFocus={[Function]}
+            onLayout={[Function]}
+            placeholderTextColor="transparent"
+            selectionColor="#8B1E2D"
+            style={
+              [
+                {
+                  "flexGrow": 1,
+                  "margin": 0,
+                },
+                {
+                  "height": 48,
+                },
+                {
+                  "paddingBottom": 0,
+                  "paddingTop": 0,
+                },
+                {
+                  "color": "#1C1A18",
+                  "fontFamily": "Inter-Regular",
+                  "fontSize": 16,
+                  "fontWeight": undefined,
+                  "letterSpacing": 0.15,
+                  "lineHeight": undefined,
+                  "minWidth": 65,
+                  "paddingHorizontal": 16,
+                  "textAlign": "left",
+                  "textAlignVertical": "center",
+                },
+                undefined,
+                [
+                  {},
+                ],
+                undefined,
+              ]
+            }
+            testID="text-input-outlined"
+            underlineColorAndroid="transparent"
+          />
+        </View>
+      </View>
+      <Text
+        collapsable={false}
+        maxFontSizeMultiplier={1.5}
+        onLayout={[Function]}
+        style={
+          {
+            "color": "#5C544D",
+            "fontFamily": "Inter-Regular",
+            "fontSize": 12,
+            "fontWeight": "400",
+            "letterSpacing": 0.25,
+            "lineHeight": 20,
+            "opacity": 1,
+            "paddingHorizontal": 12,
+            "paddingVertical": 4,
+            "textAlign": "left",
+            "transform": [],
+            "writingDirection": "ltr",
+          }
+        }
+      >
+        Helper
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Layout 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        [
+          {
+            "flex": undefined,
+            "margin": undefined,
+            "marginBottom": undefined,
+            "marginEnd": undefined,
+            "marginHorizontal": undefined,
+            "marginStart": undefined,
+            "marginTop": undefined,
+            "marginVertical": undefined,
+            "padding": undefined,
+            "paddingBottom": undefined,
+            "paddingEnd": undefined,
+            "paddingHorizontal": undefined,
+            "paddingStart": undefined,
+            "paddingTop": undefined,
+            "paddingVertical": undefined,
+          },
+          {
+            "alignItems": undefined,
+            "flexDirection": "column",
+            "justifyContent": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          {
+            "marginTop": 0,
+          }
+        }
+      >
+        <View
+          style={
+            [
+              {
+                "flex": undefined,
+                "margin": undefined,
+                "marginBottom": undefined,
+                "marginEnd": undefined,
+                "marginHorizontal": undefined,
+                "marginStart": undefined,
+                "marginTop": undefined,
+                "marginVertical": undefined,
+                "padding": undefined,
+                "paddingBottom": undefined,
+                "paddingEnd": undefined,
+                "paddingHorizontal": undefined,
+                "paddingStart": undefined,
+                "paddingTop": undefined,
+                "paddingVertical": undefined,
+              },
+              {
+                "alignItems": undefined,
+                "flexDirection": "row",
+                "flexWrap": "nowrap",
+                "justifyContent": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          <View
+            style={
+              {
+                "marginStart": 0,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#000",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+          <View
+            style={
+              {
+                "marginStart": 8,
+              }
+            }
+          >
+            <View
+              style={
+                [
+                  {
+                    "flex": undefined,
+                    "margin": undefined,
+                    "marginBottom": undefined,
+                    "marginEnd": undefined,
+                    "marginHorizontal": undefined,
+                    "marginStart": undefined,
+                    "marginTop": undefined,
+                    "marginVertical": undefined,
+                    "padding": undefined,
+                    "paddingBottom": undefined,
+                    "paddingEnd": undefined,
+                    "paddingHorizontal": undefined,
+                    "paddingStart": undefined,
+                    "paddingTop": undefined,
+                    "paddingVertical": undefined,
+                  },
+                  {
+                    "backgroundColor": "#888",
+                    "borderRadius": undefined,
+                    "height": 32,
+                    "width": 32,
+                  },
+                  undefined,
+                ]
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light LoadingSkeleton 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityElementsHidden={true}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "backgroundColor": "#E5DED5",
+            "borderRadius": 4,
+            "height": 12,
+            "opacity": 0.5,
+            "width": 100,
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Modal 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            undefined,
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#FFFFFF",
+              "borderRadius": 12,
+              "margin": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 12,
+                "flex": undefined,
+                "justifyContent": "center",
+                "padding": 16,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#1C1A18",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Modal body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Select 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+    >
+      <View
+        accessibilityLabel="A"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          [
+            {
+              "alignItems": "center",
+              "backgroundColor": "#FFFFFF",
+              "borderColor": "#E5DED5",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 44,
+              "opacity": 1,
+              "paddingHorizontal": 12,
+              "paddingVertical": 8,
+            },
+            undefined,
+          ]
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "color": "#1C1A18",
+                "fontFamily": "Inter-Regular",
+                "fontSize": 14,
+                "letterSpacing": undefined,
+                "lineHeight": 21,
+                "textAlign": undefined,
+                "textTransform": undefined,
+              },
+              undefined,
+            ]
+          }
+        >
+          A
+        </Text>
+        <View
+          style={
+            {
+              "marginStart": 8,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={20}
+            bbWidth={20}
+            fill="none"
+            focusable={false}
+            height={20}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            stroke="#5C544D"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            style={
+              [
+                {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                {
+                  "flex": 0,
+                  "height": 20,
+                  "width": 20,
+                },
+              ]
+            }
+            vbHeight={24}
+            vbWidth={24}
+            width={20}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <RNSVGGroup
+              fill={null}
+              propList={
+                [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                  "strokeLinecap",
+                  "strokeLinejoin",
+                ]
+              }
+              stroke={
+                {
+                  "payload": 4284240973,
+                  "type": 0,
+                }
+              }
+              strokeLinecap={1}
+              strokeLinejoin={1}
+              strokeWidth={2}
+            >
+              <RNSVGPath
+                d="m6 9 6 6 6-6"
+                fill={null}
+                propList={
+                  [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                    "strokeLinecap",
+                    "strokeLinejoin",
+                  ]
+                }
+                stroke={
+                  {
+                    "payload": 4284240973,
+                    "type": 0,
+                  }
+                }
+                strokeLinecap={1}
+                strokeLinejoin={1}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Sheet 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  />
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessibilityLiveRegion="polite"
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      onAccessibilityEscape={[Function]}
+      pointerEvents="auto"
+      style={
+        {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+      testID="modal"
+    >
+      <View
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
+        accessibilityState={
+          {
+            "busy": undefined,
+            "checked": undefined,
+            "disabled": false,
+            "expanded": undefined,
+            "selected": undefined,
+          }
+        }
+        accessibilityValue={
+          {
+            "max": undefined,
+            "min": undefined,
+            "now": undefined,
+            "text": undefined,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        focusable={true}
+        importantForAccessibility="no"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          {
+            "backgroundColor": "rgba(0,0,0,0.5)",
+            "flex": 1,
+            "opacity": 1,
+          }
+        }
+        testID="modal-backdrop"
+      />
+      <View
+        pointerEvents="box-none"
+        style={
+          [
+            {
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            {
+              "marginBottom": 0,
+              "marginTop": 0,
+            },
+            {
+              "justifyContent": "flex-end",
+            },
+          ]
+        }
+        testID="modal-wrapper"
+      >
+        <View
+          collapsable={false}
+          style={
+            {
+              "backgroundColor": "#FFFFFF",
+              "borderTopLeftRadius": 16,
+              "borderTopRightRadius": 16,
+              "opacity": 1,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.15,
+              "shadowRadius": 3,
+            }
+          }
+          testID="modal-surface-outer-layer"
+        >
+          <View
+            collapsable={false}
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderTopLeftRadius": 16,
+                "borderTopRightRadius": 16,
+                "flex": undefined,
+                "justifyContent": "center",
+                "paddingBottom": 24,
+                "paddingHorizontal": 16,
+                "paddingTop": 8,
+                "shadowColor": "#000",
+                "shadowOffset": {
+                  "height": 1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.3,
+                "shadowRadius": 1,
+              }
+            }
+            testID="modal-surface"
+          >
+            <View>
+              <View
+                accessibilityElementsHidden={true}
+                importantForAccessibility="no"
+                style={
+                  {
+                    "alignSelf": "center",
+                    "backgroundColor": "#E5DED5",
+                    "borderRadius": 2,
+                    "height": 4,
+                    "marginBottom": 12,
+                    "width": 40,
+                  }
+                }
+              />
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#1C1A18",
+                      "fontFamily": "Inter-Regular",
+                      "fontSize": 14,
+                      "letterSpacing": undefined,
+                      "lineHeight": 21,
+                      "textAlign": undefined,
+                      "textTransform": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                Sheet body
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Snackbar 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      pointerEvents="box-none"
+      style={
+        [
+          {
+            "bottom": 0,
+            "position": "absolute",
+            "width": "100%",
+          },
+          {
+            "paddingBottom": 0,
+            "paddingHorizontal": 0,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        collapsable={false}
+        style={
+          {
+            "backgroundColor": "#1F1A16",
+            "borderRadius": 8,
+            "margin": 8,
+            "opacity": 0,
+            "shadowColor": "#000",
+            "shadowOffset": {
+              "height": 2,
+              "width": 0,
+            },
+            "shadowOpacity": 0.15,
+            "shadowRadius": 6,
+            "transform": [
+              {
+                "scale": 0.9,
+              },
+            ],
+          }
+        }
+        testID="surface-outer-layer"
+      >
+        <View
+          accessibilityLiveRegion="polite"
+          collapsable={false}
+          pointerEvents="box-none"
+          style={
+            {
+              "backgroundColor": "#1F1A16",
+              "borderRadius": 8,
+              "flex": undefined,
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "minHeight": 48,
+              "shadowColor": "#000",
+              "shadowOffset": {
+                "height": 1,
+                "width": 0,
+              },
+              "shadowOpacity": 0.3,
+              "shadowRadius": 2,
+            }
+          }
+          testID="surface"
+        >
+          <Text
+            style={
+              [
+                {
+                  "textAlign": "left",
+                },
+                {
+                  "color": "#1C1A18",
+                  "writingDirection": "ltr",
+                },
+                [
+                  {
+                    "fontFamily": "Inter-Regular",
+                    "fontSize": 14,
+                    "fontWeight": "400",
+                    "letterSpacing": 0.25,
+                    "lineHeight": 20,
+                  },
+                  [
+                    {
+                      "flex": 1,
+                      "marginHorizontal": 16,
+                      "marginVertical": 14,
+                    },
+                    {
+                      "color": "#F5EFE7",
+                    },
+                  ],
+                ],
+              ]
+            }
+          >
+            Message
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Spinner 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <ActivityIndicator
+      accessibilityLabel="Loading"
+      color="#8B1E2D"
+      size={24}
+    />
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Component snapshots — light Text 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <Text
+      style={
+        [
+          {
+            "color": "#1C1A18",
+            "fontFamily": "Inter-SemiBold",
+            "fontSize": 22,
+            "letterSpacing": undefined,
+            "lineHeight": 28.6,
+            "textAlign": undefined,
+            "textTransform": undefined,
+          },
+          undefined,
+        ]
+      }
+    >
+      Hello
+    </Text>
+  </View>
+</RNCSafeAreaProvider>
+`;

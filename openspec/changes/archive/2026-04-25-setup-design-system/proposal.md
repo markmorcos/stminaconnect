@@ -47,5 +47,5 @@ We're building a brand-led app for a specific community (Coptic Orthodox in Muni
 - **Breaking changes**: none — first time these tokens exist; the placeholder home screen from phase 1 is restyled but its behavior is unchanged.
 - **Migration needs**: none.
 - **Expo Go compatible**: yes — Paper, expo-font, lucide-react-native, AsyncStorage, and `useColorScheme` all work in Expo Go. Reanimated (used later in `harden-and-polish`) is also Expo Go-compatible from SDK 50+.
-- **Uses design system**: this *is* the design system. Establishes the contract every later phase honours.
+- **Uses design system**: this _is_ the design system. Establishes the contract every later phase honours.
 - **Dependencies**: `init-project-scaffolding`.
