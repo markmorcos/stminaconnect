@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Controller, useForm, type FieldErrors, type Resolver } from 'react-hook-form';
 import { Pressable, ScrollView, View } from 'react-native';
 import * as Linking from 'expo-linking';
+import { useTranslation } from 'react-i18next';
 import { z, type ZodSchema } from 'zod';
 
 import { Button, Input, Snackbar, Stack, Text, useTokens } from '@/design';
@@ -9,25 +10,27 @@ import { useAuth } from '@/hooks/useAuth';
 
 type Mode = 'password' | 'magic-link';
 
-const passwordSchema = z.object({
-  email: z.string().email('Enter a valid email'),
-  password: z.string().min(6, 'Password is too short'),
-});
-type PasswordValues = z.infer<typeof passwordSchema>;
+function buildSchemas(t: ReturnType<typeof useTranslation>['t']) {
+  const passwordSchema = z.object({
+    email: z.string().email(t('auth.signIn.errors.invalidEmail')),
+    password: z.string().min(6, t('auth.signIn.errors.passwordTooShort')),
+  });
+  const magicLinkSchema = z.object({
+    email: z.string().email(t('auth.signIn.errors.invalidEmail')),
+  });
+  const otpSchema = z.object({
+    token: z
+      .string()
+      .min(6, t('auth.signIn.errors.codeLength'))
+      .max(6, t('auth.signIn.errors.codeLength'))
+      .regex(/^\d+$/, t('auth.signIn.errors.codeDigitsOnly')),
+  });
+  return { passwordSchema, magicLinkSchema, otpSchema };
+}
 
-const magicLinkSchema = z.object({
-  email: z.string().email('Enter a valid email'),
-});
-type MagicLinkValues = z.infer<typeof magicLinkSchema>;
-
-const otpSchema = z.object({
-  token: z
-    .string()
-    .min(6, 'Code must be 6 digits')
-    .max(6, 'Code must be 6 digits')
-    .regex(/^\d+$/, 'Digits only'),
-});
-type OtpValues = z.infer<typeof otpSchema>;
+type PasswordValues = { email: string; password: string };
+type MagicLinkValues = { email: string };
+type OtpValues = { token: string };
 
 /**
  * Tiny Zod resolver — avoids pulling in `@hookform/resolvers` for two
@@ -53,6 +56,7 @@ function zodResolver<T extends Record<string, unknown>>(schema: ZodSchema<T>): R
 }
 
 export default function SignInScreen() {
+  const { t } = useTranslation();
   const { colors, spacing } = useTokens();
   const { signIn, signInWithMagicLink, verifyEmailOtp, isLoading, error } = useAuth();
   const [mode, setMode] = useState<Mode>('password');
@@ -71,10 +75,10 @@ export default function SignInScreen() {
       >
         <Stack gap="sm">
           <Text variant="displayMd" accessibilityRole="header">
-            Welcome
+            {t('auth.signIn.welcome')}
           </Text>
           <Text variant="bodyLg" color={colors.textMuted}>
-            Servants only. Use your church-issued email.
+            {t('auth.signIn.subtitle')}
           </Text>
         </Stack>
 
@@ -96,7 +100,7 @@ export default function SignInScreen() {
               const redirectTo = Linking.createURL('/auth/callback');
               await signInWithMagicLink(values.email.trim(), redirectTo);
               setPendingEmail(values.email.trim());
-              setSnack('Code sent. Check your email (or Mailpit in dev).');
+              setSnack(t('auth.signIn.codeSentSnack'));
             }}
           />
         ) : (
@@ -117,7 +121,9 @@ export default function SignInScreen() {
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
             <Text variant="body" color={colors.primary} align="center">
-              {mode === 'password' ? 'Email me a code instead' : 'Use email and password instead'}
+              {mode === 'password'
+                ? t('auth.signIn.switchToMagicLink')
+                : t('auth.signIn.switchToPassword')}
             </Text>
           </Pressable>
         ) : null}
@@ -146,6 +152,8 @@ function PasswordModeForm({
   disabled: boolean;
   onSubmit: (values: PasswordValues) => Promise<void>;
 }) {
+  const { t } = useTranslation();
+  const { passwordSchema } = buildSchemas(t);
   const { control, handleSubmit, formState } = useForm<PasswordValues>({
     defaultValues: { email: '', password: '' },
     resolver: zodResolver(passwordSchema),
@@ -157,7 +165,7 @@ function PasswordModeForm({
         name="email"
         render={({ field }) => (
           <Input
-            label="Email"
+            label={t('auth.signIn.emailLabel')}
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
@@ -173,7 +181,7 @@ function PasswordModeForm({
         name="password"
         render={({ field }) => (
           <Input
-            label="Password"
+            label={t('auth.signIn.passwordLabel')}
             secureTextEntry
             autoCapitalize="none"
             autoComplete="password"
@@ -189,7 +197,7 @@ function PasswordModeForm({
         loading={disabled || formState.isSubmitting}
         disabled={disabled || formState.isSubmitting}
       >
-        Sign in
+        {t('auth.signIn.submitPassword')}
       </Button>
     </Stack>
   );
@@ -202,6 +210,8 @@ function MagicLinkModeForm({
   disabled: boolean;
   onSubmit: (values: MagicLinkValues) => Promise<void>;
 }) {
+  const { t } = useTranslation();
+  const { magicLinkSchema } = buildSchemas(t);
   const { control, handleSubmit, formState } = useForm<MagicLinkValues>({
     defaultValues: { email: '' },
     resolver: zodResolver(magicLinkSchema),
@@ -213,7 +223,7 @@ function MagicLinkModeForm({
         name="email"
         render={({ field }) => (
           <Input
-            label="Email"
+            label={t('auth.signIn.emailLabel')}
             autoCapitalize="none"
             autoComplete="email"
             keyboardType="email-address"
@@ -229,7 +239,7 @@ function MagicLinkModeForm({
         loading={disabled || formState.isSubmitting}
         disabled={disabled || formState.isSubmitting}
       >
-        Send code
+        {t('auth.signIn.submitMagicLink')}
       </Button>
     </Stack>
   );
@@ -246,6 +256,8 @@ function OtpModeForm({
   onSubmit: (values: OtpValues) => Promise<void>;
   onBack: () => void;
 }) {
+  const { t } = useTranslation();
+  const { otpSchema } = buildSchemas(t);
   const { colors } = useTokens();
   const { control, handleSubmit, formState } = useForm<OtpValues>({
     defaultValues: { token: '' },
@@ -254,18 +266,14 @@ function OtpModeForm({
   return (
     <Stack gap="md">
       <Text variant="body" color={colors.textMuted}>
-        We sent a 6-digit code to{' '}
-        <Text variant="body" style={{ fontWeight: '600' }} color={colors.text}>
-          {email}
-        </Text>
-        . Enter it below to sign in.
+        {t('auth.signIn.otpInstruction', { email })}
       </Text>
       <Controller
         control={control}
         name="token"
         render={({ field }) => (
           <Input
-            label="6-digit code"
+            label={t('auth.signIn.otpLabel')}
             keyboardType="number-pad"
             autoComplete="one-time-code"
             maxLength={6}
@@ -281,7 +289,7 @@ function OtpModeForm({
         loading={disabled || formState.isSubmitting}
         disabled={disabled || formState.isSubmitting}
       >
-        Verify
+        {t('auth.signIn.submitOtp')}
       </Button>
       <Pressable
         accessibilityRole="link"
@@ -289,7 +297,7 @@ function OtpModeForm({
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       >
         <Text variant="body" color={colors.primary} align="center">
-          Use a different email
+          {t('auth.signIn.useDifferentEmail')}
         </Text>
       </Pressable>
     </Stack>

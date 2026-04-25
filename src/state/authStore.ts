@@ -1,4 +1,5 @@
-import type { Session } from '@supabase/supabase-js';
+import type { AuthError, Session } from '@supabase/supabase-js';
+import i18next from 'i18next';
 import { create } from 'zustand';
 
 import { supabase } from '@/services/api/supabase';
@@ -28,7 +29,49 @@ export interface AuthState {
   refresh: () => Promise<void>;
 }
 
-const ORPHAN_ERROR = 'Account not configured. Contact your admin.';
+// eslint-disable-next-line import/no-named-as-default-member -- i18next exposes its API on the default export
+const orphanError = (): string => i18next.t('auth.errors.orphan');
+// eslint-disable-next-line import/no-named-as-default-member
+const signInFailedError = (): string => i18next.t('auth.errors.signInFailed');
+// eslint-disable-next-line import/no-named-as-default-member
+const invalidCodeError = (): string => i18next.t('auth.errors.invalidOrExpiredCode');
+// eslint-disable-next-line import/no-named-as-default-member
+const loadProfileError = (): string => i18next.t('auth.errors.loadServantFailed');
+
+/**
+ * Translates a Supabase AuthError into a user-facing string. We map
+ * the handful of codes a user actually hits during sign-in / OTP and
+ * fall through to a generic message for the rest — better than
+ * showing GoTrue's English `error.message` when the UI is in
+ * Arabic / German.
+ */
+function mapAuthError(error: AuthError | null | undefined, fallback: () => string): string {
+  if (!error) return fallback();
+  // Network / fetch failures from gotrue-js — no HTTP status reached us.
+  if (
+    error.name === 'AuthRetryableFetchError' ||
+    error.status === undefined ||
+    error.status === 0
+  ) {
+    // eslint-disable-next-line import/no-named-as-default-member
+    return i18next.t('auth.errors.network');
+  }
+  switch (error.code) {
+    case 'invalid_credentials':
+      // eslint-disable-next-line import/no-named-as-default-member
+      return i18next.t('auth.errors.invalidCredentials');
+    case 'email_not_confirmed':
+      // eslint-disable-next-line import/no-named-as-default-member
+      return i18next.t('auth.errors.emailNotConfirmed');
+    case 'over_request_rate_limit':
+    case 'over_email_send_rate_limit':
+      // eslint-disable-next-line import/no-named-as-default-member
+      return i18next.t('auth.errors.rateLimit');
+    default:
+      // eslint-disable-next-line import/no-named-as-default-member
+      return i18next.t('auth.errors.unknown');
+  }
+}
 
 export const useAuthStore = create<AuthState>((set, get) => ({
   session: null,
@@ -40,7 +83,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   async refresh() {
     const { data, error } = await supabase.auth.getSession();
     if (error) {
-      set({ session: null, servant: null, isHydrated: true, error: error.message });
+      set({
+        session: null,
+        servant: null,
+        isHydrated: true,
+        error: mapAuthError(error, signInFailedError),
+      });
       return;
     }
     const session = data.session;
@@ -52,12 +100,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const servant = await fetchMyServant();
       if (!servant) {
         await supabase.auth.signOut();
-        set({ session: null, servant: null, isHydrated: true, error: ORPHAN_ERROR });
+        set({ session: null, servant: null, isHydrated: true, error: orphanError() });
         return;
       }
       set({ session, servant, isHydrated: true, error: null });
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load servant profile';
+      const message = err instanceof Error ? err.message : loadProfileError();
       set({ session, servant: null, isHydrated: true, error: message });
     }
   },
@@ -68,7 +116,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     if (error || !data.session) {
       set({
         isLoading: false,
-        error: error?.message ?? 'Sign-in failed',
+        error: mapAuthError(error, signInFailedError),
         session: null,
         servant: null,
       });
@@ -78,12 +126,12 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       const servant = await fetchMyServant();
       if (!servant) {
         await supabase.auth.signOut();
-        set({ session: null, servant: null, isLoading: false, error: ORPHAN_ERROR });
+        set({ session: null, servant: null, isLoading: false, error: orphanError() });
         return;
       }
       set({ session: data.session, servant, isLoading: false, error: null });
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load servant profile';
+      const message = err instanceof Error ? err.message : loadProfileError();
       await supabase.auth.signOut();
       set({ session: null, servant: null, isLoading: false, error: message });
     }
@@ -99,7 +147,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       },
     });
     if (error) {
-      set({ isLoading: false, error: error.message });
+      set({ isLoading: false, error: mapAuthError(error, signInFailedError) });
       return;
     }
     set({ isLoading: false, error: null });
@@ -113,19 +161,19 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       type: 'email',
     });
     if (error || !data.session) {
-      set({ isLoading: false, error: error?.message ?? 'Invalid or expired code' });
+      set({ isLoading: false, error: mapAuthError(error, invalidCodeError) });
       return;
     }
     try {
       const servant = await fetchMyServant();
       if (!servant) {
         await supabase.auth.signOut();
-        set({ session: null, servant: null, isLoading: false, error: ORPHAN_ERROR });
+        set({ session: null, servant: null, isLoading: false, error: orphanError() });
         return;
       }
       set({ session: data.session, servant, isLoading: false, error: null });
     } catch (err) {
-      const message = err instanceof Error ? err.message : 'Failed to load servant profile';
+      const message = err instanceof Error ? err.message : loadProfileError();
       await supabase.auth.signOut();
       set({ session: null, servant: null, isLoading: false, error: message });
     }
@@ -171,14 +219,14 @@ export function bootstrapAuth(): () => void {
           useAuthStore.setState({
             session: null,
             servant: null,
-            error: ORPHAN_ERROR,
+            error: orphanError(),
           });
           return;
         }
         useAuthStore.setState({ session, servant, error: null });
       })
       .catch((err: unknown) => {
-        const message = err instanceof Error ? err.message : 'Failed to load servant profile';
+        const message = err instanceof Error ? err.message : loadProfileError();
         useAuthStore.setState({ error: message });
       });
   });

@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { I18nextProvider } from 'react-i18next';
 
-import '@/i18n';
+import { bootstrapI18n, i18n } from '@/i18n';
 import { bootstrapAuth, useIsHydrated } from '@/state/authStore';
 import { ThemeProvider, useTokens } from '@/design/ThemeProvider';
 
@@ -21,6 +22,7 @@ export default function RootLayout() {
     'IBMPlexSansArabic-Bold': require('../assets/fonts/IBMPlexSansArabic-Bold.ttf'),
   });
   const isHydrated = useIsHydrated();
+  const [i18nReady, setI18nReady] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line no-console -- spec requires this exact bootstrap log line
@@ -29,14 +31,30 @@ export default function RootLayout() {
 
   useEffect(() => bootstrapAuth(), []);
 
+  useEffect(() => {
+    let cancelled = false;
+    bootstrapI18n()
+      .catch(() => {
+        // detection failed; the synchronous EN fallback is already loaded
+      })
+      .finally(() => {
+        if (!cancelled) setI18nReady(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const fontsReady = fontsLoaded || !!fontError;
-  if (!fontsReady || !isHydrated) return null;
+  if (!fontsReady || !isHydrated || !i18nReady) return null;
 
   return (
-    <ThemeProvider>
-      <SplashGate />
-      <ThemedStack />
-    </ThemeProvider>
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider>
+        <SplashGate />
+        <ThemedStack />
+      </ThemeProvider>
+    </I18nextProvider>
   );
 }
 

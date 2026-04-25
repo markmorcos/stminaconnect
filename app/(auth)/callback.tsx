@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Redirect } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 import * as Linking from 'expo-linking';
+import { useTranslation } from 'react-i18next';
 
 import { Stack, Text, useTokens } from '@/design';
 import { supabase } from '@/services/api/supabase';
@@ -15,6 +16,7 @@ type Status = 'pending' | 'done' | 'error';
  * picks up the new session and updates `useAuth()`.
  */
 export default function AuthCallback() {
+  const { t } = useTranslation();
   const { colors } = useTokens();
   const [status, setStatus] = useState<Status>('pending');
 
@@ -46,7 +48,7 @@ export default function AuthCallback() {
       <Stack flex={1} align="center" justify="center" gap="md">
         <ActivityIndicator color={colors.primary} />
         <Text variant="body" color={colors.textMuted}>
-          Signing you in…
+          {t('auth.callback.signingIn')}
         </Text>
       </Stack>
     </View>

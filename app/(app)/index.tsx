@@ -1,6 +1,7 @@
 import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { Banner } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Stack, Text, useTokens } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
@@ -9,6 +10,7 @@ import { missingSupabaseEnvVars } from '@/services/api/supabase';
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
 export default function Home() {
+  const { t } = useTranslation();
   const { colors } = useTokens();
   const router = useRouter();
   const { servant, signOut, isLoading } = useAuth();
@@ -19,7 +21,7 @@ export default function Home() {
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       {missingUrl ? (
         <Banner visible icon="alert-circle">
-          Supabase URL not configured. See README.
+          {t('home.supabaseMissing')}
         </Banner>
       ) : null}
       <Stack
@@ -28,7 +30,7 @@ export default function Home() {
         justify="center"
         padding="xl"
         gap="md"
-        accessibilityLabel="St. Mina Connect home"
+        accessibilityLabel={t('home.title')}
       >
         <Pressable
           onLongPress={() => {
@@ -36,19 +38,22 @@ export default function Home() {
           }}
           delayLongPress={600}
           accessibilityRole="image"
-          accessibilityLabel="St. Mina Connect logo"
+          accessibilityLabel={t('home.title')}
         >
           <Text variant="displayMd" align="center">
-            St. Mina Connect
+            {t('home.title')}
           </Text>
         </Pressable>
         {greeting ? (
           <Text variant="bodyLg" color={colors.textMuted} align="center">
-            Signed in as {greeting}
+            {t('home.signedInAs', { name: greeting })}
           </Text>
         ) : null}
         <Button variant="ghost" onPress={() => router.push('/about')}>
-          About
+          {t('home.about')}
+        </Button>
+        <Button variant="ghost" onPress={() => router.push('/settings/language')}>
+          {t('home.settings')}
         </Button>
         <Button
           variant="destructive"
@@ -58,7 +63,7 @@ export default function Home() {
           loading={isLoading}
           disabled={isLoading}
         >
-          Sign out
+          {t('home.signOut')}
         </Button>
       </Stack>
     </View>

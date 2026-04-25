@@ -37,8 +37,8 @@ EN/AR/DE all have to ship from public release. Arabic adds an RTL layout require
     - `en` → "St. Mina Connect"
     - `ar` → "خدمة القديس مينا" (the Arabic phrase for "Service of Saint Mina"; "Connect" doesn't translate idiomatically)
     - `de` → "St. Mina Connect" — kept English because German Coptic communities use the English transliteration in print and signage; a German rendering would feel imposed
-    The native bundle name (`expo.name` in `app.json`) stays "St. Mina Connect" — this is what appears on the device home screen regardless of UI language. Final values are produced in `add-brand-assets`; this phase reserves the keys.
-11. **Language switcher placement**: `app/(app)/settings/language.tsx` for now — three radio rows: English / العربية / Deutsch. Phase 13/14 folds it into a wider Settings index.
+      The native bundle name (`expo.name` in `app.json`) stays "St. Mina Connect" — this is what appears on the device home screen regardless of UI language. Final values are produced in `add-brand-assets`; this phase reserves the keys.
+12. **Language switcher placement**: `app/(app)/settings/language.tsx` for now — three radio rows: English / العربية / Deutsch. Phase 13/14 folds it into a wider Settings index.
 
 ## Risks / Trade-offs
 

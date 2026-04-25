@@ -57,10 +57,15 @@ describe('authStore.signIn', () => {
     expect(state.error).toBeNull();
   });
 
-  it('exposes the error message and clears state on failure', async () => {
+  it('maps invalid_credentials to the localized message and clears state', async () => {
     mockedAuth.signInWithPassword.mockResolvedValue({
       data: { session: null },
-      error: { message: 'Invalid login credentials' },
+      error: {
+        name: 'AuthApiError',
+        message: 'Invalid login credentials',
+        status: 400,
+        code: 'invalid_credentials',
+      },
     });
 
     await useAuthStore.getState().signIn('a@b', 'bad');
@@ -68,8 +73,23 @@ describe('authStore.signIn', () => {
     const state = useAuthStore.getState();
     expect(state.session).toBeNull();
     expect(state.servant).toBeNull();
-    expect(state.error).toBe('Invalid login credentials');
+    expect(state.error).toBe('Email or password is incorrect.');
     expect(state.isLoading).toBe(false);
+  });
+
+  it('falls back to the generic message for unmapped auth error codes', async () => {
+    mockedAuth.signInWithPassword.mockResolvedValue({
+      data: { session: null },
+      error: {
+        name: 'AuthApiError',
+        message: 'mystery server message',
+        status: 422,
+        code: 'something_we_havent_mapped',
+      },
+    });
+
+    await useAuthStore.getState().signIn('a@b', 'bad');
+    expect(useAuthStore.getState().error).toBe('Something went wrong. Please try again.');
   });
 
   it('signs out + surfaces orphan error when servant row is missing', async () => {
@@ -98,10 +118,29 @@ describe('authStore.signInWithMagicLink', () => {
     expect(useAuthStore.getState().isLoading).toBe(false);
   });
 
-  it('surfaces the error message on failure', async () => {
-    mockedAuth.signInWithOtp.mockResolvedValue({ data: {}, error: { message: 'rate limited' } });
+  it('maps rate-limit errors to the localized message', async () => {
+    mockedAuth.signInWithOtp.mockResolvedValue({
+      data: {},
+      error: {
+        name: 'AuthApiError',
+        message: 'rate limited',
+        status: 429,
+        code: 'over_email_send_rate_limit',
+      },
+    });
     await useAuthStore.getState().signInWithMagicLink('a@b');
-    expect(useAuthStore.getState().error).toBe('rate limited');
+    expect(useAuthStore.getState().error).toBe('Too many attempts. Try again in a moment.');
+  });
+
+  it('maps fetch failures to the offline message', async () => {
+    mockedAuth.signInWithOtp.mockResolvedValue({
+      data: {},
+      error: { name: 'AuthRetryableFetchError', message: 'fetch failed' },
+    });
+    await useAuthStore.getState().signInWithMagicLink('a@b');
+    expect(useAuthStore.getState().error).toBe(
+      "Couldn't reach the server. Check your connection and try again.",
+    );
   });
 });
 

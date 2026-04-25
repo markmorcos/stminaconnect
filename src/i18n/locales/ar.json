@@ -18,5 +18,76 @@
       "uiLibrary": "مكتبة الواجهة",
       "acknowledgments": "تقدير خاص"
     }
+  },
+  "common": {
+    "actions": {
+      "cancel": "إلغاء",
+      "restart": "إعادة تشغيل",
+      "save": "حفظ",
+      "back": "رجوع"
+    },
+    "errors": {
+      "generic": "حدث خطأ ما. حاول مرة أخرى.",
+      "networkOffline": "لا يوجد اتصال بالإنترنت."
+    }
+  },
+  "auth": {
+    "signIn": {
+      "welcome": "أهلاً بك",
+      "subtitle": "للخدّام فقط. استخدم بريدك الإلكتروني الخاص بالكنيسة.",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "submitPassword": "تسجيل الدخول",
+      "submitMagicLink": "إرسال رمز",
+      "submitOtp": "تأكيد",
+      "switchToMagicLink": "أرسل لي رمزاً بدلاً من ذلك",
+      "switchToPassword": "استخدم البريد وكلمة المرور بدلاً من ذلك",
+      "useDifferentEmail": "استخدم بريداً إلكترونياً آخر",
+      "otpInstruction": "أرسلنا رمزاً مكوّناً من 6 أرقام إلى {{email}}. أدخله أدناه لتسجيل الدخول.",
+      "otpLabel": "رمز من 6 أرقام",
+      "codeSentSnack": "تم إرسال الرمز. تحقّق من بريدك (أو Mailpit في بيئة التطوير).",
+      "errors": {
+        "invalidEmail": "أدخل بريداً إلكترونياً صحيحاً",
+        "passwordTooShort": "كلمة المرور قصيرة جداً",
+        "codeLength": "يجب أن يتكوّن الرمز من 6 أرقام",
+        "codeDigitsOnly": "أرقام فقط"
+      }
+    },
+    "callback": {
+      "signingIn": "جارٍ تسجيل دخولك…"
+    },
+    "errors": {
+      "orphan": "الحساب غير مُعَدّ. تواصل مع المسؤول.",
+      "signInFailed": "فشل تسجيل الدخول",
+      "invalidOrExpiredCode": "الرمز غير صالح أو منتهي الصلاحية",
+      "loadServantFailed": "تعذّر تحميل ملف الخادم",
+      "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+      "emailNotConfirmed": "أكِّد بريدك الإلكتروني قبل تسجيل الدخول.",
+      "rateLimit": "محاولات كثيرة جداً. حاول بعد قليل.",
+      "network": "تعذّر الاتصال بالخادم. تحقّق من الاتصال وحاول مجدداً.",
+      "unknown": "حدث خطأ ما. حاول مرة أخرى."
+    }
+  },
+  "home": {
+    "title": "خدمة القديس مينا",
+    "signedInAs": "مُسجَّل الدخول باسم {{name}}",
+    "supabaseMissing": "لم يتم ضبط رابط Supabase. راجع ملف README.",
+    "about": "عن التطبيق",
+    "settings": "الإعدادات",
+    "signOut": "تسجيل الخروج"
+  },
+  "settings": {
+    "language": {
+      "title": "اللغة",
+      "english": "English",
+      "arabic": "العربية",
+      "german": "Deutsch",
+      "restartNeeded": {
+        "title": "يلزم إعادة التشغيل",
+        "body": "سيُعاد تشغيل التطبيق لتبديل اتجاه التخطيط.",
+        "confirm": "إعادة تشغيل",
+        "cancel": "إلغاء"
+      }
+    }
   }
 }

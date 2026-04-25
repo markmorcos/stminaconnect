@@ -18,5 +18,76 @@
       "uiLibrary": "UI-Bibliothek",
       "acknowledgments": "Danksagungen"
     }
+  },
+  "common": {
+    "actions": {
+      "cancel": "Abbrechen",
+      "restart": "Neu starten",
+      "save": "Speichern",
+      "back": "Zurück"
+    },
+    "errors": {
+      "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+      "networkOffline": "Du bist offline."
+    }
+  },
+  "auth": {
+    "signIn": {
+      "welcome": "Willkommen",
+      "subtitle": "Nur für Diener. Bitte verwende deine kirchliche E-Mail-Adresse.",
+      "emailLabel": "E-Mail",
+      "passwordLabel": "Passwort",
+      "submitPassword": "Anmelden",
+      "submitMagicLink": "Code senden",
+      "submitOtp": "Bestätigen",
+      "switchToMagicLink": "Stattdessen Code per E-Mail",
+      "switchToPassword": "Stattdessen E-Mail und Passwort",
+      "useDifferentEmail": "Andere E-Mail verwenden",
+      "otpInstruction": "Wir haben einen 6-stelligen Code an {{email}} gesendet. Gib ihn unten ein, um dich anzumelden.",
+      "otpLabel": "6-stelliger Code",
+      "codeSentSnack": "Code gesendet. Prüfe deine E-Mails (oder Mailpit in der Dev-Umgebung).",
+      "errors": {
+        "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein",
+        "passwordTooShort": "Das Passwort ist zu kurz",
+        "codeLength": "Der Code muss 6 Ziffern haben",
+        "codeDigitsOnly": "Nur Ziffern"
+      }
+    },
+    "callback": {
+      "signingIn": "Du wirst angemeldet…"
+    },
+    "errors": {
+      "orphan": "Konto nicht eingerichtet. Bitte wende dich an die Verwaltung.",
+      "signInFailed": "Anmeldung fehlgeschlagen",
+      "invalidOrExpiredCode": "Code ist ungültig oder abgelaufen",
+      "loadServantFailed": "Profil konnte nicht geladen werden",
+      "invalidCredentials": "E-Mail oder Passwort ist falsch.",
+      "emailNotConfirmed": "Bestätige deine E-Mail-Adresse, bevor du dich anmeldest.",
+      "rateLimit": "Zu viele Versuche. Bitte warte kurz und versuche es erneut.",
+      "network": "Server nicht erreichbar. Prüfe deine Verbindung und versuche es erneut.",
+      "unknown": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+    }
+  },
+  "home": {
+    "title": "St. Mina Connect",
+    "signedInAs": "Angemeldet als {{name}}",
+    "supabaseMissing": "Supabase-URL nicht konfiguriert. Siehe README.",
+    "about": "Über",
+    "settings": "Einstellungen",
+    "signOut": "Abmelden"
+  },
+  "settings": {
+    "language": {
+      "title": "Sprache",
+      "english": "English",
+      "arabic": "العربية",
+      "german": "Deutsch",
+      "restartNeeded": {
+        "title": "Neustart erforderlich",
+        "body": "Die App startet neu, um die Layout-Richtung zu wechseln.",
+        "confirm": "Neu starten",
+        "cancel": "Abbrechen"
+      }
+    }
   }
 }

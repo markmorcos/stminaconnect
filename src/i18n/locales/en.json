@@ -18,5 +18,76 @@
       "uiLibrary": "UI library",
       "acknowledgments": "Acknowledgments"
     }
+  },
+  "common": {
+    "actions": {
+      "cancel": "Cancel",
+      "restart": "Restart",
+      "save": "Save",
+      "back": "Back"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "networkOffline": "You appear to be offline."
+    }
+  },
+  "auth": {
+    "signIn": {
+      "welcome": "Welcome",
+      "subtitle": "Servants only. Use your church-issued email.",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "submitPassword": "Sign in",
+      "submitMagicLink": "Send code",
+      "submitOtp": "Verify",
+      "switchToMagicLink": "Email me a code instead",
+      "switchToPassword": "Use email and password instead",
+      "useDifferentEmail": "Use a different email",
+      "otpInstruction": "We sent a 6-digit code to {{email}}. Enter it below to sign in.",
+      "otpLabel": "6-digit code",
+      "codeSentSnack": "Code sent. Check your email (or Mailpit in dev).",
+      "errors": {
+        "invalidEmail": "Enter a valid email",
+        "passwordTooShort": "Password is too short",
+        "codeLength": "Code must be 6 digits",
+        "codeDigitsOnly": "Digits only"
+      }
+    },
+    "callback": {
+      "signingIn": "Signing you in…"
+    },
+    "errors": {
+      "orphan": "Account not configured. Contact your admin.",
+      "signInFailed": "Sign-in failed",
+      "invalidOrExpiredCode": "Invalid or expired code",
+      "loadServantFailed": "Failed to load servant profile",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Confirm your email address before signing in.",
+      "rateLimit": "Too many attempts. Try again in a moment.",
+      "network": "Couldn't reach the server. Check your connection and try again.",
+      "unknown": "Something went wrong. Please try again."
+    }
+  },
+  "home": {
+    "title": "St. Mina Connect",
+    "signedInAs": "Signed in as {{name}}",
+    "supabaseMissing": "Supabase URL not configured. See README.",
+    "about": "About",
+    "settings": "Settings",
+    "signOut": "Sign out"
+  },
+  "settings": {
+    "language": {
+      "title": "Language",
+      "english": "English",
+      "arabic": "العربية",
+      "german": "Deutsch",
+      "restartNeeded": {
+        "title": "Restart needed",
+        "body": "The app will restart to switch layout direction.",
+        "confirm": "Restart",
+        "cancel": "Cancel"
+      }
+    }
   }
 }
