@@ -84,13 +84,29 @@ The `Text` component MUST resolve `fontFamily` at render time based on `i18n.lan
 
 ### Requirement: A base component library SHALL provide all primitive UI affordances.
 
-The library MUST export at least: `Text`, `Button`, `Input`, `Select`, `Card`, `Avatar`, `Badge`, `Chip`, `IconButton`, `Spinner`, `LoadingSkeleton`, `EmptyState`, `Snackbar`, `Divider`, `Sheet`, `Modal`, `Stack`, `Inline`, `Box`. Each component MUST accept `style`, `accessibilityLabel`, and document its variants in JSDoc.
+The component library MUST export the primitives listed in `setup-design-system` (Text, Button, Input, Avatar, Badge, etc.). From this change forward, the index MUST also export `Logo`, defined in `src/design/components/Logo.tsx`. The Logo component MUST be theme-aware (light/dark) and MUST consume the same tokens as other primitives — it MUST NOT introduce its own color or sizing literals.
 
 #### Scenario: All primitives present
 
 - **WHEN** the components index is inspected
 - **THEN** the listed components are exported
 - **AND** each export has a corresponding test file under `tests/design-system/components/`
+
+#### Scenario: Logo present in component index
+
+- **WHEN** the components barrel index is inspected
+- **THEN** `Logo` is exported alongside the other primitives listed in `setup-design-system`
+- **AND** importing `Logo` from the design-system path resolves without error
+
+#### Scenario: Logo respects active theme
+
+- **GIVEN** the active theme is light
+- **WHEN** `<Logo size="lg" />` renders
+- **THEN** the SVG uses `tokens.colors.light.primary` and `tokens.colors.light.secondary`
+
+- **GIVEN** the active theme is dark
+- **WHEN** the same Logo renders
+- **THEN** the SVG uses `tokens.colors.dark.primary` and `tokens.colors.dark.secondary`
 
 ### Requirement: All interactive components SHALL meet WCAG touch-target requirements.
 

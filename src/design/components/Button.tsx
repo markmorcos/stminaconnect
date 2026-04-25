@@ -17,7 +17,7 @@ import {
   type ViewStyle,
 } from 'react-native';
 
-import { useTokens } from '../ThemeProvider';
+import { useTheme, useTokens } from '../ThemeProvider';
 import { Text } from './Text';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'destructive';
@@ -45,6 +45,7 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const { colors, radii, spacing: sp } = useTokens();
+  const { isDark } = useTheme();
 
   const bg =
     variant === 'primary'
@@ -54,11 +55,16 @@ export function Button({
         : variant === 'destructive'
           ? colors.error
           : 'transparent';
+  // Secondary's background is gold in both modes — always pair with the
+  // mode's dark ink so contrast holds. In light mode that's `text`; in
+  // dark mode the dark ink is exposed via `textInverse`.
   const fg =
     variant === 'ghost'
       ? colors.primary
       : variant === 'secondary'
-        ? colors.text
+        ? isDark
+          ? colors.textInverse
+          : colors.text
         : colors.textInverse;
   const borderColor = variant === 'ghost' ? colors.primary : 'transparent';
 

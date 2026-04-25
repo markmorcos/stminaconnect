@@ -1,5 +1,5 @@
 import { avatarPalette, colors, elevation, radii, spacing, typography } from '@/design/tokens';
-import { contrastRatio, WCAG } from '@/design/contrast';
+import { contrastRatio, WCAG } from '@/design/utils/contrast';
 
 describe('tokens — color parity', () => {
   it('every light color key has a dark counterpart of the same name', () => {

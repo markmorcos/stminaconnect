@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432 432" width="432" height="432">
+  <title>St. Mina Connect — Adaptive Icon Foreground</title>
+  <!-- Foreground only; background is supplied via app.json adaptiveIcon.backgroundColor.
+       Glyph stays inside the 264dp safe-zone circle inscribed in the 432dp canvas. -->
+  <g transform="translate(216 216) scale(0.55)">
+    <g transform="translate(-216 -216)">
+      <g fill="#C9A961">
+        <rect x="184" y="40" width="64" height="352" rx="8"/>
+        <rect x="40" y="184" width="352" height="64" rx="8"/>
+      </g>
+      <g fill="#FBF8F4">
+        <rect x="206" y="92" width="20" height="248" rx="4"/>
+        <rect x="92" y="206" width="248" height="20" rx="4"/>
+      </g>
+    </g>
+  </g>
+</svg>

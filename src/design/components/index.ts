@@ -8,6 +8,7 @@ export { EmptyState, type EmptyStateProps } from './EmptyState';
 export { IconButton, type IconButtonProps } from './IconButton';
 export { Input, type InputProps } from './Input';
 export { LoadingSkeleton, type LoadingSkeletonProps } from './LoadingSkeleton';
+export { Logo, type LogoProps, type LogoSize, type LogoVariant } from './Logo';
 export { Modal, type ModalProps } from './Modal';
 export { Select, type SelectOption, type SelectProps } from './Select';
 export { Sheet, type SheetProps } from './Sheet';

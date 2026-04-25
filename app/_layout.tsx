@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
-import '@/services/api/supabase';
+import '@/i18n';
+import { supabase } from '@/services/api/supabase';
 import { ThemeProvider, useTokens } from '@/design/ThemeProvider';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -19,6 +20,7 @@ export default function RootLayout() {
     'IBMPlexSansArabic-SemiBold': require('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf'),
     'IBMPlexSansArabic-Bold': require('../assets/fonts/IBMPlexSansArabic-Bold.ttf'),
   });
+  const [authChecked, setAuthChecked] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line no-console -- spec requires this exact bootstrap log line
@@ -26,18 +28,41 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync().catch(() => {});
-    }
-  }, [fontsLoaded, fontError]);
+    let cancelled = false;
+    supabase.auth
+      .getSession()
+      .catch(() => null)
+      .finally(() => {
+        if (!cancelled) setAuthChecked(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
-  if (!fontsLoaded && !fontError) return null;
+  const fontsReady = fontsLoaded || !!fontError;
+  if (!fontsReady || !authChecked) return null;
 
   return (
     <ThemeProvider>
+      <SplashGate />
       <ThemedStack />
     </ThemeProvider>
   );
+}
+
+/**
+ * Hides the native splash on first render under ThemeProvider — which
+ * means fonts loaded, initial auth check ran, and the theme finished
+ * hydrating from AsyncStorage. This is the single hide-point: any
+ * earlier and the user sees a flash of the unstyled tree; any later and
+ * the splash overstays its welcome.
+ */
+function SplashGate() {
+  useEffect(() => {
+    SplashScreen.hideAsync().catch(() => {});
+  }, []);
+  return null;
 }
 
 function ThemedStack() {

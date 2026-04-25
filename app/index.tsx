@@ -2,13 +2,13 @@ import { useRouter } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { Banner } from 'react-native-paper';
 
-import { Stack, Text, useTokens } from '@/design';
+import { Button, Stack, Text, useTokens } from '@/design';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
 
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
 export default function Index() {
-  const { colors, spacing } = useTokens();
+  const { colors } = useTokens();
   const router = useRouter();
   const missingUrl = missingSupabaseEnvVars.includes('EXPO_PUBLIC_SUPABASE_URL');
 
@@ -42,6 +42,9 @@ export default function Index() {
         <Text variant="bodyLg" color={colors.textMuted} align="center">
           Initializing
         </Text>
+        <Button variant="ghost" onPress={() => router.push('/about')}>
+          About
+        </Button>
       </Stack>
     </View>
   );

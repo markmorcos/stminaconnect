@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1284 2778" width="1284" height="2778">
+  <title>St. Mina Connect — Splash (Dark)</title>
+  <rect width="1284" height="2778" fill="#15110E"/>
+  <g transform="translate(642 1389) scale(0.42)">
+    <g transform="translate(-512 -512)">
+      <g fill="#D45D6E">
+        <rect x="432" y="208" width="160" height="608" rx="16"/>
+        <rect x="208" y="432" width="608" height="160" rx="16"/>
+      </g>
+      <g fill="#E2BE7A">
+        <rect x="488" y="304" width="48" height="416" rx="8"/>
+        <rect x="304" y="488" width="416" height="48" rx="8"/>
+      </g>
+    </g>
+  </g>
+</svg>

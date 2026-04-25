@@ -1,0 +1,22 @@
+{
+  "branding": {
+    "appName": "خدمة القديس مينا",
+    "about": {
+      "title": "عن التطبيق",
+      "app": "التطبيق",
+      "church": "الكنيسة",
+      "credits": "شكر وتقدير",
+      "privacy": "سياسة الخصوصية",
+      "terms": "شروط الاستخدام",
+      "version": "الإصدار",
+      "buildSha": "رقم البناء",
+      "address": "العنوان",
+      "languagesSpoken": "اللغات المستخدمة",
+      "contact": "للتواصل",
+      "fonts": "الخطوط",
+      "icons": "الأيقونات",
+      "uiLibrary": "مكتبة الواجهة",
+      "acknowledgments": "تقدير خاص"
+    }
+  }
+}

@@ -4,24 +4,20 @@
     "slug": "st-mina-connect",
     "version": "0.1.0",
     "orientation": "portrait",
-    "icon": "./assets/icons/icon-placeholder.png",
+    "icon": "./assets/branding/icon-source.png",
     "scheme": "stminaconnect",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/icons/splash-placeholder.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#FBF8F4"
-    },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tech.morcos.stminaconnect"
+      "bundleIdentifier": "tech.morcos.stminaconnect",
+      "icon": "./assets/branding/icon-source.png"
     },
     "android": {
       "package": "tech.morcos.stminaconnect",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icons/icon-placeholder.png",
-        "backgroundColor": "#FBF8F4"
+        "foregroundImage": "./assets/branding/icon-foreground.png",
+        "backgroundColor": "#8B1E2D"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
@@ -29,6 +25,23 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
-    "plugins": ["expo-router", "expo-localization", "expo-sqlite", "expo-font"]
+    "plugins": [
+      "expo-router",
+      "expo-localization",
+      "expo-sqlite",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/branding/splash-light.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#FBF8F4",
+          "dark": {
+            "image": "./assets/branding/splash-dark.png",
+            "backgroundColor": "#15110E"
+          }
+        }
+      ]
+    ]
   }
 }

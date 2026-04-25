@@ -1,0 +1,22 @@
+{
+  "branding": {
+    "appName": "St. Mina Connect",
+    "about": {
+      "title": "About",
+      "app": "App",
+      "church": "Church",
+      "credits": "Credits",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "version": "Version",
+      "buildSha": "Build",
+      "address": "Address",
+      "languagesSpoken": "Languages spoken",
+      "contact": "Contact",
+      "fonts": "Fonts",
+      "icons": "Icons",
+      "uiLibrary": "UI library",
+      "acknowledgments": "Acknowledgments"
+    }
+  }
+}

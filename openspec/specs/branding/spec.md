@@ -1,6 +1,10 @@
-# branding — Spec Delta
+# branding Specification
 
-## ADDED Requirements
+## Purpose
+
+The branding capability defines the visual and verbal identity of the St. Mina Connect app — the app icon, splash screens, in-app logo component, brand color verification, localized app naming, and the About screen. It establishes the church-app identity that lives inside the design system, ensuring every screen ships under real branding (Coptic Orthodox visual language) rather than placeholder marks, and that brand assets respect light/dark theming, RTL layout, WCAG contrast requirements, and per-locale naming.
+
+## Requirements
 
 ### Requirement: An app icon SHALL be configured for both platforms.
 
@@ -39,6 +43,7 @@ The app's splash screen MUST display the centered logo on the brand background. 
 ### Requirement: A Logo component SHALL be available throughout the app.
 
 `src/design/components/Logo.tsx` MUST export a configurable Logo component supporting:
+
 - variants `mark` (glyph only) and `combined` (glyph + wordmark);
 - sizes `sm` (24), `md` (40), `lg` (64), `xl` (96);
 - automatic light/dark color resolution via the active theme;
@@ -67,6 +72,7 @@ After this change, the design system tokens MUST satisfy WCAG AA contrast for ev
 ### Requirement: The app name SHALL render correctly in each locale.
 
 The displayed app name MUST resolve from `t('branding.appName')`:
+
 - English: "St. Mina Connect"
 - Arabic: "خدمة القديس مينا"
 - German: "St. Mina Connect"
@@ -87,6 +93,7 @@ The native bundle name (`expo.name` in `app.json`) is "St. Mina Connect" — thi
 ### Requirement: An About screen SHALL display app and church identity information.
 
 `app/(app)/about.tsx` MUST render:
+
 - App name, version, and build SHA (if available).
 - Church identity from `src/branding/church.ts` (name, address, languages spoken, contact).
 - Credits for fonts (Inter, IBM Plex Sans Arabic), icon library (lucide-react-native), UI library (react-native-paper), and any optional acknowledgments.
@@ -105,4 +112,3 @@ The native bundle name (`expo.name` in `app.json`) is "St. Mina Connect" — thi
 - **AND** the IBM Plex Sans Arabic OFL notice
 - **AND** the Lucide ISC notice
 - **AND** the React Native Paper MIT notice
-

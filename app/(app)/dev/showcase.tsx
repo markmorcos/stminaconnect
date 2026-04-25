@@ -15,6 +15,7 @@ import {
   Inline,
   Input,
   LoadingSkeleton,
+  Logo,
   Modal,
   Select,
   Sheet,
@@ -342,6 +343,21 @@ function ComponentsView({
 
       <Section title="EmptyState">
         <EmptyState icon="users" title="No people yet" body="Add someone to get started." />
+      </Section>
+
+      <Section title="Logo">
+        <Stack gap="md">
+          <Inline gap="lg" align="center" wrap>
+            {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
+              <Logo key={`mark-${s}`} variant="mark" size={s} />
+            ))}
+          </Inline>
+          <Inline gap="lg" align="center" wrap>
+            {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
+              <Logo key={`combined-${s}`} variant="combined" size={s} />
+            ))}
+          </Inline>
+        </Stack>
       </Section>
 
       <Section title="Divider">

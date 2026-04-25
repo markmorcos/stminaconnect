@@ -1,0 +1,3961 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Logo snapshots — RTL combined-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL combined-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL combined-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL combined-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL mark-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 64,
+            "width": 64,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL mark-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 40,
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL mark-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 24,
+            "width": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — RTL mark-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 96,
+            "width": 96,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark combined-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark combined-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark combined-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark combined-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#F5EFE7",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark mark-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 64,
+            "width": 64,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark mark-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 40,
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark mark-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 24,
+            "width": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — dark mark-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 96,
+            "width": 96,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4292107630,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4293049978,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light combined-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 14,
+              "letterSpacing": undefined,
+              "lineHeight": 21,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light combined-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 13,
+              "letterSpacing": undefined,
+              "lineHeight": 18.849999999999998,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light combined-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Medium",
+              "fontSize": 12,
+              "letterSpacing": undefined,
+              "lineHeight": 16.799999999999997,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light combined-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "alignItems": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+      <Text
+        style={
+          [
+            {
+              "color": "#1C1A18",
+              "fontFamily": "Inter-Regular",
+              "fontSize": 16,
+              "letterSpacing": undefined,
+              "lineHeight": 24,
+              "textAlign": "center",
+              "textTransform": undefined,
+            },
+            {
+              "marginTop": 8,
+              "writingDirection": "ltr",
+            },
+          ]
+        }
+      >
+        St. Mina Connect
+      </Text>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light mark-lg 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 64,
+            "width": 64,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={64}
+        bbWidth={64}
+        focusable={false}
+        height={64}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 64,
+              "width": 64,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={64}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light mark-md 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 40,
+            "width": 40,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={40}
+        bbWidth={40}
+        focusable={false}
+        height={40}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 40,
+              "width": 40,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={40}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light mark-sm 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 24,
+            "width": 24,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={24}
+        bbWidth={24}
+        focusable={false}
+        height={24}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 24,
+              "width": 24,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={24}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
+
+exports[`Logo snapshots — light mark-xl 1`] = `
+<RNCSafeAreaProvider
+  onInsetsChange={[Function]}
+  style={
+    [
+      {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    collapsable={false}
+    pointerEvents="box-none"
+    style={
+      {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessibilityLabel="St. Mina Connect logo"
+      accessibilityRole="image"
+      style={
+        [
+          {
+            "height": 96,
+            "width": 96,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RNSVGSvgView
+        align="xMidYMid"
+        bbHeight={96}
+        bbWidth={96}
+        focusable={false}
+        height={96}
+        meetOrSlice={0}
+        minX={0}
+        minY={0}
+        style={
+          [
+            {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            },
+            {
+              "flex": 0,
+              "height": 96,
+              "width": 96,
+            },
+          ]
+        }
+        vbHeight={1024}
+        vbWidth={1024}
+        width={96}
+      >
+        <RNSVGGroup
+          fill={
+            {
+              "payload": 4278190080,
+              "type": 0,
+            }
+          }
+        >
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4287307309,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={608}
+              rx={16}
+              width={160}
+              x={432}
+              y={208}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={160}
+              rx={16}
+              width={608}
+              x={208}
+              y={432}
+            />
+          </RNSVGGroup>
+          <RNSVGGroup
+            fill={
+              {
+                "payload": 4291406177,
+                "type": 0,
+              }
+            }
+            propList={
+              [
+                "fill",
+              ]
+            }
+          >
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={416}
+              rx={8}
+              width={48}
+              x={488}
+              y={304}
+            />
+            <RNSVGRect
+              fill={
+                {
+                  "payload": 4278190080,
+                  "type": 0,
+                }
+              }
+              height={48}
+              rx={8}
+              width={416}
+              x={304}
+              y={488}
+            />
+          </RNSVGGroup>
+        </RNSVGGroup>
+      </RNSVGSvgView>
+    </View>
+  </View>
+</RNCSafeAreaProvider>
+`;
