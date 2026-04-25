@@ -1,0 +1,153 @@
+# person-management — Spec Delta
+
+## ADDED Requirements
+
+### Requirement: A `persons` table SHALL be the single source of truth for member records.
+
+The `persons` table MUST contain the columns enumerated in `design.md` §Decisions. Every member, whether registered via Quick Add or Full Registration, occupies exactly one row.
+
+The `persons` table MUST NOT contain a `photo_url` (or equivalent) column in v1. Profile photos are out of scope; profile screens display initials in deterministically-colored avatars instead.
+
+#### Scenario: Schema is created and indexed correctly
+
+- **GIVEN** migration `002_persons.sql` has been applied
+- **WHEN** the schema is inspected
+- **THEN** the `persons` table exists with all columns and constraints from the design
+- **AND** indexes exist on `assigned_servant`, `region`, `status`, and a partial index for `WHERE deleted_at IS NULL`
+- **AND** RLS is enabled
+- **AND** no `photo_url` (or analogous) column exists on the `persons` table
+
+### Requirement: Direct table access SHALL be denied to all client roles.
+
+RLS policies on `persons` MUST deny SELECT, INSERT, UPDATE, and DELETE from `authenticated` and `anon` roles. All client access goes through `SECURITY DEFINER` RPCs.
+
+#### Scenario: Direct SELECT from a signed-in servant returns nothing
+
+- **GIVEN** a signed-in servant
+- **WHEN** the client executes `select * from persons`
+- **THEN** the result is empty
+- **AND** Supabase returns no error (RLS-filtered, not 403)
+
+#### Scenario: Direct INSERT is denied
+
+- **GIVEN** a signed-in servant
+- **WHEN** the client attempts `insert into persons (...) values (...)`
+- **THEN** the insert is rejected with an RLS violation
+
+### Requirement: The `comments` field SHALL be visible only to the assigned servant and admins.
+
+The `get_person` RPC MUST include `comments` only when the caller is either an admin or the currently assigned servant. For all other callers, `comments` SHALL be null in the response. Reassignment immediately changes visibility — the previous assigned servant loses access; the new one gains it.
+
+#### Scenario: Assigned servant sees comments
+
+- **GIVEN** person P is assigned to servant S
+- **AND** S is signed in
+- **WHEN** S calls `get_person(P.id)`
+- **THEN** the response includes `comments` with the actual stored value
+
+#### Scenario: Non-assigned servant cannot see comments
+
+- **GIVEN** person P is assigned to servant S1
+- **AND** servant S2 (a different non-admin servant) is signed in
+- **WHEN** S2 calls `get_person(P.id)`
+- **THEN** the response's `comments` field is null
+- **AND** the rest of the row is returned normally
+
+#### Scenario: Admin always sees comments
+
+- **GIVEN** any person P
+- **AND** an admin is signed in
+- **WHEN** the admin calls `get_person(P.id)`
+- **THEN** the response includes `comments`
+
+#### Scenario: Reassignment immediately changes visibility
+
+- **GIVEN** person P assigned to servant S1, with comments visible to S1
+- **WHEN** an admin calls `assign_person(P.id, S2.id, 'reassigned for region')`
+- **AND** S1 calls `get_person(P.id)`
+- **THEN** the response's `comments` is null
+- **WHEN** S2 calls `get_person(P.id)`
+- **THEN** the response's `comments` is the stored value
+
+### Requirement: Reassignments SHALL be recorded in `assignment_history`.
+
+A trigger on `persons.assigned_servant` MUST insert a row into `assignment_history` whenever the value changes. The row records `from_servant` (old), `to_servant` (new), `changed_by` (`auth.uid()`), and `changed_at`.
+
+#### Scenario: Assignment change inserts history row
+
+- **GIVEN** person P assigned to S1
+- **WHEN** an admin calls `assign_person(P.id, S2.id, 'reason')`
+- **THEN** a row exists in `assignment_history` with `person_id = P.id`, `from_servant = S1`, `to_servant = S2`, `changed_by = admin.id`
+
+#### Scenario: Initial assignment creates a history row
+
+- **GIVEN** a `create_person` call with `assigned_servant = S1`
+- **WHEN** the person is created
+- **THEN** an `assignment_history` row exists with `from_servant = null`, `to_servant = S1`
+
+### Requirement: Listing persons SHALL exclude soft-deleted rows.
+
+`list_persons` MUST filter out rows where `deleted_at IS NOT NULL`. An admin-only RPC `list_persons_including_deleted` MAY be added later for audit purposes; it is not required in this phase.
+
+#### Scenario: Soft-deleted person disappears from list
+
+- **GIVEN** person P exists and appears in `list_persons`
+- **WHEN** an admin calls `soft_delete_person(P.id)`
+- **AND** any servant calls `list_persons`
+- **THEN** P is not in the response
+
+### Requirement: Soft-delete SHALL scrub personal data while preserving the row's referential integrity.
+
+`soft_delete_person` MUST set `deleted_at = now()`, replace `first_name` with `'Removed'`, replace `last_name` with `'Member'`, set `phone = null`, and set `comments = null`. The row itself is NOT deleted; foreign keys from `attendance` (added in phase 9) and other tables remain valid.
+
+#### Scenario: PII is scrubbed on soft-delete
+
+- **GIVEN** person P with `first_name='John'`, `phone='+491701234567'`, `comments='private note'`
+- **WHEN** an admin calls `soft_delete_person(P.id)`
+- **AND** the row is fetched directly via the SQL editor
+- **THEN** `first_name='Removed'`, `last_name='Member'`, `phone=null`, `comments=null`, `deleted_at` is recent
+
+### Requirement: Person list and profile screens SHALL render data via RPCs only.
+
+The mobile screens `app/(app)/persons/index.tsx` and `app/(app)/persons/[id].tsx` MUST fetch data through `services/api/persons.ts`, which uses `list_persons` and `get_person` RPCs. They SHALL NOT call `supabase.from('persons')` directly.
+
+#### Scenario: Person list renders seeded persons
+
+- **GIVEN** the seed script has run with 20 persons
+- **AND** an admin is signed in
+- **WHEN** the persons list screen is opened
+- **THEN** all 20 persons are displayed with name, region, priority, and assigned-servant initials
+
+#### Scenario: Profile screen renders comments-hidden banner appropriately
+
+- **GIVEN** a non-admin signed-in servant viewing a person not assigned to them
+- **WHEN** the profile screen renders
+- **THEN** the comments section displays the localized message from `t('persons.profile.commentsHidden')`
+- **AND** no comment text is shown
+
+### Requirement: Profile screens SHALL render avatars with deterministic colored initials.
+
+The persons list and profile screens MUST use the design-system `Avatar` component to display each person's identity. The avatar's background color MUST be derived deterministically from `person.id` (via FNV-1a hash modulo 8 against `tokens.avatarPalette`). The avatar's text MUST be the first letter of `first_name` plus the first letter of `last_name` (Unicode-aware). No photo upload affordance exists in v1.
+
+#### Scenario: Same person same color across screens
+
+- **GIVEN** person P with id `pers-123` and name "Mariam Saad"
+- **WHEN** P is rendered on the persons list and on P's profile
+- **THEN** both renderings show the same background color from `tokens.avatarPalette`
+- **AND** both show the initials "MS" (or the Arabic-character equivalent if names use Arabic)
+
+#### Scenario: No photo upload UI exists
+
+- **WHEN** a reviewer inspects the persons list, profile, edit, or registration screens
+- **THEN** no "Upload photo", "Take photo", or "Edit photo" affordance exists
+- **AND** the design-system `Avatar` is the only avatar primitive in use
+
+### Requirement: Phone numbers SHALL not be enforced as unique.
+
+Family-shared phone numbers are common. The schema MUST NOT have a unique constraint on `phone`. Soft duplicate detection at registration time is a future-phase concern.
+
+#### Scenario: Two persons can share a phone number
+
+- **GIVEN** person P1 with phone `+491701234567` exists
+- **WHEN** `create_person` is called with another person P2 also using `+491701234567`
+- **THEN** the call succeeds and both rows exist
