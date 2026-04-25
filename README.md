@@ -46,6 +46,18 @@ service_role key: eyJhbGciOiJI...
 
 Copy `API URL` → `EXPO_PUBLIC_SUPABASE_URL`, `anon key` → `EXPO_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`. The `service_role key` is for Edge Functions only — never bundle it into the client.
 
+### Email-code sign-in (Expo Go)
+
+The sign-in screen has a fallback "Email me a code instead" mode. In dev:
+
+1. Tap "Email me a code instead" → enter your email → tap **Send code**.
+2. Open Mailpit at http://127.0.0.1:54324. The latest message is titled "Your Magic Link" and contains a 6-digit code (e.g. `Alternatively, enter the code: 763938`).
+3. Type the code into the app → tap **Verify** → home screen.
+
+The same email also carries a `…?token=…&type=magiclink&redirect_to=…` URL. **In Expo Go that link is dormant** — the local GoTrue build silently rejects `exp://` redirect URLs and falls back to `site_url`, which the device can't reach. Production standalone builds (post-phase 16) register the `stminaconnect://` scheme; tapping the link there opens the app directly. Until then, dev verification uses the 6-digit code path.
+
+`additional_redirect_urls` in `supabase/config.toml` lists `stminaconnect://auth/callback` for that future production case.
+
 ## Make targets
 
 ```bash

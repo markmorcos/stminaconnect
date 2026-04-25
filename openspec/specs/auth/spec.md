@@ -1,10 +1,14 @@
-# auth — Spec Delta
+# auth Specification
 
-## ADDED Requirements
+## Purpose
 
-### Requirement: The system SHALL authenticate servants via Supabase Auth using email/password or magic link.
+The auth capability gates every authenticated surface in the app. Servants are the only logged-in users — there is no public sign-up, no member auth, and no native-module-dependent provider in v1. Two flows are supported: email/password (default) and an emailed 6-digit one-time code (alternate). Sessions persist across app restarts. A `servants` row joined on `auth.users.id` is the canonical identity record (display name, role); RLS keeps each servant's row visible only to themselves and to admins.
 
-Servants are the only authenticated users. There is no public sign-up. Two flows are supported: email/password (default) and magic link (alternate). Sessions persist across app restarts. The system SHALL NOT integrate Google Sign-In, Apple Sign-In, or any other native-module-dependent provider in v1.
+## Requirements
+
+### Requirement: The system SHALL authenticate servants via Supabase Auth using email/password or an emailed one-time code.
+
+Servants are the only authenticated users. There is no public sign-up. Two flows are supported: email/password (default) and an emailed 6-digit one-time code (alternate). The same Supabase email also includes a magic-link URL — production standalone builds with the `stminaconnect://` scheme MAY honour it, but the canonical path the app drives in v1 is the 6-digit code (it works in Expo Go without depending on a redirect-URL allow-list). Sessions persist across app restarts. The system SHALL NOT integrate Google Sign-In, Apple Sign-In, or any other native-module-dependent provider in v1.
 
 #### Scenario: Successful email/password sign-in
 
@@ -23,14 +27,26 @@ Servants are the only authenticated users. There is no public sign-up. Two flows
 - **AND** the screen displays an error message via Paper Snackbar
 - **AND** the form remains usable for retry
 
-#### Scenario: Magic-link sign-in completes via deep link
+#### Scenario: Email-code sign-in completes via the 6-digit OTP
 
 - **GIVEN** a servant row exists for `volunteer@stmina.de`
-- **WHEN** the user enters that email and taps "Send link"
-- **AND** receives the email and taps the link on the device running Expo Go
-- **THEN** the OS opens the Expo Go app via the configured `exp://...` redirect
-- **AND** the callback route exchanges the token for a session
+- **WHEN** the user taps "Email me a code instead", enters that email, and taps "Send code"
+- **AND** receives the email and reads the 6-digit code
+- **AND** types the code into the in-app field and taps "Verify"
+- **THEN** `supabase.auth.verifyOtp({ type: 'email' })` returns a session
+- **AND** the auth store is populated with the joined servant row
 - **AND** the user lands on the authenticated home screen
+
+#### Scenario: Magic-link deep link completes via `stminaconnect://` (production builds)
+
+- **GIVEN** a standalone build with the `stminaconnect://` scheme registered
+- **AND** a servant row exists for `volunteer@stmina.de`
+- **WHEN** the user taps "Email me a code instead", enters that email, and taps "Send code"
+- **AND** instead of typing the 6-digit code, taps the magic link in the email on the device
+- **THEN** the OS opens the app via `stminaconnect://auth/callback?code=…`
+- **AND** the callback route exchanges the code for a session
+- **AND** the user lands on the authenticated home screen
+- **NOTE** Expo Go does not exercise this path — the `exp://` redirect is silently rejected by the local GoTrue build, so dev verification uses the 6-digit code instead. The deep-link route remains wired and becomes the production flow once `switch-to-development-build` (phase 16) ships a dev client with the `stminaconnect://` scheme registered. Until that phase verifies the round-trip end-to-end, the OTP-code path is the canonical sign-in alternate; the deep-link scenario above is aspirational. Acceptance for the deep-link path lives in phase 16's `tasks.md` § 5a.
 
 #### Scenario: Sign-up is not available
 
@@ -88,6 +104,7 @@ The `servants` table is the source of truth for display name and role. After suc
 ### Requirement: The `servants` table SHALL enforce row-level security from creation.
 
 RLS MUST be enabled on `servants` before any row is inserted. Policies SHALL allow:
+
 - A servant to read their own row.
 - An admin (a servant with `role = 'admin'`) to read all rows.
 
@@ -125,7 +142,7 @@ Tapping "Sign out" from the temporary Account screen MUST clear the Supabase ses
 
 ### Requirement: The auth store SHALL expose role information for downstream features.
 
-`useAuth()` MUST return `{ session, servant, isLoading, error, signIn, signInWithMagicLink, signOut }`. The `servant.role` field is the canonical role identifier; later phases SHALL consume it to gate admin-only screens. No admin-only screens exist in this phase.
+`useAuth()` MUST return `{ session, servant, isLoading, error, signIn, signInWithMagicLink, verifyEmailOtp, signOut }`. The auth store separately exposes `isHydrated` (true once the initial session check has settled), which layouts use to gate route redirects so that in-flight actions do not unmount the active screen. The `servant.role` field is the canonical role identifier; later phases SHALL consume it to gate admin-only screens. No admin-only screens exist in this phase.
 
 #### Scenario: Auth store exposes role on a signed-in admin
 

@@ -7,7 +7,7 @@
  */
 import { Snackbar as PaperSnackbar, type SnackbarProps as PaperProps } from 'react-native-paper';
 
-export interface SnackbarProps extends PaperProps {}
+export type SnackbarProps = PaperProps;
 
 export function Snackbar(props: SnackbarProps) {
   return <PaperSnackbar {...props} />;

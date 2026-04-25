@@ -3,14 +3,17 @@ import { Pressable, View } from 'react-native';
 import { Banner } from 'react-native-paper';
 
 import { Button, Stack, Text, useTokens } from '@/design';
+import { useAuth } from '@/hooks/useAuth';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
 
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
-export default function Index() {
+export default function Home() {
   const { colors } = useTokens();
   const router = useRouter();
+  const { servant, signOut, isLoading } = useAuth();
   const missingUrl = missingSupabaseEnvVars.includes('EXPO_PUBLIC_SUPABASE_URL');
+  const greeting = servant?.display_name?.trim() || servant?.email || '';
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -39,11 +42,23 @@ export default function Index() {
             St. Mina Connect
           </Text>
         </Pressable>
-        <Text variant="bodyLg" color={colors.textMuted} align="center">
-          Initializing
-        </Text>
+        {greeting ? (
+          <Text variant="bodyLg" color={colors.textMuted} align="center">
+            Signed in as {greeting}
+          </Text>
+        ) : null}
         <Button variant="ghost" onPress={() => router.push('/about')}>
           About
+        </Button>
+        <Button
+          variant="destructive"
+          onPress={() => {
+            void signOut();
+          }}
+          loading={isLoading}
+          disabled={isLoading}
+        >
+          Sign out
         </Button>
       </Stack>
     </View>

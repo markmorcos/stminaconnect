@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
 import '@/i18n';
-import { supabase } from '@/services/api/supabase';
+import { bootstrapAuth, useIsHydrated } from '@/state/authStore';
 import { ThemeProvider, useTokens } from '@/design/ThemeProvider';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
@@ -20,28 +20,17 @@ export default function RootLayout() {
     'IBMPlexSansArabic-SemiBold': require('../assets/fonts/IBMPlexSansArabic-SemiBold.ttf'),
     'IBMPlexSansArabic-Bold': require('../assets/fonts/IBMPlexSansArabic-Bold.ttf'),
   });
-  const [authChecked, setAuthChecked] = useState(false);
+  const isHydrated = useIsHydrated();
 
   useEffect(() => {
     // eslint-disable-next-line no-console -- spec requires this exact bootstrap log line
     console.log('Supabase client initialized');
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    supabase.auth
-      .getSession()
-      .catch(() => null)
-      .finally(() => {
-        if (!cancelled) setAuthChecked(true);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  useEffect(() => bootstrapAuth(), []);
 
   const fontsReady = fontsLoaded || !!fontError;
-  if (!fontsReady || !authChecked) return null;
+  if (!fontsReady || !isHydrated) return null;
 
   return (
     <ThemeProvider>

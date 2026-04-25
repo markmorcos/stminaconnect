@@ -33,6 +33,14 @@
 - [ ] 5.6 All five admin dashboard sections render.
 - [ ] 5.7 Sign out → sign in.
 
+## 5a. Magic-link deep-link activation (deferred from add-servant-auth)
+
+- [ ] 5a.1 Dev-client `Info.plist` / `AndroidManifest` registers `stminaconnect://` (verified from `app.json` `scheme`; rebuild required if missing).
+- [ ] 5a.2 Sign-in screen → "Email me a code instead" → "Send code" → open email on the **same device**. Tap the magic-link URL (not the OTP code).
+- [ ] 5a.3 OS opens the dev client via `stminaconnect://auth/callback?code=…`; `app/(auth)/callback.tsx` calls `exchangeCodeForSession`, the auth store hydrates the joined `servants` row, and the user lands on the home screen with no manual code entry.
+- [ ] 5a.4 OTP-code fallback still works in the same build (paste the 6-digit code instead — for cases where the email is opened on a different device).
+- [ ] 5a.5 If the redirect fails, document the cause (allow-list, scheme registration, GoTrue version) in `docs/dev-build.md` so we don't re-discover it later.
+
 ## 6. Docs
 
 - [ ] 6.1 `docs/dev-build.md` per design's structure.

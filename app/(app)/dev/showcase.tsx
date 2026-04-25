@@ -29,12 +29,12 @@ import {
 } from '@/design';
 
 const SECTIONS = ['tokens', 'components'] as const;
-type Section = (typeof SECTIONS)[number];
+type SectionId = (typeof SECTIONS)[number];
 
 export default function Showcase() {
   const { mode, setMode } = useTheme();
   const { colors } = useTokens();
-  const [section, setSection] = useState<Section>('tokens');
+  const [section, setSection] = useState<SectionId>('tokens');
   const [modalOpen, setModalOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -115,8 +115,8 @@ function SectionSwitcher({
   section,
   setSection,
 }: {
-  section: Section;
-  setSection: (s: Section) => void;
+  section: SectionId;
+  setSection: (s: SectionId) => void;
 }) {
   const { colors } = useTokens();
   return (
