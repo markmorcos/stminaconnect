@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { I18nextProvider } from 'react-i18next';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { bootstrapI18n, i18n } from '@/i18n';
 import { bootstrapAuth, useIsHydrated } from '@/state/authStore';
@@ -23,6 +24,19 @@ export default function RootLayout() {
   });
   const isHydrated = useIsHydrated();
   const [i18nReady, setI18nReady] = useState(false);
+  const queryClient = useMemo(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 30_000,
+            retry: 1,
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+    [],
+  );
 
   useEffect(() => {
     // eslint-disable-next-line no-console -- spec requires this exact bootstrap log line
@@ -50,10 +64,12 @@ export default function RootLayout() {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <ThemeProvider>
-        <SplashGate />
-        <ThemedStack />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <SplashGate />
+          <ThemedStack />
+        </ThemeProvider>
+      </QueryClientProvider>
     </I18nextProvider>
   );
 }

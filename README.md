@@ -58,6 +58,21 @@ The same email also carries a `…?token=…&type=magiclink&redirect_to=…` URL
 
 `additional_redirect_urls` in `supabase/config.toml` lists `stminaconnect://auth/callback` for that future production case.
 
+### Seed accounts (after `make seed`)
+
+`make seed` resets the dev fixture every time it runs. Sign in with:
+
+| Email                | Password      | Role    |
+| -------------------- | ------------- | ------- |
+| `priest@stmina.de`   | `password123` | admin   |
+| `servant1@stmina.de` | `password123` | servant |
+| `servant2@stmina.de` | `password123` | servant |
+| `servant3@stmina.de` | `password123` | servant |
+| `servant4@stmina.de` | `password123` | servant |
+
+The fixture also inserts 20 sample persons across regions and languages so
+the persons list and profile screens have content to render.
+
 ## Make targets
 
 ```bash
@@ -68,7 +83,7 @@ make dev-down        # supabase stop
 make migrate-up      # supabase migration up
 make migrate-down    # supabase db reset (destructive)
 make migrate-new NAME=<name>
-make seed            # placeholder until phase 4
+make seed            # populate the local DB with the dev fixture
 make lint            # eslint
 make typecheck       # tsc --noEmit
 make test            # jest

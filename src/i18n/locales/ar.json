@@ -76,6 +76,40 @@
     "settings": "الإعدادات",
     "signOut": "تسجيل الخروج"
   },
+  "persons": {
+    "list": {
+      "title": "الأعضاء",
+      "searchPlaceholder": "ابحث بالاسم",
+      "empty": "لا يوجد أعضاء بعد.",
+      "error": "تعذّر تحميل الأعضاء."
+    },
+    "profile": {
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "phone": "الهاتف",
+      "region": "المنطقة",
+      "language": "اللغة المفضّلة",
+      "priority": "الأولوية",
+      "assignedServant": "الخادم المسؤول",
+      "status": "الحالة",
+      "registeredAt": "تاريخ التسجيل",
+      "comments": "ملاحظات خاصة",
+      "commentsEmpty": "لا توجد ملاحظات بعد.",
+      "commentsHidden": "الملاحظات الخاصة متاحة فقط للخادم المسؤول والمسؤولين."
+    },
+    "priority": {
+      "high": "عالية",
+      "medium": "متوسطة",
+      "low": "منخفضة",
+      "very_low": "منخفضة جداً"
+    },
+    "status": {
+      "new": "جديد",
+      "active": "نشِط",
+      "inactive": "غير نشِط",
+      "on_break": "في فترة راحة"
+    }
+  },
   "settings": {
     "language": {
       "title": "اللغة",

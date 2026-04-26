@@ -76,6 +76,40 @@
     "settings": "Einstellungen",
     "signOut": "Abmelden"
   },
+  "persons": {
+    "list": {
+      "title": "Mitglieder",
+      "searchPlaceholder": "Nach Name suchen",
+      "empty": "Noch keine Mitglieder.",
+      "error": "Mitglieder konnten nicht geladen werden."
+    },
+    "profile": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phone": "Telefon",
+      "region": "Region",
+      "language": "Bevorzugte Sprache",
+      "priority": "Priorität",
+      "assignedServant": "Zugewiesener Diener",
+      "status": "Status",
+      "registeredAt": "Registriert am",
+      "comments": "Vertrauliche Notizen",
+      "commentsEmpty": "Noch keine Notizen.",
+      "commentsHidden": "Vertrauliche Notizen sind nur für den zugewiesenen Diener und Admins sichtbar."
+    },
+    "priority": {
+      "high": "Hoch",
+      "medium": "Mittel",
+      "low": "Niedrig",
+      "very_low": "Sehr niedrig"
+    },
+    "status": {
+      "new": "Neu",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "on_break": "Pausiert"
+    }
+  },
   "settings": {
     "language": {
       "title": "Sprache",

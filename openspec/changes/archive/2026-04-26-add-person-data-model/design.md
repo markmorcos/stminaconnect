@@ -3,6 +3,7 @@
 This is the data foundation for the rest of the app. The schema must support: trilingual data, region grouping, priority/assignment, private comments, soft-delete, and (via assignment_history) reassignment audit. Three later phases — Quick Add, Full Registration, Attendance — write into this model; many phases read from it.
 
 We split read paths from write paths via RPCs because:
+
 - The mobile client never directly inserts; it goes through `create_person`/`update_person` which apply server-side defaults (`createdBy`, `registrationType`, `status`).
 - The `comments` privacy rule (visible to assigned servant + admins) is too nuanced to express cleanly in a single SELECT policy. An RPC returning a curated projection is simpler.
 - Soft-delete filtering is centralized.

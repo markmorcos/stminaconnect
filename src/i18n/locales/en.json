@@ -76,6 +76,40 @@
     "settings": "Settings",
     "signOut": "Sign out"
   },
+  "persons": {
+    "list": {
+      "title": "Members",
+      "searchPlaceholder": "Search by name",
+      "empty": "No members yet.",
+      "error": "Could not load members."
+    },
+    "profile": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "region": "Region",
+      "language": "Preferred language",
+      "priority": "Priority",
+      "assignedServant": "Assigned servant",
+      "status": "Status",
+      "registeredAt": "Registered at",
+      "comments": "Private comments",
+      "commentsEmpty": "No comments yet.",
+      "commentsHidden": "Private comments are visible only to the assigned servant and admins."
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "very_low": "Very low"
+    },
+    "status": {
+      "new": "New",
+      "active": "Active",
+      "inactive": "Inactive",
+      "on_break": "On break"
+    }
+  },
   "settings": {
     "language": {
       "title": "Language",

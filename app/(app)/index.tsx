@@ -52,6 +52,9 @@ export default function Home() {
         <Button variant="ghost" onPress={() => router.push('/about')}>
           {t('home.about')}
         </Button>
+        <Button variant="ghost" onPress={() => router.push('/persons')}>
+          {t('persons.list.title')}
+        </Button>
         <Button variant="ghost" onPress={() => router.push('/settings/language')}>
           {t('home.settings')}
         </Button>

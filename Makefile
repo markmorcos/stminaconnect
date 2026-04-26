@@ -56,8 +56,12 @@ migrate-new: ## Create a new migration: make migrate-new NAME=add_persons
 	npx supabase migration new $(NAME)
 
 .PHONY: seed
-seed: ## Seed the local DB (placeholder until phase 4)
-	@echo "seed: no-op until phase 4 (add-person-data-model)"
+seed: docker-check ## Seed the local DB (1 admin + 4 servants + 20 persons)
+	@if ! docker ps --format '{{.Names}}' | grep -q '^supabase_db_stminaconnect$$'; then \
+		echo "ERROR: supabase_db_stminaconnect container is not running. Run 'make dev-up' first."; \
+		exit 1; \
+	fi
+	docker exec -i supabase_db_stminaconnect psql -U postgres -d postgres < supabase/seed.sql
 
 # -------------------------------------------------------------------
 # Deploys (placeholders — wired in later phases)
