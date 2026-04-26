@@ -9,9 +9,43 @@
 
 begin;
 
--- Clean slate for the seeded auth users (cascades into servants + persons
--- via FK on auth.users → servants, and from servants via the trigger
--- chain we set up). `assignment_history.person_id` cascades from persons.
+-- Clean slate for the seeded data. Order matters because the FK chain
+-- isn't fully cascading:
+--   * auth.users → servants  : ON DELETE CASCADE  ✓
+--   * servants → persons     : (no cascade — would bite on re-run)
+--   * persons → attendance   : (no cascade — phase 12)
+-- So we delete from the leaves up: attendance referencing seeded
+-- persons, then the seeded persons, then the auth.users (which
+-- cascades into servants). assignment_history rows cascade from
+-- persons automatically.
+
+delete from public.attendance
+ where person_id in (
+   select id from public.persons
+    where registered_by in (
+      select id from public.servants
+       where email in (
+         'priest@stmina.de',
+         'servant1@stmina.de',
+         'servant2@stmina.de',
+         'servant3@stmina.de',
+         'servant4@stmina.de'
+       )
+    )
+ );
+
+delete from public.persons
+ where assigned_servant in (
+   select id from public.servants
+    where email in (
+      'priest@stmina.de',
+      'servant1@stmina.de',
+      'servant2@stmina.de',
+      'servant3@stmina.de',
+      'servant4@stmina.de'
+    )
+ );
+
 delete from auth.users where email in (
   'priest@stmina.de',
   'servant1@stmina.de',
@@ -75,21 +109,36 @@ begin
     ('Mary',    'Sobhy',    '+491700000006', 'Sendling',      'en', 'high',     s3_id, 'Visits regularly with her family',                  'active',   null, 'full',     admin_id, now()),
     ('Andrew',  'Nashed',   '+491700000007', 'Pasing',        'en', 'medium',   s4_id, null,                                                'active',   null, 'full',     admin_id, now()),
     ('Sara',    'Maged',    '+491700000008', 'Pasing',        'en', 'low',      s4_id, null,                                                'new',      null, 'quick_add', admin_id, now()),
-    ('Peter',   'Adel',     '+491700000009', 'outside Munich','en', 'medium',   s1_id, 'Drives in once a month',                            'active',   null, 'full',     admin_id, now()),
+    -- Three persons (one per language) are assigned to the admin so
+    -- priest@stmina.de also has a populated "My Group" on the roster.
+    -- Admins are servants-with-extra-powers in the data model; the
+    -- registrar role and the shepherd role overlap by design.
+    ('Peter',   'Adel',     '+491700000009', 'outside Munich','en', 'medium',   admin_id, 'Drives in once a month',                            'active',   null, 'full',     admin_id, now()),
     ('Martha',  'Wahba',    null,            'outside Munich','en', 'very_low', s2_id, null,                                                'on_break', '2026-07-15', 'quick_add', admin_id, now()),
     -- 5 DE
     ('Markus',  'Schmidt',  '+491701000001', 'Schwabing',     'de', 'medium',   s2_id, 'Konvertit, lernt Liturgie kennen',                  'active',   null, 'full',     admin_id, now()),
-    ('Anna',    'Müller',   '+491701000002', 'Maxvorstein',   'de', 'high',     s3_id, null,                                                'active',   null, 'full',     admin_id, now()),
+    ('Anna',    'Müller',   '+491701000002', 'Maxvorstein',   'de', 'high',     admin_id, null,                                                'active',   null, 'full',     admin_id, now()),
     ('Stefan',  'Weber',    '+491701000003', 'Sendling',      'de', 'low',      s4_id, null,                                                'new',      null, 'quick_add', admin_id, now()),
     ('Lena',    'Koch',     '+491701000004', 'Pasing',        'de', 'medium',   s1_id, null,                                                'active',   null, 'full',     admin_id, now()),
     ('Klaus',   'Becker',   null,            'outside Munich','de', 'very_low', s2_id, null,                                                'on_break', '2026-05-20', 'quick_add', admin_id, now()),
     -- 5 AR
-    ('مينا',     'سامي',     '+491702000001', 'Schwabing',     'ar', 'high',     s3_id, 'يفضّل المتابعة باللغة العربية',                       'active',   null, 'full',     admin_id, now()),
+    ('مينا',     'سامي',     '+491702000001', 'Schwabing',     'ar', 'high',     admin_id, 'يفضّل المتابعة باللغة العربية',                       'active',   null, 'full',     admin_id, now()),
     ('مريم',     'فايز',     '+491702000002', 'Maxvorstein',   'ar', 'medium',   s4_id, null,                                                'active',   null, 'full',     admin_id, now()),
     ('بيشوي',    'شنودة',    '+491702000003', 'Sendling',      'ar', 'low',      s1_id, null,                                                'new',      null, 'quick_add', admin_id, now()),
     ('فيرينا',   'صبحي',     '+491702000004', 'Pasing',        'ar', 'medium',   s2_id, 'تشارك في فريق التسبحة',                              'active',   null, 'full',     admin_id, now()),
     ('أبانوب',   'مكرم',     null,            'outside Munich','ar', 'very_low', s3_id, null,                                                'inactive', null, 'quick_add', admin_id, now());
 end
 $$;
+
+-- Counted-event patterns (admin-configurable in-app via the Counted Events
+-- screen, but seeded here so a fresh local DB has the German liturgy + youth
+-- patterns the church actually uses). `pattern` is UNIQUE; ON CONFLICT keeps
+-- the seed re-runnable without surfacing a constraint violation.
+insert into public.counted_event_patterns (pattern) values
+  ('Lobpreis'),
+  ('Gebetsabend'),
+  ('Jugendversammlung'),
+  ('Jugendkonferenz')
+  on conflict (pattern) do nothing;
 
 commit;

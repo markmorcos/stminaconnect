@@ -80,9 +80,38 @@
     "registerFull": "Register full",
     "registerFullSubtitle": "Capture priority, assignment, and notes",
     "personsListSubtitle": "Browse all members",
+    "checkIn": "Check In",
+    "checkInSubtitle": "Mark attendance for today's events",
     "menu": "Menu",
     "account": "Account",
     "notifications": "Notifications"
+  },
+  "attendance": {
+    "picker": {
+      "title": "Today's events",
+      "empty": "No events today.",
+      "emptyHint": "Check the calendar or contact an admin if you expected something here.",
+      "countedBadge": "Counted",
+      "loadError": "Could not load events."
+    },
+    "roster": {
+      "title": "Roster",
+      "myGroup": "My Group",
+      "myGroupEmpty": "You have no assigned members yet.",
+      "findSomeoneElse": "Find someone else",
+      "searchPlaceholder": "Search by name",
+      "searchEmpty": "No matches.",
+      "searchHint": "Type at least one letter to search.",
+      "save": "Save",
+      "saveCount_one": "Save ({{count}} change)",
+      "saveCount_other": "Save ({{count}} changes)",
+      "successSaved": "Attendance saved.",
+      "errorSave": "Could not save. Check your connection and try again.",
+      "errorEditWindowClosed": "Edit window has closed. Refresh to continue.",
+      "loadError": "Could not load roster.",
+      "editWindowClosed": "This event is no longer editable.",
+      "editWindowCutoff": "Editing closed at {{cutoff}} (Europe/Berlin)."
+    }
   },
   "notifications": {
     "inbox": {

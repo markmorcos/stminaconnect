@@ -132,9 +132,15 @@ export default function Home() {
         </Pressable>
 
         <Tile
+          title={t('home.checkIn')}
+          subtitle={t('home.checkInSubtitle')}
+          variant="primary"
+          onPress={() => router.push('/attendance')}
+        />
+        <Tile
           title={t('home.quickAdd')}
           subtitle={t('home.quickAddSubtitle')}
-          variant="primary"
+          variant="secondary"
           onPress={() => router.push('/registration/quick-add')}
         />
         <Tile

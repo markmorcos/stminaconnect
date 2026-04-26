@@ -48,7 +48,7 @@ migrate-up: ## Apply pending migrations to the local DB
 
 .PHONY: migrate-down
 migrate-down: ## DESTRUCTIVE: reset the local DB and re-apply all migrations
-	npx supabase db reset
+	npx supabase db reset && make seed-all
 
 .PHONY: migrate-new
 migrate-new: ## Create a new migration: make migrate-new NAME=add_persons
@@ -62,6 +62,24 @@ seed: docker-check ## Seed the local DB (1 admin + 4 servants + 20 persons)
 		exit 1; \
 	fi
 	docker exec -i supabase_db_stminaconnect psql -U postgres -d postgres < supabase/seed.sql
+
+.PHONY: seed-vault
+seed-vault: docker-check ## Seed the local Vault with calendar-sync secrets (auto-pulls SERVICE_ROLE_KEY)
+	@if ! docker ps --format '{{.Names}}' | grep -q '^supabase_db_stminaconnect$$'; then \
+		echo "ERROR: supabase_db_stminaconnect container is not running. Run 'make dev-up' first."; \
+		exit 1; \
+	fi
+	@SRK=$$(npx supabase status -o json | jq -r .SERVICE_ROLE_KEY); \
+	if [ -z "$$SRK" ] || [ "$$SRK" = "null" ]; then \
+		echo "ERROR: could not read SERVICE_ROLE_KEY from 'supabase status'."; \
+		exit 1; \
+	fi; \
+	docker exec -i supabase_db_stminaconnect \
+		psql -U postgres -d postgres -v ON_ERROR_STOP=1 -v service_role_key="$$SRK" \
+		< supabase/seed_vault.sql
+
+.PHONY: seed-all
+seed-all: seed seed-vault ## Run both seed and seed-vault (the usual post-reset combo)
 
 # -------------------------------------------------------------------
 # Deploys (placeholders — wired in later phases)

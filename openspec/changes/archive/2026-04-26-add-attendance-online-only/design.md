@@ -16,7 +16,7 @@ Check-in is the single highest-throughput flow on Sunday mornings — a servant 
 - Offline support. Phase 10.
 - Bulk paste / CSV import. Out of v1.
 - Per-attendance notes (e.g. "arrived late"). Out of v1.
-- Marking *absence* explicitly. Per Open Question C2, absence is implicit.
+- Marking _absence_ explicitly. Per Open Question C2, absence is implicit.
 - Statistics/dashboards. Phase 13/14.
 
 ## Decisions
@@ -32,7 +32,7 @@ Check-in is the single highest-throughput flow on Sunday mornings — a servant 
    unique (event_id, person_id)
    ```
    `is_present` exists for future flexibility (e.g. an explicit "did not attend" record) but in v1 we never insert `false`.
-2. **Implicit absence**: `mark_attendance` upserts; `unmark_attendance` deletes. The set of present persons is the rows; everyone else is absent. This matches the servant mental model — they check people *in*, never *out*.
+2. **Implicit absence**: `mark_attendance` upserts; `unmark_attendance` deletes. The set of present persons is the rows; everyone else is absent. This matches the servant mental model — they check people _in_, never _out_.
 3. **Edit window** (Open Question C1): `mark_attendance` and `unmark_attendance` MUST verify `now() < event.start_at::date + interval '1 day' + interval '3 hours' AT TIME ZONE 'Europe/Berlin'`. Past the window, the RPCs return an error.
 4. **My Group section**: `get_event_attendance(event_id)` is fetched in parallel with the servant's assigned persons (`list_persons` filtered by `assigned_servant=auth.uid()`). The roster renders all assigned persons with check states from the attendance set.
 5. **"Find someone else" search**: `search_persons(query text)` returns a small projection (id, first_name, last_name, region) for any signed-in servant. Limit 25 per call. Debounced 300ms client-side.

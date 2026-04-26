@@ -80,9 +80,38 @@
     "registerFull": "Vollständig registrieren",
     "registerFullSubtitle": "Priorität, Zuweisung und Notizen erfassen",
     "personsListSubtitle": "Alle Mitglieder ansehen",
+    "checkIn": "Check-in",
+    "checkInSubtitle": "Anwesenheit für die heutigen Veranstaltungen erfassen",
     "menu": "Menü",
     "account": "Konto",
     "notifications": "Benachrichtigungen"
+  },
+  "attendance": {
+    "picker": {
+      "title": "Heutige Veranstaltungen",
+      "empty": "Heute keine Veranstaltungen.",
+      "emptyHint": "Prüfe den Kalender oder wende dich an einen Admin, wenn etwas fehlt.",
+      "countedBadge": "Gezählt",
+      "loadError": "Veranstaltungen konnten nicht geladen werden."
+    },
+    "roster": {
+      "title": "Anwesenheit",
+      "myGroup": "Meine Gruppe",
+      "myGroupEmpty": "Dir sind noch keine Mitglieder zugeordnet.",
+      "findSomeoneElse": "Jemand anderen finden",
+      "searchPlaceholder": "Nach Namen suchen",
+      "searchEmpty": "Keine Treffer.",
+      "searchHint": "Tippe mindestens einen Buchstaben, um zu suchen.",
+      "save": "Speichern",
+      "saveCount_one": "Speichern ({{count}} Änderung)",
+      "saveCount_other": "Speichern ({{count}} Änderungen)",
+      "successSaved": "Anwesenheit gespeichert.",
+      "errorSave": "Speichern fehlgeschlagen. Verbindung prüfen und erneut versuchen.",
+      "errorEditWindowClosed": "Bearbeitungszeitraum beendet. Aktualisieren, um fortzufahren.",
+      "loadError": "Anwesenheitsliste konnte nicht geladen werden.",
+      "editWindowClosed": "Diese Veranstaltung ist nicht mehr bearbeitbar.",
+      "editWindowCutoff": "Bearbeitung endete um {{cutoff}} (Europa/Berlin)."
+    }
   },
   "notifications": {
     "inbox": {

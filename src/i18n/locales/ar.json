@@ -80,9 +80,38 @@
     "registerFull": "تسجيل كامل",
     "registerFullSubtitle": "أدخل الأولوية والخادم المسؤول والملاحظات",
     "personsListSubtitle": "تصفّح كل الأعضاء",
+    "checkIn": "تسجيل الحضور",
+    "checkInSubtitle": "علِّم الحضور لاجتماعات اليوم",
     "menu": "القائمة",
     "account": "الحساب",
     "notifications": "الإشعارات"
+  },
+  "attendance": {
+    "picker": {
+      "title": "اجتماعات اليوم",
+      "empty": "لا توجد اجتماعات اليوم.",
+      "emptyHint": "راجع التقويم أو تواصل مع المسؤول إذا كنت تتوقع وجود اجتماع.",
+      "countedBadge": "محتسب",
+      "loadError": "تعذّر تحميل الاجتماعات."
+    },
+    "roster": {
+      "title": "كشف الحضور",
+      "myGroup": "مجموعتي",
+      "myGroupEmpty": "لا يوجد أعضاء مُسندون إليك بعد.",
+      "findSomeoneElse": "ابحث عن شخص آخر",
+      "searchPlaceholder": "ابحث بالاسم",
+      "searchEmpty": "لا توجد نتائج.",
+      "searchHint": "اكتب حرفًا واحدًا على الأقل للبحث.",
+      "save": "حفظ",
+      "saveCount_one": "حفظ ({{count}} تغيير)",
+      "saveCount_other": "حفظ ({{count}} تغييرات)",
+      "successSaved": "تم حفظ الحضور.",
+      "errorSave": "تعذّر الحفظ. تحقق من الاتصال وحاول مجددًا.",
+      "errorEditWindowClosed": "انتهت فترة التعديل. حدِّث الصفحة للمتابعة.",
+      "loadError": "تعذّر تحميل كشف الحضور.",
+      "editWindowClosed": "لم يعد بالإمكان تعديل هذا الاجتماع.",
+      "editWindowCutoff": "انتهى التعديل عند {{cutoff}} (توقيت برلين)."
+    }
   },
   "notifications": {
     "inbox": {
