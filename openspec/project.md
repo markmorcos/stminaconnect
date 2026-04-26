@@ -58,33 +58,34 @@ Member profiles do not display photos. Profile screens (and list rows) use the d
 
 This is the most important architectural rule of the project and supersedes other preferences when they conflict.
 
-> **Every change before `switch-to-development-build` (phase 19) MUST be fully buildable, runnable, and end-to-end testable in Expo Go.**
+> **Every change before `switch-to-development-build` (phase 20) MUST be fully buildable, runnable, and end-to-end testable in Expo Go.**
 
 Rationale: solo developer iteration speed. EAS builds are slow and fragile; Expo Go's QR-code reload loop keeps the inner loop tight.
 
 ### What this means in practice
+
 - **Allowed in early phases**: `@supabase/supabase-js`, i18next, React Hook Form + Zod, expo-sqlite, expo-localization, expo-notifications **for local notifications only**, NativeWind, Recharts-equivalent libraries that work in Expo Go.
 - **Forbidden in early phases**: WatermelonDB, native Google Sign-In, custom config plugins, remote push notifications via `getExpoPushTokenAsync`, anything requiring `expo-dev-client`.
-- **Mocked in early phases**: real push notifications. The app uses a `NotificationService` interface; before phase 19, the implementation is a mock dispatcher (Postgres `notifications` table + in-app banner + optional `expo-notifications` local notification). Phase 20 swaps in the real implementation.
-- **Self-check rule**: before finalizing any change before phase 19, verify `Can this be tested end-to-end in Expo Go?`. If no, mock the incompatible part or move the work into the dev-build phase.
+- **Mocked in early phases**: real push notifications. The app uses a `NotificationService` interface; before phase 20, the implementation is a mock dispatcher (Postgres `notifications` table + in-app banner + optional `expo-notifications` local notification). Phase 21 swaps in the real implementation.
+- **Self-check rule**: before finalizing any change before phase 20, verify `Can this be tested end-to-end in Expo Go?`. If no, mock the incompatible part or move the work into the dev-build phase.
 
 ## 3. Domain Glossary
 
-| Term | Definition |
-|---|---|
-| **Member** | A person known to the church (newcomer, regular attendee, occasional attendee). Members do not log into the app. |
-| **Servant** | An authenticated app user with volunteer-level permissions. Registers newcomers, marks attendance, performs follow-ups. |
-| **Admin** | A privileged servant (priest / church leader) who can configure alerts, manage other servants, see all reports, reassign members. |
-| **Quick Add** | A 5-field newcomer registration flow optimized for the newcomer to fill in on the servant's phone. Auto-assigned to the initiating servant. |
-| **Full Registration** | A longer registration form with priority, assigned servant, and private comments. Filled in by a servant. |
-| **Counted Event** | A church event whose Google Calendar entry matches an admin-configured title pattern (e.g. "Sunday Liturgy"). Only counted events affect absence streaks. |
-| **Absence Streak** | The number of consecutive counted events a member has missed. Reset to zero on attendance. |
-| **Absence Threshold** | The streak length at which an alert fires. Default 3. May be configured per priority level. |
-| **Follow-up** | A pastoral action (Called/Texted/Visited/No Answer/Other) logged against a member, optionally with notes and a status (Completed/Snoozed). |
-| **On Break** | A status indicating a member is travelling or otherwise temporarily unavailable. Pauses absence-streak evaluation until `pausedUntil`. |
-| **Counted Event Pattern** | A case-insensitive substring or simple wildcard pattern matched against `eventTitle` to flag events as counted. |
-| **Sync Queue** | The local table holding pending writes that have not yet reached Supabase. |
-| **Notification Dispatcher** | The runtime implementation behind `NotificationService` — mock (early phases) or real Expo Push (phase 20+). |
+| Term                        | Definition                                                                                                                                                |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Member**                  | A person known to the church (newcomer, regular attendee, occasional attendee). Members do not log into the app.                                          |
+| **Servant**                 | An authenticated app user with volunteer-level permissions. Registers newcomers, marks attendance, performs follow-ups.                                   |
+| **Admin**                   | A privileged servant (priest / church leader) who can configure alerts, manage other servants, see all reports, reassign members.                         |
+| **Quick Add**               | A 5-field newcomer registration flow optimized for the newcomer to fill in on the servant's phone. Auto-assigned to the initiating servant.               |
+| **Full Registration**       | A longer registration form with priority, assigned servant, and private comments. Filled in by a servant.                                                 |
+| **Counted Event**           | A church event whose Google Calendar entry matches an admin-configured title pattern (e.g. "Sunday Liturgy"). Only counted events affect absence streaks. |
+| **Absence Streak**          | The number of consecutive counted events a member has missed. Reset to zero on attendance.                                                                |
+| **Absence Threshold**       | The streak length at which an alert fires. Default 3. May be configured per priority level.                                                               |
+| **Follow-up**               | A pastoral action (Called/Texted/Visited/No Answer/Other) logged against a member, optionally with notes and a status (Completed/Snoozed).                |
+| **On Break**                | A status indicating a member is travelling or otherwise temporarily unavailable. Pauses absence-streak evaluation until `pausedUntil`.                    |
+| **Counted Event Pattern**   | A case-insensitive substring or simple wildcard pattern matched against `eventTitle` to flag events as counted.                                           |
+| **Sync Queue**              | The local table holding pending writes that have not yet reached Supabase.                                                                                |
+| **Notification Dispatcher** | The runtime implementation behind `NotificationService` — mock (early phases) or real Expo Push (phase 21+).                                              |
 
 ## 4. Users & Roles
 
@@ -94,34 +95,34 @@ Rationale: solo developer iteration speed. EAS builds are slow and fragile; Expo
 
 ## 5. Tech Stack (Pinned)
 
-| Layer | Choice | Notes |
-|---|---|---|
-| Runtime (mobile) | **Expo SDK 50+** (latest stable at session time), React Native, TypeScript 5.x, Node 20 LTS | Managed workflow; Expo Go-first |
-| Navigation | **Expo Router** | File-based |
-| Forms | **React Hook Form + Zod** | |
-| State | **Zustand** for ephemeral UI state; **TanStack Query** for server-state caching | Zustand picked for ergonomic minimalism; TanStack Query for caching + sync UX. Both Expo Go-compatible. |
-| UI substrate | **React Native Paper, theme overridden** | Picked for accessibility defaults, RTL support, Material conventions familiar to non-tech-savvy users, and zero native-module surprises in Expo Go. Paper's *theme* is fully overridden by our brand tokens (see `setup-design-system`); features consume our design-system components, never Paper directly. NativeWind/Tamagui considered but Paper's a11y/RTL/Expo-Go-compat win. |
-| Fonts | **Inter** (Latin) + **IBM Plex Sans Arabic** (Arabic) via `expo-font` | Loaded in `setup-design-system`. `Text` resolves family by `i18n.language`. |
-| Icons | **lucide-react-native** | Stroke-style, modern, Expo Go compatible. |
-| Animations | **react-native-reanimated** | Used in `harden-and-polish` for motion. Expo Go compatible from SDK 50+. |
-| Haptics | **expo-haptics** | Used in `harden-and-polish` for tactile feedback. |
-| Theming | **Light + dark** mandatory | Tokens define both; system default + manual override. |
-| i18n | **i18next + react-i18next**, **expo-localization** for device locale | EN/AR/DE day one |
-| RTL | `I18nManager` + Paper RTL primitives | First Arabic switch requires app reload (documented) |
-| Local DB | **expo-sqlite** | Decided. NOT WatermelonDB. |
-| Local notifications | **expo-notifications** (local channel only) | Real push deferred to phase 20 |
-| Charts | **react-native-chart-kit** (or `victory-native@^36` if Paper integration is cleaner) | Final pick justified in `add-admin-dashboard/design.md`. Must be Expo Go-compatible. |
-| Backend | **Supabase** (EU/Frankfurt region) | Free tier sufficient |
-| Auth | Supabase Auth (email/password + magic link) | No Google Sign-In in v1 |
-| DB | Postgres + RLS | All client access via RPC functions |
-| Server logic | Supabase Edge Functions (Deno) | TypeScript |
-| Calendar | Google Calendar via service account | Service account JSON in Edge Function secrets |
-| Push (later) | Expo Push API | Phase 20+ only |
-| Local dev | Supabase CLI (Docker) | `supabase start` |
-| Build (later) | EAS Build | Introduced in phase 19 |
-| Tests | Jest + React Native Testing Library; Deno test for Edge Functions | 80%+ coverage on business logic |
-| Lint/format | ESLint + Prettier | Pinned configs in scaffold |
-| CI | Deferred — local-only checks during early phases | Considered in phase 22 |
+| Layer               | Choice                                                                                      | Notes                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Runtime (mobile)    | **Expo SDK 50+** (latest stable at session time), React Native, TypeScript 5.x, Node 20 LTS | Managed workflow; Expo Go-first                                                                                                                                                                                                                                                                                                                                                      |
+| Navigation          | **Expo Router**                                                                             | File-based                                                                                                                                                                                                                                                                                                                                                                           |
+| Forms               | **React Hook Form + Zod**                                                                   |                                                                                                                                                                                                                                                                                                                                                                                      |
+| State               | **Zustand** for ephemeral UI state; **TanStack Query** for server-state caching             | Zustand picked for ergonomic minimalism; TanStack Query for caching + sync UX. Both Expo Go-compatible.                                                                                                                                                                                                                                                                              |
+| UI substrate        | **React Native Paper, theme overridden**                                                    | Picked for accessibility defaults, RTL support, Material conventions familiar to non-tech-savvy users, and zero native-module surprises in Expo Go. Paper's _theme_ is fully overridden by our brand tokens (see `setup-design-system`); features consume our design-system components, never Paper directly. NativeWind/Tamagui considered but Paper's a11y/RTL/Expo-Go-compat win. |
+| Fonts               | **Inter** (Latin) + **IBM Plex Sans Arabic** (Arabic) via `expo-font`                       | Loaded in `setup-design-system`. `Text` resolves family by `i18n.language`.                                                                                                                                                                                                                                                                                                          |
+| Icons               | **lucide-react-native**                                                                     | Stroke-style, modern, Expo Go compatible.                                                                                                                                                                                                                                                                                                                                            |
+| Animations          | **react-native-reanimated**                                                                 | Used in `harden-and-polish` for motion. Expo Go compatible from SDK 50+.                                                                                                                                                                                                                                                                                                             |
+| Haptics             | **expo-haptics**                                                                            | Used in `harden-and-polish` for tactile feedback.                                                                                                                                                                                                                                                                                                                                    |
+| Theming             | **Light + dark** mandatory                                                                  | Tokens define both; system default + manual override.                                                                                                                                                                                                                                                                                                                                |
+| i18n                | **i18next + react-i18next**, **expo-localization** for device locale                        | EN/AR/DE day one                                                                                                                                                                                                                                                                                                                                                                     |
+| RTL                 | `I18nManager` + Paper RTL primitives                                                        | First Arabic switch requires app reload (documented)                                                                                                                                                                                                                                                                                                                                 |
+| Local DB            | **expo-sqlite**                                                                             | Decided. NOT WatermelonDB.                                                                                                                                                                                                                                                                                                                                                           |
+| Local notifications | **expo-notifications** (local channel only)                                                 | Real push deferred to phase 21                                                                                                                                                                                                                                                                                                                                                       |
+| Charts              | **react-native-chart-kit** (or `victory-native@^36` if Paper integration is cleaner)        | Final pick justified in `add-admin-dashboard/design.md`. Must be Expo Go-compatible.                                                                                                                                                                                                                                                                                                 |
+| Backend             | **Supabase** (EU/Frankfurt region)                                                          | Free tier sufficient                                                                                                                                                                                                                                                                                                                                                                 |
+| Auth                | Supabase Auth (email/password + magic link)                                                 | No Google Sign-In in v1                                                                                                                                                                                                                                                                                                                                                              |
+| DB                  | Postgres + RLS                                                                              | All client access via RPC functions                                                                                                                                                                                                                                                                                                                                                  |
+| Server logic        | Supabase Edge Functions (Deno)                                                              | TypeScript                                                                                                                                                                                                                                                                                                                                                                           |
+| Calendar            | Google Calendar via service account                                                         | Service account JSON in Edge Function secrets                                                                                                                                                                                                                                                                                                                                        |
+| Push (later)        | Expo Push API                                                                               | Phase 21+ only                                                                                                                                                                                                                                                                                                                                                                       |
+| Local dev           | Supabase CLI (Docker)                                                                       | `supabase start`                                                                                                                                                                                                                                                                                                                                                                     |
+| Build (later)       | EAS Build                                                                                   | Introduced in phase 20                                                                                                                                                                                                                                                                                                                                                               |
+| Tests               | Jest + React Native Testing Library; Deno test for Edge Functions                           | 80%+ coverage on business logic                                                                                                                                                                                                                                                                                                                                                      |
+| Lint/format         | ESLint + Prettier                                                                           | Pinned configs in scaffold                                                                                                                                                                                                                                                                                                                                                           |
+| CI                  | Deferred — local-only checks during early phases                                            | Considered in phase 23                                                                                                                                                                                                                                                                                                                                                               |
 
 Versions are committed to `package.json` / `Makefile` during phase 1; later changes can bump but never silently downgrade.
 
@@ -132,7 +133,7 @@ These patterns are non-negotiable. Every change must respect them.
 1. **Service-first networking**. All mobile network calls go through `services/api/*` modules. Components never call `supabase.from(...)` directly.
 2. **`NotificationService` interface**. All outbound notifications go through `services/notifications/NotificationService`. The runtime implementation is selected by config (`mock` vs `real`). Edge Functions also dispatch through a server-side equivalent.
 3. **RPC-only client access**. From the mobile client, all database mutations and most reads happen through Postgres RPC functions, never direct table access. RLS policies are defense-in-depth, not the only line.
-4. **Offline writes go through the sync queue**. From phase 12 onward, writes are recorded into `local_sync_queue` first; the queue worker pushes to Supabase when online. Reads go to expo-sqlite first, with TanStack Query falling through to Supabase on cache miss.
+4. **Offline writes go through the sync queue**. From phase 13 onward, writes are recorded into `local_sync_queue` first; the queue worker pushes to Supabase when online. Reads go to expo-sqlite first, with TanStack Query falling through to Supabase on cache miss.
 5. **One source of truth for events**. Events come from Google Calendar via the `sync-calendar-events` Edge Function. The app never creates events.
 6. **Auto-generated audit fields**. Every persistable row has `createdAt`, `updatedAt`, `createdBy`. Mutations set these via DB triggers or RPC defaults — never relied on from the client.
 7. **i18n-or-die**. No user-facing string is hardcoded. Every label has a translation key. Tests catch missing keys at CI time.
@@ -199,17 +200,17 @@ These patterns are non-negotiable. Every change must respect them.
 
 ## 11. Documentation Rules
 
-- Inline comments only for non-obvious *why* — never *what*.
+- Inline comments only for non-obvious _why_ — never _what_.
 - **Specs reflect reality**. After applying a change, the spec under `openspec/specs/` is updated as part of the archive step. No drift allowed.
 - **README** is a quick-start ("how to run in Expo Go in 60 seconds"), not a spec.
-- **Runbooks** (deployment, backup) introduced in phase 22.
+- **Runbooks** (deployment, backup) introduced in phase 23.
 
 ## 12. Environments
 
-| Env | Backend | Mobile |
-|---|---|---|
-| `local` | Supabase CLI (Docker) on `localhost:54321` | Expo Go via LAN dev server |
-| `production` | Hosted Supabase project, EU/Frankfurt region | EAS-built apps via TestFlight + internal APK (phase 22) |
+| Env          | Backend                                      | Mobile                                                  |
+| ------------ | -------------------------------------------- | ------------------------------------------------------- |
+| `local`      | Supabase CLI (Docker) on `localhost:54321`   | Expo Go via LAN dev server                              |
+| `production` | Hosted Supabase project, EU/Frankfurt region | EAS-built apps via TestFlight + internal APK (phase 23) |
 
 There is **no staging environment** in v1. Production deploys are gated on local verification + manual test.
 
@@ -223,11 +224,12 @@ There is **no staging environment** in v1. Production deploys are gated on local
 ## 14. Quality Gates per Change
 
 A change is ready to archive only when:
+
 1. All `tasks.md` items checked off.
 2. All scenarios in the spec delta verified (manual or automated).
 3. `openspec validate <change>` passes.
 4. Test suite green and coverage threshold met.
-5. Manual verification performed **in Expo Go** (changes 1–18) or in a dev build (changes 19+).
+5. Manual verification performed **in Expo Go** (changes 1–19) or in a dev build (changes 20+).
 6. User has committed and reviewed.
 
 Until each of these is true, the change stays in `openspec/changes/`.
@@ -244,17 +246,18 @@ The full execution order. Changes are applied one at a time; each must be archiv
 6. **`add-person-data-model`** — Create the `persons` and `servants` tables with RLS, basic CRUD, and seed data.
 7. **`add-quick-add-registration`** — Ship the 5-field newcomer form with auto-assignment to the initiating servant.
 8. **`add-full-registration`** — Add the full registration form with priority, assigned servant, and private comments.
-9. **`add-notification-service-mock`** — Define the `NotificationService` interface and ship the mock in-app dispatcher.
-10. **`add-google-calendar-sync`** — Add the Edge Function that polls Google Calendar, the `events` table, and counted-event matching.
-11. **`add-attendance-online-only`** — Build the check-in screen and persist attendance against events on the online path.
-12. **`add-offline-sync-with-sqlite`** — Mirror reads in expo-sqlite, queue offline writes, and resolve conflicts on reconnect.
-13. **`add-absence-detection`** — Add admin-configurable thresholds, streak calculation, and alert generation through the mock dispatcher.
-14. **`add-followups-and-on-break`** — Add the follow-up flow, the on-break state, and return-to-attendance detection.
-15. **`add-admin-dashboard`** — Build the admin overview: trends, at-risk list, registration funnel, and region breakdown.
-16. **`add-servant-dashboard`** — Build the servant home: my group, pending follow-ups, recent newcomers.
-17. **`harden-and-polish`** — Add error/empty/loading states, accessibility audit, motion, and performance pass.
-18. **`add-gdpr-compliance`** — Add the consent flow, data export (Article 15), hard-erasure (Article 17), and audit log.
-19. **`switch-to-development-build`** — Move to expo-dev-client, EAS build profiles, and a custom URL scheme.
-20. **`replace-mock-with-real-push`** — Swap in the real Expo Push dispatcher with token lifecycle and quiet hours.
-21. **`prepare-store-listings`** — Produce store assets, copy in EN/AR/DE, screenshots, and iOS privacy nutrition labels.
-22. **`setup-production-deployment`** — Provision the production Supabase project, deployment scripts, backups, and runbook.
+9. **`add-servant-account-management`** — Self-service account screen for display-name and password changes; admin RPC for editing other servants' display names (UI consumer in phase 16).
+10. **`add-notification-service-mock`** — Define the `NotificationService` interface and ship the mock in-app dispatcher.
+11. **`add-google-calendar-sync`** — Add the Edge Function that polls Google Calendar, the `events` table, and counted-event matching.
+12. **`add-attendance-online-only`** — Build the check-in screen and persist attendance against events on the online path.
+13. **`add-offline-sync-with-sqlite`** — Mirror reads in expo-sqlite, queue offline writes, and resolve conflicts on reconnect.
+14. **`add-absence-detection`** — Add admin-configurable thresholds, streak calculation, and alert generation through the mock dispatcher.
+15. **`add-followups-and-on-break`** — Add the follow-up flow, the on-break state, and return-to-attendance detection.
+16. **`add-admin-dashboard`** — Build the admin overview: trends, at-risk list, registration funnel, and region breakdown.
+17. **`add-servant-dashboard`** — Build the servant home: my group, pending follow-ups, recent newcomers.
+18. **`harden-and-polish`** — Add error/empty/loading states, accessibility audit, motion, and performance pass.
+19. **`add-gdpr-compliance`** — Add the consent flow, data export (Article 15), hard-erasure (Article 17), and audit log.
+20. **`switch-to-development-build`** — Move to expo-dev-client, EAS build profiles, and a custom URL scheme.
+21. **`replace-mock-with-real-push`** — Swap in the real Expo Push dispatcher with token lifecycle and quiet hours.
+22. **`prepare-store-listings`** — Produce store assets, copy in EN/AR/DE, screenshots, and iOS privacy nutrition labels.
+23. **`setup-production-deployment`** — Provision the production Supabase project, deployment scripts, backups, and runbook.
