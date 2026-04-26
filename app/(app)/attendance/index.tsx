@@ -4,13 +4,15 @@
  * the admin counted-events screen shows so servants know which events
  * affect absence streaks.
  */
-import { FlatList, Pressable, View } from 'react-native';
+import { useCallback, useState } from 'react';
+import { FlatList, Pressable, RefreshControl, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 
 import { Badge, Card, EmptyState, LoadingSkeleton, Stack, Text, useTokens } from '@/design';
 import { getTodayEvents } from '@/services/api/events';
+import { getSyncEngine } from '@/services/sync/SyncEngine';
 import type { CalendarEvent } from '@/types/event';
 
 function formatRange(startIso: string, endIso: string): string {
@@ -25,10 +27,21 @@ export default function AttendancePicker() {
   const { colors, spacing } = useTokens();
   const router = useRouter();
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['attendance', 'today-events'],
     queryFn: getTodayEvents,
   });
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await getSyncEngine().runOnce();
+      await refetch();
+    } finally {
+      setRefreshing(false);
+    }
+  }, [refetch]);
 
   if (isLoading) {
     return (
@@ -70,6 +83,9 @@ export default function AttendancePicker() {
         data={events}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ padding: spacing.lg, gap: spacing.sm }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
+        }
         renderItem={({ item }) => (
           <EventTile event={item} onPress={() => router.push(`/attendance/${item.id}`)} />
         )}

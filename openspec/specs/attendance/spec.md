@@ -55,24 +55,25 @@ On entering the roster, the screen MUST fetch the servant's assigned persons and
 
 ### Requirement: Save SHALL batch all pending changes into one round-trip.
 
-Tapping Save MUST call `mark_attendance` (for newly added person ids) and `unmark_attendance` (for removed ones) in parallel via Promise.all. Both calls MUST occur in the same network burst. On any failure, both pending sets MUST be retained for retry.
+Tapping Save MUST persist pending check-in changes for the active event. From this change forward, Save MUST enqueue `mark_attendance` and `unmark_attendance` ops into `local_sync_queue` and update the local SQLite `attendance` cache optimistically — the actual RPC dispatch is owned by the SyncEngine. UI feedback ("Saved") MUST NOT depend on the network round-trip; the sync indicator reflects the queued state until the SyncEngine drains it.
 
-#### Scenario: Save batches add and remove
+#### Scenario: Save updates local immediately
 
-- **GIVEN** the servant has toggled P2 on and P1 off in the roster
-- **WHEN** the servant taps Save
-- **THEN** `mark_attendance(E, [P2])` and `unmark_attendance(E, [P1])` are dispatched in parallel
-- **AND** on completion, both DB states reflect the changes
-- **AND** the FAB hides
+- **GIVEN** the roster has pending toggles
+- **WHEN** the user taps Save
+- **THEN** the local `attendance` table is updated within the same UI frame
+- **AND** the corresponding ops are added to `local_sync_queue`
+- **AND** the Save FAB hides
+- **AND** the indicator reflects pending sync
 
-#### Scenario: Save failure preserves pending
+#### Scenario: Save offline still succeeds locally
 
-- **GIVEN** pending changes exist
-- **AND** the network is unavailable
-- **WHEN** the servant taps Save
-- **THEN** an error Snackbar appears (translated)
-- **AND** the pending sets are unchanged
-- **AND** the Save FAB still shows the change count
+- **GIVEN** the device is offline
+- **AND** the roster has pending toggles
+- **WHEN** the user taps Save
+- **THEN** the local cache is updated
+- **AND** ops are queued
+- **AND** the user receives a localized "Saved" confirmation (no network error surfaced)
 
 ### Requirement: A "Find someone else" search SHALL allow marking any non-deleted person.
 

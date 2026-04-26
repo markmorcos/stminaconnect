@@ -318,5 +318,42 @@
         "resyncFailed": "Could not start resync. Try again."
       }
     }
+  },
+  "sync": {
+    "status": {
+      "idle": "Synced",
+      "syncing": "Syncing…",
+      "error": "Sync error",
+      "offline": "Offline"
+    },
+    "bar": {
+      "syncing": "Syncing…",
+      "syncingWithCount_one": "Syncing {{count}} change…",
+      "syncingWithCount_other": "Syncing {{count}} changes…",
+      "pending_one": "{{count}} change waiting to sync",
+      "pending_other": "{{count}} changes waiting to sync",
+      "synced": "Synced"
+    },
+    "panel": {
+      "title": "Sync status",
+      "lastSync": "Last sync: {{when}}",
+      "lastSyncNever": "Last sync: never",
+      "queueLength_one": "{{count}} change waiting to sync",
+      "queueLength_other": "{{count}} changes waiting to sync",
+      "syncNow": "Sync now",
+      "unsynced": "Unsynced changes"
+    },
+    "firstLaunchLoading": "Syncing initial data…",
+    "signOutDialog": {
+      "title": "Unsynced changes",
+      "body_one": "You have {{count}} change that hasn't been saved to the server. Logging out will discard it.",
+      "body_other": "You have {{count}} changes that haven't been saved to the server. Logging out will discard them.",
+      "stay": "Stay logged in",
+      "logoutAnyway": "Logout anyway"
+    },
+    "conflictToast": "Your local change to {{name}} was overwritten by a newer version.",
+    "errorToast": {
+      "fourXX": "Your {{subject}} could not be saved: {{reason}}"
+    }
   }
 }

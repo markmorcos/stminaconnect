@@ -3,8 +3,8 @@
  * the RPC return everything); only admins gain edit/reassign affordances
  * — added in a later phase.
  */
-import { useEffect, useMemo, useState } from 'react';
-import { FlatList, Pressable, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { FlatList, Pressable, RefreshControl, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
@@ -21,6 +21,7 @@ import {
   useTokens,
 } from '@/design';
 import { listPersons } from '@/services/api/persons';
+import { getSyncEngine } from '@/services/sync/SyncEngine';
 import type { Person, PersonPriority, PersonStatus, PersonsFilter } from '@/types/person';
 
 const PRIORITY_VARIANT: Record<
@@ -57,10 +58,21 @@ export default function PersonsList() {
     [debouncedSearch],
   );
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['persons', filter],
     queryFn: () => listPersons(filter),
   });
+
+  const [refreshing, setRefreshing] = useState(false);
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await getSyncEngine().runOnce();
+      await refetch();
+    } finally {
+      setRefreshing(false);
+    }
+  }, [refetch]);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -89,6 +101,9 @@ export default function PersonsList() {
           data={data ?? []}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ padding: spacing.lg, gap: spacing.sm }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
+          }
           renderItem={({ item }) => (
             <PersonRow person={item} onPress={() => router.push(`/persons/${item.id}`)} />
           )}

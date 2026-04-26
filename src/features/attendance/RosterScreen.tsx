@@ -14,7 +14,7 @@
  * members without leaving the roster.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FlatList, Pressable, View, type ListRenderItem } from 'react-native';
+import { FlatList, Pressable, RefreshControl, View, type ListRenderItem } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { Banner, FAB } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -41,6 +41,7 @@ import {
 } from '@/services/api/attendance';
 import { getTodayEvents } from '@/services/api/events';
 import { listPersons } from '@/services/api/persons';
+import { getSyncEngine } from '@/services/sync/SyncEngine';
 import { useAuth } from '@/hooks/useAuth';
 import type { PersonSearchHit } from '@/types/attendance';
 import type { CalendarEvent } from '@/types/event';
@@ -114,6 +115,21 @@ export function RosterScreen() {
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [snack, setSnack] = useState<{ message: string; tone: 'success' | 'error' } | null>(null);
   const [saving, setSaving] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await getSyncEngine().runOnce();
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ['attendance', 'event-attendance', eventId] }),
+        queryClient.invalidateQueries({ queryKey: ['attendance', 'my-group', servant?.id] }),
+        queryClient.invalidateQueries({ queryKey: ['attendance', 'event', eventId] }),
+      ]);
+    } finally {
+      setRefreshing(false);
+    }
+  }, [eventId, queryClient, servant?.id]);
 
   useEffect(() => {
     const handle = setTimeout(() => setDebouncedSearch(searchInput.trim()), 300);
@@ -388,6 +404,9 @@ export function RosterScreen() {
         keyExtractor={(item) => item.key}
         renderItem={renderItem}
         contentContainerStyle={{ padding: spacing.lg, gap: spacing.xs, paddingBottom: 96 }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
+        }
       />
 
       {editable && count > 0 ? (

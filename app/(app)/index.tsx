@@ -5,6 +5,7 @@ import { Appbar, Badge as PaperBadge, Banner, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { Card, Snackbar, Stack, Text, useTokens } from '@/design';
+import { useSignOutWithGuard } from '@/components/SignOutDialog';
 import { useAuth } from '@/hooks/useAuth';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
 import { useNotificationsStore } from '@/state/notificationsStore';
@@ -15,7 +16,8 @@ export default function Home() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
   const router = useRouter();
-  const { servant, signOut, isLoading } = useAuth();
+  const { servant, isLoading } = useAuth();
+  const { request: requestSignOut, Dialog: SignOutGuardDialog } = useSignOutWithGuard();
   const params = useLocalSearchParams<{ welcome?: string }>();
   const [welcomeName, setWelcomeName] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -103,7 +105,7 @@ export default function Home() {
           <Menu.Item
             onPress={() => {
               setMenuOpen(false);
-              void signOut();
+              requestSignOut();
             }}
             disabled={isLoading}
             title={t('home.signOut')}
@@ -164,6 +166,8 @@ export default function Home() {
       >
         {welcomeName ? t('registration.quickAdd.successWelcome', { firstName: welcomeName }) : ''}
       </Snackbar>
+
+      <SignOutGuardDialog />
     </View>
   );
 }

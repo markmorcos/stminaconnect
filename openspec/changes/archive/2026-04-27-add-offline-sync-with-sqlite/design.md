@@ -3,6 +3,7 @@
 The single most important architectural change in v1. Sunday-morning connectivity is unreliable. We chose **expo-sqlite** (bundled with Expo, works in Expo Go) over WatermelonDB (native module, requires dev build). This gives us SQL-like ergonomics, the same query model server and client, and a familiar mental model for ops.
 
 The conceptual model:
+
 - **Server is authoritative**. Local DB is a cache + a queue.
 - **Reads** come from local; UI never blocks on network.
 - **Writes** go to a `local_sync_queue` and to the local cache simultaneously.
@@ -59,7 +60,7 @@ The conceptual model:
    - If a 4xx (e.g. validation, edit-window-closed) occurs, mark the op `last_error` and surface a notification: "Your check-in for [event] could not be saved: [reason]". The op stays in the queue with a "needs attention" flag (admins/users can manually retry or discard via a small "Sync issues" screen — phase 15 introduces UI; for now, surface in console + notifications inbox).
 6. **Conflict resolution** (resolves Open Question F1):
    - **Attendance**: rows are commutative — `mark` and `unmark` are idempotent; the union of operations from multiple devices yields the right state. No conflict possible.
-   - **Persons updates**: server `updated_at` is the canonical version. When pulling, if local has a newer `updatedAt` AND a queued `update_person` for that id, push first, then pull again. If conflict still detected (rare race), the *server* version wins; show a Snackbar to the user.
+   - **Persons updates**: server `updated_at` is the canonical version. When pulling, if local has a newer `updatedAt` AND a queued `update_person` for that id, push first, then pull again. If conflict still detected (rare race), the _server_ version wins; show a Snackbar to the user.
 7. **Logout with pending queue** (Open Question F2): if `local_sync_queue.length > 0`, `signOut` shows a Paper Dialog. Default action is "Stay logged in". "Logout anyway" clears the queue + sign-out.
 8. **Indicator UX**: green ✓ when queue empty + last pull <5min; ⏳ amber when queue draining or pull in progress; ✗ red when offline + queue non-empty. Tap → expanded panel with details + "Sync now".
 9. **Connectivity detection**: rely on RPC failure (offline = no response). No explicit `NetInfo` polling — keeps it simple.

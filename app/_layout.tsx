@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { I18nextProvider } from 'react-i18next';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { bootstrapI18n, i18n } from '@/i18n';
@@ -66,12 +67,14 @@ export default function RootLayout() {
   return (
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <NotificationServiceProvider>
-            <SplashGate />
-            <ThemedStack />
-          </NotificationServiceProvider>
-        </ThemeProvider>
+        <SafeAreaProvider>
+          <ThemeProvider>
+            <NotificationServiceProvider>
+              <SplashGate />
+              <ThemedStack />
+            </NotificationServiceProvider>
+          </ThemeProvider>
+        </SafeAreaProvider>
       </QueryClientProvider>
     </I18nextProvider>
   );

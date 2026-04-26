@@ -318,5 +318,42 @@
         "resyncFailed": "Synchronisierung konnte nicht gestartet werden. Bitte erneut versuchen."
       }
     }
+  },
+  "sync": {
+    "status": {
+      "idle": "Synchronisiert",
+      "syncing": "Synchronisiere…",
+      "error": "Synchronisierungsfehler",
+      "offline": "Offline"
+    },
+    "bar": {
+      "syncing": "Synchronisiere…",
+      "syncingWithCount_one": "Synchronisiere {{count}} Änderung…",
+      "syncingWithCount_other": "Synchronisiere {{count}} Änderungen…",
+      "pending_one": "{{count}} Änderung wartet auf Synchronisierung",
+      "pending_other": "{{count}} Änderungen warten auf Synchronisierung",
+      "synced": "Synchronisiert"
+    },
+    "panel": {
+      "title": "Synchronisierungsstatus",
+      "lastSync": "Letzte Sync: {{when}}",
+      "lastSyncNever": "Letzte Sync: nie",
+      "queueLength_one": "{{count}} Änderung wartet auf Synchronisierung",
+      "queueLength_other": "{{count}} Änderungen warten auf Synchronisierung",
+      "syncNow": "Jetzt synchronisieren",
+      "unsynced": "Nicht synchronisierte Änderungen"
+    },
+    "firstLaunchLoading": "Initiale Daten werden synchronisiert…",
+    "signOutDialog": {
+      "title": "Nicht synchronisierte Änderungen",
+      "body_one": "Du hast {{count}} Änderung, die noch nicht auf dem Server gespeichert ist. Beim Abmelden geht sie verloren.",
+      "body_other": "Du hast {{count}} Änderungen, die noch nicht auf dem Server gespeichert sind. Beim Abmelden gehen sie verloren.",
+      "stay": "Angemeldet bleiben",
+      "logoutAnyway": "Trotzdem abmelden"
+    },
+    "conflictToast": "Deine lokale Änderung an {{name}} wurde von einer neueren Version überschrieben.",
+    "errorToast": {
+      "fourXX": "{{subject}} konnte nicht gespeichert werden: {{reason}}"
+    }
   }
 }

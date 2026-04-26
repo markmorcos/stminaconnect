@@ -33,7 +33,12 @@ jest.mock('@/services/api/persons', () => ({
 }));
 
 function renderScreen() {
-  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  // `gcTime: 0` so query observers tear down synchronously on unmount.
+  // Default is 5 minutes, which keeps a setTimeout alive past the test
+  // and blocks jest-worker from exiting cleanly.
+  const client = new QueryClient({
+    defaultOptions: { queries: { retry: false, gcTime: 0 } },
+  });
   return render(
     <QueryClientProvider client={client}>
       <PaperProvider>

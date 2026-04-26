@@ -92,7 +92,9 @@ jest.mock('@/services/api/attendance', () => ({
 }));
 
 function renderScreen() {
-  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  const client = new QueryClient({
+    defaultOptions: { queries: { retry: false, gcTime: 0 } },
+  });
   return render(
     <QueryClientProvider client={client}>
       <PaperProvider>

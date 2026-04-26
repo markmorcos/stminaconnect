@@ -7,6 +7,7 @@
 import Constants from 'expo-constants';
 import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 
 import '@/i18n';
@@ -23,6 +24,7 @@ const BUILD_SHA =
 export default function About() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
+  const insets = useSafeAreaInsets();
   const router = useRouter();
   const version = Constants.expoConfig?.version ?? '0.0.0';
   const visibleAcknowledgments = church.acknowledgments.filter((a) => a.optIn);
@@ -32,6 +34,7 @@ export default function About() {
       <ScrollView
         contentContainerStyle={{
           padding: spacing.lg,
+          paddingTop: insets.top + spacing.lg,
           paddingBottom: spacing['3xl'],
           gap: spacing.lg,
         }}

@@ -1,6 +1,6 @@
 ## Why
 
-Servants check in members during services in basement halls with intermittent Wi-Fi. The app *must* function without connectivity: read the roster, toggle checks, save — all while offline — and seamlessly catch up when the network returns. This is the most architecturally consequential change in the project and it lands here, after the online flow is fully working, because we want to wrap the existing flow in a sync layer rather than redesign it.
+Servants check in members during services in basement halls with intermittent Wi-Fi. The app _must_ function without connectivity: read the roster, toggle checks, save — all while offline — and seamlessly catch up when the network returns. This is the most architecturally consequential change in the project and it lands here, after the online flow is fully working, because we want to wrap the existing flow in a sync layer rather than redesign it.
 
 ## What Changes
 

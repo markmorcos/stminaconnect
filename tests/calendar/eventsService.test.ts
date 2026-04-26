@@ -20,6 +20,10 @@ jest.mock('@/services/api/supabase', () => {
   };
 });
 
+jest.mock('@/services/db/repositories/eventsRepo', () => ({
+  getTodayEvents: jest.fn(),
+}));
+
 import {
   deleteCountedEventPattern,
   getLastSyncStatus,
@@ -30,6 +34,7 @@ import {
   upsertCountedEventPattern,
 } from '@/services/api/events';
 import { supabase } from '@/services/api/supabase';
+import { getTodayEvents as repoGetTodayEvents } from '@/services/db/repositories/eventsRepo';
 /* eslint-enable import/first */
 
 const mockedRpc = supabase.rpc as unknown as jest.Mock;
@@ -38,19 +43,16 @@ const mockedFrom = supabase.from as unknown as jest.Mock;
 beforeEach(() => {
   mockedRpc.mockReset();
   mockedFrom.mockClear();
+  (repoGetTodayEvents as jest.Mock).mockReset();
 });
 
-describe('getTodayEvents', () => {
-  it('calls get_today_events and returns the rows', async () => {
-    mockedRpc.mockResolvedValue({ data: [{ id: 'e1' }], error: null });
+describe('getTodayEvents (local-first)', () => {
+  it('reads from the local repository (no RPC call)', async () => {
+    (repoGetTodayEvents as jest.Mock).mockResolvedValue([{ id: 'e1' }]);
     const out = await getTodayEvents();
-    expect(mockedRpc).toHaveBeenCalledWith('get_today_events');
+    expect(repoGetTodayEvents).toHaveBeenCalled();
+    expect(mockedRpc).not.toHaveBeenCalled();
     expect(out).toEqual([{ id: 'e1' }]);
-  });
-
-  it('throws on error', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: { message: 'boom' } });
-    await expect(getTodayEvents()).rejects.toEqual({ message: 'boom' });
   });
 });
 

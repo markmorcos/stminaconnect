@@ -330,5 +330,54 @@
         "resyncFailed": "تعذّر بدء المزامنة. حاول مرة أخرى."
       }
     }
+  },
+  "sync": {
+    "status": {
+      "idle": "متزامن",
+      "syncing": "جارٍ المزامنة…",
+      "error": "خطأ في المزامنة",
+      "offline": "غير متصل"
+    },
+    "bar": {
+      "syncing": "جارٍ المزامنة…",
+      "syncingWithCount_zero": "جارٍ المزامنة…",
+      "syncingWithCount_one": "جارٍ مزامنة تغيير واحد…",
+      "syncingWithCount_two": "جارٍ مزامنة تغييرين…",
+      "syncingWithCount_few": "جارٍ مزامنة {{count}} تغييرات…",
+      "syncingWithCount_many": "جارٍ مزامنة {{count}} تغييراً…",
+      "syncingWithCount_other": "جارٍ مزامنة {{count}} تغيير…",
+      "pending_zero": "لا توجد تغييرات في الانتظار",
+      "pending_one": "تغيير واحد في انتظار المزامنة",
+      "pending_two": "تغييران في انتظار المزامنة",
+      "pending_few": "{{count}} تغييرات في انتظار المزامنة",
+      "pending_many": "{{count}} تغييراً في انتظار المزامنة",
+      "pending_other": "{{count}} تغيير في انتظار المزامنة",
+      "synced": "تمت المزامنة"
+    },
+    "panel": {
+      "title": "حالة المزامنة",
+      "lastSync": "آخر مزامنة: {{when}}",
+      "lastSyncNever": "آخر مزامنة: لم تتم بعد",
+      "queueLength_zero": "لا توجد تغييرات في الانتظار",
+      "queueLength_one": "تغيير واحد في انتظار المزامنة",
+      "queueLength_two": "تغييران في انتظار المزامنة",
+      "queueLength_few": "{{count}} تغييرات في انتظار المزامنة",
+      "queueLength_many": "{{count}} تغييراً في انتظار المزامنة",
+      "queueLength_other": "{{count}} تغيير في انتظار المزامنة",
+      "syncNow": "زامن الآن",
+      "unsynced": "تغييرات غير متزامنة"
+    },
+    "firstLaunchLoading": "جارٍ مزامنة البيانات الأولية…",
+    "signOutDialog": {
+      "title": "تغييرات غير متزامنة",
+      "body_one": "لديك تغيير واحد لم يُحفظ على الخادم. تسجيل الخروج سيؤدي إلى فقده.",
+      "body_other": "لديك {{count}} تغييرات لم تُحفظ على الخادم. تسجيل الخروج سيؤدي إلى فقدها.",
+      "stay": "ابقَ مسجلاً",
+      "logoutAnyway": "سجّل الخروج رغم ذلك"
+    },
+    "conflictToast": "تم استبدال تغييرك المحلي على {{name}} بإصدار أحدث.",
+    "errorToast": {
+      "fourXX": "تعذّر حفظ {{subject}}: {{reason}}"
+    }
   }
 }

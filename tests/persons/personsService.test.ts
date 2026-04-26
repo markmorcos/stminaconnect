@@ -1,134 +1,170 @@
 /**
- * Unit tests for the `services/api/persons.ts` wrappers. Mocks
- * `supabase.rpc` so we can verify each wrapper sends the right RPC name
- * and payload, and surfaces errors from the underlying call.
+ * Unit tests for the local-first `services/api/persons.ts` wrappers.
+ * Reads come from the SQLite repo; writes apply locally + enqueue an
+ * op into the sync queue. We mock the underlying repos and queue so
+ * the wrapper logic is exercised in isolation.
  */
 /* eslint-disable import/first -- jest.mock() is hoisted; imports follow */
-jest.mock('@/services/api/supabase', () => ({
-  supabase: {
-    rpc: jest.fn(),
-  },
+jest.mock('@/services/db/repositories/personsRepo', () => ({
+  listPersons: jest.fn(),
+  getPerson: jest.fn(),
+  upsertPersons: jest.fn(),
+  softDeletePersons: jest.fn(),
+  rewritePersonId: jest.fn(),
+}));
+
+jest.mock('@/services/db/repositories/queueRepo', () => ({
+  enqueue: jest.fn().mockResolvedValue(1),
+}));
+
+jest.mock('@/services/sync/SyncEngine', () => ({
+  getSyncEngine: () => ({ kick: jest.fn(), runOnce: jest.fn() }),
+}));
+
+jest.mock('@/services/db/database', () => ({
+  getDatabase: jest.fn().mockResolvedValue({
+    getAllAsync: jest.fn().mockResolvedValue([]),
+  }),
+}));
+
+jest.mock('@/state/authStore', () => ({
+  useAuthStore: { getState: () => ({ servant: { id: 'servant-1' } }) },
 }));
 
 import {
   assignPerson,
   createPerson,
+  findPotentialDuplicate,
   getPerson,
   listPersons,
   softDeletePerson,
   updatePerson,
 } from '@/services/api/persons';
-import { supabase } from '@/services/api/supabase';
+import { getDatabase } from '@/services/db/database';
+import * as personsRepo from '@/services/db/repositories/personsRepo';
+import { enqueue } from '@/services/db/repositories/queueRepo';
 /* eslint-enable import/first */
 
-const mockedRpc = supabase.rpc as unknown as jest.Mock;
-
 beforeEach(() => {
-  mockedRpc.mockReset();
+  (personsRepo.listPersons as jest.Mock).mockReset();
+  (personsRepo.getPerson as jest.Mock).mockReset();
+  (personsRepo.upsertPersons as jest.Mock).mockReset();
+  (personsRepo.softDeletePersons as jest.Mock).mockReset();
+  (enqueue as jest.Mock).mockClear();
 });
 
-describe('listPersons', () => {
-  it('calls list_persons with the filter and returns the rows', async () => {
-    const row = { id: 'p1', first_name: 'A', last_name: 'B' };
-    mockedRpc.mockResolvedValue({ data: [row], error: null });
-
+describe('listPersons (local-first)', () => {
+  it('reads from the local repository and forwards the filter', async () => {
+    (personsRepo.listPersons as jest.Mock).mockResolvedValue([{ id: 'p1' }]);
     const out = await listPersons({ region: 'Schwabing', search: 'A' });
-    expect(mockedRpc).toHaveBeenCalledWith('list_persons', {
-      filter: { region: 'Schwabing', search: 'A' },
-    });
-    expect(out).toEqual([row]);
-  });
-
-  it('defaults filter to {}', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: null });
-    await listPersons();
-    expect(mockedRpc).toHaveBeenCalledWith('list_persons', { filter: {} });
-  });
-
-  it('throws when the RPC returns an error', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: new Error('boom') });
-    await expect(listPersons()).rejects.toThrow('boom');
+    expect(personsRepo.listPersons).toHaveBeenCalledWith({ region: 'Schwabing', search: 'A' });
+    expect(out).toEqual([{ id: 'p1' }]);
   });
 });
 
-describe('getPerson', () => {
-  it('calls get_person with the id', async () => {
-    const row = { id: 'p1', first_name: 'A', last_name: 'B' };
-    mockedRpc.mockResolvedValue({ data: row, error: null });
-
-    const out = await getPerson('p1');
-    expect(mockedRpc).toHaveBeenCalledWith('get_person', { person_id: 'p1' });
-    expect(out).toEqual(row);
-  });
-
-  it('treats an all-null record as null', async () => {
-    mockedRpc.mockResolvedValue({ data: { id: null, first_name: null }, error: null });
-    expect(await getPerson('missing')).toBeNull();
-  });
-
-  it('returns null for a literal null payload', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: null });
-    expect(await getPerson('missing')).toBeNull();
+describe('getPerson (local-first)', () => {
+  it('returns the cached row', async () => {
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue({ id: 'p1' });
+    expect(await getPerson('p1')).toEqual({ id: 'p1' });
   });
 });
 
-describe('createPerson', () => {
-  it('calls create_person with the payload and returns the new id', async () => {
-    mockedRpc.mockResolvedValue({ data: 'new-id', error: null });
+describe('createPerson (optimistic + enqueue)', () => {
+  it('inserts a temp_id row locally and enqueues create_person', async () => {
     const id = await createPerson({
       first_name: 'A',
       last_name: 'B',
       language: 'en',
-      assigned_servant: 's1',
       registration_type: 'quick_add',
     });
-    expect(mockedRpc).toHaveBeenCalledWith('create_person', {
-      payload: {
-        first_name: 'A',
-        last_name: 'B',
-        language: 'en',
-        assigned_servant: 's1',
-        registration_type: 'quick_add',
-      },
+    expect(id).toMatch(/^temp-/);
+    expect(personsRepo.upsertPersons).toHaveBeenCalledWith(
+      [
+        expect.objectContaining({
+          id,
+          first_name: 'A',
+          last_name: 'B',
+          assigned_servant: 'servant-1',
+        }),
+      ],
+      'pending',
+    );
+    expect(enqueue).toHaveBeenCalledWith({
+      op_type: 'create_person',
+      payload: { payload: expect.objectContaining({ first_name: 'A' }) },
+      temp_id: id,
     });
-    expect(id).toBe('new-id');
   });
 });
 
-describe('updatePerson', () => {
-  it('calls update_person and returns the updated row', async () => {
-    const row = { id: 'p1', first_name: 'A', last_name: 'B' };
-    mockedRpc.mockResolvedValue({ data: row, error: null });
-    const out = await updatePerson('p1', { first_name: 'A', priority: 'high' });
-    expect(mockedRpc).toHaveBeenCalledWith('update_person', {
-      person_id: 'p1',
-      payload: { first_name: 'A', priority: 'high' },
+describe('updatePerson (optimistic + enqueue)', () => {
+  it('updates the local cache and enqueues update_person', async () => {
+    const existing = {
+      id: 'p1',
+      first_name: 'A',
+      last_name: 'B',
+      phone: null,
+      region: null,
+      language: 'en',
+      priority: 'medium',
+      assigned_servant: 's1',
+      comments: null,
+      status: 'new',
+      paused_until: null,
+      registration_type: 'quick_add',
+      registered_by: 's1',
+      registered_at: '2026-01-01T00:00:00Z',
+      created_at: '2026-01-01T00:00:00Z',
+      updated_at: '2026-01-01T00:00:00Z',
+      deleted_at: null,
+    };
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue(existing);
+    const out = await updatePerson('p1', { first_name: 'A2', priority: 'high' });
+    expect(out).toMatchObject({ first_name: 'A2', priority: 'high' });
+    expect(personsRepo.upsertPersons).toHaveBeenCalled();
+    expect(enqueue).toHaveBeenCalledWith({
+      op_type: 'update_person',
+      payload: { person_id: 'p1', payload: { first_name: 'A2', priority: 'high' } },
     });
-    expect(out).toEqual(row);
   });
 });
 
-describe('assignPerson', () => {
-  it('calls assign_person with all three args', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: null });
+describe('assignPerson / softDeletePerson (enqueue)', () => {
+  it('assignPerson enqueues with reason', async () => {
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue(null);
     await assignPerson('p1', 's2', 'region change');
-    expect(mockedRpc).toHaveBeenCalledWith('assign_person', {
-      person_id: 'p1',
-      servant_id: 's2',
-      reason: 'region change',
+    expect(enqueue).toHaveBeenCalledWith({
+      op_type: 'assign_person',
+      payload: { person_id: 'p1', servant_id: 's2', reason: 'region change' },
     });
   });
 
-  it('throws on error', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: new Error('admin only') });
-    await expect(assignPerson('p1', 's2', '')).rejects.toThrow('admin only');
+  it('softDeletePerson updates local + enqueues', async () => {
+    await softDeletePerson('p1');
+    expect(personsRepo.softDeletePersons).toHaveBeenCalledWith(['p1']);
+    expect(enqueue).toHaveBeenCalledWith({
+      op_type: 'soft_delete_person',
+      payload: { person_id: 'p1' },
+    });
   });
 });
 
-describe('softDeletePerson', () => {
-  it('calls soft_delete_person', async () => {
-    mockedRpc.mockResolvedValue({ data: null, error: null });
-    await softDeletePerson('p1');
-    expect(mockedRpc).toHaveBeenCalledWith('soft_delete_person', { person_id: 'p1' });
+describe('findPotentialDuplicate (local SELECT)', () => {
+  it('returns the matching id when name+phone collides', async () => {
+    const fakeDb = {
+      getAllAsync: jest.fn().mockResolvedValue([{ id: 'p99' }]),
+    };
+    (getDatabase as jest.Mock).mockResolvedValue(fakeDb);
+    const id = await findPotentialDuplicate('A', 'B', '+49 123');
+    expect(id).toBe('p99');
+    expect(fakeDb.getAllAsync).toHaveBeenCalled();
+  });
+
+  it('returns null when nothing matches', async () => {
+    const fakeDb = {
+      getAllAsync: jest.fn().mockResolvedValue([]),
+    };
+    (getDatabase as jest.Mock).mockResolvedValue(fakeDb);
+    expect(await findPotentialDuplicate('A', 'B', '+49 123')).toBeNull();
   });
 });

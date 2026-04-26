@@ -1,9 +1,10 @@
 /**
- * Mobile-side wrappers around the calendar RPCs declared in
- * `supabase/migrations/014_calendar_rpcs.sql`. Screens import from here
- * rather than calling `supabase.rpc(...)` directly — keeps the
- * RPC-only access pattern enforceable.
+ * Events API. `getTodayEvents` reads from the SQLite mirror populated
+ * by the SyncEngine; the admin counted-event-pattern RPCs continue to
+ * round-trip to Supabase because (a) admins are typically online and
+ * (b) the pattern table doesn't participate in offline workflows.
  */
+import { getTodayEvents as repoGetTodayEvents } from '@/services/db/repositories/eventsRepo';
 import type {
   CalendarEvent,
   CountedEventPattern,
@@ -14,9 +15,7 @@ import type {
 import { supabase } from './supabase';
 
 export async function getTodayEvents(): Promise<CalendarEvent[]> {
-  const { data, error } = await supabase.rpc('get_today_events');
-  if (error) throw error;
-  return (data ?? []) as CalendarEvent[];
+  return repoGetTodayEvents();
 }
 
 export async function listCountedEventPatterns(): Promise<CountedEventPattern[]> {

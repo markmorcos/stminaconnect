@@ -145,4 +145,3 @@ If an op fails with a 4xx (validation, edit-window-closed, RLS denial), the Sync
 - **THEN** the RPC returns a 4xx
 - **AND** a `system` notification appears in the inbox: "Your check-in for Sunday Liturgy could not be saved: edit window closed"
 - **AND** the op is marked `needs_attention`
-
