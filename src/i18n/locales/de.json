@@ -253,5 +253,41 @@
         "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
       }
     }
+  },
+  "admin": {
+    "countedEvents": {
+      "title": "Gezählte Termine",
+      "lastSync": "Letzte Synchronisierung",
+      "neverSynced": "Noch nie synchronisiert",
+      "resync": "Jetzt synchronisieren",
+      "resyncQueued": "Synchronisierung gestartet.",
+      "justNow": "Gerade eben",
+      "minutesAgo_one": "vor {{count}} Minute",
+      "minutesAgo_other": "vor {{count}} Minuten",
+      "hoursAgo_one": "vor {{count}} Stunde",
+      "hoursAgo_other": "vor {{count}} Stunden",
+      "daysAgo_one": "vor {{count}} Tag",
+      "daysAgo_other": "vor {{count}} Tagen",
+      "outcome": {
+        "success": "Erfolg",
+        "error": "Fehler",
+        "running": "Läuft"
+      },
+      "patterns": {
+        "title": "Muster für gezählte Termine",
+        "add": "Muster hinzufügen",
+        "placeholder": "z. B. Liturgie",
+        "empty": "Noch keine Muster. Füge oben eines hinzu, um passende Termine zu zählen.",
+        "removeA11y": "Muster {{pattern}} entfernen"
+      },
+      "preview": {
+        "title": "Anstehende gezählte Termine (nächste 14 Tage)",
+        "empty": "Keine anstehenden Termine entsprechen den Mustern."
+      },
+      "errors": {
+        "rateLimited": "Eine Synchronisierung wurde gerade gestartet. Bitte eine Minute warten.",
+        "resyncFailed": "Synchronisierung konnte nicht gestartet werden. Bitte erneut versuchen."
+      }
+    }
   }
 }

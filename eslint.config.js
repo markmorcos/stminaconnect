@@ -12,6 +12,10 @@ module.exports = [
       'android/**',
       'ios/**',
       'supabase/.temp/**',
+      // Edge Functions are Deno code; their `https://...` imports and
+      // `Deno` globals don't resolve under the Node ESLint config.
+      // They're type-checked via excluded tsconfig + tested via `deno test`.
+      'supabase/functions/**',
       'Makefile',
       '**/*.md',
     ],

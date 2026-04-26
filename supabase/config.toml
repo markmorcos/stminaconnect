@@ -389,7 +389,12 @@ deno_version = 2
 # secret_key = "env(SECRET_VALUE)"
 
 [analytics]
-enabled = true
+# Disabled locally: the vector log-aggregator container needs to mount
+# the Docker socket at /var/run/docker.sock, but Colima keeps it at
+# ~/.colima/default/docker.sock and Docker Desktop users hit similar
+# pathing issues. Vector is observability scaffolding — local dev runs
+# fine without it. Re-enable for hosted projects.
+enabled = false
 port = 54327
 # Configure one of the supported backends: `postgres`, `bigquery`.
 backend = "postgres"

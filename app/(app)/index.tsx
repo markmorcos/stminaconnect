@@ -91,6 +91,15 @@ export default function Home() {
             }}
             title={t('home.account')}
           />
+          {servant?.role === 'admin' ? (
+            <Menu.Item
+              onPress={() => {
+                setMenuOpen(false);
+                router.push('/admin/counted-events');
+              }}
+              title={t('admin.countedEvents.title')}
+            />
+          ) : null}
           <Menu.Item
             onPress={() => {
               setMenuOpen(false);

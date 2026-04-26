@@ -253,5 +253,41 @@
         "generic": "Something went wrong. Please try again."
       }
     }
+  },
+  "admin": {
+    "countedEvents": {
+      "title": "Counted events",
+      "lastSync": "Last sync",
+      "neverSynced": "Never synced",
+      "resync": "Resync now",
+      "resyncQueued": "Resync queued.",
+      "justNow": "Just now",
+      "minutesAgo_one": "{{count}} minute ago",
+      "minutesAgo_other": "{{count}} minutes ago",
+      "hoursAgo_one": "{{count}} hour ago",
+      "hoursAgo_other": "{{count}} hours ago",
+      "daysAgo_one": "{{count}} day ago",
+      "daysAgo_other": "{{count}} days ago",
+      "outcome": {
+        "success": "Success",
+        "error": "Error",
+        "running": "Running"
+      },
+      "patterns": {
+        "title": "Counted-event patterns",
+        "add": "Add pattern",
+        "placeholder": "e.g. Liturgy",
+        "empty": "No patterns yet. Add one above to count matching events.",
+        "removeA11y": "Remove pattern {{pattern}}"
+      },
+      "preview": {
+        "title": "Upcoming counted events (next 14 days)",
+        "empty": "No upcoming events match your patterns."
+      },
+      "errors": {
+        "rateLimited": "A sync was triggered moments ago. Please wait a minute.",
+        "resyncFailed": "Could not start resync. Try again."
+      }
+    }
   }
 }

@@ -57,7 +57,7 @@ The church already publishes events to Google Calendar; clergy update it directl
 - **Risk**: Google Calendar API rate limits. Mitigation: 30-min cadence is well within free quotas; manual resync button rate-limited to once per minute via a server-side check.
 - **Risk**: timezone bugs around the day boundary in `get_today_events`. Mitigation: explicit tests at 23:59 and 00:01 Berlin time.
 - **Trade-off**: rolling-window approach means changes to events older than 30 days are invisible. Acceptable — past events are immutable in practice.
-- **Trade-off**: admin screen lives under `app/(app)/admin/` even though phase 13 is the proper "admin dashboard" change. Justified: this admin screen is logically part of *this* capability, and folding it under admin-dashboard later (if needed) is a path move, not a rewrite.
+- **Trade-off**: admin screen lives under `app/(app)/admin/` even though phase 13 is the proper "admin dashboard" change. Justified: this admin screen is logically part of _this_ capability, and folding it under admin-dashboard later (if needed) is a path move, not a rewrite.
 
 ## Migration Plan
 

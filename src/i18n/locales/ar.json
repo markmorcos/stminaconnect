@@ -253,5 +253,53 @@
         "generic": "حدث خطأ ما. حاول مرة أخرى."
       }
     }
+  },
+  "admin": {
+    "countedEvents": {
+      "title": "الفعاليات المحتسبة",
+      "lastSync": "آخر مزامنة",
+      "neverSynced": "لم تتم المزامنة بعد",
+      "resync": "إعادة المزامنة الآن",
+      "resyncQueued": "تم إرسال طلب المزامنة.",
+      "justNow": "الآن",
+      "minutesAgo_zero": "منذ أقل من دقيقة",
+      "minutesAgo_one": "منذ دقيقة واحدة",
+      "minutesAgo_two": "منذ دقيقتين",
+      "minutesAgo_few": "منذ {{count}} دقائق",
+      "minutesAgo_many": "منذ {{count}} دقيقة",
+      "minutesAgo_other": "منذ {{count}} دقيقة",
+      "hoursAgo_zero": "منذ أقل من ساعة",
+      "hoursAgo_one": "منذ ساعة واحدة",
+      "hoursAgo_two": "منذ ساعتين",
+      "hoursAgo_few": "منذ {{count}} ساعات",
+      "hoursAgo_many": "منذ {{count}} ساعة",
+      "hoursAgo_other": "منذ {{count}} ساعة",
+      "daysAgo_zero": "اليوم",
+      "daysAgo_one": "منذ يوم واحد",
+      "daysAgo_two": "منذ يومين",
+      "daysAgo_few": "منذ {{count}} أيام",
+      "daysAgo_many": "منذ {{count}} يوماً",
+      "daysAgo_other": "منذ {{count}} يوم",
+      "outcome": {
+        "success": "ناجحة",
+        "error": "خطأ",
+        "running": "قيد التنفيذ"
+      },
+      "patterns": {
+        "title": "أنماط الفعاليات المحتسبة",
+        "add": "إضافة نمط",
+        "placeholder": "مثال: قداس",
+        "empty": "لا توجد أنماط بعد. أضف نمطاً أعلاه لاحتساب الفعاليات المطابقة.",
+        "removeA11y": "إزالة النمط {{pattern}}"
+      },
+      "preview": {
+        "title": "الفعاليات المحتسبة القادمة (خلال 14 يوماً)",
+        "empty": "لا توجد فعاليات قادمة تطابق الأنماط."
+      },
+      "errors": {
+        "rateLimited": "تم تشغيل المزامنة قبل لحظات. يرجى الانتظار دقيقة.",
+        "resyncFailed": "تعذّر بدء المزامنة. حاول مرة أخرى."
+      }
+    }
   }
 }
