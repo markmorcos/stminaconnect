@@ -21,6 +21,7 @@ export function useAuth() {
       signInWithMagicLink: s.signInWithMagicLink,
       verifyEmailOtp: s.verifyEmailOtp,
       signOut: s.signOut,
+      setServant: s.setServant,
     })),
   );
 }

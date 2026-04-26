@@ -80,7 +80,8 @@
     "registerFull": "تسجيل كامل",
     "registerFullSubtitle": "أدخل الأولوية والخادم المسؤول والملاحظات",
     "personsListSubtitle": "تصفّح كل الأعضاء",
-    "menu": "القائمة"
+    "menu": "القائمة",
+    "account": "الحساب"
   },
   "registration": {
     "quickAdd": {
@@ -195,6 +196,29 @@
         "body": "سيُعاد تشغيل التطبيق لتبديل اتجاه التخطيط.",
         "confirm": "إعادة تشغيل",
         "cancel": "إلغاء"
+      }
+    },
+    "account": {
+      "title": "الحساب",
+      "displayNameLabel": "اسم العرض",
+      "emailLabel": "البريد الإلكتروني",
+      "emailReadOnly": "تواصل مع المسؤول لتغييره.",
+      "save": "حفظ",
+      "saved": "تم الحفظ.",
+      "changePassword": "تغيير كلمة المرور",
+      "passwordSection": "كلمة المرور",
+      "currentPassword": "كلمة المرور الحالية",
+      "newPassword": "كلمة المرور الجديدة",
+      "confirmPassword": "تأكيد كلمة المرور الجديدة",
+      "passwordChanged": "تم تغيير كلمة المرور.",
+      "errors": {
+        "displayNameRequired": "اسم العرض مطلوب",
+        "displayNameTooLong": "يجب ألا يتجاوز اسم العرض 100 حرفاً",
+        "currentPasswordWrong": "كلمة المرور الحالية غير صحيحة",
+        "newPasswordTooShort": "يجب أن تتكوّن كلمة المرور الجديدة من 8 أحرف على الأقل",
+        "newPasswordEqualsCurrent": "يجب أن تختلف كلمة المرور الجديدة عن الحالية",
+        "confirmMismatch": "كلمتا المرور غير متطابقتين",
+        "generic": "حدث خطأ ما. حاول مرة أخرى."
       }
     }
   }

@@ -27,6 +27,18 @@ export interface AuthState {
   verifyEmailOtp: (email: string, token: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
+  /**
+   * Replaces the in-memory servant row with the given partial. Used by
+   * the account screen to reflect a successful display-name save without
+   * a round-trip back to `fetchMyServant`.
+   */
+  setServant: (partial: Partial<ServantRow>) => void;
+  /**
+   * Re-fetches the joined servant row and replaces the store value.
+   * Used after auth-side mutations (password change) where the row
+   * itself is unchanged but a refresh keeps the contract consistent.
+   */
+  refreshServant: () => Promise<void>;
 }
 
 // eslint-disable-next-line import/no-named-as-default-member -- i18next exposes its API on the default export
@@ -183,6 +195,24 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: true });
     await supabase.auth.signOut().catch(() => null);
     set({ session: null, servant: null, isLoading: false, error: null });
+  },
+
+  setServant(partial) {
+    const current = get().servant;
+    if (!current) return;
+    set({ servant: { ...current, ...partial } });
+  },
+
+  async refreshServant() {
+    const session = get().session;
+    if (!session) return;
+    try {
+      const servant = await fetchMyServant();
+      if (!servant) return;
+      set({ servant });
+    } catch {
+      /* best-effort; failure is silent — caller can retry */
+    }
   },
 }));
 

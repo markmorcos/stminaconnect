@@ -40,3 +40,36 @@ export async function listServants(): Promise<ServantRow[]> {
   if (error) throw error;
   return (data ?? []) as ServantRow[];
 }
+
+export interface ServantUpdatePayload {
+  display_name?: string;
+}
+
+export class AdminOnlyError extends Error {
+  constructor() {
+    super('admin only');
+    this.name = 'AdminOnlyError';
+  }
+}
+
+/**
+ * Admin-only update of another servant's row. Surfaces `AdminOnlyError`
+ * for the well-known server-side reject so callers can map it to a
+ * localized message.
+ */
+export async function updateServant(
+  servantId: string,
+  payload: ServantUpdatePayload,
+): Promise<ServantRow> {
+  const { data, error } = await supabase.rpc('update_servant', {
+    servant_id: servantId,
+    payload,
+  });
+  if (error) {
+    if ((error.message ?? '').toLowerCase().includes('admin only')) {
+      throw new AdminOnlyError();
+    }
+    throw error;
+  }
+  return data as ServantRow;
+}

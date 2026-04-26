@@ -26,6 +26,7 @@ export default function SettingsLayout() {
       }}
     >
       <Stack.Screen name="language" options={{ title: t('settings.language.title') }} />
+      <Stack.Screen name="account" options={{ title: t('settings.account.title') }} />
     </Stack>
   );
 }

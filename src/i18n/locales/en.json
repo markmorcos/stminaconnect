@@ -80,7 +80,8 @@
     "registerFull": "Register full",
     "registerFullSubtitle": "Capture priority, assignment, and notes",
     "personsListSubtitle": "Browse all members",
-    "menu": "Menu"
+    "menu": "Menu",
+    "account": "Account"
   },
   "registration": {
     "quickAdd": {
@@ -195,6 +196,29 @@
         "body": "The app will restart to switch layout direction.",
         "confirm": "Restart",
         "cancel": "Cancel"
+      }
+    },
+    "account": {
+      "title": "Account",
+      "displayNameLabel": "Display name",
+      "emailLabel": "Email",
+      "emailReadOnly": "Contact an admin to change.",
+      "save": "Save",
+      "saved": "Saved.",
+      "changePassword": "Change password",
+      "passwordSection": "Password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm new password",
+      "passwordChanged": "Password changed.",
+      "errors": {
+        "displayNameRequired": "Display name is required",
+        "displayNameTooLong": "Display name must be 100 characters or fewer",
+        "currentPasswordWrong": "Current password is incorrect",
+        "newPasswordTooShort": "New password must be at least 8 characters",
+        "newPasswordEqualsCurrent": "New password must differ from the current one",
+        "confirmMismatch": "Passwords do not match",
+        "generic": "Something went wrong. Please try again."
       }
     }
   }

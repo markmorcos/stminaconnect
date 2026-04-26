@@ -68,6 +68,13 @@ export default function Home() {
           <Menu.Item
             onPress={() => {
               setMenuOpen(false);
+              router.push('/settings/account');
+            }}
+            title={t('home.account')}
+          />
+          <Menu.Item
+            onPress={() => {
+              setMenuOpen(false);
               void signOut();
             }}
             disabled={isLoading}

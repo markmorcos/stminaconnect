@@ -80,7 +80,8 @@
     "registerFull": "Vollständig registrieren",
     "registerFullSubtitle": "Priorität, Zuweisung und Notizen erfassen",
     "personsListSubtitle": "Alle Mitglieder ansehen",
-    "menu": "Menü"
+    "menu": "Menü",
+    "account": "Konto"
   },
   "registration": {
     "quickAdd": {
@@ -195,6 +196,29 @@
         "body": "Die App startet neu, um die Layout-Richtung zu wechseln.",
         "confirm": "Neu starten",
         "cancel": "Abbrechen"
+      }
+    },
+    "account": {
+      "title": "Konto",
+      "displayNameLabel": "Anzeigename",
+      "emailLabel": "E-Mail",
+      "emailReadOnly": "Wende dich an die Verwaltung, um sie zu ändern.",
+      "save": "Speichern",
+      "saved": "Gespeichert.",
+      "changePassword": "Passwort ändern",
+      "passwordSection": "Passwort",
+      "currentPassword": "Aktuelles Passwort",
+      "newPassword": "Neues Passwort",
+      "confirmPassword": "Neues Passwort bestätigen",
+      "passwordChanged": "Passwort geändert.",
+      "errors": {
+        "displayNameRequired": "Anzeigename ist erforderlich",
+        "displayNameTooLong": "Anzeigename darf höchstens 100 Zeichen lang sein",
+        "currentPasswordWrong": "Aktuelles Passwort ist falsch",
+        "newPasswordTooShort": "Neues Passwort muss mindestens 8 Zeichen lang sein",
+        "newPasswordEqualsCurrent": "Neues Passwort muss sich vom aktuellen unterscheiden",
+        "confirmMismatch": "Passwörter stimmen nicht überein",
+        "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
       }
     }
   }
