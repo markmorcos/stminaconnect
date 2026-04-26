@@ -77,6 +77,8 @@
     "signOut": "تسجيل الخروج",
     "quickAdd": "إضافة سريعة",
     "quickAddSubtitle": "رحِّب بقادم جديد في ثلاث نقرات",
+    "registerFull": "تسجيل كامل",
+    "registerFullSubtitle": "أدخل الأولوية والخادم المسؤول والملاحظات",
     "personsListSubtitle": "تصفّح كل الأعضاء",
     "menu": "القائمة"
   },
@@ -103,6 +105,27 @@
         "lastNameRequired": "اسم العائلة مطلوب",
         "phoneInvalid": "رقم الهاتف غير صحيح",
         "regionTooLong": "المنطقة طويلة جداً"
+      }
+    },
+    "full": {
+      "title": "تسجيل كامل",
+      "priority": "الأولوية",
+      "priorityOption": {
+        "high": "عالية",
+        "medium": "متوسطة",
+        "low": "منخفضة",
+        "very_low": "منخفضة جداً"
+      },
+      "assignedServant": "الخادم المسؤول",
+      "assignedServantCurrent": "الخادم الحالي",
+      "reassignReason": "سبب إعادة التعيين",
+      "comments": "ملاحظات خاصة",
+      "adminOnlyHint": "(للمسؤولين فقط)",
+      "save": "حفظ",
+      "success": "تم الحفظ.",
+      "errors": {
+        "commentsTooLong": "الملاحظات يجب ألا تتجاوز 1000 حرف",
+        "assignedServantRequired": "الخادم المسؤول مطلوب"
       }
     }
   },
@@ -138,6 +161,27 @@
       "active": "نشِط",
       "inactive": "غير نشِط",
       "on_break": "في فترة راحة"
+    },
+    "edit": {
+      "title": "تعديل العضو",
+      "button": "تعديل",
+      "save": "حفظ",
+      "success": "تم الحفظ.",
+      "errorPermissionField": "ليست لديك الصلاحية لتعديل {{field}}.",
+      "errorReasonRequired": "يرجى ذكر سبب إعادة التعيين."
+    },
+    "upgrade": {
+      "button": "ترقية إلى تسجيل كامل"
+    },
+    "delete": {
+      "button": "إزالة العضو",
+      "dialogTitle": "إزالة العضو",
+      "dialogBody": "سيتم إزالة بيانات {{name}} الشخصية. يبقى سجل الحضور محفوظاً. لا يمكن التراجع عن هذه العملية.",
+      "typedConfirmPlaceholder": "اكتب \"{{name}}\" للتأكيد",
+      "typedConfirmA11y": "اكتب الاسم {{name}} للتأكيد",
+      "confirm": "إزالة",
+      "cancel": "إلغاء",
+      "success": "تم إزالة العضو."
     }
   },
   "settings": {

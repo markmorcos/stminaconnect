@@ -103,6 +103,12 @@ export default function Home() {
           onPress={() => router.push('/registration/quick-add')}
         />
         <Tile
+          title={t('home.registerFull')}
+          subtitle={t('home.registerFullSubtitle')}
+          variant="secondary"
+          onPress={() => router.push('/registration/full')}
+        />
+        <Tile
           title={t('persons.list.title')}
           subtitle={t('home.personsListSubtitle')}
           variant="secondary"

@@ -30,3 +30,13 @@ export async function fetchMyServant(): Promise<ServantRow | null> {
   if (!row || row.id == null) return null;
   return row;
 }
+
+/**
+ * Lists active servants. Returns an empty array for non-admins (the RPC
+ * gates on `is_admin()` server-side).
+ */
+export async function listServants(): Promise<ServantRow[]> {
+  const { data, error } = await supabase.rpc('list_servants');
+  if (error) throw error;
+  return (data ?? []) as ServantRow[];
+}

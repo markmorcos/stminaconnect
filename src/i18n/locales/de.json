@@ -77,6 +77,8 @@
     "signOut": "Abmelden",
     "quickAdd": "Schnell hinzufügen",
     "quickAddSubtitle": "Neuankömmlinge in drei Tipps begrüßen",
+    "registerFull": "Vollständig registrieren",
+    "registerFullSubtitle": "Priorität, Zuweisung und Notizen erfassen",
     "personsListSubtitle": "Alle Mitglieder ansehen",
     "menu": "Menü"
   },
@@ -103,6 +105,27 @@
         "lastNameRequired": "Nachname ist erforderlich",
         "phoneInvalid": "Ungültige Telefonnummer",
         "regionTooLong": "Region ist zu lang"
+      }
+    },
+    "full": {
+      "title": "Vollständige Registrierung",
+      "priority": "Priorität",
+      "priorityOption": {
+        "high": "Hoch",
+        "medium": "Mittel",
+        "low": "Niedrig",
+        "very_low": "Sehr niedrig"
+      },
+      "assignedServant": "Zugewiesener Diener",
+      "assignedServantCurrent": "Aktuelle Zuweisung",
+      "reassignReason": "Grund der Neuzuweisung",
+      "comments": "Vertrauliche Notizen",
+      "adminOnlyHint": "(nur Admin)",
+      "save": "Speichern",
+      "success": "Gespeichert.",
+      "errors": {
+        "commentsTooLong": "Notizen dürfen höchstens 1000 Zeichen lang sein",
+        "assignedServantRequired": "Zugewiesener Diener ist erforderlich"
       }
     }
   },
@@ -138,6 +161,27 @@
       "active": "Aktiv",
       "inactive": "Inaktiv",
       "on_break": "Pausiert"
+    },
+    "edit": {
+      "title": "Mitglied bearbeiten",
+      "button": "Bearbeiten",
+      "save": "Speichern",
+      "success": "Gespeichert.",
+      "errorPermissionField": "Du darfst {{field}} nicht ändern.",
+      "errorReasonRequired": "Bitte gib einen Grund für die Neuzuweisung an."
+    },
+    "upgrade": {
+      "button": "Auf Vollständig erweitern"
+    },
+    "delete": {
+      "button": "Mitglied entfernen",
+      "dialogTitle": "Mitglied entfernen",
+      "dialogBody": "Dadurch werden die persönlichen Daten von {{name}} entfernt. Anwesenheitsverlauf bleibt erhalten. Dies kann nicht rückgängig gemacht werden.",
+      "typedConfirmPlaceholder": "Tippe \"{{name}}\" zur Bestätigung",
+      "typedConfirmA11y": "Tippe den Namen {{name}} zur Bestätigung",
+      "confirm": "Entfernen",
+      "cancel": "Abbrechen",
+      "success": "Mitglied entfernt."
     }
   },
   "settings": {

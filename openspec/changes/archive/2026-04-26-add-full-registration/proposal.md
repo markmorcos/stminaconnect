@@ -1,6 +1,6 @@
 ## Why
 
-Quick Add captures bare contact info; pastoral follow-up requires more — priority, intentional servant assignment, private comments. Servants also need to *upgrade* a Quick Add row to a Full row (e.g. after a follow-up call) and edit existing person profiles. This change introduces the Full Registration form, the upgrade flow, and the profile edit screen — completing the person-management lifecycle the Quick Add change deliberately left open.
+Quick Add captures bare contact info; pastoral follow-up requires more — priority, intentional servant assignment, private comments. Servants also need to _upgrade_ a Quick Add row to a Full row (e.g. after a follow-up call) and edit existing person profiles. This change introduces the Full Registration form, the upgrade flow, and the profile edit screen — completing the person-management lifecycle the Quick Add change deliberately left open.
 
 ## What Changes
 

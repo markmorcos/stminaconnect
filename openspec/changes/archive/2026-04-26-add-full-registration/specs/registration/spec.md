@@ -50,4 +50,3 @@ Person profiles where `registration_type = 'quick_add'` MUST display an "Upgrade
 - **THEN** the Full form opens with `first_name='Mina'` prefilled
 - **WHEN** the servant adds comments and saves
 - **THEN** `update_person` is called and `registration_type = 'full'` afterward
-

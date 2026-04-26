@@ -19,6 +19,7 @@ export default function RegistrationLayout() {
       }}
     >
       <Stack.Screen name="quick-add" options={{ title: t('registration.quickAdd.title') }} />
+      <Stack.Screen name="full" options={{ title: t('registration.full.title') }} />
     </Stack>
   );
 }

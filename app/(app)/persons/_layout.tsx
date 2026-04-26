@@ -19,7 +19,8 @@ export default function PersonsLayout() {
       }}
     >
       <Stack.Screen name="index" options={{ title: t('persons.list.title') }} />
-      <Stack.Screen name="[id]" options={{ title: '' }} />
+      <Stack.Screen name="[id]/index" options={{ title: '' }} />
+      <Stack.Screen name="[id]/edit" options={{ title: t('persons.edit.title') }} />
     </Stack>
   );
 }

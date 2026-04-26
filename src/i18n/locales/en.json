@@ -77,6 +77,8 @@
     "signOut": "Sign out",
     "quickAdd": "Quick Add",
     "quickAddSubtitle": "Welcome a newcomer in three taps",
+    "registerFull": "Register full",
+    "registerFullSubtitle": "Capture priority, assignment, and notes",
     "personsListSubtitle": "Browse all members",
     "menu": "Menu"
   },
@@ -103,6 +105,27 @@
         "lastNameRequired": "Last name is required",
         "phoneInvalid": "Invalid phone number",
         "regionTooLong": "Region is too long"
+      }
+    },
+    "full": {
+      "title": "Full registration",
+      "priority": "Priority",
+      "priorityOption": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low",
+        "very_low": "Very low"
+      },
+      "assignedServant": "Assigned servant",
+      "assignedServantCurrent": "Current assignment",
+      "reassignReason": "Reassignment reason",
+      "comments": "Private comments",
+      "adminOnlyHint": "(admin only)",
+      "save": "Save",
+      "success": "Saved.",
+      "errors": {
+        "commentsTooLong": "Comments must be 1000 characters or fewer",
+        "assignedServantRequired": "Assigned servant is required"
       }
     }
   },
@@ -138,6 +161,27 @@
       "active": "Active",
       "inactive": "Inactive",
       "on_break": "On break"
+    },
+    "edit": {
+      "title": "Edit member",
+      "button": "Edit",
+      "save": "Save",
+      "success": "Saved.",
+      "errorPermissionField": "You don't have permission to change {{field}}.",
+      "errorReasonRequired": "Please provide a reason for reassigning."
+    },
+    "upgrade": {
+      "button": "Upgrade to full"
+    },
+    "delete": {
+      "button": "Remove member",
+      "dialogTitle": "Remove member",
+      "dialogBody": "This will remove {{name}}'s personal details. Attendance history is preserved. This cannot be undone.",
+      "typedConfirmPlaceholder": "Type \"{{name}}\" to confirm",
+      "typedConfirmA11y": "Type the name {{name}} to confirm",
+      "confirm": "Remove",
+      "cancel": "Cancel",
+      "success": "Member removed."
     }
   },
   "settings": {

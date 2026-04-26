@@ -1,28 +1,43 @@
 /**
- * Person profile (read-only). Edit/reassign affordances arrive in a
- * later phase. The `comments` field is shown only when the RPC returns
- * a non-null value (caller is admin or assigned servant); otherwise we
- * surface a localized "comments hidden" banner.
+ * Person profile.
+ *
+ * Affordances surfaced here:
+ *   - "Edit" button (always visible) → opens `/persons/[id]/edit`. The
+ *     edit screen mirrors field-level RPC permissions in its UI; the
+ *     RPC enforces them server-side regardless.
+ *   - "Upgrade to Full" button (Quick Add rows only, visible to admin
+ *     or assigned servant) → opens edit screen with `?upgrade=true`.
+ *   - "Remove member" button (admin-only) → opens RemoveMemberDialog
+ *     (typed-confirmation soft delete). General-churn path; distinct
+ *     from the GDPR hard-erasure flow.
+ *
+ * `comments` is shown only when the RPC returns a non-null value
+ * (caller is admin or assigned servant); otherwise we surface a
+ * localized "comments hidden" banner.
  */
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Banner } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import {
   Avatar,
   Badge,
+  Button,
   Card,
   Divider,
   EmptyState,
   LoadingSkeleton,
+  Snackbar,
   Stack,
   Text,
   useTokens,
 } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
-import { getPerson } from '@/services/api/persons';
+import { RemoveMemberDialog } from '@/features/persons/RemoveMemberDialog';
+import { getPerson, softDeletePerson } from '@/services/api/persons';
 import type { Person, PersonPriority, PersonStatus } from '@/types/person';
 
 const PRIORITY_VARIANT: Record<
@@ -45,13 +60,20 @@ const STATUS_VARIANT: Record<PersonStatus, 'success' | 'info' | 'warning' | 'neu
 export default function PersonProfile() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
+  const router = useRouter();
+  const queryClient = useQueryClient();
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { servant } = useAuth();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['person', id],
     queryFn: () => getPerson(id),
     enabled: typeof id === 'string' && id.length > 0,
   });
+
+  const [confirmRemove, setConfirmRemove] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [errorSnack, setErrorSnack] = useState<string | null>(null);
 
   if (isLoading) {
     return (
@@ -66,6 +88,26 @@ export default function PersonProfile() {
     return <EmptyState icon="alertCircle" title={t('persons.list.error')} />;
   }
 
+  const isAdmin = servant?.role === 'admin';
+  const isAssigned = servant?.id === data.assigned_servant;
+  const showUpgrade = data.registration_type === 'quick_add' && (isAdmin || isAssigned);
+  const fullName = `${data.first_name} ${data.last_name}`.trim();
+
+  const onRemoveConfirm = async () => {
+    setRemoving(true);
+    try {
+      await softDeletePerson(data.id);
+      await queryClient.invalidateQueries({ queryKey: ['persons'] });
+      await queryClient.invalidateQueries({ queryKey: ['person', data.id] });
+      setConfirmRemove(false);
+      router.replace('/persons');
+    } catch {
+      setErrorSnack(t('common.errors.generic'));
+    } finally {
+      setRemoving(false);
+    }
+  };
+
   return (
     <ScrollView
       style={{ backgroundColor: colors.background }}
@@ -74,9 +116,7 @@ export default function PersonProfile() {
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.md }}>
         <Avatar id={data.id} firstName={data.first_name} lastName={data.last_name} size="lg" />
         <View style={{ flex: 1 }}>
-          <Text variant="headingLg">
-            {data.first_name} {data.last_name}
-          </Text>
+          <Text variant="headingLg">{fullName}</Text>
           {data.region ? (
             <Text variant="body" color={colors.textMuted}>
               {data.region}
@@ -92,6 +132,25 @@ export default function PersonProfile() {
           </View>
         </View>
       </View>
+
+      <Stack gap="sm">
+        <Button variant="primary" onPress={() => router.push(`/persons/${data.id}/edit`)}>
+          {t('persons.edit.button')}
+        </Button>
+        {showUpgrade ? (
+          <Button
+            variant="secondary"
+            onPress={() =>
+              router.push({
+                pathname: `/persons/${data.id}/edit`,
+                params: { upgrade: 'true' },
+              })
+            }
+          >
+            {t('persons.upgrade.button')}
+          </Button>
+        ) : null}
+      </Stack>
 
       <Card>
         <Stack gap="sm">
@@ -123,6 +182,24 @@ export default function PersonProfile() {
       </Card>
 
       <CommentsSection person={data} />
+
+      {isAdmin ? (
+        <Button variant="destructive" onPress={() => setConfirmRemove(true)}>
+          {t('persons.delete.button')}
+        </Button>
+      ) : null}
+
+      <RemoveMemberDialog
+        visible={confirmRemove}
+        fullName={fullName}
+        busy={removing}
+        onCancel={() => setConfirmRemove(false)}
+        onConfirm={onRemoveConfirm}
+      />
+
+      <Snackbar visible={errorSnack !== null} onDismiss={() => setErrorSnack(null)} duration={4000}>
+        {errorSnack ?? ''}
+      </Snackbar>
     </ScrollView>
   );
 }

@@ -68,5 +68,6 @@ export type PersonUpdatePayload = Partial<
     | 'comments'
     | 'paused_until'
     | 'status'
+    | 'registration_type'
   >
 >;
