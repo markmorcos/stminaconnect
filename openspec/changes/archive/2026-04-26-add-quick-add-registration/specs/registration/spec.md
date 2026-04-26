@@ -48,20 +48,24 @@ The phone field MUST prefill with `+49 ` (with cursor positioned after the space
 - **THEN** validation passes
 - **AND** the form submits
 
-### Requirement: The form's labels SHALL be switchable to the newcomer's language without affecting the rest of the app.
+### Requirement: The Language radio SHALL capture the newcomer's preferred language for storage only.
 
-When the newcomer taps a Language radio (English / العربية / Deutsch), the form's labels and helper texts MUST re-render in that language. The app's overall language MUST NOT change. Other screens, the home tile, and the Snackbar messages remain in the active app language.
+The Language radio MUST set the `language` field on the created `persons` row. It MUST NOT retranslate the form. The servant operates the device, so form labels and helper texts always render in the active app language; switching the radio only records the newcomer's preference for future contact.
 
-#### Scenario: Switching form language to Arabic translates labels only
+#### Scenario: Tapping a different language radio does not change form labels
 
 - **GIVEN** the active app language is English
 - **AND** the Quick Add form is open
 - **WHEN** the user taps the Arabic radio
-- **THEN** the field labels (First name, Last name, Phone, Region, Language) re-render in Arabic
-- **AND** the screen's Stack header (translated via app i18n) remains in English
-- **WHEN** the user navigates back to home
-- **THEN** the home screen is in English
-- **AND** the global app language is still English
+- **THEN** the field labels (First name, Last name, Phone, Region, Language) remain in English
+- **AND** the radio reflects "Arabic" as the selected option
+
+#### Scenario: Selected language persists on the saved row
+
+- **GIVEN** the form is filled with valid values
+- **AND** the user has tapped the Arabic radio
+- **WHEN** the user taps Save and the create succeeds
+- **THEN** the `persons` row has `language = 'ar'`
 
 ### Requirement: Quick Add SHALL auto-assign the new person to the initiating servant.
 

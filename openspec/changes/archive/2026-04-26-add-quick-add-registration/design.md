@@ -5,7 +5,7 @@ The newcomer is a non-app-user filling a form on a stranger's phone, mid-convers
 ## Goals
 
 - ≤ 2 taps from home to a focused first-name input.
-- Newcomer can switch the form's labels into their language without affecting the rest of the app.
+- Newcomer's preferred language is captured on the row, but form labels stay in the servant's active app language.
 - One screen, one scroll, no multi-step wizard.
 - Phone defaults to +49 (Munich is in Germany) but accepts other prefixes.
 - Soft duplicate warning, never a hard block.
@@ -21,7 +21,7 @@ The newcomer is a non-app-user filling a form on a stranger's phone, mid-convers
 ## Decisions
 
 1. **5 fields, no more, no less.** Anything else dilutes the brief promise.
-2. **Form label language is independent of app language.** When the newcomer taps Arabic, the form re-renders with Arabic labels and helper texts using a local i18n context override (`<I18nextProvider i18n={localI18n}>`). The rest of the app and the saved record's `language` field reflect the newcomer's choice; the *app* language doesn't change. RTL is only applied to the form's content area, via `style={{ direction: 'rtl' }}` on the form container — not full app RTL toggle.
+2. **Language radio is metadata-only.** Tapping the radio sets the form's `language` field (which becomes `persons.language`) but does not retranslate the form. The servant is the one reading the labels, so they stay in the active app language. Arabic stays in Latin script visually because we never flip the form's writing direction. Earlier drafts proposed a per-form i18n fork; we dropped that after it added complexity for a behaviour the servant didn't want.
 3. **Default values:**
    - `language = active app language` (i18next current).
    - `phone` prefilled with `+49 ` (cursor positioned after the space).
@@ -39,7 +39,6 @@ The newcomer is a non-app-user filling a form on a stranger's phone, mid-convers
 
 ## Risks / Trade-offs
 
-- **Risk**: per-form language override is a new pattern. Mitigation: it's localized to the form component; doesn't leak into the rest of the app. We document and write a component test.
 - **Risk**: the +49 default is wrong for non-German numbers. Mitigation: cursor lands after `+49 `, easy to delete. We accept brief annoyance for the common-case win.
 - **Trade-off**: Soft duplicate detection RPC may surface false positives (common Coptic names: Mina, Mariam). Acceptable — the dialog asks the servant to make the call.
 

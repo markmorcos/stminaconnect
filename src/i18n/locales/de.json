@@ -74,7 +74,37 @@
     "supabaseMissing": "Supabase-URL nicht konfiguriert. Siehe README.",
     "about": "Über",
     "settings": "Einstellungen",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "quickAdd": "Schnell hinzufügen",
+    "quickAddSubtitle": "Neuankömmlinge in drei Tipps begrüßen",
+    "personsListSubtitle": "Alle Mitglieder ansehen",
+    "menu": "Menü"
+  },
+  "registration": {
+    "quickAdd": {
+      "title": "Schnell hinzufügen",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phone": "Telefon",
+      "region": "Region (optional)",
+      "language": "Bevorzugte Sprache",
+      "languageEN": "English",
+      "languageAR": "العربية",
+      "languageDE": "Deutsch",
+      "save": "Speichern",
+      "successWelcome": "Willkommen {{firstName}}!",
+      "errorGeneric": "Speichern fehlgeschlagen. Bitte versuche es erneut.",
+      "duplicateDialogTitle": "Möglicher Doppeleintrag",
+      "duplicateDialogBody": "{{name}} existiert bereits. Was möchtest du tun?",
+      "useExisting": "Vorhandenen verwenden",
+      "saveAnyway": "Trotzdem speichern",
+      "errors": {
+        "firstNameRequired": "Vorname ist erforderlich",
+        "lastNameRequired": "Nachname ist erforderlich",
+        "phoneInvalid": "Ungültige Telefonnummer",
+        "regionTooLong": "Region ist zu lang"
+      }
+    }
   },
   "persons": {
     "list": {

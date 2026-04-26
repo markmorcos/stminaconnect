@@ -1,9 +1,10 @@
-import { useRouter } from 'expo-router';
-import { Pressable, View } from 'react-native';
-import { Banner } from 'react-native-paper';
+import { useEffect, useState } from 'react';
+import { Pressable, ScrollView, View } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { Appbar, Banner, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
-import { Button, Stack, Text, useTokens } from '@/design';
+import { Card, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
 
@@ -11,64 +12,152 @@ const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'tr
 
 export default function Home() {
   const { t } = useTranslation();
-  const { colors } = useTokens();
+  const { colors, spacing } = useTokens();
   const router = useRouter();
   const { servant, signOut, isLoading } = useAuth();
+  const params = useLocalSearchParams<{ welcome?: string }>();
+  const [welcomeName, setWelcomeName] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const missingUrl = missingSupabaseEnvVars.includes('EXPO_PUBLIC_SUPABASE_URL');
   const greeting = servant?.display_name?.trim() || servant?.email || '';
 
+  useEffect(() => {
+    // Quick Add navigates back here with `?welcome=<first>` set; mirror
+    // it into local state so we can clear the route param immediately
+    // (otherwise the snackbar would re-appear on every re-render and
+    // back-navigation).
+    if (typeof params.welcome === 'string' && params.welcome.length > 0) {
+      setWelcomeName(params.welcome);
+      router.setParams({ welcome: undefined });
+    }
+  }, [params.welcome, router]);
+
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
+      <Appbar.Header style={{ backgroundColor: colors.surface }}>
+        <Appbar.Content
+          title={t('home.title')}
+          titleStyle={{ color: colors.text, fontFamily: 'Inter-SemiBold', fontSize: 18 }}
+        />
+        <Menu
+          visible={menuOpen}
+          onDismiss={() => setMenuOpen(false)}
+          anchor={
+            <Appbar.Action
+              icon="dots-vertical"
+              color={colors.text}
+              accessibilityLabel={t('home.menu')}
+              onPress={() => setMenuOpen(true)}
+            />
+          }
+        >
+          <Menu.Item
+            onPress={() => {
+              setMenuOpen(false);
+              router.push('/about');
+            }}
+            title={t('home.about')}
+          />
+          <Menu.Item
+            onPress={() => {
+              setMenuOpen(false);
+              router.push('/settings/language');
+            }}
+            title={t('home.settings')}
+          />
+          <Menu.Item
+            onPress={() => {
+              setMenuOpen(false);
+              void signOut();
+            }}
+            disabled={isLoading}
+            title={t('home.signOut')}
+          />
+        </Menu>
+      </Appbar.Header>
+
       {missingUrl ? (
         <Banner visible icon="alert-circle">
           {t('home.supabaseMissing')}
         </Banner>
       ) : null}
-      <Stack
-        flex={1}
-        align="center"
-        justify="center"
-        padding="xl"
-        gap="md"
-        accessibilityLabel={t('home.title')}
-      >
+
+      <ScrollView contentContainerStyle={{ padding: spacing.lg, gap: spacing.md }}>
         <Pressable
           onLongPress={() => {
             if (SHOW_DEV_TOOLS) router.push('/dev/showcase');
           }}
           delayLongPress={600}
-          accessibilityRole="image"
-          accessibilityLabel={t('home.title')}
         >
-          <Text variant="displayMd" align="center">
-            {t('home.title')}
-          </Text>
+          {greeting ? (
+            <Text variant="bodyLg" color={colors.textMuted}>
+              {t('home.signedInAs', { name: greeting })}
+            </Text>
+          ) : null}
         </Pressable>
-        {greeting ? (
-          <Text variant="bodyLg" color={colors.textMuted} align="center">
-            {t('home.signedInAs', { name: greeting })}
-          </Text>
-        ) : null}
-        <Button variant="ghost" onPress={() => router.push('/about')}>
-          {t('home.about')}
-        </Button>
-        <Button variant="ghost" onPress={() => router.push('/persons')}>
-          {t('persons.list.title')}
-        </Button>
-        <Button variant="ghost" onPress={() => router.push('/settings/language')}>
-          {t('home.settings')}
-        </Button>
-        <Button
-          variant="destructive"
-          onPress={() => {
-            void signOut();
-          }}
-          loading={isLoading}
-          disabled={isLoading}
-        >
-          {t('home.signOut')}
-        </Button>
-      </Stack>
+
+        <Tile
+          title={t('home.quickAdd')}
+          subtitle={t('home.quickAddSubtitle')}
+          variant="primary"
+          onPress={() => router.push('/registration/quick-add')}
+        />
+        <Tile
+          title={t('persons.list.title')}
+          subtitle={t('home.personsListSubtitle')}
+          variant="secondary"
+          onPress={() => router.push('/persons')}
+        />
+      </ScrollView>
+
+      <Snackbar
+        visible={welcomeName !== null}
+        onDismiss={() => setWelcomeName(null)}
+        duration={4000}
+      >
+        {welcomeName ? t('registration.quickAdd.successWelcome', { firstName: welcomeName }) : ''}
+      </Snackbar>
     </View>
+  );
+}
+
+function Tile({
+  title,
+  subtitle,
+  onPress,
+  variant,
+}: {
+  title: string;
+  subtitle: string;
+  onPress: () => void;
+  variant: 'primary' | 'secondary';
+}) {
+  const { colors, spacing } = useTokens();
+  const minHeight = variant === 'primary' ? 140 : 96;
+  const bg = variant === 'primary' ? colors.primary : colors.surface;
+  const titleColor = variant === 'primary' ? colors.textInverse : colors.text;
+  const subColor = variant === 'primary' ? colors.textInverse : colors.textMuted;
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={title}
+      onPress={onPress}
+      style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}
+    >
+      <Card padding="lg" style={{ backgroundColor: bg, minHeight }}>
+        <Stack gap="xs" justify="center" style={{ flex: 1, padding: spacing.xs }}>
+          <Text
+            variant={variant === 'primary' ? 'displayMd' : 'headingMd'}
+            color={titleColor}
+            style={{ fontWeight: '700' }}
+          >
+            {title}
+          </Text>
+          <Text variant="body" color={subColor}>
+            {subtitle}
+          </Text>
+        </Stack>
+      </Card>
+    </Pressable>
   );
 }

@@ -74,7 +74,37 @@
     "supabaseMissing": "Supabase URL not configured. See README.",
     "about": "About",
     "settings": "Settings",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "quickAdd": "Quick Add",
+    "quickAddSubtitle": "Welcome a newcomer in three taps",
+    "personsListSubtitle": "Browse all members",
+    "menu": "Menu"
+  },
+  "registration": {
+    "quickAdd": {
+      "title": "Quick Add",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phone": "Phone",
+      "region": "Region (optional)",
+      "language": "Preferred language",
+      "languageEN": "English",
+      "languageAR": "العربية",
+      "languageDE": "Deutsch",
+      "save": "Save",
+      "successWelcome": "Welcome {{firstName}}!",
+      "errorGeneric": "Could not save. Please try again.",
+      "duplicateDialogTitle": "Possible duplicate",
+      "duplicateDialogBody": "{{name}} already exists. What would you like to do?",
+      "useExisting": "Use existing",
+      "saveAnyway": "Save anyway",
+      "errors": {
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "phoneInvalid": "Invalid phone number",
+        "regionTooLong": "Region is too long"
+      }
+    }
   },
   "persons": {
     "list": {

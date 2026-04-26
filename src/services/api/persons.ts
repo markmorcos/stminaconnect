@@ -54,3 +54,22 @@ export async function softDeletePerson(id: string): Promise<void> {
   const { error } = await supabase.rpc('soft_delete_person', { person_id: id });
   if (error) throw error;
 }
+
+/**
+ * Returns the id of the most recent (non-deleted) person matching
+ * first+last+phone, or null. Used by Quick Add to surface a soft
+ * duplicate dialog before creating a new row.
+ */
+export async function findPotentialDuplicate(
+  first: string,
+  last: string,
+  phone: string,
+): Promise<string | null> {
+  const { data, error } = await supabase.rpc('find_potential_duplicate', {
+    first,
+    last,
+    phone,
+  });
+  if (error) throw error;
+  return (data as string | null) ?? null;
+}

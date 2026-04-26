@@ -74,7 +74,37 @@
     "supabaseMissing": "لم يتم ضبط رابط Supabase. راجع ملف README.",
     "about": "عن التطبيق",
     "settings": "الإعدادات",
-    "signOut": "تسجيل الخروج"
+    "signOut": "تسجيل الخروج",
+    "quickAdd": "إضافة سريعة",
+    "quickAddSubtitle": "رحِّب بقادم جديد في ثلاث نقرات",
+    "personsListSubtitle": "تصفّح كل الأعضاء",
+    "menu": "القائمة"
+  },
+  "registration": {
+    "quickAdd": {
+      "title": "إضافة سريعة",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "phone": "الهاتف",
+      "region": "المنطقة (اختياري)",
+      "language": "اللغة المفضّلة",
+      "languageEN": "English",
+      "languageAR": "العربية",
+      "languageDE": "Deutsch",
+      "save": "حفظ",
+      "successWelcome": "أهلاً {{firstName}}!",
+      "errorGeneric": "تعذّر الحفظ. حاول مرة أخرى.",
+      "duplicateDialogTitle": "تكرار محتمل",
+      "duplicateDialogBody": "{{name}} موجود مسبقاً. ماذا تريد أن تفعل؟",
+      "useExisting": "استخدم الموجود",
+      "saveAnyway": "احفظ على أي حال",
+      "errors": {
+        "firstNameRequired": "الاسم الأول مطلوب",
+        "lastNameRequired": "اسم العائلة مطلوب",
+        "phoneInvalid": "رقم الهاتف غير صحيح",
+        "regionTooLong": "المنطقة طويلة جداً"
+      }
+    }
   },
   "persons": {
     "list": {

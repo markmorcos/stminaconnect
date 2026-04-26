@@ -41,8 +41,13 @@ export interface PersonCreatePayload {
   first_name: string;
   last_name: string;
   language: PersonLanguage;
-  assigned_servant: string;
   registration_type: PersonRegistrationType;
+  /**
+   * Optional. Non-admin callers always end up as the assigned servant
+   * regardless of what's sent here (the RPC overrides). Admins may set
+   * this to register on behalf of another servant; omitted ⇒ caller.
+   */
+  assigned_servant?: string;
   phone?: string | null;
   region?: string | null;
   priority?: PersonPriority;

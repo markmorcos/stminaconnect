@@ -10,7 +10,7 @@ Quick Add is the most-used flow on Sunday mornings: a servant meets a newcomer, 
   - 5 fields: First name, Last name, Phone (default +49), Region (free text, optional), Language (radio EN/AR/DE, defaults to active app language).
   - Auto-assigns to the initiating servant (`assigned_servant = auth.uid()`).
   - Sets `registration_type = 'quick_add'`, `priority = 'medium'` (default), `status = 'new'`.
-  - Per-field language hint: when newcomer taps "Language: عربية", the form labels and helper texts switch to Arabic mid-form (does NOT trigger app-wide RTL — only re-renders the form labels). On submit, the saved record stores the chosen language.
+  - Language radio captures the newcomer's preferred language for the saved record. Form labels stay in the active app language (the servant is reading them); the radio does not retranslate the form.
   - Phone validation: E.164, default +49 country prefix, accepts 9–14 digits.
   - Soft duplicate detection: warns if first+last+phone matches an existing person; offers "Use existing" to navigate to that profile, or "Save anyway" to create a new row.
 - **ADDED** Success toast + auto-return to home after save.
