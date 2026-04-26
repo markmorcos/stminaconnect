@@ -1,6 +1,10 @@
-# notifications — Spec Delta
+# notifications Specification
 
-## ADDED Requirements
+## Purpose
+
+Defines the in-app notifications capability: persistence, dispatch, real-time delivery, inbox UX, and the service abstraction that lets the implementation swap from a Realtime-based mock to a push-based real implementation without consumer changes.
+
+## Requirements
 
 ### Requirement: A `notifications` table SHALL store every dispatched notification.
 
@@ -8,7 +12,7 @@ The `notifications` table MUST persist `id`, `recipient_servant_id`, `type` (con
 
 #### Scenario: Schema and RLS in place
 
-- **WHEN** migration `007_notifications.sql` has applied
+- **WHEN** migration `008_notifications.sql` has applied
 - **THEN** the table exists with the specified columns and indexes
 - **AND** RLS is enabled with `notifications_self_read` and admin-read-all policies
 

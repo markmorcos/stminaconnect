@@ -66,7 +66,7 @@ Rationale: solo developer iteration speed. EAS builds are slow and fragile; Expo
 
 - **Allowed in early phases**: `@supabase/supabase-js`, i18next, React Hook Form + Zod, expo-sqlite, expo-localization, expo-notifications **for local notifications only**, NativeWind, Recharts-equivalent libraries that work in Expo Go.
 - **Forbidden in early phases**: WatermelonDB, native Google Sign-In, custom config plugins, remote push notifications via `getExpoPushTokenAsync`, anything requiring `expo-dev-client`.
-- **Mocked in early phases**: real push notifications. The app uses a `NotificationService` interface; before phase 20, the implementation is a mock dispatcher (Postgres `notifications` table + in-app banner + optional `expo-notifications` local notification). Phase 21 swaps in the real implementation.
+- **Mocked in early phases**: real push notifications. The app uses a `NotificationService` interface; before phase 20, the implementation is a mock dispatcher (Postgres `notifications` table + in-app banner). Phase 21 swaps in the real implementation.
 - **Self-check rule**: before finalizing any change before phase 20, verify `Can this be tested end-to-end in Expo Go?`. If no, mock the incompatible part or move the work into the dev-build phase.
 
 ## 3. Domain Glossary

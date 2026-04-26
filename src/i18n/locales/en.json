@@ -81,7 +81,39 @@
     "registerFullSubtitle": "Capture priority, assignment, and notes",
     "personsListSubtitle": "Browse all members",
     "menu": "Menu",
-    "account": "Account"
+    "account": "Account",
+    "notifications": "Notifications"
+  },
+  "notifications": {
+    "inbox": {
+      "title": "Notifications",
+      "empty": "No notifications yet.",
+      "markAllRead": "Mark all read",
+      "unreadHeader": "Unread",
+      "readHeader": "Read"
+    },
+    "banner": {
+      "viewAction": "View",
+      "dismissAction": "Dismiss"
+    },
+    "types": {
+      "absence_alert": {
+        "title": "Absence alert",
+        "body": "A member you serve has missed recent attendance."
+      },
+      "welcome_back": {
+        "title": "Welcome back",
+        "body": "A member you serve has returned after an absence."
+      },
+      "reassignment": {
+        "title": "Reassignment",
+        "body": "A member has been reassigned to you."
+      },
+      "system": {
+        "title": "Notification",
+        "body": "You have a new notification."
+      }
+    }
   },
   "registration": {
     "quickAdd": {

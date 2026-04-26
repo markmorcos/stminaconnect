@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { bootstrapI18n, i18n } from '@/i18n';
 import { bootstrapAuth, useIsHydrated } from '@/state/authStore';
 import { ThemeProvider, useTokens } from '@/design/ThemeProvider';
+import { NotificationServiceProvider } from '@/services/notifications/NotificationServiceProvider';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -66,8 +67,10 @@ export default function RootLayout() {
     <I18nextProvider i18n={i18n}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <SplashGate />
-          <ThemedStack />
+          <NotificationServiceProvider>
+            <SplashGate />
+            <ThemedStack />
+          </NotificationServiceProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </I18nextProvider>

@@ -81,7 +81,39 @@
     "registerFullSubtitle": "Priorität, Zuweisung und Notizen erfassen",
     "personsListSubtitle": "Alle Mitglieder ansehen",
     "menu": "Menü",
-    "account": "Konto"
+    "account": "Konto",
+    "notifications": "Benachrichtigungen"
+  },
+  "notifications": {
+    "inbox": {
+      "title": "Benachrichtigungen",
+      "empty": "Noch keine Benachrichtigungen.",
+      "markAllRead": "Alle als gelesen markieren",
+      "unreadHeader": "Ungelesen",
+      "readHeader": "Gelesen"
+    },
+    "banner": {
+      "viewAction": "Anzeigen",
+      "dismissAction": "Schließen"
+    },
+    "types": {
+      "absence_alert": {
+        "title": "Abwesenheits-Hinweis",
+        "body": "Ein von dir betreutes Mitglied war zuletzt nicht da."
+      },
+      "welcome_back": {
+        "title": "Willkommen zurück",
+        "body": "Ein von dir betreutes Mitglied ist nach einer Abwesenheit zurück."
+      },
+      "reassignment": {
+        "title": "Neuzuweisung",
+        "body": "Ein Mitglied wurde dir neu zugewiesen."
+      },
+      "system": {
+        "title": "Benachrichtigung",
+        "body": "Du hast eine neue Benachrichtigung."
+      }
+    }
   },
   "registration": {
     "quickAdd": {

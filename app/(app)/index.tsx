@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Appbar, Banner, Menu } from 'react-native-paper';
+import { Appbar, Badge as PaperBadge, Banner, Menu } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { Card, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
+import { useNotificationsStore } from '@/state/notificationsStore';
 
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
@@ -20,6 +21,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const missingUrl = missingSupabaseEnvVars.includes('EXPO_PUBLIC_SUPABASE_URL');
   const greeting = servant?.display_name?.trim() || servant?.email || '';
+  const unreadCount = useNotificationsStore((s) => s.unreadCount);
 
   useEffect(() => {
     // Quick Add navigates back here with `?welcome=<first>` set; mirror
@@ -39,6 +41,23 @@ export default function Home() {
           title={t('home.title')}
           titleStyle={{ color: colors.text, fontFamily: 'Inter-SemiBold', fontSize: 18 }}
         />
+        <View>
+          <Appbar.Action
+            icon="bell-outline"
+            color={colors.text}
+            accessibilityLabel={t('home.notifications')}
+            onPress={() => router.push('/notifications')}
+          />
+          {unreadCount > 0 ? (
+            <PaperBadge
+              size={16}
+              style={{ position: 'absolute', top: 6, right: 6 }}
+              accessibilityLabel={`${unreadCount} unread`}
+            >
+              {unreadCount > 99 ? '99+' : String(unreadCount)}
+            </PaperBadge>
+          ) : null}
+        </View>
         <Menu
           visible={menuOpen}
           onDismiss={() => setMenuOpen(false)}

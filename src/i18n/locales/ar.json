@@ -81,7 +81,39 @@
     "registerFullSubtitle": "أدخل الأولوية والخادم المسؤول والملاحظات",
     "personsListSubtitle": "تصفّح كل الأعضاء",
     "menu": "القائمة",
-    "account": "الحساب"
+    "account": "الحساب",
+    "notifications": "الإشعارات"
+  },
+  "notifications": {
+    "inbox": {
+      "title": "الإشعارات",
+      "empty": "لا توجد إشعارات بعد.",
+      "markAllRead": "تعليم الكل كمقروء",
+      "unreadHeader": "غير مقروءة",
+      "readHeader": "مقروءة"
+    },
+    "banner": {
+      "viewAction": "عرض",
+      "dismissAction": "إغلاق"
+    },
+    "types": {
+      "absence_alert": {
+        "title": "تنبيه غياب",
+        "body": "عضو تخدمه تغيّب عن الحضور مؤخراً."
+      },
+      "welcome_back": {
+        "title": "أهلاً بعودته",
+        "body": "عضو تخدمه عاد بعد غياب."
+      },
+      "reassignment": {
+        "title": "إعادة تعيين",
+        "body": "تم تعيين عضو إليك."
+      },
+      "system": {
+        "title": "إشعار",
+        "body": "لديك إشعار جديد."
+      }
+    }
   },
   "registration": {
     "quickAdd": {
