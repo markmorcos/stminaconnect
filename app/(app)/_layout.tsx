@@ -7,6 +7,7 @@ import { NotificationBanner } from '@/components/NotificationBanner';
 import { SyncConflictSnackbar } from '@/components/SyncConflictSnackbar';
 import { SyncStatusIndicator } from '@/components/SyncStatusIndicator';
 import { Text, useTokens } from '@/design';
+import { useInvalidateOnPull } from '@/services/sync/useInvalidateOnPull';
 import { useSyncBootstrap } from '@/services/sync/useSyncBootstrap';
 import { useSyncState } from '@/services/sync/SyncEngine';
 import { useAuthStore } from '@/state/authStore';
@@ -19,6 +20,7 @@ export default function AppLayout() {
   const hasCompletedFirstPull = useSyncState((s) => s.hasCompletedFirstPull);
   // Same reasoning as `(auth)/_layout.tsx` — gate on session only.
   useSyncBootstrap();
+  useInvalidateOnPull();
   if (!session) return <Redirect href="/sign-in" />;
 
   // Block first-launch with a spinner until the SyncEngine completes

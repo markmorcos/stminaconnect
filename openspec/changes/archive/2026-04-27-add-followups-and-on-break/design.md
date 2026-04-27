@@ -31,7 +31,9 @@ Follow-ups are simple records — what action a servant took. The interesting pa
 7. **Return detection**: integrated into `mark_attendance` post-commit. After insertion, for each affected `(event, person)` pair, query: are there `absence_alerts` rows for the person with `resolved_at IS NULL`? If yes, set `resolved_at = now()` and dispatch a `welcome_back` notification. Recipients: **assigned servant only** (per Open Question D2). The notification's deep link goes to the person profile.
 8. **`welcome_back` payload**:
    ```typescript
-   { personId, personName, eventTitle, eventDate }
+   {
+     (personId, personName, eventTitle, eventDate);
+   }
    ```
 9. **Pending follow-ups list (`/follow-ups`)**: three sections, sorted within each by urgency:
    - **Needs follow-up**: `absence_alerts` with no `follow_ups` row OR follow-ups all completed but a newer alert exists.

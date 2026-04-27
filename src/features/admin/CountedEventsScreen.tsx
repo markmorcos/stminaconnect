@@ -36,6 +36,7 @@ import {
   triggerCalendarSync,
   upsertCountedEventPattern,
 } from '@/services/api/events';
+import { getSyncEngine } from '@/services/sync/SyncEngine';
 import type { CalendarEvent, CountedEventPattern, SyncLogRow } from '@/types/event';
 
 function formatRelative(iso: string, t: TFunction): string {
@@ -104,9 +105,16 @@ export function CountedEventsScreen() {
     setResyncing(true);
     try {
       await triggerCalendarSync();
-      // Give the Edge Function a moment, then refresh the status row.
+      // Give the Edge Function a moment, then refresh the status row
+      // AND kick the local SyncEngine so the new events flow into the
+      // SQLite mirror. Without the kick, the attendance picker keeps
+      // showing the pre-resync events until the next AppState foreground
+      // or app reload.
       setTimeout(() => {
         void refresh().catch(() => undefined);
+        getSyncEngine()
+          .runOnce({ pull: true })
+          .catch(() => undefined);
       }, 1500);
       setSnack({ message: t('admin.countedEvents.resyncQueued'), tone: 'success' });
     } catch (e) {

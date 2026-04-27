@@ -131,8 +131,8 @@
         "body": "{{consecutiveMisses}} Termine in Folge versäumt. Zuletzt: {{lastEventTitle}}."
       },
       "welcome_back": {
-        "title": "Willkommen zurück",
-        "body": "Ein von dir betreutes Mitglied ist nach einer Abwesenheit zurück."
+        "title": "Willkommen zurück: {{personName}}",
+        "body": "War bei {{eventTitle}}."
       },
       "reassignment": {
         "title": "Neuzuweisung",
@@ -244,6 +244,62 @@
       "confirm": "Entfernen",
       "cancel": "Abbrechen",
       "success": "Mitglied entfernt."
+    },
+    "followUp": {
+      "button": "Nachfass-Eintrag"
+    },
+    "onBreak": {
+      "button": "Auf Pause setzen",
+      "dialogTitle": "Auf Pause setzen",
+      "durationLabel": "Wie lange?",
+      "untilLabel": "Pause bis",
+      "fixedDate": "Festes Datum",
+      "openEnded": "Offen",
+      "openEndedHint": "Die Erkennung bleibt pausiert, bis du die Pause manuell beendest.",
+      "save": "Speichern",
+      "endBreak": "Pause vorzeitig beenden",
+      "success": "Gespeichert.",
+      "errors": {
+        "invalidDate": "Datum im Format JJJJ-MM-TT auswählen."
+      }
+    }
+  },
+  "followUps": {
+    "pendingTitle": "Nachfassungen",
+    "modalTitle": "Nachfassung erfassen",
+    "actionLabel": "Was hast du gemacht?",
+    "notesLabel": "Notizen",
+    "notesPlaceholder": "Optionaler Kontext (≤ 500 Zeichen)",
+    "statusLabel": "Status",
+    "snoozeUntil": "Erinnern bis",
+    "snoozedUntil": "Erinnerung bis {{date}}",
+    "needsFollowUpBadge": "Offen",
+    "alertSummary_one": "{{count}} versäumter Termin in Folge",
+    "alertSummary_other": "{{count}} versäumte Termine in Folge",
+    "save": "Speichern",
+    "success": "Gespeichert.",
+    "loadError": "Nachfassungen konnten nicht geladen werden.",
+    "empty": "Alles erledigt.",
+    "emptyHint": "Neue Hinweise und erinnerte Nachfassungen erscheinen hier.",
+    "errorPermissionUpdate": "Nur der Ersteller kann eine Nachfassung innerhalb einer Stunde nach dem Erfassen bearbeiten.",
+    "action": {
+      "called": "Angerufen",
+      "texted": "Geschrieben",
+      "visited": "Besucht",
+      "no_answer": "Keine Antwort",
+      "other": "Sonstiges"
+    },
+    "status": {
+      "completed": "Erledigt",
+      "snoozed": "Erinnert"
+    },
+    "sections": {
+      "needs_follow_up": "Nachfass nötig",
+      "snoozed_returning": "Heute/morgen zurück",
+      "recent": "Kürzlich erfasst"
+    },
+    "errors": {
+      "actionRequired": "Wähle, was du gemacht hast."
     }
   },
   "settings": {

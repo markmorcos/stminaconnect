@@ -8,14 +8,14 @@ Defines the in-app notifications capability: persistence, dispatch, real-time de
 
 ### Requirement: A `notifications` table SHALL store every dispatched notification.
 
-The `notifications` table MUST persist every dispatched notification. From this change forward, `absence_alert` rows MUST carry a structured payload containing `personId`, `personName`, `consecutiveMisses`, `lastEventTitle`, `lastEventDate`, `priority`, and `thresholdKind`. The `notifications` schema itself is unchanged; this is an additive contract on the `payload jsonb` column for the `absence_alert` type.
+The `notifications` table MUST persist every dispatched notification. From this change forward, `welcome_back` rows MUST carry a structured payload containing `personId`, `personName`, `eventTitle`, and `eventDate`. The `notifications` schema itself is unchanged; this is an additive contract on the `payload jsonb` column for the `welcome_back` type.
 
-#### Scenario: Absence-alert payload conforms to the typed shape
+#### Scenario: Welcome-back payload conforms to typed shape
 
-- **GIVEN** absence detection fires for person P with 3 consecutive misses at "Sunday Liturgy" on 2026-04-26
-- **WHEN** `dispatch_notification` inserts the row
-- **THEN** the `payload` jsonb contains `personId`, `personName='[P first] [P last]'`, `consecutiveMisses=3`, `lastEventTitle='Sunday Liturgy'`, `lastEventDate='2026-04-26'`, `priority`, `thresholdKind='primary'`
-- **AND** any consumer (banner, inbox, push) can read these fields without additional joins
+- **GIVEN** previously-flagged person P attends "Sunday Liturgy" on 2026-04-26
+- **WHEN** the post-attendance routine resolves the alert and dispatches a `welcome_back` notification to the assigned servant
+- **THEN** the `payload` jsonb contains `personId`, `personName='[P first] [P last]'`, `eventTitle='Sunday Liturgy'`, `eventDate='2026-04-26'`
+- **AND** the banner and inbox renderers can derive the localized display strings from these fields without additional joins
 
 ### Requirement: A `NotificationService` interface SHALL be the only path the rest of the app uses to dispatch notifications.
 

@@ -131,8 +131,8 @@
         "body": "{{consecutiveMisses}} consecutive missed events. Last: {{lastEventTitle}}."
       },
       "welcome_back": {
-        "title": "Welcome back",
-        "body": "A member you serve has returned after an absence."
+        "title": "Welcome back: {{personName}}",
+        "body": "Attended {{eventTitle}}."
       },
       "reassignment": {
         "title": "Reassignment",
@@ -244,6 +244,62 @@
       "confirm": "Remove",
       "cancel": "Cancel",
       "success": "Member removed."
+    },
+    "followUp": {
+      "button": "Log follow-up"
+    },
+    "onBreak": {
+      "button": "Mark on break",
+      "dialogTitle": "Mark on break",
+      "durationLabel": "How long?",
+      "untilLabel": "On break until",
+      "fixedDate": "Fixed date",
+      "openEnded": "Open-ended",
+      "openEndedHint": "Detection stays paused until you end the break manually.",
+      "save": "Save",
+      "endBreak": "End break early",
+      "success": "Saved.",
+      "errors": {
+        "invalidDate": "Pick a date in the format YYYY-MM-DD."
+      }
+    }
+  },
+  "followUps": {
+    "pendingTitle": "Follow-ups",
+    "modalTitle": "Log follow-up",
+    "actionLabel": "What did you do?",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Optional context (≤ 500 chars)",
+    "statusLabel": "Status",
+    "snoozeUntil": "Snooze until",
+    "snoozedUntil": "Snoozed until {{date}}",
+    "needsFollowUpBadge": "Pending",
+    "alertSummary_one": "{{count}} consecutive missed event",
+    "alertSummary_other": "{{count}} consecutive missed events",
+    "save": "Save",
+    "success": "Saved.",
+    "loadError": "Could not load follow-ups.",
+    "empty": "All caught up.",
+    "emptyHint": "New alerts and snoozed follow-ups will appear here.",
+    "errorPermissionUpdate": "Follow-ups can only be edited by their creator within an hour of logging.",
+    "action": {
+      "called": "Called",
+      "texted": "Texted",
+      "visited": "Visited",
+      "no_answer": "No answer",
+      "other": "Other"
+    },
+    "status": {
+      "completed": "Completed",
+      "snoozed": "Snoozed"
+    },
+    "sections": {
+      "needs_follow_up": "Needs follow-up",
+      "snoozed_returning": "Returning today/tomorrow",
+      "recent": "Recently logged"
+    },
+    "errors": {
+      "actionRequired": "Pick what you did."
     }
   },
   "settings": {

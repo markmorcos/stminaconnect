@@ -26,8 +26,14 @@ export interface AbsenceAlertPayload {
 }
 
 export interface WelcomeBackPayload {
-  /** Person who returned after an absence. Populated in phase 12. */
-  person_id: string;
+  /** Person who returned after an absence. */
+  personId: string;
+  /** Pre-rendered "First Last" for display without a join. */
+  personName: string;
+  /** Title of the counted event the person attended. */
+  eventTitle: string;
+  /** ISO timestamp of the event the person attended. */
+  eventDate: string;
 }
 
 export interface ReassignmentPayload {

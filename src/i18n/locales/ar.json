@@ -131,8 +131,8 @@
         "body": "{{consecutiveMisses}} غيابات متتالية. آخرها: {{lastEventTitle}}."
       },
       "welcome_back": {
-        "title": "أهلاً بعودته",
-        "body": "عضو تخدمه عاد بعد غياب."
+        "title": "أهلاً بعودته: {{personName}}",
+        "body": "حضر {{eventTitle}}."
       },
       "reassignment": {
         "title": "إعادة تعيين",
@@ -244,6 +244,66 @@
       "confirm": "إزالة",
       "cancel": "إلغاء",
       "success": "تم إزالة العضو."
+    },
+    "followUp": {
+      "button": "تسجيل متابعة"
+    },
+    "onBreak": {
+      "button": "وضع في إجازة",
+      "dialogTitle": "وضع في إجازة",
+      "durationLabel": "إلى متى؟",
+      "untilLabel": "في إجازة حتى",
+      "fixedDate": "تاريخ محدد",
+      "openEnded": "مفتوحة",
+      "openEndedHint": "تبقى المراقبة معطّلة حتى تنهي الإجازة يدوياً.",
+      "save": "حفظ",
+      "endBreak": "إنهاء الإجازة الآن",
+      "success": "تم الحفظ.",
+      "errors": {
+        "invalidDate": "اختر تاريخاً بصيغة YYYY-MM-DD."
+      }
+    }
+  },
+  "followUps": {
+    "pendingTitle": "المتابعات",
+    "modalTitle": "تسجيل متابعة",
+    "actionLabel": "ماذا فعلت؟",
+    "notesLabel": "ملاحظات",
+    "notesPlaceholder": "تفاصيل اختيارية (≤ 500 حرفاً)",
+    "statusLabel": "الحالة",
+    "snoozeUntil": "تأجيل حتى",
+    "snoozedUntil": "مؤجلة حتى {{date}}",
+    "needsFollowUpBadge": "معلّقة",
+    "alertSummary_zero": "لا غيابات متتالية",
+    "alertSummary_one": "غياب متتالي واحد",
+    "alertSummary_two": "غيابان متتاليان",
+    "alertSummary_few": "{{count}} غيابات متتالية",
+    "alertSummary_many": "{{count}} غياباً متتالياً",
+    "alertSummary_other": "{{count}} غيابات متتالية",
+    "save": "حفظ",
+    "success": "تم الحفظ.",
+    "loadError": "تعذّر تحميل المتابعات.",
+    "empty": "كل شيء على ما يرام.",
+    "emptyHint": "ستظهر التنبيهات الجديدة والمتابعات المؤجلة هنا.",
+    "errorPermissionUpdate": "يمكن للمنشئ فقط تعديل المتابعة خلال ساعة من تسجيلها.",
+    "action": {
+      "called": "اتصلت",
+      "texted": "أرسلت رسالة",
+      "visited": "زرت",
+      "no_answer": "لا يوجد رد",
+      "other": "أخرى"
+    },
+    "status": {
+      "completed": "مكتملة",
+      "snoozed": "مؤجلة"
+    },
+    "sections": {
+      "needs_follow_up": "تحتاج متابعة",
+      "snoozed_returning": "العودة اليوم/غداً",
+      "recent": "المسجَّلة حديثاً"
+    },
+    "errors": {
+      "actionRequired": "اختر الإجراء الذي قمت به."
     }
   },
   "settings": {

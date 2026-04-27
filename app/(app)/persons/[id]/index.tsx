@@ -15,7 +15,7 @@
  * (caller is admin or assigned servant); otherwise we surface a
  * localized "comments hidden" banner.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Banner } from 'react-native-paper';
@@ -37,6 +37,7 @@ import {
 } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
 import { RemoveMemberDialog } from '@/features/persons/RemoveMemberDialog';
+import { endBreak } from '@/services/api/onBreak';
 import { getPerson, softDeletePerson } from '@/services/api/persons';
 import type { Person, PersonPriority, PersonStatus } from '@/types/person';
 
@@ -62,7 +63,7 @@ export default function PersonProfile() {
   const { colors, spacing } = useTokens();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, openFollowUp } = useLocalSearchParams<{ id: string; openFollowUp?: string }>();
   const { servant } = useAuth();
 
   const { data, isLoading, isError } = useQuery({
@@ -73,7 +74,21 @@ export default function PersonProfile() {
 
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [removing, setRemoving] = useState(false);
+  const [endingBreak, setEndingBreak] = useState(false);
   const [errorSnack, setErrorSnack] = useState<string | null>(null);
+
+  // Auto-open the follow-up modal when arriving via an absence_alert
+  // notification deep link (`?openFollowUp=true`). The forwarder runs
+  // exactly once per mount even on re-renders.
+  const followUpOpened = useRef(false);
+  useEffect(() => {
+    if (followUpOpened.current) return;
+    if (typeof id !== 'string' || id.length === 0) return;
+    if (openFollowUp !== 'true' && openFollowUp !== '1') return;
+    followUpOpened.current = true;
+    router.setParams({ openFollowUp: undefined });
+    router.push(`/persons/${id}/follow-up`);
+  }, [id, openFollowUp, router]);
 
   if (isLoading) {
     return (
@@ -149,6 +164,35 @@ export default function PersonProfile() {
           >
             {t('persons.upgrade.button')}
           </Button>
+        ) : null}
+        <Button variant="secondary" onPress={() => router.push(`/persons/${data.id}/follow-up`)}>
+          {t('persons.followUp.button')}
+        </Button>
+        {isAdmin || isAssigned ? (
+          data.status === 'on_break' ? (
+            <Button
+              variant="ghost"
+              loading={endingBreak}
+              disabled={endingBreak}
+              onPress={async () => {
+                setEndingBreak(true);
+                try {
+                  await endBreak(data.id);
+                  await queryClient.invalidateQueries({ queryKey: ['person', data.id] });
+                } catch (e) {
+                  setErrorSnack((e as Error).message);
+                } finally {
+                  setEndingBreak(false);
+                }
+              }}
+            >
+              {t('persons.onBreak.endBreak')}
+            </Button>
+          ) : (
+            <Button variant="ghost" onPress={() => router.push(`/persons/${data.id}/on-break`)}>
+              {t('persons.onBreak.button')}
+            </Button>
+          )
         ) : null}
       </Stack>
 

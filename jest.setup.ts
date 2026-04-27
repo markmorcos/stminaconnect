@@ -4,6 +4,17 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 
+// react-native-paper-dates pulls in ESM-flavoured modules that Jest
+// doesn't transpile by default. Tests don't render the calendar; stub
+// the surface so production imports compile in the test environment.
+jest.mock('react-native-paper-dates', () => ({
+  DatePickerModal: () => null,
+  registerTranslation: jest.fn(),
+  en: {},
+  ar: {},
+  de: {},
+}));
+
 // Stop tests from calling the real expo-updates (and from blowing up
 // because the native module isn't linked in the Jest environment).
 jest.mock('expo-updates', () => ({

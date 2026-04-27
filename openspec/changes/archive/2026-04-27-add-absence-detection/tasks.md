@@ -1,9 +1,5 @@
 # Tasks — add-absence-detection
 
-> **Migration numbering note**: the proposal targeted 017/018/019, but
-> `017_sync_rpcs.sql` was claimed by the offline-sync change first. This
-> change shifts to **018/019/020**. Functional content is unchanged.
-
 ## 1. Schema
 
 - [x] 1.1 `018_alert_config.sql`: alert_config singleton table with default seed row; trigger to prevent multiple rows.

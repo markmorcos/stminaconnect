@@ -7,8 +7,6 @@
 
 ## 2. Schema migrations
 
-> Migration numbers renumbered 008..011 → 009..012 because `008_notifications.sql` already exists from the previous phase.
-
 - [x] 2.1 `009_events.sql`: events table per design + index on `start_at` and on `(is_counted, start_at)`.
 - [x] 2.2 `009_events.sql`: enable RLS — all signed-in servants can SELECT (events are not private). Deny INSERT/UPDATE/DELETE from clients.
 - [x] 2.3 `010_counted_event_patterns.sql`: counted_event_patterns table; RLS — admins read+write (writes go through admin RPCs in 014); servants read-only.

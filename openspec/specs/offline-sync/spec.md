@@ -149,3 +149,49 @@ If an op fails with a 4xx (validation, edit-window-closed, RLS denial), the Sync
 - **THEN** the RPC returns a 4xx
 - **AND** a `system` notification appears in the inbox: "Your check-in for Sunday Liturgy could not be saved: edit window closed"
 - **AND** the op is marked `needs_attention`
+
+### Requirement: Cached reads SHALL invalidate when the SyncEngine completes a pull.
+
+A subscription to `useSyncState.lastPullAt` MUST call
+`queryClient.invalidateQueries()` whenever the watermark advances, so
+every TanStack Query that reads from the SQLite mirror re-fetches and
+the UI reflects the freshly-pulled rows without the user reloading the
+app. The hook MUST NOT fire on the first render so app boot does not
+double-fetch (`hasCompletedFirstPull` already gates that path).
+
+#### Scenario: Wipe + auto re-pull refreshes the picker
+
+- **GIVEN** the attendance picker is mounted and showing the previous
+  mirror's events
+- **AND** the dev-only "Wipe local DB" action runs (clears SQLite,
+  resets `useSyncState`, kicks the SyncEngine)
+- **WHEN** the SyncEngine's pull completes and advances `lastPullAt`
+- **THEN** the picker re-renders with the freshly-pulled events
+- **AND** no app reload was required
+
+#### Scenario: Background pull mid-session refreshes the persons list
+
+- **GIVEN** the persons list is mounted
+- **WHEN** an AppState foreground transition triggers `runOnce`
+- **AND** `sync_persons_since` returns one new person
+- **THEN** the persons list re-fetches from the local mirror and shows
+  the new row within one render cycle of the pull completing
+
+### Requirement: The admin "Resync now" affordance SHALL drive the local mirror to converge.
+
+Tapping "Resync now" on the admin counted-events screen MUST, in
+addition to refreshing the screen's own status row, kick the local
+SyncEngine (`getSyncEngine().runOnce({ pull: true })`) shortly after
+the server-side Edge Function would have committed its writes — so the
+new events flow into the local mirror without requiring the user to
+foreground/reload the app.
+
+#### Scenario: Resync surfaces new events in the picker
+
+- **GIVEN** the admin signs in and `events` is empty client-side
+- **WHEN** the admin taps "Resync now" on `/admin/counted-events`
+- **AND** the Edge Function writes new rows into `events`
+- **THEN** within a few seconds the local SyncEngine has pulled the new
+  rows
+- **AND** the attendance picker, when next opened (or while open), shows
+  the new events without an app reload

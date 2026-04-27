@@ -18,10 +18,23 @@ import * as Updates from 'expo-updates';
 import i18next from 'i18next';
 import { DevSettings, I18nManager } from 'react-native';
 import { initReactI18next } from 'react-i18next';
+import {
+  registerTranslation,
+  ar as paperDatesAr,
+  de as paperDatesDe,
+  en as paperDatesEn,
+} from 'react-native-paper-dates';
 
 import ar from './locales/ar.json';
 import de from './locales/de.json';
 import en from './locales/en.json';
+
+// Register react-native-paper-dates locales once at module load so the
+// DatePickerModal renders translated weekdays/months across our three
+// supported languages.
+registerTranslation('en', paperDatesEn);
+registerTranslation('ar', paperDatesAr);
+registerTranslation('de', paperDatesDe);
 
 export const SUPPORTED_LANGUAGES = ['en', 'ar', 'de'] as const;
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];

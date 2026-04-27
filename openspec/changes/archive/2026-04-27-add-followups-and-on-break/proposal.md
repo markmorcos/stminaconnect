@@ -20,10 +20,13 @@ Alerts without a workflow are noise. Servants need to log what they did about an
 
 ## Impact
 
-- **Affected specs**: `follow-up` (new), `notifications` (modified — `welcome_back` payload populated). `absence-detection` is touched indirectly via the `resolved_at` field and return detection.
-- **Affected code**: `supabase/migrations/020_follow_ups.sql`, `021_on_break_helpers.sql`, `022_return_detection.sql`. New `app/(app)/follow-ups.tsx`, `app/(app)/persons/[id]/follow-up.tsx`, `app/(app)/persons/[id]/on-break.tsx`. Service modules added.
+- **Affected specs**:
+  - `follow-up` (new)
+  - `notifications` (modified — `welcome_back` payload populated)
+  - `offline-sync` (added requirements — TanStack Query auto-invalidates on every successful pull so screens re-render against the freshly-populated SQLite mirror without an app reload; admin "Resync now" kicks the local SyncEngine so calendar resync converges automatically). `absence-detection` is touched indirectly via the `resolved_at` field and return detection.
+- **Affected code**: migrations `024_follow_ups.sql`, `025_on_break.sql`, `026_return_detection.sql`. New `app/(app)/follow-ups.tsx`, `app/(app)/persons/[id]/follow-up.tsx`, `app/(app)/persons/[id]/on-break.tsx`, `src/services/api/followUps.ts`, `src/services/api/onBreak.ts`, `src/features/follow-up/*`, `src/services/sync/useInvalidateOnPull.ts`. Updates to `app/(app)/_layout.tsx`, `app/(app)/persons/[id]/index.tsx`, `app/(app)/persons/_layout.tsx`, `app/(app)/index.tsx`, `src/features/admin/CountedEventsScreen.tsx`, `src/services/notifications/notificationRouter.ts`, `src/services/notifications/types.ts`, `src/i18n/index.ts`, locales. New dep: `react-native-paper-dates` for the brand-styled calendar picker (replaces a brief earlier attempt with `@react-native-community/datetimepicker`).
 - **Breaking changes**: none.
-- **Migration needs**: three migrations + cron schedule for break-expiry.
+- **Migration needs**: three migrations (`024`–`026`) + daily cron for break-expiry.
 - **Expo Go compatible**: yes.
-- **Uses design system**: all UI built with components/tokens from the design-system capability. No ad-hoc styles.
-- **Dependencies**: `add-absence-detection`, `add-notification-service-mock`.
+- **Uses design system**: all UI built with components/tokens from the design-system capability. No ad-hoc styles. The date picker (`DatePickerModal` from `react-native-paper-dates`) inherits Paper's brand theme on iOS and Android.
+- **Dependencies**: `add-absence-detection`, `add-notification-service-mock`, `add-offline-sync-with-sqlite`.

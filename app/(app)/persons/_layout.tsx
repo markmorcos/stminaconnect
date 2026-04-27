@@ -21,6 +21,20 @@ export default function PersonsLayout() {
       <Stack.Screen name="index" options={{ title: t('persons.list.title') }} />
       <Stack.Screen name="[id]/index" options={{ title: '' }} />
       <Stack.Screen name="[id]/edit" options={{ title: t('persons.edit.title') }} />
+      <Stack.Screen
+        name="[id]/follow-up"
+        options={{
+          title: t('followUps.modalTitle'),
+          presentation: 'modal',
+        }}
+      />
+      <Stack.Screen
+        name="[id]/on-break"
+        options={{
+          title: t('persons.onBreak.dialogTitle'),
+          presentation: 'modal',
+        }}
+      />
     </Stack>
   );
 }

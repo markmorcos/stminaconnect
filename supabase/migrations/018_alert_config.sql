@@ -10,12 +10,6 @@
 --   * INSERT / UPDATE / DELETE are denied at the table level — mutations
 --     flow through the SECURITY DEFINER RPCs at the bottom of this file,
 --     which gate on `is_admin()`.
---
--- The numbering note for this change:
---   The change proposal originally targeted 017/018/019; 017 was taken
---   by `017_sync_rpcs.sql` (offline-sync change), so absence-detection
---   shifts to 018/019/020. Migration ordering only matters for sequence,
---   not the proposal-cited file names.
 
 create table if not exists public.alert_config (
   id                       uuid primary key default gen_random_uuid(),

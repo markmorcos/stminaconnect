@@ -66,9 +66,12 @@ When `status='snoozed'` is selected on the form, the snooze-until date picker MU
 ### Requirement: A pending follow-ups screen SHALL group items by urgency.
 
 `app/(app)/follow-ups.tsx` MUST render three sections:
+
 1. **Needs follow-up** — `absence_alerts` for the signed-in servant's persons that have no `follow_ups` row, OR have only completed follow-ups but a newer alert exists.
 2. **Snoozed → Returning today/tomorrow** — snoozed follow-ups created by the user with `snooze_until <= today + 1`.
-3. **Recently logged** — last 20 follow-ups by the user in the last 14 days.
+3. **Recently logged** — last 20 follow-ups by the user in the last 14 days, **excluding** rows that already qualify for section 2. Sections MUST be disjoint: a single follow-up row appears in exactly one section.
+
+Within each section the rows MUST be ordered by `created_at` descending (newest first) so the most recent activity is at the top.
 
 #### Scenario: New alert without follow-up appears in section 1
 
@@ -76,6 +79,26 @@ When `status='snoozed'` is selected on the form, the snooze-until date picker MU
 - **AND** no `follow_ups` exist for P
 - **WHEN** the pending screen renders
 - **THEN** P appears under "Needs follow-up"
+
+#### Scenario: Snoozed-for-tomorrow follow-up appears only in section 2
+
+- **GIVEN** the user logs a follow-up for person P with `status='snoozed'` and `snooze_until = tomorrow`
+- **WHEN** the pending screen renders
+- **THEN** the row appears under "Snoozed → Returning today/tomorrow"
+- **AND** the same row does NOT appear under "Recently logged"
+
+#### Scenario: Snoozed-far-future follow-up appears in section 3 until return is imminent
+
+- **GIVEN** the user logs a follow-up with `status='snoozed'` and `snooze_until = today + 10`
+- **WHEN** the pending screen renders today
+- **THEN** the row appears under "Recently logged"
+- **AND** when the screen is re-rendered on `today + 9`, the row migrates to "Snoozed → Returning today/tomorrow" and is no longer in "Recently logged"
+
+#### Scenario: Latest first within each section
+
+- **GIVEN** three follow-ups logged at `t1 < t2 < t3` all in "Recently logged"
+- **WHEN** the section renders
+- **THEN** the row order top-to-bottom is `t3, t2, t1`
 
 ### Requirement: "On break" status SHALL pause absence detection for a person.
 
@@ -139,4 +162,3 @@ The `welcome_back` notification payload MUST include `personId`, `personName`, `
 - **GIVEN** a welcome_back notification with personName="Mariam Saad", eventTitle="Sunday Liturgy", eventDate="2026-04-26"
 - **WHEN** the recipient sees the banner
 - **THEN** the body reads localized "Mariam Saad attended Sunday Liturgy on 2026-04-26"
-

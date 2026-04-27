@@ -93,6 +93,13 @@ export default function Home() {
             }}
             title={t('home.account')}
           />
+          <Menu.Item
+            onPress={() => {
+              setMenuOpen(false);
+              router.push('/follow-ups');
+            }}
+            title={t('followUps.pendingTitle')}
+          />
           {servant?.role === 'admin' ? (
             <Menu.Item
               onPress={() => {
