@@ -34,3 +34,28 @@ export async function getDatabase(): Promise<SQLite.SQLiteDatabase> {
 export function __setDatabaseForTests(db: SQLite.SQLiteDatabase | null): void {
   dbPromise = db ? Promise.resolve(db) : null;
 }
+
+/**
+ * Closes the singleton DB, deletes the file from disk, and resets the
+ * cached promise so the next `getDatabase()` reopens with a fresh
+ * schema (migrations re-run on the empty file).
+ *
+ * Caller should also reset any in-memory state that mirrors the DB
+ * (zustand stores) and re-trigger the SyncEngine for a full pull.
+ *
+ * Dev-only: invoked from the `/dev/db` inspector. Not safe to call
+ * while writes are in flight.
+ */
+export async function wipeLocalDatabase(): Promise<void> {
+  if (dbPromise) {
+    try {
+      const db = await dbPromise;
+      await db.closeAsync();
+    } catch {
+      // best effort — fall through to the delete so a half-broken
+      // connection still gets cleaned up.
+    }
+  }
+  dbPromise = null;
+  await SQLite.deleteDatabaseAsync(DATABASE_NAME);
+}

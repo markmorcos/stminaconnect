@@ -1,8 +1,12 @@
 /**
- * Attendance event picker — lists today's events (via `getTodayEvents`)
- * and routes to the roster on tap. The "Counted" badge mirrors what
- * the admin counted-events screen shows so servants know which events
- * affect absence streaks.
+ * Attendance event picker — lists today's events plus any from the
+ * configured backfill grace window so servants can mark attendance
+ * for recent services they didn't get to in time. The window mirrors
+ * `alert_config.grace_period_days` so the picker stays in lock-step
+ * with the absence-detection streak walk.
+ *
+ * The "Counted" badge mirrors what the admin counted-events screen
+ * shows so servants know which events affect absence streaks.
  */
 import { useCallback, useState } from 'react';
 import { FlatList, Pressable, RefreshControl, View } from 'react-native';
@@ -11,15 +15,33 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 
 import { Badge, Card, EmptyState, LoadingSkeleton, Stack, Text, useTokens } from '@/design';
-import { getTodayEvents } from '@/services/api/events';
+import { getAlertConfig } from '@/services/api/alertConfig';
+import { getCheckInEvents } from '@/services/api/events';
 import { getSyncEngine } from '@/services/sync/SyncEngine';
 import type { CalendarEvent } from '@/types/event';
+
+const DEFAULT_GRACE_DAYS = 3;
+
+function isSameDay(a: Date, b: Date): boolean {
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
+}
 
 function formatRange(startIso: string, endIso: string): string {
   const start = new Date(startIso);
   const end = new Date(endIso);
-  const fmt = (d: Date) => d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-  return `${fmt(start)} – ${fmt(end)}`;
+  const time = (d: Date) => d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+  const range = `${time(start)} – ${time(end)}`;
+  if (isSameDay(start, new Date())) return range;
+  const date = start.toLocaleDateString(undefined, {
+    weekday: 'short',
+    month: 'short',
+    day: 'numeric',
+  });
+  return `${date} · ${range}`;
 }
 
 export default function AttendancePicker() {
@@ -27,9 +49,21 @@ export default function AttendancePicker() {
   const { colors, spacing } = useTokens();
   const router = useRouter();
 
+  // Fetch the admin alert config first so we know how far back to look.
+  // Servants are typically online when picking events; if the config
+  // call fails (offline, RLS), we fall back to a 3-day window — matches
+  // the migration default and is safe (worst case: shows a couple of
+  // extra past events the servant can't actually mark).
+  const alertConfigQuery = useQuery({
+    queryKey: ['alert-config'],
+    queryFn: getAlertConfig,
+    staleTime: 60_000,
+  });
+  const graceDays = alertConfigQuery.data?.grace_period_days ?? DEFAULT_GRACE_DAYS;
+
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ['attendance', 'today-events'],
-    queryFn: getTodayEvents,
+    queryKey: ['attendance', 'check-in-events', graceDays],
+    queryFn: () => getCheckInEvents(graceDays),
   });
 
   const [refreshing, setRefreshing] = useState(false);
@@ -37,11 +71,12 @@ export default function AttendancePicker() {
     setRefreshing(true);
     try {
       await getSyncEngine().runOnce();
+      await alertConfigQuery.refetch();
       await refetch();
     } finally {
       setRefreshing(false);
     }
-  }, [refetch]);
+  }, [alertConfigQuery, refetch]);
 
   if (isLoading) {
     return (

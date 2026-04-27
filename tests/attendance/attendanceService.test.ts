@@ -146,4 +146,23 @@ describe('isEventWithinEditWindow (Berlin cutoff)', () => {
       Date.now = realNow;
     }
   });
+
+  it('extends the cutoff by graceDays so past-but-grace events are editable', async () => {
+    const eventStart = new Date('2026-04-26T07:00:00Z');
+    (getEvent as jest.Mock).mockResolvedValue({
+      id: 'e1',
+      start_at: eventStart.toISOString(),
+      end_at: new Date(eventStart.getTime() + 2 * 3600 * 1000).toISOString(),
+    });
+    const realNow = Date.now;
+    // 3 days after start: outside the no-grace cutoff (~27h) but inside
+    // a 5-day grace window. graceDays=5 → cutoff is +6 days at 03:00 Berlin.
+    Date.now = () => eventStart.getTime() + 3 * 24 * 3600_000;
+    try {
+      expect(await isEventWithinEditWindow('e1', 5)).toBe(true);
+      expect(await isEventWithinEditWindow('e1', 0)).toBe(false);
+    } finally {
+      Date.now = realNow;
+    }
+  });
 });

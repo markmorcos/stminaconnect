@@ -51,6 +51,19 @@ async function clearTestEvents(svc: SupabaseClient): Promise<void> {
   await svc.from('events').delete().like('google_event_id', 'test-att-%');
 }
 
+/**
+ * The edit window factors in `alert_config.grace_period_days` (added by
+ * 023). Tests that depend on the original "next-day 03:00 Berlin" cutoff
+ * pin the grace to 0 so they don't drift when the seed default changes.
+ */
+async function setGracePeriodDays(svc: SupabaseClient, days: number): Promise<void> {
+  const { data: row } = await svc.from('alert_config').select('id').limit(1).single();
+  await svc
+    .from('alert_config')
+    .update({ grace_period_days: days })
+    .eq('id', (row as { id: string }).id);
+}
+
 describeIntegration('attendance RPCs (live Supabase)', () => {
   // -------------------------------------------------------------------
   // 7.1 is_event_within_edit_window — Berlin cutoff
@@ -58,15 +71,50 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
   describe('is_event_within_edit_window', () => {
     let svc: SupabaseClient;
     let servant: SupabaseClient;
+    let savedGrace: number;
 
     beforeAll(async () => {
       svc = adminClient();
       servant = await signInAs('servant1@stmina.de');
       await clearTestEvents(svc);
+      const { data: cfg } = await svc
+        .from('alert_config')
+        .select('grace_period_days')
+        .limit(1)
+        .single();
+      savedGrace = (cfg as { grace_period_days: number }).grace_period_days;
+      await setGracePeriodDays(svc, 0);
     });
 
     afterAll(async () => {
       await clearTestEvents(svc);
+      await setGracePeriodDays(svc, savedGrace);
+    });
+
+    it('returns true for an event within the grace window when grace > 0', async () => {
+      await setGracePeriodDays(svc, 5);
+      try {
+        const past = new Date(Date.now() - 3 * 86_400_000);
+        const { data: ev } = await svc
+          .from('events')
+          .insert({
+            google_event_id: 'test-att-grace',
+            title: 'Att Grace',
+            start_at: past.toISOString(),
+            end_at: new Date(past.getTime() + 60 * 60_000).toISOString(),
+            is_counted: true,
+          })
+          .select('id')
+          .single();
+        const eventId = (ev as { id: string }).id;
+        const { data, error } = await servant.rpc('is_event_within_edit_window', {
+          p_event_id: eventId,
+        });
+        expect(error).toBeNull();
+        expect(data).toBe(true);
+      } finally {
+        await setGracePeriodDays(svc, 0);
+      }
     });
 
     it('returns true for an event whose cutoff is in the future', async () => {
@@ -183,15 +231,24 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
   describe('mark_attendance outside edit window', () => {
     let svc: SupabaseClient;
     let servant: SupabaseClient;
+    let savedGrace: number;
 
     beforeAll(async () => {
       svc = adminClient();
       servant = await signInAs('servant1@stmina.de');
       await clearTestEvents(svc);
+      const { data: cfg } = await svc
+        .from('alert_config')
+        .select('grace_period_days')
+        .limit(1)
+        .single();
+      savedGrace = (cfg as { grace_period_days: number }).grace_period_days;
+      await setGracePeriodDays(svc, 0);
     });
 
     afterAll(async () => {
       await clearTestEvents(svc);
+      await setGracePeriodDays(svc, savedGrace);
     });
 
     it('rejects calls outside the window and inserts no rows', async () => {

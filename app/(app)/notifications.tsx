@@ -121,7 +121,10 @@ function Row({ notification, onPress }: { notification: Notification; onPress: (
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={t(`notifications.types.${notification.type}.title`)}
+      accessibilityLabel={t(
+        `notifications.types.${notification.type}.title`,
+        (notification.payload ?? {}) as Record<string, unknown>,
+      )}
       onPress={onPress}
       style={({ pressed }) => [{ opacity: pressed ? 0.85 : 1 }]}
     >
@@ -135,7 +138,10 @@ function Row({ notification, onPress }: { notification: Notification; onPress: (
       >
         <Stack gap="xs">
           <Text variant="bodyLg" style={{ fontWeight: isUnread ? '700' : '500' }}>
-            {t(`notifications.types.${notification.type}.title`)}
+            {t(
+              `notifications.types.${notification.type}.title`,
+              (notification.payload ?? {}) as Record<string, unknown>,
+            )}
           </Text>
           <Text variant="body" color={colors.textMuted}>
             {bodyFor(notification, t)}
@@ -154,5 +160,8 @@ function bodyFor(notification: Notification, t: ReturnType<typeof useTranslation
     const message = notification.payload?.message;
     if (typeof message === 'string' && message.length > 0) return message;
   }
-  return t(`notifications.types.${notification.type}.body`);
+  return t(
+    `notifications.types.${notification.type}.body`,
+    (notification.payload ?? {}) as Record<string, unknown>,
+  );
 }

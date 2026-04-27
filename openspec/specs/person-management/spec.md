@@ -113,9 +113,21 @@ A trigger on `persons.assigned_servant` MUST insert a row into `assignment_histo
 
 ### Requirement: Person list and profile screens SHALL render data via RPCs only.
 
-The persons list and profile screens MUST fetch data through `services/api/persons.ts`, which from this change forward reads from the local SQLite cache populated by the SyncEngine. The screens MUST NOT call the persons RPCs directly at render time. Writes (Quick Add, edit, soft-delete) MUST go through the local sync queue. End-to-end behaviour visible to the user MUST be identical when online; offline support is now a first-class feature.
+The persons list and profile screens MUST fetch data through
+`services/api/persons.ts`, which reads from the local SQLite cache
+populated by the SyncEngine. The screens MUST NOT call the persons
+RPCs directly at render time. Writes (Quick Add, edit, soft-delete)
+MUST go through the local sync queue.
 
-The `comments`-visibility rule from the original requirement is unchanged: visibility is determined server-side and cached locally per person.
+`getPerson(id)` MUST fall back to the `get_person` RPC when the local
+cache returns null. On a successful fallback the row MUST be written
+into the local mirror so subsequent reads resolve from cache. The
+fallback SHALL respect server-side visibility (a deleted row is
+returned as null without polluting the cache).
+
+The `comments`-visibility rule from the original requirement is
+unchanged: visibility is determined server-side and cached locally per
+person.
 
 #### Scenario: Persons list renders from local cache
 
@@ -138,6 +150,25 @@ The `comments`-visibility rule from the original requirement is unchanged: visib
 - **WHEN** the profile renders
 - **THEN** the comments-hidden banner is shown
 - **AND** no comment text appears
+
+#### Scenario: Deep link to uncached person falls back to RPC and caches the row
+
+- **GIVEN** the local cache does NOT contain person P
+- **AND** the user taps a notification deep-linking to `/persons/<P.id>`
+- **WHEN** the profile screen calls `getPerson(P.id)`
+- **THEN** the call invokes the `get_person` RPC
+- **AND** the returned row is written into the local cache via `upsertPersons([row], 'synced')`
+- **AND** the screen renders the profile
+- **AND** a subsequent re-mount of the same screen reads from local cache without another RPC
+
+#### Scenario: RPC fallback honors server-side soft-delete
+
+- **GIVEN** the local cache does NOT contain person P
+- **AND** P is soft-deleted server-side (`deleted_at IS NOT NULL`)
+- **WHEN** `getPerson(P.id)` is called
+- **THEN** the RPC returns the deleted row, which the wrapper treats as null
+- **AND** no row is written into the local cache
+- **AND** the screen renders the not-found state
 
 ### Requirement: Profile screens SHALL render avatars with deterministic colored initials.
 

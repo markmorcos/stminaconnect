@@ -23,8 +23,9 @@ export function NotificationBanner() {
   const dismiss = useNotificationsStore((s) => s.dismissBanner);
 
   const visible = banner !== null;
-  const title = banner ? t(`notifications.types.${banner.type}.title`) : '';
-  const body = banner ? t(`notifications.types.${banner.type}.body`) : '';
+  const params = (banner?.payload ?? {}) as Record<string, unknown>;
+  const title = banner ? t(`notifications.types.${banner.type}.title`, params) : '';
+  const body = banner ? t(`notifications.types.${banner.type}.body`, params) : '';
 
   return (
     <Banner

@@ -20,19 +20,35 @@ jest.mock('@/hooks/useAuth', () => ({
   useAuth: () => mockUseAuth(),
 }));
 
-jest.mock('@/services/api/events', () => ({
-  getTodayEvents: jest.fn().mockResolvedValue([
-    {
-      id: 'event-1',
-      google_event_id: 'g1',
-      title: 'Sunday Liturgy',
-      description: null,
-      start_at: new Date().toISOString(),
-      end_at: new Date(Date.now() + 60 * 60_000).toISOString(),
-      is_counted: true,
-      synced_at: new Date().toISOString(),
-    },
-  ]),
+jest.mock('@/services/api/events', () => {
+  const fixture = {
+    id: 'event-1',
+    google_event_id: 'g1',
+    title: 'Sunday Liturgy',
+    description: null,
+    start_at: new Date().toISOString(),
+    end_at: new Date(Date.now() + 60 * 60_000).toISOString(),
+    is_counted: true,
+    synced_at: new Date().toISOString(),
+  };
+  return {
+    getTodayEvents: jest.fn().mockResolvedValue([fixture]),
+    getCheckInEvents: jest.fn().mockResolvedValue([fixture]),
+    getEvent: jest.fn().mockResolvedValue(fixture),
+  };
+});
+
+jest.mock('@/services/api/alertConfig', () => ({
+  getAlertConfig: jest.fn().mockResolvedValue({
+    id: 'cfg-1',
+    absence_threshold: 3,
+    priority_thresholds: {},
+    notify_admin_on_alert: false,
+    escalation_threshold: null,
+    grace_period_days: 3,
+    updated_at: '2026-04-27T00:00:00Z',
+    updated_by: null,
+  }),
 }));
 
 jest.mock('@/services/api/persons', () => ({

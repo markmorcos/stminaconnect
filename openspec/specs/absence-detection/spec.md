@@ -1,10 +1,19 @@
-# absence-detection — Spec Delta
+# absence-detection Specification
 
-## ADDED Requirements
+## Purpose
+
+TBD - created by archiving change add-absence-detection. Update Purpose after archive.
+
+## Requirements
 
 ### Requirement: A streak SHALL count consecutive missed counted events backwards from now.
 
 `compute_streak(person_id, at)` MUST walk events with `is_counted=true AND start_at < at` ordered by `start_at desc` and count those with no matching `attendance` row for the person, stopping at the first attended event. Persons currently `on_break` (with `paused_until > event.start_at`) MUST have those events skipped (not counted as misses).
+
+The walk additionally MUST ignore events whose `start_at` falls outside `[persons.registered_at, now() - alert_config.grace_period_days]`:
+
+- **Cold-start lower bound** — events before the person's registration timestamp are not real absences and never count, regardless of how far back the calendar reaches.
+- **Grace-period upper bound** — events within the grace window have not yet been treated as misses; servants still have time to backfill attendance for them.
 
 #### Scenario: Streak of zero when person attended the most recent counted event
 
@@ -28,6 +37,21 @@
 - **WHEN** `compute_streak(P)` is called
 - **THEN** the result is 1 (E5 missed; E4, E3 skipped; E2 attended)
 
+#### Scenario: Events older than registered_at are ignored (cold-start)
+
+- **GIVEN** person P with `registered_at = today - 1 day`
+- **AND** counted events E5 (today − 5 days), E4 (today − 3 days), E3 (today − 1 day) — all missed
+- **AND** `grace_period_days = 0`
+- **WHEN** `compute_streak(P)` is called
+- **THEN** the result is 1 (only E3 falls inside `[registered_at, now]` and is missed; E5 and E4 predate registration and are skipped)
+
+#### Scenario: Events within the grace window are ignored
+
+- **GIVEN** `grace_period_days = 3`
+- **AND** counted events E5 (today − 5 days, missed), E4 (today − 2 days, missed), E3 (today − 1 day, missed)
+- **WHEN** `compute_streak(P)` is called
+- **THEN** the result is 1 (E5 is older than the grace cutoff and counts; E4 and E3 are within the grace window and are skipped)
+
 ### Requirement: Alert configuration SHALL be a single admin-managed row.
 
 `alert_config` MUST contain exactly one row. RPCs `get_alert_config()` (read-only for any servant) and `update_alert_config(...)` (admin-only) provide access. A trigger MUST prevent inserting a second row.
@@ -42,6 +66,32 @@
 
 - **WHEN** any caller attempts a direct INSERT into `alert_config`
 - **THEN** a trigger raises an exception preventing the insert
+
+### Requirement: A backfill grace period SHALL be admin-configurable.
+
+`alert_config.grace_period_days` (int ≥ 0, default 3) MUST exist as a tunable knob on the singleton row. It governs two behaviors that MUST stay in lock-step:
+
+1. `compute_streak` excludes events newer than `now() - grace_period_days` (see streak requirement).
+2. The attendance edit window — both server (`is_event_within_edit_window`) and client local-cutoff check — extends by the same window so servants can backfill attendance for events the streak is still ignoring.
+
+`update_alert_config` MUST accept `p_grace_period_days int default null` and pass it through verbatim. The admin Alerts settings screen MUST surface a numeric field labeled "Backfill grace period (days)" (EN), with localizations in AR and DE.
+
+#### Scenario: Default grace is 3 days
+
+- **WHEN** the singleton `alert_config` row is seeded
+- **THEN** `grace_period_days = 3`
+
+#### Scenario: Updating grace flows through to streak math
+
+- **GIVEN** `grace_period_days = 0` and a missed counted event from yesterday
+- **WHEN** an admin sets `grace_period_days = 2` via `update_alert_config` and runs `recalculate_absences`
+- **THEN** the event is no longer counted by `compute_streak`
+- **AND** any prior `absence_alerts` rows that hinged on it remain (uniqueness still holds), but the next call to detection adds no new alert because streaks have shrunk
+
+#### Scenario: Grace below zero is rejected
+
+- **WHEN** an admin attempts to set `grace_period_days = -1`
+- **THEN** the column's `check (grace_period_days >= 0)` constraint rejects the write
 
 ### Requirement: Per-priority thresholds SHALL override the global threshold.
 
@@ -95,6 +145,7 @@ If `alert_config.escalation_threshold` is set (non-null) AND a person's streak `
 ### Requirement: Alerts SHALL go to the assigned servant, and to admins when configured.
 
 When an alert is dispatched, the system MUST insert one notifications row per recipient. The recipient set MUST include:
+
 - The person's currently-assigned servant (always).
 - All admins, if and only if `alert_config.notify_admin_on_alert = true`.
 
@@ -155,4 +206,3 @@ Each `absence_alert` notification MUST include `personId`, `personName`, `consec
 - **GIVEN** an alert is dispatched for "Mariam Saad" with 3 consecutive misses
 - **WHEN** the recipient sees the banner
 - **THEN** the banner shows the localized "Absence alert: Mariam Saad" title and "3 consecutive missed events. Last: Sunday Liturgy." body
-

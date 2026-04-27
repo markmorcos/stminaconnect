@@ -31,6 +31,13 @@ jest.mock('@/state/authStore', () => ({
   useAuthStore: { getState: () => ({ servant: { id: 'servant-1' } }) },
 }));
 
+const mockRpc = jest.fn();
+jest.mock('@/services/api/supabase', () => ({
+  supabase: {
+    rpc: (...args: unknown[]) => mockRpc(...args),
+  },
+}));
+
 import {
   assignPerson,
   createPerson,
@@ -51,6 +58,7 @@ beforeEach(() => {
   (personsRepo.upsertPersons as jest.Mock).mockReset();
   (personsRepo.softDeletePersons as jest.Mock).mockReset();
   (enqueue as jest.Mock).mockClear();
+  mockRpc.mockReset();
 });
 
 describe('listPersons (local-first)', () => {
@@ -66,6 +74,51 @@ describe('getPerson (local-first)', () => {
   it('returns the cached row', async () => {
     (personsRepo.getPerson as jest.Mock).mockResolvedValue({ id: 'p1' });
     expect(await getPerson('p1')).toEqual({ id: 'p1' });
+    expect(mockRpc).not.toHaveBeenCalled();
+  });
+
+  it('falls back to the get_person RPC and caches the result on local miss', async () => {
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue(null);
+    const remote = {
+      id: 'p2',
+      first_name: 'A',
+      last_name: 'B',
+      phone: null,
+      region: null,
+      language: 'en',
+      priority: 'medium',
+      assigned_servant: 'servant-1',
+      comments: null,
+      status: 'active',
+      paused_until: null,
+      registration_type: 'full',
+      registered_by: 'servant-1',
+      registered_at: '2026-01-01T00:00:00Z',
+      created_at: '2026-01-01T00:00:00Z',
+      updated_at: '2026-01-01T00:00:00Z',
+      deleted_at: null,
+    };
+    mockRpc.mockResolvedValue({ data: remote, error: null });
+    const out = await getPerson('p2');
+    expect(out).toEqual(remote);
+    expect(mockRpc).toHaveBeenCalledWith('get_person', { person_id: 'p2' });
+    expect(personsRepo.upsertPersons).toHaveBeenCalledWith([remote], 'synced');
+  });
+
+  it('returns null when the RPC reports the row was deleted server-side', async () => {
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue(null);
+    mockRpc.mockResolvedValue({
+      data: { id: 'p3', deleted_at: '2026-04-27T00:00:00Z' },
+      error: null,
+    });
+    expect(await getPerson('p3')).toBeNull();
+    expect(personsRepo.upsertPersons).not.toHaveBeenCalled();
+  });
+
+  it('returns null when the RPC returns an empty composite (id null)', async () => {
+    (personsRepo.getPerson as jest.Mock).mockResolvedValue(null);
+    mockRpc.mockResolvedValue({ data: { id: null }, error: null });
+    expect(await getPerson('missing')).toBeNull();
   });
 });
 

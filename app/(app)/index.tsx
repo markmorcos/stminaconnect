@@ -102,6 +102,24 @@ export default function Home() {
               title={t('admin.countedEvents.title')}
             />
           ) : null}
+          {servant?.role === 'admin' ? (
+            <Menu.Item
+              onPress={() => {
+                setMenuOpen(false);
+                router.push('/admin/alerts');
+              }}
+              title={t('admin.alerts.title')}
+            />
+          ) : null}
+          {SHOW_DEV_TOOLS ? (
+            <Menu.Item
+              onPress={() => {
+                setMenuOpen(false);
+                router.push('/dev/db');
+              }}
+              title="DB Inspector"
+            />
+          ) : null}
           <Menu.Item
             onPress={() => {
               setMenuOpen(false);

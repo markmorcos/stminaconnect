@@ -9,10 +9,20 @@
 export type NotificationType = 'absence_alert' | 'welcome_back' | 'reassignment' | 'system';
 
 export interface AbsenceAlertPayload {
-  /** Person whose absence triggered the alert. Populated in phase 11. */
-  person_id: string;
-  /** ISO date of the most recent attendance. */
-  last_seen_at?: string;
+  /** Person whose absence triggered the alert. */
+  personId: string;
+  /** Pre-rendered "First Last" for display without a join. */
+  personName: string;
+  /** Streak length at the moment the alert fired. */
+  consecutiveMisses: number;
+  /** Title of the most recent missed counted event. */
+  lastEventTitle: string;
+  /** ISO timestamp of the most recent missed counted event. */
+  lastEventDate: string;
+  /** Person priority at the moment the alert fired. */
+  priority: 'high' | 'medium' | 'low' | 'very_low';
+  /** Which threshold was crossed. */
+  thresholdKind: 'primary' | 'escalation';
 }
 
 export interface WelcomeBackPayload {

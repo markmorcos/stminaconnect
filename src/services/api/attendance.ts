@@ -91,17 +91,23 @@ export async function searchPersons(query: string): Promise<PersonSearchHit[]> {
 
 /**
  * Berlin-local edit-window check. Cutoff is 03:00 the day after the
- * event's start_at. Returns false when the event isn't in the local
- * cache so callers can short-circuit on "I don't know about this event".
+ * event's start_at, plus `graceDays` to allow backfill within the
+ * admin-configured grace window. Returns false when the event isn't
+ * in the local cache so callers can short-circuit on "I don't know
+ * about this event".
+ *
+ * `graceDays` MUST mirror `alert_config.grace_period_days` so the
+ * local check agrees with `is_event_within_edit_window` on the server
+ * (023_edit_window_grace.sql).
  */
-export async function isEventWithinEditWindow(eventId: string): Promise<boolean> {
+export async function isEventWithinEditWindow(eventId: string, graceDays = 0): Promise<boolean> {
   const event = await getEvent(eventId);
   if (!event) return false;
-  const cutoffMs = berlinCutoffMs(event.start_at);
+  const cutoffMs = berlinCutoffMs(event.start_at, graceDays);
   return Date.now() < cutoffMs;
 }
 
-function berlinCutoffMs(eventStartIso: string): number {
+function berlinCutoffMs(eventStartIso: string, graceDays = 0): number {
   // Convert event start to a Berlin-local "year/month/day" tuple, then
   // build the cutoff by walking +1 day at 03:00 in Berlin and converting
   // back to UTC. Intl gives us a deterministic projection independent of
@@ -118,12 +124,12 @@ function berlinCutoffMs(eventStartIso: string): number {
   const y = get('year');
   const m = get('month');
   const d = get('day');
-  // 03:00 next day, expressed as a UTC instant by computing the UTC
-  // offset Berlin had on that wall-clock date. We approximate using the
-  // formatted offset for the cutoff instant: since CET is UTC+1 and CEST
-  // is UTC+2, we let the runtime tell us the offset for that wall-clock
-  // moment via a probe Date.
-  const cutoffUtcGuess = Date.UTC(y, m - 1, d, 3, 0, 0) + 24 * 3_600_000;
+  // 03:00 next day plus the grace window, expressed as a UTC instant by
+  // computing the UTC offset Berlin had on that wall-clock date. CET is
+  // UTC+1 and CEST is UTC+2, so we let the runtime resolve the offset
+  // for that wall-clock moment via a probe Date.
+  const grace = Math.max(0, Math.floor(graceDays));
+  const cutoffUtcGuess = Date.UTC(y, m - 1, d, 3, 0, 0) + (1 + grace) * 24 * 3_600_000;
   // Refine offset using the actual wall clock at the guess.
   const offsetMs = berlinUtcOffsetMs(new Date(cutoffUtcGuess));
   return cutoffUtcGuess - offsetMs;

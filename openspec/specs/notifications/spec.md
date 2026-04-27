@@ -8,19 +8,14 @@ Defines the in-app notifications capability: persistence, dispatch, real-time de
 
 ### Requirement: A `notifications` table SHALL store every dispatched notification.
 
-The `notifications` table MUST persist `id`, `recipient_servant_id`, `type` (constrained enum), `payload` (jsonb), `read_at`, `created_at`. Notifications dispatched by either the mock or real (future) implementation MUST end up here. The table is the canonical source of truth for the in-app inbox.
+The `notifications` table MUST persist every dispatched notification. From this change forward, `absence_alert` rows MUST carry a structured payload containing `personId`, `personName`, `consecutiveMisses`, `lastEventTitle`, `lastEventDate`, `priority`, and `thresholdKind`. The `notifications` schema itself is unchanged; this is an additive contract on the `payload jsonb` column for the `absence_alert` type.
 
-#### Scenario: Schema and RLS in place
+#### Scenario: Absence-alert payload conforms to the typed shape
 
-- **WHEN** migration `008_notifications.sql` has applied
-- **THEN** the table exists with the specified columns and indexes
-- **AND** RLS is enabled with `notifications_self_read` and admin-read-all policies
-
-#### Scenario: Servant cannot read other servants' notifications
-
-- **GIVEN** servant A and B; a notification exists for A
-- **WHEN** B queries `notifications`
-- **THEN** the row is not returned
+- **GIVEN** absence detection fires for person P with 3 consecutive misses at "Sunday Liturgy" on 2026-04-26
+- **WHEN** `dispatch_notification` inserts the row
+- **THEN** the `payload` jsonb contains `personId`, `personName='[P first] [P last]'`, `consecutiveMisses=3`, `lastEventTitle='Sunday Liturgy'`, `lastEventDate='2026-04-26'`, `priority`, `thresholdKind='primary'`
+- **AND** any consumer (banner, inbox, push) can read these fields without additional joins
 
 ### Requirement: A `NotificationService` interface SHALL be the only path the rest of the app uses to dispatch notifications.
 

@@ -39,7 +39,8 @@ import {
   searchPersons,
   unmarkAttendance,
 } from '@/services/api/attendance';
-import { getTodayEvents } from '@/services/api/events';
+import { getAlertConfig } from '@/services/api/alertConfig';
+import { getEvent } from '@/services/api/events';
 import { listPersons } from '@/services/api/persons';
 import { getSyncEngine } from '@/services/sync/SyncEngine';
 import { useAuth } from '@/hooks/useAuth';
@@ -137,15 +138,24 @@ export function RosterScreen() {
   }, [searchInput]);
 
   // The picker fetches today's events; re-use that cache to find the
-  // event detail rather than firing a second query for one row.
+  // Look up the event by id directly so this works for past events
+  // within the grace window (the picker now surfaces those too — see
+  // `getCheckInEvents` and 022/023 migrations).
   const eventQuery = useQuery({
     queryKey: ['attendance', 'event', eventId],
-    queryFn: async () => {
-      const events = await getTodayEvents();
-      return events.find((e) => e.id === eventId) ?? null;
-    },
+    queryFn: () => getEvent(eventId),
     enabled: typeof eventId === 'string' && eventId.length > 0,
   });
+
+  // Pull the admin grace window so the local edit-window check agrees
+  // with the server's `is_event_within_edit_window`. Falls back to 3
+  // (the migration default) if the call fails.
+  const alertConfigQuery = useQuery({
+    queryKey: ['alert-config'],
+    queryFn: getAlertConfig,
+    staleTime: 60_000,
+  });
+  const graceDays = alertConfigQuery.data?.grace_period_days ?? 3;
 
   const myGroupQuery = useQuery({
     queryKey: ['attendance', 'my-group', servant?.id],
@@ -160,8 +170,8 @@ export function RosterScreen() {
   });
 
   const editWindowQuery = useQuery({
-    queryKey: ['attendance', 'edit-window', eventId],
-    queryFn: () => isEventWithinEditWindow(eventId),
+    queryKey: ['attendance', 'edit-window', eventId, graceDays],
+    queryFn: () => isEventWithinEditWindow(eventId, graceDays),
     enabled: typeof eventId === 'string' && eventId.length > 0,
   });
 

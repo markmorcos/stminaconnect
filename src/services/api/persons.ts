@@ -28,6 +28,7 @@ import type {
 } from '@/types/person';
 
 import { getDatabase } from '../db/database';
+import { supabase } from './supabase';
 
 function currentServantIdOrThrow(): string {
   const id = useAuthStore.getState().servant?.id;
@@ -39,8 +40,35 @@ export async function listPersons(filter: PersonsFilter = {}): Promise<Person[]>
   return repoList(filter);
 }
 
+/**
+ * Reads the local SQLite mirror first; on cache miss, falls back to the
+ * `get_person` RPC and writes the result into the local mirror so
+ * subsequent reads stay offline.
+ *
+ * The fallback exists because deep links (notifications, future
+ * push-to-profile flows) can target a person whose row has not yet
+ * been pulled by the SyncEngine — for example on a fresh install
+ * where the initial pull is still in flight, or after a sync gap. The
+ * project architecture (project.md §6.4) calls for this fall-through
+ * pattern.
+ */
 export async function getPerson(id: string): Promise<Person | null> {
-  return repoGet(id);
+  const local = await repoGet(id);
+  if (local) return local;
+
+  const { data, error } = await supabase.rpc('get_person', { person_id: id });
+  if (error) throw error;
+  if (!data || (data as { id?: string }).id == null) return null;
+
+  const row = data as Person;
+  if (row.deleted_at) return null;
+
+  // Cache locally so the next read hits SQLite. The sync engine will
+  // re-overwrite this row on its next pull with whatever the server
+  // says — if the row was visible to us via get_person, sync_persons_since
+  // will surface it too once the watermark catches up.
+  await upsertPersons([row], 'synced');
+  return row;
 }
 
 export async function createPerson(payload: PersonCreatePayload): Promise<string> {

@@ -37,13 +37,27 @@ function rowToEvent(row: EventRow): CalendarEvent {
  * can render offline.
  */
 export async function getTodayEvents(): Promise<CalendarEvent[]> {
+  return getCheckInEvents(0);
+}
+
+/**
+ * Returns events from `[today − pastDays, today + 1 day)` in the device
+ * timezone. The attendance picker passes the admin-configured
+ * `grace_period_days` so servants can backfill attendance for recent
+ * events that the streak walk is also ignoring.
+ *
+ * `pastDays` is clamped to >= 0; values larger than ~30 are still safe
+ * because the events table is bounded by the rolling sync window.
+ */
+export async function getCheckInEvents(pastDays: number): Promise<CalendarEvent[]> {
   const db = await getDatabase();
+  const days = Math.max(0, Math.floor(pastDays));
   const now = new Date();
-  const dayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
-  const dayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).toISOString();
+  const startDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days);
+  const endDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
   const rows = await db.getAllAsync<EventRow>(
     `SELECT * FROM events WHERE start_at >= ? AND start_at < ? ORDER BY start_at ASC`,
-    [dayStart, dayEnd],
+    [startDate.toISOString(), endDate.toISOString()],
   );
   return rows.map(rowToEvent);
 }

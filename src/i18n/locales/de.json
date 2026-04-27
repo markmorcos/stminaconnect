@@ -88,8 +88,8 @@
   },
   "attendance": {
     "picker": {
-      "title": "Heutige Veranstaltungen",
-      "empty": "Heute keine Veranstaltungen.",
+      "title": "Aktuelle Veranstaltungen",
+      "empty": "Keine aktuellen Veranstaltungen.",
       "emptyHint": "Prüfe den Kalender oder wende dich an einen Admin, wenn etwas fehlt.",
       "countedBadge": "Gezählt",
       "loadError": "Veranstaltungen konnten nicht geladen werden."
@@ -127,8 +127,8 @@
     },
     "types": {
       "absence_alert": {
-        "title": "Abwesenheits-Hinweis",
-        "body": "Ein von dir betreutes Mitglied war zuletzt nicht da."
+        "title": "Abwesenheits-Hinweis: {{personName}}",
+        "body": "{{consecutiveMisses}} Termine in Folge versäumt. Zuletzt: {{lastEventTitle}}."
       },
       "welcome_back": {
         "title": "Willkommen zurück",
@@ -316,6 +316,38 @@
       "errors": {
         "rateLimited": "Eine Synchronisierung wurde gerade gestartet. Bitte eine Minute warten.",
         "resyncFailed": "Synchronisierung konnte nicht gestartet werden. Bitte erneut versuchen."
+      }
+    },
+    "alerts": {
+      "title": "Abwesenheits-Hinweise",
+      "globalThreshold": "Standardschwelle (versäumte Termine in Folge)",
+      "priorityThresholds": {
+        "title": "Schwellen je Priorität",
+        "hint": "Leer lassen, um die Standardschwelle oben zu nutzen.",
+        "high": "Hoch",
+        "medium": "Mittel",
+        "low": "Niedrig",
+        "very_low": "Sehr niedrig"
+      },
+      "useGlobal": "Standard nutzen",
+      "notifyAdmin": "Admins bei Hinweisen benachrichtigen",
+      "notifyAdminOn": "Ein",
+      "notifyAdminOff": "Aus",
+      "escalationThreshold": "Eskalationsschwelle",
+      "escalationHint": "Wenn gesetzt, wird ein zweiter Hinweis ausgelöst, sobald die Serie diesen Wert erreicht.",
+      "escalationPlaceholder": "Aus",
+      "gracePeriod": "Nachtragefrist (Tage)",
+      "gracePeriodHint": "Termine innerhalb dieser Frist werden ignoriert, damit Helfer noch Anwesenheiten eintragen können.",
+      "save": "Speichern",
+      "recalculate": "Jetzt neu berechnen",
+      "success": "Gespeichert.",
+      "recalculateResult_one": "Neu berechnet. {{count}} neuer Hinweis.",
+      "recalculateResult_other": "Neu berechnet. {{count}} neue Hinweise.",
+      "errors": {
+        "invalidGlobal": "Standardschwelle muss eine ganze Zahl ≥ 1 sein.",
+        "invalidPriority": "Schwelle für {{priority}} muss eine ganze Zahl ≥ 1 oder leer sein.",
+        "invalidEscalation": "Eskalationsschwelle muss eine ganze Zahl ≥ 1 oder leer sein.",
+        "invalidGrace": "Nachtragefrist muss eine ganze Anzahl Tage sein (0 oder mehr)."
       }
     }
   },

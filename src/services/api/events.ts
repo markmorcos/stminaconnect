@@ -4,7 +4,11 @@
  * round-trip to Supabase because (a) admins are typically online and
  * (b) the pattern table doesn't participate in offline workflows.
  */
-import { getTodayEvents as repoGetTodayEvents } from '@/services/db/repositories/eventsRepo';
+import {
+  getCheckInEvents as repoGetCheckInEvents,
+  getEvent as repoGetEvent,
+  getTodayEvents as repoGetTodayEvents,
+} from '@/services/db/repositories/eventsRepo';
 import type {
   CalendarEvent,
   CountedEventPattern,
@@ -16,6 +20,14 @@ import { supabase } from './supabase';
 
 export async function getTodayEvents(): Promise<CalendarEvent[]> {
   return repoGetTodayEvents();
+}
+
+export async function getCheckInEvents(pastDays: number): Promise<CalendarEvent[]> {
+  return repoGetCheckInEvents(pastDays);
+}
+
+export async function getEvent(eventId: string): Promise<CalendarEvent | null> {
+  return repoGetEvent(eventId);
 }
 
 export async function listCountedEventPatterns(): Promise<CountedEventPattern[]> {

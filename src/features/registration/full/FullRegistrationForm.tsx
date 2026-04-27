@@ -164,31 +164,30 @@ export function FullRegistrationForm({
     staleTime: 60_000,
   });
 
-  // Make sure the current assigned servant is in the picker options
-  // even when the caller is a non-admin (the list RPC returns nothing
-  // for non-admins, so we synthesize a single-option list using the
-  // person's existing assigned servant or the caller themself).
+  // Make sure the current assigned servant is always selectable in the
+  // picker. Non-admin callers can't fetch the full servants list, and
+  // even admins' results may exclude a deactivated servant. We always
+  // synthesize an option for the current assigned_servant so the field
+  // shows a meaningful label rather than the placeholder.
   const servantOptions = useMemo(() => {
-    if (servantsQuery.data && servantsQuery.data.length > 0) {
-      return servantsQuery.data.map((s) => ({
-        value: s.id,
-        label: s.display_name?.trim() || s.email,
-      }));
-    }
+    const list = servantsQuery.data ?? [];
+    const options = list.map((s) => ({
+      value: s.id,
+      label: s.display_name?.trim() || s.email,
+    }));
+    const ensureOption = (id: string | undefined, label: string) => {
+      if (!id) return;
+      if (options.some((o) => o.value === id)) return;
+      options.push({ value: id, label });
+    };
     if (mode !== 'create' && person) {
-      return [
-        {
-          value: person.assigned_servant,
-          label: t('registration.full.assignedServantCurrent'),
-        },
-      ];
+      ensureOption(person.assigned_servant, t('registration.full.assignedServantCurrent'));
     }
-    return [
-      {
-        value: callerId,
-        label: servant?.display_name?.trim() || servant?.email || callerId,
-      },
-    ];
+    ensureOption(
+      callerId || undefined,
+      servant?.display_name?.trim() || servant?.email || callerId,
+    );
+    return options;
   }, [servantsQuery.data, mode, person, t, callerId, servant]);
 
   const defaultValues: FormValues = useMemo(() => {

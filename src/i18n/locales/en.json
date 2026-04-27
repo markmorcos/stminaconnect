@@ -88,8 +88,8 @@
   },
   "attendance": {
     "picker": {
-      "title": "Today's events",
-      "empty": "No events today.",
+      "title": "Recent events",
+      "empty": "No recent events.",
       "emptyHint": "Check the calendar or contact an admin if you expected something here.",
       "countedBadge": "Counted",
       "loadError": "Could not load events."
@@ -127,8 +127,8 @@
     },
     "types": {
       "absence_alert": {
-        "title": "Absence alert",
-        "body": "A member you serve has missed recent attendance."
+        "title": "Absence alert: {{personName}}",
+        "body": "{{consecutiveMisses}} consecutive missed events. Last: {{lastEventTitle}}."
       },
       "welcome_back": {
         "title": "Welcome back",
@@ -316,6 +316,38 @@
       "errors": {
         "rateLimited": "A sync was triggered moments ago. Please wait a minute.",
         "resyncFailed": "Could not start resync. Try again."
+      }
+    },
+    "alerts": {
+      "title": "Absence alerts",
+      "globalThreshold": "Default threshold (consecutive misses)",
+      "priorityThresholds": {
+        "title": "Per-priority thresholds",
+        "hint": "Leave blank to use the default threshold above.",
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low",
+        "very_low": "Very low"
+      },
+      "useGlobal": "Use default",
+      "notifyAdmin": "Notify admins on alert",
+      "notifyAdminOn": "On",
+      "notifyAdminOff": "Off",
+      "escalationThreshold": "Escalation threshold",
+      "escalationHint": "When set, a second alert fires once the streak reaches this value.",
+      "escalationPlaceholder": "Off",
+      "gracePeriod": "Backfill grace period (days)",
+      "gracePeriodHint": "Recent events within this window are ignored, giving servants time to enter past attendance.",
+      "save": "Save",
+      "recalculate": "Recalculate now",
+      "success": "Saved.",
+      "recalculateResult_one": "Recalculated. {{count}} new alert.",
+      "recalculateResult_other": "Recalculated. {{count}} new alerts.",
+      "errors": {
+        "invalidGlobal": "Default threshold must be a whole number ≥ 1.",
+        "invalidPriority": "{{priority}} threshold must be a whole number ≥ 1 or blank.",
+        "invalidEscalation": "Escalation threshold must be a whole number ≥ 1 or blank.",
+        "invalidGrace": "Grace period must be a whole number of days (0 or more)."
       }
     }
   },

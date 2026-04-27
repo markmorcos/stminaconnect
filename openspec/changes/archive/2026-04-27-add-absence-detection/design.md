@@ -1,6 +1,6 @@
 ## Context
 
-Streak math is straightforward but the *triggering* logic is where bugs hide: alerting on every counted-event evaluation generates fatigue; alerting only once per crossing keeps things sane. Servants also need flexibility — a "high priority" newcomer should generate an alert sooner than a long-term member.
+Streak math is straightforward but the _triggering_ logic is where bugs hide: alerting on every counted-event evaluation generates fatigue; alerting only once per crossing keeps things sane. Servants also need flexibility — a "high priority" newcomer should generate an alert sooner than a long-term member.
 
 ## Goals
 
@@ -45,13 +45,13 @@ Streak math is straightforward but the *triggering* logic is where bugs hide: al
    ```typescript
    type AbsenceAlertPayload = {
      personId: string;
-     personName: string;            // "First Last"
+     personName: string; // "First Last"
      consecutiveMisses: number;
      lastEventTitle: string;
-     lastEventDate: string;         // ISO
-     priority: 'high'|'medium'|'low'|'very_low';
-     thresholdKind: 'primary'|'escalation';
-   }
+     lastEventDate: string; // ISO
+     priority: 'high' | 'medium' | 'low' | 'very_low';
+     thresholdKind: 'primary' | 'escalation';
+   };
    ```
 8. **Trigger vs. scheduled** approach: detection runs both ways.
    - **Reactive**: after `mark_attendance` / `unmark_attendance` RPCs commit, fire-and-forget `select detect_absences(person_ids)` for the affected persons only.

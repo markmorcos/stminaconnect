@@ -88,8 +88,8 @@
   },
   "attendance": {
     "picker": {
-      "title": "اجتماعات اليوم",
-      "empty": "لا توجد اجتماعات اليوم.",
+      "title": "الاجتماعات الأخيرة",
+      "empty": "لا توجد اجتماعات حديثة.",
       "emptyHint": "راجع التقويم أو تواصل مع المسؤول إذا كنت تتوقع وجود اجتماع.",
       "countedBadge": "محتسب",
       "loadError": "تعذّر تحميل الاجتماعات."
@@ -127,8 +127,8 @@
     },
     "types": {
       "absence_alert": {
-        "title": "تنبيه غياب",
-        "body": "عضو تخدمه تغيّب عن الحضور مؤخراً."
+        "title": "تنبيه غياب: {{personName}}",
+        "body": "{{consecutiveMisses}} غيابات متتالية. آخرها: {{lastEventTitle}}."
       },
       "welcome_back": {
         "title": "أهلاً بعودته",
@@ -328,6 +328,42 @@
       "errors": {
         "rateLimited": "تم تشغيل المزامنة قبل لحظات. يرجى الانتظار دقيقة.",
         "resyncFailed": "تعذّر بدء المزامنة. حاول مرة أخرى."
+      }
+    },
+    "alerts": {
+      "title": "تنبيهات الغياب",
+      "globalThreshold": "العتبة الافتراضية (غيابات متتالية)",
+      "priorityThresholds": {
+        "title": "العتبات حسب الأولوية",
+        "hint": "اتركها فارغة لاستخدام العتبة الافتراضية أعلاه.",
+        "high": "عالية",
+        "medium": "متوسطة",
+        "low": "منخفضة",
+        "very_low": "منخفضة جداً"
+      },
+      "useGlobal": "استخدام الافتراضية",
+      "notifyAdmin": "إشعار المسؤولين عند التنبيه",
+      "notifyAdminOn": "مفعّل",
+      "notifyAdminOff": "متوقف",
+      "escalationThreshold": "عتبة التصعيد",
+      "escalationHint": "عند تعيينها، يُطلق تنبيه ثانٍ عند بلوغ هذا الحد.",
+      "escalationPlaceholder": "متوقف",
+      "gracePeriod": "مهلة التسجيل المتأخر (أيام)",
+      "gracePeriodHint": "تُتجاهل الفعاليات الحديثة ضمن هذه الفترة، لإعطاء الخدّام وقتاً لإدخال الحضور السابق.",
+      "save": "حفظ",
+      "recalculate": "إعادة الحساب الآن",
+      "success": "تم الحفظ.",
+      "recalculateResult_zero": "تمت إعادة الحساب. لا توجد تنبيهات جديدة.",
+      "recalculateResult_one": "تمت إعادة الحساب. تنبيه جديد واحد.",
+      "recalculateResult_two": "تمت إعادة الحساب. تنبيهان جديدان.",
+      "recalculateResult_few": "تمت إعادة الحساب. {{count}} تنبيهات جديدة.",
+      "recalculateResult_many": "تمت إعادة الحساب. {{count}} تنبيهاً جديداً.",
+      "recalculateResult_other": "تمت إعادة الحساب. {{count}} تنبيهات جديدة.",
+      "errors": {
+        "invalidGlobal": "يجب أن تكون العتبة الافتراضية رقماً صحيحاً ≥ 1.",
+        "invalidPriority": "عتبة {{priority}} يجب أن تكون رقماً صحيحاً ≥ 1 أو فارغة.",
+        "invalidEscalation": "عتبة التصعيد يجب أن تكون رقماً صحيحاً ≥ 1 أو فارغة.",
+        "invalidGrace": "مهلة التسجيل يجب أن تكون عدد أيام صحيحاً (0 أو أكثر)."
       }
     }
   },

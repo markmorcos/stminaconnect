@@ -26,10 +26,17 @@ Tracking attendance is half the picture; the pastoral value emerges when the app
 
 ## Impact
 
-- **Affected specs**: `absence-detection` (new), `notifications` (modified — `absence_alert` type now produces actual content).
-- **Affected code**: `supabase/migrations/017_alert_config.sql`, `018_absence_alerts.sql`. New `supabase/functions/detect-absences/index.ts`. New `app/(app)/admin/alerts.tsx`. New `src/services/api/alertConfig.ts`.
+- **Affected specs**:
+  - `absence-detection` (new)
+  - `notifications` (modified — `absence_alert` type now produces actual content)
+  - `attendance` (modified — edit window honors `alert_config.grace_period_days`; check-in picker surfaces events from the past `grace_period_days`)
+  - `person-management` (modified — `getPerson` falls back to the `get_person` RPC on local cache miss so notification deep links resolve before the SyncEngine has pulled the row)
+  - `dev-tooling` (added requirements — read-only `/dev/db` SQLite inspector, plus a "Wipe local DB" action with confirmation)
+  - `registration` (modified — Full Registration form's Assigned Servant picker always synthesizes an option for the bound value so the field never renders blank)
+- **Affected code**: migrations `018_alert_config.sql`, `019_absence_alerts.sql`, `020_detect_absences.sql`, `021_compute_streak_cold_start.sql`, `022_grace_period.sql`, `023_edit_window_grace.sql`. New `supabase/functions/detect-absences/index.ts`. New `app/(app)/admin/alerts.tsx`, `app/(app)/dev/db.tsx`, `src/features/admin/AlertsScreen.tsx`, `src/features/dev/DbInspectorScreen.tsx`, `src/services/api/alertConfig.ts`. Updates to `src/services/api/attendance.ts`, `src/services/api/events.ts`, `src/services/api/persons.ts`, `src/services/db/database.ts`, `src/services/db/repositories/eventsRepo.ts`, `src/features/attendance/RosterScreen.tsx`, `src/features/registration/full/FullRegistrationForm.tsx`, `app/(app)/attendance/index.tsx`.
 - **Breaking changes**: none.
-- **Migration needs**: two migrations. `alert_config` seeded with defaults.
+- **Migration numbering note**: the proposal originally targeted 017/018/019; 017 was claimed by the offline-sync change, so this change occupies 018–023. The §10 "scope expansions" tasks document the rest.
+- **Migration needs**: six migrations. `alert_config` seeded with defaults including `grace_period_days = 3`.
 - **Expo Go compatible**: yes — server-side detection; client only consumes notifications.
-- **Uses design system**: yes — the admin alerts settings screen uses design-system tokens and components.
+- **Uses design system**: yes — the admin alerts settings screen and DB inspector use design-system tokens and components.
 - **Dependencies**: `add-attendance-online-only`, `add-google-calendar-sync`, `add-notification-service-mock`, `add-offline-sync-with-sqlite`.

@@ -22,10 +22,12 @@ jest.mock('@/services/api/supabase', () => {
 
 jest.mock('@/services/db/repositories/eventsRepo', () => ({
   getTodayEvents: jest.fn(),
+  getCheckInEvents: jest.fn(),
 }));
 
 import {
   deleteCountedEventPattern,
+  getCheckInEvents,
   getLastSyncStatus,
   getTodayEvents,
   listCountedEventPatterns,
@@ -34,7 +36,10 @@ import {
   upsertCountedEventPattern,
 } from '@/services/api/events';
 import { supabase } from '@/services/api/supabase';
-import { getTodayEvents as repoGetTodayEvents } from '@/services/db/repositories/eventsRepo';
+import {
+  getCheckInEvents as repoGetCheckInEvents,
+  getTodayEvents as repoGetTodayEvents,
+} from '@/services/db/repositories/eventsRepo';
 /* eslint-enable import/first */
 
 const mockedRpc = supabase.rpc as unknown as jest.Mock;
@@ -44,6 +49,7 @@ beforeEach(() => {
   mockedRpc.mockReset();
   mockedFrom.mockClear();
   (repoGetTodayEvents as jest.Mock).mockReset();
+  (repoGetCheckInEvents as jest.Mock).mockReset();
 });
 
 describe('getTodayEvents (local-first)', () => {
@@ -53,6 +59,16 @@ describe('getTodayEvents (local-first)', () => {
     expect(repoGetTodayEvents).toHaveBeenCalled();
     expect(mockedRpc).not.toHaveBeenCalled();
     expect(out).toEqual([{ id: 'e1' }]);
+  });
+});
+
+describe('getCheckInEvents (local-first, with grace window)', () => {
+  it('forwards pastDays to the local repository', async () => {
+    (repoGetCheckInEvents as jest.Mock).mockResolvedValue([{ id: 'e1' }, { id: 'e2' }]);
+    const out = await getCheckInEvents(3);
+    expect(repoGetCheckInEvents).toHaveBeenCalledWith(3);
+    expect(mockedRpc).not.toHaveBeenCalled();
+    expect(out).toEqual([{ id: 'e1' }, { id: 'e2' }]);
   });
 });
 
