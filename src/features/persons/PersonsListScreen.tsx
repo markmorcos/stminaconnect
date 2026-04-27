@@ -41,7 +41,7 @@ const STATUS_VARIANT: Record<PersonStatus, 'success' | 'info' | 'warning' | 'neu
   inactive: 'neutral',
 };
 
-export default function PersonsList() {
+export default function PersonsListScreen() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
   const router = useRouter();

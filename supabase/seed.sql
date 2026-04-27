@@ -54,7 +54,11 @@ delete from auth.users where email in (
   'servant4@stmina.de'
 );
 
--- Helper: build an auth.users row + matching servants row.
+-- Helper: build an auth.users row + matching servants row. The display
+-- name lives in two places — `auth.users.raw_user_meta_data.display_name`
+-- (where Supabase Auth surfaces it on the dashboard / in invite emails)
+-- and `public.servants.display_name` (the source of truth for the app).
+-- Both are written from the same `*_name` variable so they can't drift.
 do $$
 declare
   admin_id    uuid := gen_random_uuid();
@@ -62,6 +66,11 @@ declare
   s2_id       uuid := gen_random_uuid();
   s3_id       uuid := gen_random_uuid();
   s4_id       uuid := gen_random_uuid();
+  admin_name  text := 'Father Mina';
+  s1_name     text := 'Tasoni Mariam';
+  s2_name     text := 'Servant Mina';
+  s3_name     text := 'Servant Beshoy';
+  s4_name     text := 'Servant Verena';
   encrypted   text := crypt('password123', gen_salt('bf'));
 begin
   insert into auth.users (
@@ -72,26 +81,31 @@ begin
   ) values
     ('00000000-0000-0000-0000-000000000000', admin_id, 'authenticated', 'authenticated',
      'priest@stmina.de', encrypted, now(), now(), now(),
-     '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb, '', '', '', ''),
+     '{"provider":"email","providers":["email"]}'::jsonb,
+     jsonb_build_object('display_name', admin_name), '', '', '', ''),
     ('00000000-0000-0000-0000-000000000000', s1_id, 'authenticated', 'authenticated',
      'servant1@stmina.de', encrypted, now(), now(), now(),
-     '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb, '', '', '', ''),
+     '{"provider":"email","providers":["email"]}'::jsonb,
+     jsonb_build_object('display_name', s1_name), '', '', '', ''),
     ('00000000-0000-0000-0000-000000000000', s2_id, 'authenticated', 'authenticated',
      'servant2@stmina.de', encrypted, now(), now(), now(),
-     '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb, '', '', '', ''),
+     '{"provider":"email","providers":["email"]}'::jsonb,
+     jsonb_build_object('display_name', s2_name), '', '', '', ''),
     ('00000000-0000-0000-0000-000000000000', s3_id, 'authenticated', 'authenticated',
      'servant3@stmina.de', encrypted, now(), now(), now(),
-     '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb, '', '', '', ''),
+     '{"provider":"email","providers":["email"]}'::jsonb,
+     jsonb_build_object('display_name', s3_name), '', '', '', ''),
     ('00000000-0000-0000-0000-000000000000', s4_id, 'authenticated', 'authenticated',
      'servant4@stmina.de', encrypted, now(), now(), now(),
-     '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb, '', '', '', '');
+     '{"provider":"email","providers":["email"]}'::jsonb,
+     jsonb_build_object('display_name', s4_name), '', '', '', '');
 
   insert into public.servants (id, email, display_name, role) values
-    (admin_id, 'priest@stmina.de',   'Father Mina',     'admin'),
-    (s1_id,    'servant1@stmina.de', 'Tasoni Mariam',   'servant'),
-    (s2_id,    'servant2@stmina.de', 'Servant Mina',    'servant'),
-    (s3_id,    'servant3@stmina.de', 'Servant Beshoy',  'servant'),
-    (s4_id,    'servant4@stmina.de', 'Servant Verena',  'servant');
+    (admin_id, 'priest@stmina.de',   admin_name, 'admin'),
+    (s1_id,    'servant1@stmina.de', s1_name,    'servant'),
+    (s2_id,    'servant2@stmina.de', s2_name,    'servant'),
+    (s3_id,    'servant3@stmina.de', s3_name,    'servant'),
+    (s4_id,    'servant4@stmina.de', s4_name,    'servant');
 
   -- 20 persons, fake names, distributed across regions / languages /
   -- priorities; 3 in on_break.

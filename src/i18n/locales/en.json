@@ -86,6 +86,12 @@
     "account": "Account",
     "notifications": "Notifications"
   },
+  "tabs": {
+    "home": "Home",
+    "persons": "Members",
+    "followUps": "Follow-ups",
+    "settings": "Settings"
+  },
   "attendance": {
     "picker": {
       "title": "Recent events",
@@ -303,6 +309,10 @@
     }
   },
   "settings": {
+    "section": {
+      "app": "App",
+      "admin": "Admin"
+    },
     "language": {
       "title": "Language",
       "english": "English",
@@ -340,6 +350,65 @@
     }
   },
   "admin": {
+    "dashboard": {
+      "error": "Could not load this section.",
+      "retry": "Retry",
+      "cards": {
+        "totalMembers": "Total members",
+        "activeLast30": "Active (30 days)",
+        "newThisMonth": "New this month",
+        "avgAttendance4w": "Avg attendance (4w)"
+      },
+      "trend": {
+        "title": "Attendance trend",
+        "empty": "No counted events in this window.",
+        "latest": "Latest: {{value}} on {{date}}"
+      },
+      "atRisk": {
+        "title": "At risk",
+        "empty": "Nobody is at risk right now.",
+        "streak_one": "{{count}} miss",
+        "streak_other": "{{count}} misses"
+      },
+      "funnel": {
+        "title": "Newcomer funnel (90 days)",
+        "empty": "No newcomers in the last 90 days.",
+        "quickAdd": "Newcomers",
+        "upgraded": "Upgraded to full",
+        "active": "Active"
+      },
+      "regions": {
+        "title": "Members by region",
+        "empty": "No region data yet.",
+        "other": "Other"
+      }
+    },
+    "servants": {
+      "title": "Servants",
+      "invite": "Invite servant",
+      "inviteEmailLabel": "Email",
+      "inviteDisplayNameLabel": "Display name",
+      "inviteRoleLabel": "Role",
+      "inviteSubmit": "Send invite",
+      "inviteCancel": "Cancel",
+      "roleAdmin": "Admin",
+      "roleServant": "Servant",
+      "stateActive": "Active",
+      "stateDeactivated": "Deactivated",
+      "promote": "Promote to admin",
+      "demote": "Demote to servant",
+      "deactivate": "Deactivate",
+      "reactivate": "Reactivate",
+      "successInvited": "Invite sent.",
+      "successUpdated": "Saved.",
+      "errors": {
+        "alreadyRegistered": "This email is already registered.",
+        "invalidEmail": "Enter a valid email.",
+        "lastAdmin": "Cannot demote or deactivate the last active admin.",
+        "selfDeactivate": "You can't deactivate your own account.",
+        "generic": "Something went wrong. Please try again."
+      }
+    },
     "countedEvents": {
       "title": "Counted events",
       "lastSync": "Last sync",

@@ -86,6 +86,12 @@
     "account": "الحساب",
     "notifications": "الإشعارات"
   },
+  "tabs": {
+    "home": "الرئيسية",
+    "persons": "الأعضاء",
+    "followUps": "المتابعات",
+    "settings": "الإعدادات"
+  },
   "attendance": {
     "picker": {
       "title": "الاجتماعات الأخيرة",
@@ -307,6 +313,10 @@
     }
   },
   "settings": {
+    "section": {
+      "app": "التطبيق",
+      "admin": "المسؤول"
+    },
     "language": {
       "title": "اللغة",
       "english": "English",
@@ -344,6 +354,69 @@
     }
   },
   "admin": {
+    "dashboard": {
+      "error": "تعذّر تحميل هذا القسم.",
+      "retry": "إعادة المحاولة",
+      "cards": {
+        "totalMembers": "إجمالي الأعضاء",
+        "activeLast30": "نشط (30 يوماً)",
+        "newThisMonth": "جدد هذا الشهر",
+        "avgAttendance4w": "متوسط الحضور (4 أسابيع)"
+      },
+      "trend": {
+        "title": "اتجاه الحضور",
+        "empty": "لا توجد اجتماعات محتسبة في هذه الفترة.",
+        "latest": "الأحدث: {{value}} في {{date}}"
+      },
+      "atRisk": {
+        "title": "في خطر",
+        "empty": "لا يوجد أحد في خطر الآن.",
+        "streak_zero": "{{count}} غياب",
+        "streak_one": "{{count}} غياب",
+        "streak_two": "غيابان",
+        "streak_few": "{{count}} غيابات",
+        "streak_many": "{{count}} غياباً",
+        "streak_other": "{{count}} غياب"
+      },
+      "funnel": {
+        "title": "مسار الوافدين الجدد (90 يوماً)",
+        "empty": "لا يوجد وافدون جدد خلال آخر 90 يوماً.",
+        "quickAdd": "الوافدون الجدد",
+        "upgraded": "تم تطويرهم إلى تسجيل كامل",
+        "active": "نشطون"
+      },
+      "regions": {
+        "title": "الأعضاء حسب المنطقة",
+        "empty": "لا توجد بيانات للمناطق بعد.",
+        "other": "أخرى"
+      }
+    },
+    "servants": {
+      "title": "الخدّام",
+      "invite": "دعوة خادم",
+      "inviteEmailLabel": "البريد الإلكتروني",
+      "inviteDisplayNameLabel": "اسم العرض",
+      "inviteRoleLabel": "الدور",
+      "inviteSubmit": "إرسال الدعوة",
+      "inviteCancel": "إلغاء",
+      "roleAdmin": "مسؤول",
+      "roleServant": "خادم",
+      "stateActive": "نشط",
+      "stateDeactivated": "معطّل",
+      "promote": "ترقية إلى مسؤول",
+      "demote": "تخفيض إلى خادم",
+      "deactivate": "تعطيل",
+      "reactivate": "إعادة التفعيل",
+      "successInvited": "تم إرسال الدعوة.",
+      "successUpdated": "تم الحفظ.",
+      "errors": {
+        "alreadyRegistered": "هذا البريد مسجّل بالفعل.",
+        "invalidEmail": "أدخل بريداً إلكترونياً صالحاً.",
+        "lastAdmin": "لا يمكن تخفيض أو تعطيل آخر مسؤول نشط.",
+        "selfDeactivate": "لا يمكنك تعطيل حسابك الخاص.",
+        "generic": "حدث خطأ. حاول مرة أخرى."
+      }
+    },
     "countedEvents": {
       "title": "الفعاليات المحتسبة",
       "lastSync": "آخر مزامنة",

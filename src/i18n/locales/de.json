@@ -86,6 +86,12 @@
     "account": "Konto",
     "notifications": "Benachrichtigungen"
   },
+  "tabs": {
+    "home": "Start",
+    "persons": "Mitglieder",
+    "followUps": "Follow-ups",
+    "settings": "Einstellungen"
+  },
   "attendance": {
     "picker": {
       "title": "Aktuelle Veranstaltungen",
@@ -303,6 +309,10 @@
     }
   },
   "settings": {
+    "section": {
+      "app": "App",
+      "admin": "Admin"
+    },
     "language": {
       "title": "Sprache",
       "english": "English",
@@ -340,6 +350,65 @@
     }
   },
   "admin": {
+    "dashboard": {
+      "error": "Dieser Abschnitt konnte nicht geladen werden.",
+      "retry": "Erneut versuchen",
+      "cards": {
+        "totalMembers": "Mitglieder gesamt",
+        "activeLast30": "Aktiv (30 Tage)",
+        "newThisMonth": "Neu diesen Monat",
+        "avgAttendance4w": "Ø Anwesenheit (4 Wo)"
+      },
+      "trend": {
+        "title": "Anwesenheitstrend",
+        "empty": "Keine gezählten Veranstaltungen in diesem Zeitraum.",
+        "latest": "Zuletzt: {{value}} am {{date}}"
+      },
+      "atRisk": {
+        "title": "Gefährdet",
+        "empty": "Aktuell ist niemand gefährdet.",
+        "streak_one": "{{count}} Fehlen",
+        "streak_other": "{{count}} Fehlmeldungen"
+      },
+      "funnel": {
+        "title": "Newcomer-Funnel (90 Tage)",
+        "empty": "Keine Newcomer in den letzten 90 Tagen.",
+        "quickAdd": "Newcomer",
+        "upgraded": "Vollständig registriert",
+        "active": "Aktiv"
+      },
+      "regions": {
+        "title": "Mitglieder nach Region",
+        "empty": "Noch keine Regionsdaten.",
+        "other": "Sonstige"
+      }
+    },
+    "servants": {
+      "title": "Diener",
+      "invite": "Diener einladen",
+      "inviteEmailLabel": "E-Mail",
+      "inviteDisplayNameLabel": "Anzeigename",
+      "inviteRoleLabel": "Rolle",
+      "inviteSubmit": "Einladung senden",
+      "inviteCancel": "Abbrechen",
+      "roleAdmin": "Admin",
+      "roleServant": "Diener",
+      "stateActive": "Aktiv",
+      "stateDeactivated": "Deaktiviert",
+      "promote": "Zum Admin befördern",
+      "demote": "Zum Diener herabstufen",
+      "deactivate": "Deaktivieren",
+      "reactivate": "Reaktivieren",
+      "successInvited": "Einladung gesendet.",
+      "successUpdated": "Gespeichert.",
+      "errors": {
+        "alreadyRegistered": "Diese E-Mail ist bereits registriert.",
+        "invalidEmail": "Bitte gültige E-Mail eingeben.",
+        "lastAdmin": "Der letzte aktive Admin kann nicht herabgestuft oder deaktiviert werden.",
+        "selfDeactivate": "Du kannst dein eigenes Konto nicht deaktivieren.",
+        "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen."
+      }
+    },
     "countedEvents": {
       "title": "Gezählte Termine",
       "lastSync": "Letzte Synchronisierung",

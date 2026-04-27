@@ -2,27 +2,10 @@
 
 ## ADDED Requirements
 
-### Requirement: Admins SHALL land on the dashboard after sign-in.
-
-When a signed-in user has `servant.role === 'admin'`, the app's root authenticated route MUST redirect to `/admin/dashboard`. Non-admin servants land on the existing home tile screen.
-
-#### Scenario: Admin lands on dashboard
-
-- **GIVEN** an admin user signs in
-- **WHEN** the app navigates after auth
-- **THEN** the URL is `/admin/dashboard`
-- **AND** the dashboard's sections begin loading
-
-#### Scenario: Non-admin lands on home tiles
-
-- **GIVEN** a non-admin servant signs in
-- **WHEN** the app navigates after auth
-- **THEN** the URL is `/`
-- **AND** the home tiles (Quick Add, Check In, etc.) are visible
-
 ### Requirement: The dashboard SHALL render five sections.
 
 The dashboard MUST display, in order:
+
 1. Overview cards (Total members, Active last 30 days, New this month, Avg attendance 4 weeks).
 2. Attendance trend line chart.
 3. At-risk list grouped by servant.
@@ -74,6 +57,7 @@ All numeric displays (counts, percentages, dates) on the dashboard MUST use `Int
 ### Requirement: Admins SHALL be able to invite, promote, demote, and deactivate servants.
 
 A `/admin/servants` screen MUST list all servants and provide:
+
 - "Invite servant" → opens a modal collecting email, display name, role; on submit calls the `invite-servant` Edge Function.
 - "Promote to admin" / "Demote to servant" actions per row (admin-only, calls `update_servant_role`).
 - "Deactivate" / "Reactivate" actions per row.
@@ -111,4 +95,3 @@ Setting `deactivated_at` on a servant row MUST cause `get_my_servant()` to retur
 - **AND** the app fetches `get_my_servant`
 - **THEN** the result is null
 - **AND** the app signs them out
-

@@ -89,9 +89,9 @@ Routes under `app/(app)/*` MUST be reachable only with a non-null `session`. Rou
 - **WHEN** the user navigates to `app/(auth)/sign-in.tsx`
 - **THEN** they are redirected to `app/(app)/index.tsx`
 
-### Requirement: Each authenticated user SHALL have a corresponding `servants` row.
+### Requirement: Each authenticated user SHALL have a corresponding active `servants` row.
 
-The `servants` table is the source of truth for display name and role. After successful auth, the app SHALL fetch the servant row via the `get_my_servant()` RPC. If no matching row exists, the user is signed out with an error message.
+The `servants` table is the source of truth for display name and role. After successful auth, the app SHALL fetch the servant row via the `get_my_servant()` RPC. The RPC MUST return null when no matching row exists OR when `servants.deactivated_at IS NOT NULL`. In either null case, the user is signed out with an error message.
 
 #### Scenario: Auth user with no servants row is rejected
 
@@ -100,6 +100,29 @@ The `servants` table is the source of truth for display name and role. After suc
 - **THEN** the app fetches via `get_my_servant()` and receives null
 - **AND** the auth store calls `signOut`
 - **AND** the sign-in screen displays "Account not configured. Contact your admin."
+
+#### Scenario: Active servant authentication unchanged
+
+- **GIVEN** an active servant (deactivated_at IS NULL)
+- **WHEN** the user signs in
+- **THEN** the home/dashboard route loads as before
+- **AND** `get_my_servant()` returns the populated row
+
+#### Scenario: Deactivated servant signed out
+
+- **GIVEN** a servant whose `deactivated_at` has been set
+- **WHEN** the auth flow fetches the servant row
+- **THEN** `get_my_servant()` returns null
+- **AND** the user is signed out
+- **AND** the sign-in screen displays "Account not configured. Contact your admin."
+
+#### Scenario: Active session of newly-deactivated servant ends on next refresh
+
+- **GIVEN** servant S has an active session
+- **WHEN** an admin deactivates S
+- **AND** S's app refreshes the session (foreground transition or RPC error)
+- **THEN** `get_my_servant()` returns null
+- **AND** the auth store calls signOut
 
 ### Requirement: The `servants` table SHALL enforce row-level security from creation.
 

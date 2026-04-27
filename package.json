@@ -45,6 +45,7 @@
     "react-hook-form": "^7.73.1",
     "react-i18next": "^17.0.4",
     "react-native": "0.81.5",
+    "react-native-chart-kit": "^6.12.1",
     "react-native-gesture-handler": "~2.28.0",
     "react-native-paper": "^5.15.1",
     "react-native-paper-dates": "^0.23.6",

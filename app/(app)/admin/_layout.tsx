@@ -33,6 +33,7 @@ export default function AdminLayout() {
     >
       <Stack.Screen name="counted-events" options={{ title: t('admin.countedEvents.title') }} />
       <Stack.Screen name="alerts" options={{ title: t('admin.alerts.title') }} />
+      <Stack.Screen name="servants" options={{ title: t('admin.servants.title') }} />
     </Stack>
   );
 }

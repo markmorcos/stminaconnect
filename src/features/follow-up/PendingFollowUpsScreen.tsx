@@ -11,7 +11,6 @@
  */
 import { useCallback, useMemo, useState } from 'react';
 import { FlatList, Pressable, RefreshControl, View } from 'react-native';
-import { Appbar } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
@@ -91,17 +90,6 @@ export function PendingFollowUpsScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <Appbar.Header style={{ backgroundColor: colors.surface }}>
-        <Appbar.BackAction
-          color={colors.text}
-          onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
-        />
-        <Appbar.Content
-          title={t('followUps.pendingTitle')}
-          titleStyle={{ color: colors.text, fontFamily: 'Inter-SemiBold', fontSize: 18 }}
-        />
-      </Appbar.Header>
-
       {isLoading ? (
         <Stack gap="sm" padding="lg">
           {Array.from({ length: 5 }, (_, i) => (

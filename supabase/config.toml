@@ -149,19 +149,29 @@ max_indexes = 5
 
 [auth]
 enabled = true
-# The base URL of your website. Used as an allow-list for redirects and for constructing URLs used
-# in emails.
-site_url = "http://127.0.0.1:3000"
-# A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
-# The `exp://…/--/auth/callback` entries cover Expo Go magic-link redirects;
-# the LAN-IP one is what the device actually opens. `stminaconnect://…` is
-# for production builds (post-phase 16). Update the LAN entry whenever your
+# The base URL of the application. Used as the default redirect target
+# for emailed links AND as an implicit allow-list entry (any URL
+# matching this exact value passes redirect validation, even when not
+# in `additional_redirect_urls`).
+#
+# Local dev: pointed at Expo Go's deep-link URL with the dev machine's
+# LAN IP, so invite-servant emails default to the right destination
+# without having to fight gotrue's allow-list (which silently rejects
+# `exp://` schemes when only listed in `additional_redirect_urls`).
+#
+# Production: set via the Supabase Dashboard (Auth → URL Configuration)
+# to the real domain, NOT via this file. Update the LAN IP whenever
 # Wi-Fi changes (`ipconfig getifaddr en0`).
+site_url = "exp://192.168.188.131:8081/--/auth/callback"
+# Extra URLs allowed beyond `site_url`. The mobile client computes its
+# callback URL at runtime via `Linking.createURL('/auth/callback')`:
+#   - Expo Go (dev):  matches `site_url` above (already trusted).
+#   - dev/prod build: `stminaconnect://auth/callback` — listed here.
+# Note: gotrue silently REJECTS `exp://` URLs from this list (it accepts
+# them as `site_url` but not as additional entries), so the local-dev
+# fix lives in `site_url`, not here.
 additional_redirect_urls = [
   "https://127.0.0.1:3000",
-  # Production scheme — used by the magic-link deep link in standalone
-  # builds (post-phase 16). Expo Go users sign in via the 6-digit OTP
-  # the email also includes; that path doesn't depend on this list.
   "stminaconnect://auth/callback",
 ]
 # How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).

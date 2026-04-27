@@ -1,29 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Appbar, Badge as PaperBadge, Banner, Menu } from 'react-native-paper';
+import { Banner } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { Card, Snackbar, Stack, Text, useTokens } from '@/design';
-import { useSignOutWithGuard } from '@/components/SignOutDialog';
 import { useAuth } from '@/hooks/useAuth';
 import { missingSupabaseEnvVars } from '@/services/api/supabase';
-import { useNotificationsStore } from '@/state/notificationsStore';
 
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
-export default function Home() {
+export function ServantHome() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
   const router = useRouter();
-  const { servant, isLoading } = useAuth();
-  const { request: requestSignOut, Dialog: SignOutGuardDialog } = useSignOutWithGuard();
+  const { servant } = useAuth();
   const params = useLocalSearchParams<{ welcome?: string }>();
   const [welcomeName, setWelcomeName] = useState<string | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
   const missingUrl = missingSupabaseEnvVars.includes('EXPO_PUBLIC_SUPABASE_URL');
   const greeting = servant?.display_name?.trim() || servant?.email || '';
-  const unreadCount = useNotificationsStore((s) => s.unreadCount);
 
   useEffect(() => {
     // Quick Add navigates back here with `?welcome=<first>` set; mirror
@@ -38,106 +33,6 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
-      <Appbar.Header style={{ backgroundColor: colors.surface }}>
-        <Appbar.Content
-          title={t('home.title')}
-          titleStyle={{ color: colors.text, fontFamily: 'Inter-SemiBold', fontSize: 18 }}
-        />
-        <View>
-          <Appbar.Action
-            icon="bell-outline"
-            color={colors.text}
-            accessibilityLabel={t('home.notifications')}
-            onPress={() => router.push('/notifications')}
-          />
-          {unreadCount > 0 ? (
-            <PaperBadge
-              size={16}
-              style={{ position: 'absolute', top: 6, right: 6 }}
-              accessibilityLabel={`${unreadCount} unread`}
-            >
-              {unreadCount > 99 ? '99+' : String(unreadCount)}
-            </PaperBadge>
-          ) : null}
-        </View>
-        <Menu
-          visible={menuOpen}
-          onDismiss={() => setMenuOpen(false)}
-          anchor={
-            <Appbar.Action
-              icon="dots-vertical"
-              color={colors.text}
-              accessibilityLabel={t('home.menu')}
-              onPress={() => setMenuOpen(true)}
-            />
-          }
-        >
-          <Menu.Item
-            onPress={() => {
-              setMenuOpen(false);
-              router.push('/about');
-            }}
-            title={t('home.about')}
-          />
-          <Menu.Item
-            onPress={() => {
-              setMenuOpen(false);
-              router.push('/settings/language');
-            }}
-            title={t('home.settings')}
-          />
-          <Menu.Item
-            onPress={() => {
-              setMenuOpen(false);
-              router.push('/settings/account');
-            }}
-            title={t('home.account')}
-          />
-          <Menu.Item
-            onPress={() => {
-              setMenuOpen(false);
-              router.push('/follow-ups');
-            }}
-            title={t('followUps.pendingTitle')}
-          />
-          {servant?.role === 'admin' ? (
-            <Menu.Item
-              onPress={() => {
-                setMenuOpen(false);
-                router.push('/admin/counted-events');
-              }}
-              title={t('admin.countedEvents.title')}
-            />
-          ) : null}
-          {servant?.role === 'admin' ? (
-            <Menu.Item
-              onPress={() => {
-                setMenuOpen(false);
-                router.push('/admin/alerts');
-              }}
-              title={t('admin.alerts.title')}
-            />
-          ) : null}
-          {SHOW_DEV_TOOLS ? (
-            <Menu.Item
-              onPress={() => {
-                setMenuOpen(false);
-                router.push('/dev/db');
-              }}
-              title="DB Inspector"
-            />
-          ) : null}
-          <Menu.Item
-            onPress={() => {
-              setMenuOpen(false);
-              requestSignOut();
-            }}
-            disabled={isLoading}
-            title={t('home.signOut')}
-          />
-        </Menu>
-      </Appbar.Header>
-
       {missingUrl ? (
         <Banner visible icon="alert-circle">
           {t('home.supabaseMissing')}
@@ -191,8 +86,6 @@ export default function Home() {
       >
         {welcomeName ? t('registration.quickAdd.successWelcome', { firstName: welcomeName }) : ''}
       </Snackbar>
-
-      <SignOutGuardDialog />
     </View>
   );
 }
