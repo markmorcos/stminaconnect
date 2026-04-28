@@ -370,6 +370,15 @@
         "cancel": "Cancel"
       }
     },
+    "accessibility": {
+      "title": "Accessibility",
+      "feedbackSection": "Feedback",
+      "hapticsLabel": "Haptic feedback",
+      "hapticsHint": "Vibrations when you tap, save, or dismiss.",
+      "motionSection": "Motion",
+      "reduceMotionLabel": "Reduce motion",
+      "reduceMotionHint": "Animations follow your device setting. Toggle Reduce Motion in your OS settings to disable shimmer, slide-in, and bounce effects."
+    },
     "account": {
       "title": "Account",
       "displayNameLabel": "Display name",

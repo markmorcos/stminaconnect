@@ -21,6 +21,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Chip, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useLanguage } from '@/design/useLanguage';
 import { markOnBreak, OPEN_ENDED_BREAK_DATE } from '@/services/api/onBreak';
+import { haptics } from '@/utils/haptics';
 
 function defaultPausedUntilDate(): Date {
   const d = new Date();
@@ -64,8 +65,10 @@ export function OnBreakScreen() {
       await markOnBreak(personId, target);
       await queryClient.invalidateQueries({ queryKey: ['person', personId] });
       await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
+      haptics.medium();
       router.back();
     } catch (e) {
+      haptics.error();
       setErrorSnack((e as Error).message);
     } finally {
       setSaving(false);

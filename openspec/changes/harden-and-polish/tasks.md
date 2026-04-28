@@ -23,16 +23,16 @@
 
 ## 2c. Haptic feedback
 
-- [ ] 2c.1 Install `expo-haptics`.
-- [ ] 2c.2 `src/utils/haptics.ts`: thin wrapper exposing `light()`, `medium()`, `success()`, `warning()`, `error()` — each respects an in-app toggle (Settings → Accessibility → Haptics, default on).
-- [ ] 2c.3 Wire haptics:
+- [x] 2c.1 Install `expo-haptics`.
+- [x] 2c.2 `src/utils/haptics.ts`: thin wrapper exposing `light()`, `medium()`, `success()`, `warning()`, `error()` — each respects an in-app toggle (Settings → Accessibility → Haptics, default on).
+- [x] 2c.3 Wire haptics:
   - Roster row toggle → `light()`.
   - Quick Add submit success → `success()`.
   - Follow-up complete → `medium()`.
   - Notification banner appear → `light()` (selection-style).
   - Destructive confirmation enabled (typed name matches) → `warning()`.
   - Sync error / 4xx → `error()`.
-- [ ] 2c.4 Add `app/(app)/settings/accessibility.tsx` exposing the haptics toggle (and reduce-motion override stub).
+- [x] 2c.4 Add `app/(app)/settings/accessibility.tsx` exposing the haptics toggle (and reduce-motion override stub).
 
 ## 3. Accessibility
 

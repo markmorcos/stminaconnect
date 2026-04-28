@@ -5,6 +5,7 @@
  * `notificationRouter` and marks the notification read; "Dismiss" only
  * clears the banner — the notification stays unread in the inbox.
  */
+import { useEffect } from 'react';
 import { Banner } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +14,7 @@ import { useNotificationsStore } from '@/state/notificationsStore';
 import { useNotificationService } from '@/services/notifications';
 import { notificationRouter } from '@/services/notifications/notificationRouter';
 import { useTokens } from '@/design';
+import { haptics } from '@/utils/haptics';
 
 export function NotificationBanner() {
   const { t } = useTranslation();
@@ -26,6 +28,13 @@ export function NotificationBanner() {
   const params = (banner?.payload ?? {}) as Record<string, unknown>;
   const title = banner ? t(`notifications.types.${banner.type}.title`, params) : '';
   const body = banner ? t(`notifications.types.${banner.type}.body`, params) : '';
+
+  // Selection-style haptic the moment a new banner is rendered. Keyed
+  // on the notification id so re-mounts of the same banner don't
+  // re-fire — only a fresh dispatch does.
+  useEffect(() => {
+    if (banner) haptics.light();
+  }, [banner?.id]);
 
   return (
     <Banner

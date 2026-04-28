@@ -24,6 +24,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Chip, Input, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useLanguage } from '@/design/useLanguage';
 import { createFollowUp, type FollowUpAction, type FollowUpStatus } from '@/services/api/followUps';
+import { haptics } from '@/utils/haptics';
 
 const ACTIONS: FollowUpAction[] = ['called', 'texted', 'visited', 'no_answer', 'other'];
 const STATUSES: FollowUpStatus[] = ['completed', 'snoozed'];
@@ -84,8 +85,10 @@ export function FollowUpScreen() {
       });
       await queryClient.invalidateQueries({ queryKey: ['follow-ups', 'pending'] });
       await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
+      haptics.medium();
       router.back();
     } catch (e) {
+      haptics.error();
       setErrorSnack((e as Error).message);
     } finally {
       setSaving(false);

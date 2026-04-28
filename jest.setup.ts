@@ -11,6 +11,17 @@ jest.mock('@react-native-async-storage/async-storage', () =>
 // indicator pulse, roster row bounce) render normally under Jest.
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
 
+// expo-haptics resolves to native module bindings that aren't linked
+// in Jest. Stub the surface so the wrapper at `src/utils/haptics.ts`
+// can be imported without crashing tests; assertions about haptic
+// calls happen via the wrapper, not the underlying module.
+jest.mock('expo-haptics', () => ({
+  impactAsync: jest.fn(async () => {}),
+  notificationAsync: jest.fn(async () => {}),
+  ImpactFeedbackStyle: { Light: 'Light', Medium: 'Medium', Heavy: 'Heavy' },
+  NotificationFeedbackType: { Success: 'Success', Warning: 'Warning', Error: 'Error' },
+}));
+
 // react-native-paper-dates pulls in ESM-flavoured modules that Jest
 // doesn't transpile by default. Tests don't render the calendar; stub
 // the surface so production imports compile in the test environment.

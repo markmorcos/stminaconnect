@@ -370,6 +370,15 @@
         "cancel": "Abbrechen"
       }
     },
+    "accessibility": {
+      "title": "Bedienungshilfen",
+      "feedbackSection": "Rückmeldung",
+      "hapticsLabel": "Haptisches Feedback",
+      "hapticsHint": "Vibrationen beim Tippen, Speichern oder Verwerfen.",
+      "motionSection": "Animationen",
+      "reduceMotionLabel": "Bewegung reduzieren",
+      "reduceMotionHint": "Animationen folgen deiner Geräteeinstellung. Aktiviere ‚Bewegung reduzieren' in den Systemeinstellungen, um Shimmer, Einblenden und Bounce zu deaktivieren."
+    },
     "account": {
       "title": "Konto",
       "displayNameLabel": "Anzeigename",

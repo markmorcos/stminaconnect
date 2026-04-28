@@ -386,6 +386,15 @@
         "cancel": "إلغاء"
       }
     },
+    "accessibility": {
+      "title": "إمكانية الوصول",
+      "feedbackSection": "ردّ الفعل",
+      "hapticsLabel": "اهتزاز اللمس",
+      "hapticsHint": "اهتزاز خفيف عند النقر أو الحفظ أو الإغلاق.",
+      "motionSection": "الحركة",
+      "reduceMotionLabel": "تقليل الحركة",
+      "reduceMotionHint": "تتبع الرسوم المتحركة إعدادات جهازك. فعّل «تقليل الحركة» في إعدادات النظام لإيقاف اللمعان والانزلاق والارتداد."
+    },
     "account": {
       "title": "الحساب",
       "displayNameLabel": "اسم العرض",

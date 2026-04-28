@@ -62,6 +62,8 @@ import type { PersonSearchHit } from '@/types/attendance';
 import type { CalendarEvent } from '@/types/event';
 import type { Person } from '@/types/person';
 
+import { haptics } from '@/utils/haptics';
+
 import {
   emptyRoster,
   isChecked,
@@ -246,6 +248,7 @@ export function RosterScreen() {
   const onToggle = useCallback(
     (id: string) => {
       if (!editable) return;
+      haptics.light();
       setState((prev) => togglePerson(prev, id));
     },
     [editable],
@@ -269,6 +272,7 @@ export function RosterScreen() {
       // Streak resets / alert resolutions ripple through the home view.
       await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       await queryClient.invalidateQueries({ queryKey: ['follow-ups', 'pending'] });
+      haptics.success();
       setSnack({ message: t('attendance.roster.successSaved'), tone: 'success' });
     } catch (e) {
       // Log the underlying error so a servant testing in Expo Go can
@@ -282,6 +286,7 @@ export function RosterScreen() {
       // Refresh the edit-window status so the banner appears if that's
       // what changed under us — the pending state is preserved either way.
       await queryClient.invalidateQueries({ queryKey: ['attendance', 'edit-window', eventId] });
+      haptics.error();
       setSnack({ message: userMessage, tone: 'error' });
     } finally {
       setSaving(false);

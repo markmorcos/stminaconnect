@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { Redirect, Stack } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,6 +11,7 @@ import { Text, useTokens } from '@/design';
 import { useInvalidateOnPull } from '@/services/sync/useInvalidateOnPull';
 import { useSyncBootstrap } from '@/services/sync/useSyncBootstrap';
 import { useSyncState } from '@/services/sync/SyncEngine';
+import { useAccessibilityStore } from '@/state/accessibilityStore';
 import { useAuthStore } from '@/state/authStore';
 
 export default function AppLayout() {
@@ -21,6 +23,12 @@ export default function AppLayout() {
   // Same reasoning as `(auth)/_layout.tsx` — gate on session only.
   useSyncBootstrap();
   useInvalidateOnPull();
+  // Hydrate the haptics-enabled toggle from AsyncStorage so the wrapper
+  // reflects the user's preference from the very first interaction.
+  const hydrateA11y = useAccessibilityStore((s) => s.hydrate);
+  useEffect(() => {
+    void hydrateA11y();
+  }, [hydrateA11y]);
   if (!session) return <Redirect href="/sign-in" />;
 
   // Block first-launch with a spinner until the SyncEngine completes

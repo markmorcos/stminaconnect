@@ -33,6 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { Button, Input, Snackbar, Stack, Text, useTokens } from '@/design';
+import { haptics } from '@/utils/haptics';
 import {
   quickAddSchema,
   type QuickAddOutput,
@@ -160,8 +161,10 @@ export default function QuickAddScreen() {
       await queryClient.invalidateQueries({ queryKey: ['persons'] });
       await queryClient.invalidateQueries({ queryKey: ['person'] });
       await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
+      haptics.success();
       router.replace({ pathname: '/', params: { welcome: parsed.first_name } });
     } catch {
+      haptics.error();
       setErrorSnack(t('registration.quickAdd.errorGeneric'));
     }
   };

@@ -35,6 +35,12 @@ export default function SettingsTab() {
       icon: 'globe',
       href: '/settings/language',
     },
+    {
+      key: 'accessibility',
+      label: t('settings.accessibility.title'),
+      icon: 'heart',
+      href: '/settings/accessibility',
+    },
     { key: 'about', label: t('home.about'), icon: 'info', href: '/about' },
   ];
 

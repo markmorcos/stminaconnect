@@ -11,11 +11,12 @@
  * separate flow introduced in `add-gdpr-compliance` and must not be
  * conflated.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dialog, Portal, Button as PaperButton } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
 import { Input, Stack, Text, useTokens } from '@/design';
+import { haptics } from '@/utils/haptics';
 
 export interface RemoveMemberDialogProps {
   visible: boolean;
@@ -37,6 +38,16 @@ export function RemoveMemberDialog({
   const [typed, setTyped] = useState('');
 
   const matches = typed.trim() === fullName.trim() && fullName.trim().length > 0;
+
+  // Fire a one-shot warning haptic the moment the typed name flips to
+  // matching, so the destructive Confirm button enabling registers
+  // tactilely. The ref keeps it from repeating while the user idles
+  // on a matching value.
+  const lastMatch = useRef(false);
+  useEffect(() => {
+    if (matches && !lastMatch.current) haptics.warning();
+    lastMatch.current = matches;
+  }, [matches]);
 
   const reset = () => setTyped('');
 
