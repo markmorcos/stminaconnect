@@ -409,6 +409,33 @@
         "confirmMismatch": "Passwörter stimmen nicht überein",
         "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
       }
+    },
+    "privacy": {
+      "title": "Datenschutz",
+      "viewPolicy": "Datenschutzerklärung öffnen",
+      "viewTerms": "Nutzungsbedingungen öffnen",
+      "downloadMyData": "Meine Daten herunterladen",
+      "downloadMyDataHint": "Exportiert eine JSON-Kopie deiner Daten zum Teilen oder Speichern.",
+      "downloadStarted": "Daten werden vorbereitet …",
+      "downloadFailed": "Daten konnten nicht exportiert werden.",
+      "deleteMyAccount": "Mein Konto löschen",
+      "deleteMyAccountHint": "Entfernt dein Konto, anonymisiert deine Beiträge und meldet dich ab.",
+      "deleteConfirmTitle": "Konto löschen?",
+      "deleteConfirmBody": "Diese Aktion ist endgültig. Tippe zur Bestätigung deinen vollständigen Anzeigenamen exakt ein.",
+      "deleteConfirmTypePrompt": "Namen eingeben",
+      "deleteConfirm": "Löschen",
+      "deleteFailed": "Konto konnte nicht gelöscht werden.",
+      "consentHistory": "Zustimmungsverlauf",
+      "consentHistoryEmpty": "Noch keine Zustimmungen erfasst.",
+      "consentRow": "Akzeptiert am {{date}} — Datenschutz v{{policy}} · Bedingungen v{{terms}}",
+      "revokeConsent": "Zustimmung widerrufen",
+      "revokeConsentHint": "Markiert deine letzte Zustimmung als widerrufen. Beim nächsten Start erscheint der Zustimmungsbildschirm erneut, und du kannst neu zustimmen oder dich abmelden.",
+      "revokeConfirmTitle": "Zustimmung widerrufen?",
+      "revokeConfirmBody": "Deine letzte Zustimmung wird als widerrufen markiert. Bis zur erneuten Zustimmung kannst du die App nicht nutzen.",
+      "revokeConfirm": "Widerrufen",
+      "revokeFailed": "Zustimmung konnte nicht widerrufen werden. Bitte erneut versuchen.",
+      "revokeNothingToRevoke": "Keine aktive Zustimmung zum Widerruf.",
+      "loading": "Lädt …"
     }
   },
   "admin": {
@@ -536,6 +563,38 @@
         "invalidEscalation": "Eskalationsschwelle muss eine ganze Zahl ≥ 1 oder leer sein.",
         "invalidGrace": "Nachtragefrist muss eine ganze Anzahl Tage sein (0 oder mehr)."
       }
+    },
+    "compliance": {
+      "title": "Compliance",
+      "personSection": "Aktionen pro Person",
+      "searchPlaceholder": "Mitglied nach Namen suchen",
+      "noResults": "Keine Treffer.",
+      "exportPerson": "Daten exportieren",
+      "exportFailed": "Person konnte nicht exportiert werden.",
+      "exportStarted": "Export wird vorbereitet …",
+      "erasePerson": "Daten löschen",
+      "eraseDescription": "Unwiderruflich — DSGVO Artikel 17 (Hard-Erasure).",
+      "eraseConfirmTitle": "{{name}} löschen?",
+      "eraseConfirmBody": "Diese Aktion ist unwiderruflich. Tippe zur Bestätigung den vollständigen Namen exakt ein und gib einen Grund an.",
+      "eraseConfirmTypePrompt": "\"{{name}}\" eingeben",
+      "eraseConfirmReason": "Grund (≥ 20 Zeichen)",
+      "eraseConfirm": "Löschen",
+      "eraseSuccess": "{{name}} wurde gelöscht.",
+      "eraseFailed": "Person konnte nicht gelöscht werden.",
+      "audit": {
+        "title": "Audit-Log",
+        "filters": {
+          "actor": "Akteur",
+          "action": "Aktion",
+          "date": "Datum",
+          "anyActor": "Beliebiger Akteur",
+          "anyAction": "Beliebige Aktion",
+          "anyDate": "Beliebiges Datum"
+        },
+        "row": "{{action}} bei {{target}} — {{when}}",
+        "empty": "Keine Audit-Einträge passen.",
+        "loadMore": "Mehr laden"
+      }
     }
   },
   "sync": {
@@ -574,6 +633,25 @@
     "conflictToast": "Deine lokale Änderung an {{name}} wurde von einer neueren Version überschrieben.",
     "errorToast": {
       "fourXX": "{{subject}} konnte nicht gespeichert werden: {{reason}}"
+    }
+  },
+  "consent": {
+    "title": "Datenschutz & Bedingungen",
+    "summaryIntro": "Bevor du fortfährst, lies bitte die Datenschutzerklärung und die Nutzungsbedingungen und stimme ihnen zu. Daten werden in der EU gespeichert und nicht für Werbung, Analytik oder Tracking genutzt.",
+    "viewPrivacy": "Vollständige Datenschutzerklärung lesen",
+    "viewTerms": "Vollständige Nutzungsbedingungen lesen",
+    "scrollHint": "Scrolle bis zum Ende, um Akzeptieren zu aktivieren.",
+    "agreeCheckbox": "Ich habe die Datenschutzerklärung und die Bedingungen gelesen und stimme zu.",
+    "accept": "Akzeptieren und fortfahren",
+    "decline": "Ablehnen",
+    "offlineSnapshot": "Du siehst den Offline-Snapshot.",
+    "loading": "Lädt …",
+    "submitFailed": "Zustimmung konnte nicht gespeichert werden. Bitte erneut versuchen.",
+    "declineConfirm": {
+      "title": "Ablehnen und abmelden?",
+      "body": "Du kannst später zurückkehren und akzeptieren. Du wirst jetzt abgemeldet.",
+      "confirm": "Abmelden",
+      "cancel": "Bleiben"
     }
   },
   "syncIssues": {

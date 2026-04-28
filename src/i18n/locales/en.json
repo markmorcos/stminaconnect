@@ -409,6 +409,33 @@
         "confirmMismatch": "Passwords do not match",
         "generic": "Something went wrong. Please try again."
       }
+    },
+    "privacy": {
+      "title": "Privacy",
+      "viewPolicy": "View Privacy Policy",
+      "viewTerms": "View Terms of Service",
+      "downloadMyData": "Download my data",
+      "downloadMyDataHint": "Exports a JSON copy of your data to share or save.",
+      "downloadStarted": "Preparing your data…",
+      "downloadFailed": "Could not export your data.",
+      "deleteMyAccount": "Delete my account",
+      "deleteMyAccountHint": "Removes your account, anonymizes your contributions, and signs you out.",
+      "deleteConfirmTitle": "Delete your account?",
+      "deleteConfirmBody": "This is permanent. To confirm, type your full display name exactly.",
+      "deleteConfirmTypePrompt": "Type your name",
+      "deleteConfirm": "Delete",
+      "deleteFailed": "Could not delete your account.",
+      "consentHistory": "Consent history",
+      "consentHistoryEmpty": "No consents recorded yet.",
+      "consentRow": "Accepted on {{date}} — Privacy v{{policy}} · Terms v{{terms}}",
+      "revokeConsent": "Revoke my consent",
+      "revokeConsentHint": "Marks your latest acceptance revoked. You'll see the consent screen again on next launch and can re-accept or sign out.",
+      "revokeConfirmTitle": "Revoke consent?",
+      "revokeConfirmBody": "Your latest acceptance will be marked revoked. You won't be able to use the app until you re-accept on the consent screen.",
+      "revokeConfirm": "Revoke",
+      "revokeFailed": "Could not revoke your consent. Please try again.",
+      "revokeNothingToRevoke": "No active consent to revoke.",
+      "loading": "Loading…"
     }
   },
   "admin": {
@@ -536,6 +563,38 @@
         "invalidEscalation": "Escalation threshold must be a whole number ≥ 1 or blank.",
         "invalidGrace": "Grace period must be a whole number of days (0 or more)."
       }
+    },
+    "compliance": {
+      "title": "Compliance",
+      "personSection": "Per-person actions",
+      "searchPlaceholder": "Search a member by name",
+      "noResults": "No matches.",
+      "exportPerson": "Export data",
+      "exportFailed": "Could not export the person.",
+      "exportStarted": "Preparing export…",
+      "erasePerson": "Erase data",
+      "eraseDescription": "Irreversible — performs a GDPR Article 17 hard-erasure.",
+      "eraseConfirmTitle": "Erase {{name}}?",
+      "eraseConfirmBody": "This is irreversible. To confirm, type the person's full name exactly and provide a reason.",
+      "eraseConfirmTypePrompt": "Type \"{{name}}\"",
+      "eraseConfirmReason": "Reason (≥ 20 characters)",
+      "eraseConfirm": "Erase",
+      "eraseSuccess": "Erased {{name}}.",
+      "eraseFailed": "Could not erase the person.",
+      "audit": {
+        "title": "Audit log",
+        "filters": {
+          "actor": "Actor",
+          "action": "Action",
+          "date": "Date",
+          "anyActor": "Any actor",
+          "anyAction": "Any action",
+          "anyDate": "Any date"
+        },
+        "row": "{{action}} on {{target}} — {{when}}",
+        "empty": "No audit entries match.",
+        "loadMore": "Load more"
+      }
     }
   },
   "sync": {
@@ -574,6 +633,25 @@
     "conflictToast": "Your local change to {{name}} was overwritten by a newer version.",
     "errorToast": {
       "fourXX": "Your {{subject}} could not be saved: {{reason}}"
+    }
+  },
+  "consent": {
+    "title": "Privacy & Terms",
+    "summaryIntro": "Before you continue, please review and accept the Privacy Policy and Terms of Service. We host data in the EU and never use it for advertising, analytics, or tracking.",
+    "viewPrivacy": "Read full Privacy Policy",
+    "viewTerms": "Read full Terms of Service",
+    "scrollHint": "Scroll to the bottom to enable Accept.",
+    "agreeCheckbox": "I have read and agree to the Privacy Policy and Terms.",
+    "accept": "Accept and continue",
+    "decline": "Decline",
+    "offlineSnapshot": "You are viewing the offline snapshot.",
+    "loading": "Loading…",
+    "submitFailed": "Could not record your consent. Try again.",
+    "declineConfirm": {
+      "title": "Decline and sign out?",
+      "body": "You can review and accept later. You will be signed out now.",
+      "confirm": "Sign out",
+      "cancel": "Stay"
     }
   },
   "syncIssues": {

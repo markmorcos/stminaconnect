@@ -5,7 +5,7 @@ GDPR is non-negotiable for EU-resident users — and the German Federal Data Pro
 ## What Changes
 
 - **ADDED** capability `compliance`.
-- **ADDED** Privacy Policy and Terms of Service hosted as static pages on `https://stmina.morcos.tech/privacy` and `https://stmina.morcos.tech/terms`, drafted in EN/AR/DE. Source markdown lives under `docs/legal/`.
+- **ADDED** Privacy Policy and Terms of Service hosted as static pages on `https://stmina.de/privacy` and `https://stmina.de/terms`, drafted in EN/AR/DE. Source markdown lives under `docs/legal/`.
 - **ADDED** Consent flow on first launch:
   - Before any authenticated screen is reachable, the app SHALL show a one-time consent screen presenting Privacy Policy + Terms with explicit "Accept and continue" / "Decline" actions.
   - Acceptance is logged with timestamp + accepted version.

@@ -1,6 +1,7 @@
 ## Context
 
 GDPR has six principles (lawfulness/fairness/transparency, purpose limitation, data minimization, accuracy, storage limitation, integrity/confidentiality) and several concrete user rights (Articles 15–22). For a small pastoral app handling sensitive contact data of community members, the relevant subset is:
+
 - **Lawful basis**: legitimate interest of the church for pastoral care; consent for app usage (servants).
 - **Article 13/14**: transparent privacy notice on first contact.
 - **Article 15**: access — export user's data on request.
@@ -8,7 +9,7 @@ GDPR has six principles (lawfulness/fairness/transparency, purpose limitation, d
 - **Article 30**: records of processing (we keep an audit log).
 - **Article 32**: technical/organizational measures (RLS, EU hosting, encrypted at rest by Supabase, SecureStore for tokens).
 
-Because members do not log in, we treat *member* GDPR rights as exercisable by the church on behalf of the member. *Servants*, who do log in, exercise their own rights directly via Settings.
+Because members do not log in, we treat _member_ GDPR rights as exercisable by the church on behalf of the member. _Servants_, who do log in, exercise their own rights directly via Settings.
 
 ## Goals
 
@@ -31,7 +32,7 @@ Because members do not log in, we treat *member* GDPR rights as exercisable by t
 ## Decisions
 
 1. **Hosting** the legal docs:
-   - Static markdown rendered as HTML on `stmina.morcos.tech` (a small static site, deployable separately — solo dev probably uses Cloudflare Pages, GitHub Pages, or Netlify; documented in `docs/legal/hosting.md`).
+   - Static markdown rendered as HTML on `stmina.de` (a small static site, deployable separately — solo dev probably uses Cloudflare Pages, GitHub Pages, or Netlify; documented in `docs/legal/hosting.md`).
    - In-app: a `WebView` component (or `expo-web-browser` for an in-app Safari/Chrome Custom Tabs experience) renders the live URL. We do not bundle the markdown into the app — the canonical version is the hosted one, ensuring users always see the latest.
    - For offline first-launch, we ship a snapshot version inside the app (read-only fallback) so users can complete consent without network.
 2. **Versioning**:
@@ -94,5 +95,5 @@ Because members do not log in, we treat *member* GDPR rights as exercisable by t
 
 ## Open Questions
 
-- Confirm hosting domain: `stmina.morcos.tech`. Could be replaced; documented as a config var.
+- Confirm hosting domain: `stmina.de`. Could be replaced; documented as a config var.
 - None. Legal review of the Privacy Policy and Terms drafts is a release gate captured in `setup-production-deployment` design § 15 — drafts allowed for internal TestFlight/APK pilot; qualified legal review required before public store submission.

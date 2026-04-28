@@ -84,10 +84,12 @@ Settings → Privacy → "Delete my account" MUST open a typed-confirmation dial
 ### Requirement: Admins SHALL be able to perform GDPR Article 17 hard-erasure of a member.
 
 The Admin Compliance screen MUST present a per-person Erase action gated by:
+
 - A typed-confirmation requiring the admin to type the person's full name exactly.
 - A free-text Reason input of at least 20 characters.
 
 `erase_person_data(person_id, reason)` MUST:
+
 - Delete the `persons` row entirely.
 - Set `attendance.person_id = NULL` and `attendance.was_anonymized = true` for every attendance row referencing the person.
 - Delete `follow_ups` for the person.
@@ -121,6 +123,7 @@ The erasure MUST be irreversible.
 ### Requirement: An audit log SHALL record sensitive actions and be admin-readable.
 
 The `audit_log` table MUST be appended-to whenever:
+
 - a member is soft-deleted, hard-erased, or reassigned;
 - a servant's role is changed, deactivated, reactivated, invited, or self-erased;
 - a data export is performed (admin or self);
@@ -142,24 +145,24 @@ Reads MUST be admin-only. Writes MUST go through `record_audit` (SECURITY DEFINE
 
 ### Requirement: Privacy Policy and Terms SHALL be accessible in-app from settings.
 
-The Settings → Privacy screen MUST link to the published policy and terms URLs via `expo-web-browser`. If the network is unavailable, the in-app screen MUST fall back to displaying the bundled offline copy from `assets/legal/`.
+The Settings → Privacy screen MUST navigate to in-app reader screens (`app/(app)/legal/privacy.tsx` and `app/(app)/legal/terms.tsx`) that render the bundled markdown for the active language. The documents are compiled into the JS bundle at build time; no live URL is fetched and no external browser is opened.
 
-#### Scenario: Online: in-app browser opens
+#### Scenario: Tapping View Privacy Policy
 
-- **GIVEN** the device has network access
-- **WHEN** the user taps "View Privacy Policy"
-- **THEN** an in-app browser opens to `https://stmina.morcos.tech/privacy`
+- **WHEN** the user taps "View Privacy Policy" in Settings → Privacy
+- **THEN** the app pushes `/legal/privacy`
+- **AND** the bundled Privacy Policy renders as scrollable formatted content
+- **AND** no network request is made
 
-#### Scenario: Offline: bundled copy renders
+#### Scenario: Tapping View Terms
 
-- **GIVEN** no network access
-- **WHEN** the user taps "View Privacy Policy"
-- **THEN** the app renders the bundled markdown copy in a scrollable view
-- **AND** displays a small banner indicating the user is viewing an offline snapshot
+- **WHEN** the user taps "View Terms" in Settings → Privacy
+- **THEN** the app pushes `/legal/terms`
+- **AND** the bundled Terms of Service render as scrollable formatted content
 
 ### Requirement: Privacy and Terms documents SHALL be available in EN, AR, and DE.
 
-Each language version MUST exist both as a hosted page and as a bundled offline snapshot. When a user views the document, the version matching `i18n.language` MUST be displayed; if absent, the EN version is the fallback.
+The bundled documents MUST exist in EN, AR, and DE. When a user views a document or sees the consent screen, the version matching `i18n.language` MUST be displayed; if absent, the EN version is the fallback.
 
 #### Scenario: Arabic user gets Arabic policy
 
@@ -175,4 +178,3 @@ The Privacy Policy MUST explicitly state that the app performs no analytics, no 
 
 - **WHEN** a reviewer opens the published Privacy Policy
 - **THEN** a prominent paragraph explicitly disclaims analytics/tracking/ads
-

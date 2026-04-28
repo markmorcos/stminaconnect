@@ -41,6 +41,12 @@ export default function SettingsTab() {
       icon: 'heart',
       href: '/settings/accessibility',
     },
+    {
+      key: 'privacy',
+      label: t('settings.privacy.title'),
+      icon: 'shield',
+      href: '/settings/privacy',
+    },
     { key: 'about', label: t('home.about'), icon: 'info', href: '/about' },
   ];
 
@@ -64,6 +70,12 @@ export default function SettingsTab() {
             label: t('admin.servants.title'),
             icon: 'users',
             href: '/admin/servants',
+          },
+          {
+            key: 'compliance',
+            label: t('admin.compliance.title'),
+            icon: 'shield',
+            href: '/admin/compliance',
           },
         ]
       : [];

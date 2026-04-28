@@ -425,6 +425,33 @@
         "confirmMismatch": "كلمتا المرور غير متطابقتين",
         "generic": "حدث خطأ ما. حاول مرة أخرى."
       }
+    },
+    "privacy": {
+      "title": "الخصوصيّة",
+      "viewPolicy": "عرض سياسة الخصوصيّة",
+      "viewTerms": "عرض شروط الاستخدام",
+      "downloadMyData": "تنزيل بياناتي",
+      "downloadMyDataHint": "تصدير نسخة JSON من بياناتك للمشاركة أو الحفظ.",
+      "downloadStarted": "جارٍ تجهيز بياناتك …",
+      "downloadFailed": "تعذّر تصدير بياناتك.",
+      "deleteMyAccount": "حذف حسابي",
+      "deleteMyAccountHint": "يحذف حسابك ويُجَهِّل مساهماتك ويسجّل خروجك.",
+      "deleteConfirmTitle": "هل تريد حذف حسابك؟",
+      "deleteConfirmBody": "هذا الإجراء نهائي. للتأكيد اكتب اسمك المعروض كاملاً تماماً.",
+      "deleteConfirmTypePrompt": "اكتب اسمك",
+      "deleteConfirm": "حذف",
+      "deleteFailed": "تعذّر حذف حسابك.",
+      "consentHistory": "سجلّ الموافقة",
+      "consentHistoryEmpty": "لم تُسجَّل أيّ موافقة بعد.",
+      "consentRow": "تمّت الموافقة في {{date}} — الخصوصيّة v{{policy}} · الشروط v{{terms}}",
+      "revokeConsent": "سحب موافقتي",
+      "revokeConsentHint": "يُعلِّم آخر موافقة على أنّها مسحوبة. سيظهر شاشة الموافقة من جديد عند التشغيل التالي ويمكنك القبول مجدّداً أو تسجيل الخروج.",
+      "revokeConfirmTitle": "سحب الموافقة؟",
+      "revokeConfirmBody": "ستُعَدّ آخر موافقة مسحوبة. لن تستطيع استخدام التطبيق حتى تعيد الموافقة على شاشة الموافقة.",
+      "revokeConfirm": "سحب",
+      "revokeFailed": "تعذّر سحب الموافقة. حاول مرّة أخرى.",
+      "revokeNothingToRevoke": "لا توجد موافقة نشطة للسحب.",
+      "loading": "جارٍ التحميل …"
     }
   },
   "admin": {
@@ -572,6 +599,38 @@
         "invalidEscalation": "عتبة التصعيد يجب أن تكون رقماً صحيحاً ≥ 1 أو فارغة.",
         "invalidGrace": "مهلة التسجيل يجب أن تكون عدد أيام صحيحاً (0 أو أكثر)."
       }
+    },
+    "compliance": {
+      "title": "الامتثال",
+      "personSection": "إجراءات لكلّ مخدوم",
+      "searchPlaceholder": "ابحث عن مخدوم بالاسم",
+      "noResults": "لا توجد نتائج.",
+      "exportPerson": "تصدير البيانات",
+      "exportFailed": "تعذّر تصدير المخدوم.",
+      "exportStarted": "جارٍ تجهيز التصدير …",
+      "erasePerson": "حذف البيانات",
+      "eraseDescription": "غير قابل للتراجع — حذف نهائي وفق المادة 17 من اللائحة العامّة لحماية البيانات.",
+      "eraseConfirmTitle": "حذف {{name}}؟",
+      "eraseConfirmBody": "هذا الإجراء غير قابل للتراجع. للتأكيد اكتب الاسم الكامل بدقّة وأدخل سبباً.",
+      "eraseConfirmTypePrompt": "اكتب «{{name}}»",
+      "eraseConfirmReason": "السبب (≥ 20 حرفاً)",
+      "eraseConfirm": "حذف",
+      "eraseSuccess": "تم حذف {{name}}.",
+      "eraseFailed": "تعذّر حذف المخدوم.",
+      "audit": {
+        "title": "سجلّ التدقيق",
+        "filters": {
+          "actor": "الفاعل",
+          "action": "الإجراء",
+          "date": "التاريخ",
+          "anyActor": "أيّ فاعل",
+          "anyAction": "أيّ إجراء",
+          "anyDate": "أيّ تاريخ"
+        },
+        "row": "{{action}} على {{target}} — {{when}}",
+        "empty": "لا توجد إدخالات تدقيق مطابقة.",
+        "loadMore": "تحميل المزيد"
+      }
     }
   },
   "sync": {
@@ -622,6 +681,25 @@
     "conflictToast": "تم استبدال تغييرك المحلي على {{name}} بإصدار أحدث.",
     "errorToast": {
       "fourXX": "تعذّر حفظ {{subject}}: {{reason}}"
+    }
+  },
+  "consent": {
+    "title": "الخصوصيّة والشروط",
+    "summaryIntro": "قبل المتابعة، الرجاء قراءة سياسة الخصوصيّة وشروط الاستخدام والموافقة عليها. تُستضاف البيانات في الاتحاد الأوروبي ولا تُستخدَم للإعلان أو التحليلات أو التتبّع.",
+    "viewPrivacy": "قراءة سياسة الخصوصيّة كاملة",
+    "viewTerms": "قراءة شروط الاستخدام كاملة",
+    "scrollHint": "مرّر إلى الأسفل لتفعيل زر الموافقة.",
+    "agreeCheckbox": "قرأت وأوافق على سياسة الخصوصيّة والشروط.",
+    "accept": "موافقة ومتابعة",
+    "decline": "رفض",
+    "offlineSnapshot": "تشاهد النسخة المخزّنة محلّياً.",
+    "loading": "جارٍ التحميل …",
+    "submitFailed": "تعذّر تسجيل الموافقة. حاول مرّة أخرى.",
+    "declineConfirm": {
+      "title": "رفض وتسجيل الخروج؟",
+      "body": "يمكنك العودة لاحقاً للموافقة. سيتم تسجيل خروجك الآن.",
+      "confirm": "تسجيل الخروج",
+      "cancel": "البقاء"
     }
   },
   "syncIssues": {
