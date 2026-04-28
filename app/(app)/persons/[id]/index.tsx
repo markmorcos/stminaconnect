@@ -114,6 +114,7 @@ export default function PersonProfile() {
       await softDeletePerson(data.id);
       await queryClient.invalidateQueries({ queryKey: ['persons'] });
       await queryClient.invalidateQueries({ queryKey: ['person', data.id] });
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       setConfirmRemove(false);
       router.replace('/persons');
     } catch {
@@ -179,6 +180,7 @@ export default function PersonProfile() {
                 try {
                   await endBreak(data.id);
                   await queryClient.invalidateQueries({ queryKey: ['person', data.id] });
+                  await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
                 } catch (e) {
                   setErrorSnack((e as Error).message);
                 } finally {

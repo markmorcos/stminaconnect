@@ -84,7 +84,63 @@
     "checkInSubtitle": "علِّم الحضور لاجتماعات اليوم",
     "menu": "القائمة",
     "account": "الحساب",
-    "notifications": "الإشعارات"
+    "notifications": "الإشعارات",
+    "servant": {
+      "title": "الرئيسية",
+      "sections": {
+        "quickActions": "إجراءات سريعة",
+        "myGroup": "مجموعتي",
+        "pendingFollowups": "متابعات معلّقة",
+        "recentNewcomers": "وافدون جدد"
+      },
+      "status": {
+        "green": "منتظم",
+        "yellow": "بدأ يتغيّب",
+        "red": "في خطر",
+        "break": "في إجازة"
+      },
+      "lastSeen": {
+        "never": "لم يحضر بعد",
+        "today": "حضر اليوم",
+        "yesterday": "حضر أمس",
+        "daysAgo_zero": "حضر منذ {{count}} يوم",
+        "daysAgo_one": "حضر منذ يوم واحد",
+        "daysAgo_two": "حضر منذ يومين",
+        "daysAgo_few": "حضر منذ {{count}} أيام",
+        "daysAgo_many": "حضر منذ {{count}} يومًا",
+        "daysAgo_other": "حضر منذ {{count}} يوم"
+      },
+      "registeredAgo": {
+        "today": "اليوم",
+        "yesterday": "أمس",
+        "daysAgo_zero": "منذ {{count}} يوم",
+        "daysAgo_one": "منذ يوم واحد",
+        "daysAgo_two": "منذ يومين",
+        "daysAgo_few": "منذ {{count}} أيام",
+        "daysAgo_many": "منذ {{count}} يومًا",
+        "daysAgo_other": "منذ {{count}} يوم"
+      },
+      "registrationType": {
+        "quick_add": "إضافة سريعة",
+        "full": "تسجيل كامل"
+      },
+      "onBreakUntil": "في إجازة حتى {{date}}",
+      "onBreakOpen": "في إجازة",
+      "missesLabel_zero": "{{count}} غياب",
+      "missesLabel_one": "غياب واحد",
+      "missesLabel_two": "غيابان",
+      "missesLabel_few": "{{count}} غيابات",
+      "missesLabel_many": "{{count}} غيابًا",
+      "missesLabel_other": "{{count}} غياب",
+      "viewAll": "عرض الكل",
+      "loadError": "تعذّر تحميل هذا القسم.",
+      "retry": "إعادة المحاولة",
+      "empty": {
+        "myGroup": "كل أفراد مجموعتك حضروا.",
+        "followups": "لا توجد متابعات معلّقة.",
+        "newcomers": "لا يوجد وافدون جدد في آخر ٣٠ يومًا."
+      }
+    }
   },
   "tabs": {
     "home": "الرئيسية",

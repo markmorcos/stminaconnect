@@ -83,6 +83,7 @@ export function FollowUpScreen() {
         snooze_until: status === 'snoozed' ? toIsoDate(snoozeDate) : null,
       });
       await queryClient.invalidateQueries({ queryKey: ['follow-ups', 'pending'] });
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       router.back();
     } catch (e) {
       setErrorSnack((e as Error).message);

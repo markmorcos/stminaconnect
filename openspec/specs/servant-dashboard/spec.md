@@ -1,10 +1,15 @@
-# servant-dashboard — Spec Delta
+# servant-dashboard Specification
 
-## ADDED Requirements
+## Purpose
+
+TBD - created by archiving change add-servant-dashboard. Update Purpose after archive.
+
+## Requirements
 
 ### Requirement: The non-admin home screen SHALL render four sections in a fixed order.
 
 `app/(app)/index.tsx` MUST display, top to bottom:
+
 1. Quick actions row (Quick Add, Check In, Register full).
 2. My Group list.
 3. Pending follow-ups card with link to `/follow-ups`.
@@ -18,6 +23,7 @@
 ### Requirement: My Group SHALL display each assigned person with a streak status colour.
 
 For each person assigned to the signed-in servant, the row MUST show name, region, and a status indicator:
+
 - **Green** if streak is 0 (last counted event attended).
 - **Yellow** if streak is between 1 and the applicable threshold (exclusive).
 - **Red** if streak is at or above threshold.

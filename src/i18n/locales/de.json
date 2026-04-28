@@ -84,7 +84,51 @@
     "checkInSubtitle": "Anwesenheit für die heutigen Veranstaltungen erfassen",
     "menu": "Menü",
     "account": "Konto",
-    "notifications": "Benachrichtigungen"
+    "notifications": "Benachrichtigungen",
+    "servant": {
+      "title": "Start",
+      "sections": {
+        "quickActions": "Schnellzugriff",
+        "myGroup": "Meine Gruppe",
+        "pendingFollowups": "Offene Follow-ups",
+        "recentNewcomers": "Neuzugänge"
+      },
+      "status": {
+        "green": "Aktiv",
+        "yellow": "Wackelig",
+        "red": "Gefährdet",
+        "break": "In Pause"
+      },
+      "lastSeen": {
+        "never": "Noch nie gesehen",
+        "today": "Heute gesehen",
+        "yesterday": "Gestern gesehen",
+        "daysAgo_one": "Vor {{count}} Tag gesehen",
+        "daysAgo_other": "Vor {{count}} Tagen gesehen"
+      },
+      "registeredAgo": {
+        "today": "Heute",
+        "yesterday": "Gestern",
+        "daysAgo_one": "Vor {{count}} Tag",
+        "daysAgo_other": "Vor {{count}} Tagen"
+      },
+      "registrationType": {
+        "quick_add": "Schnell",
+        "full": "Vollständig"
+      },
+      "onBreakUntil": "Pause bis {{date}}",
+      "onBreakOpen": "In Pause",
+      "missesLabel_one": "{{count}} Fehlzeit",
+      "missesLabel_other": "{{count}} Fehlzeiten",
+      "viewAll": "Alle anzeigen",
+      "loadError": "Dieser Abschnitt konnte nicht geladen werden.",
+      "retry": "Erneut versuchen",
+      "empty": {
+        "myGroup": "Deine Gruppe ist vollständig erfasst.",
+        "followups": "Keine offenen Follow-ups.",
+        "newcomers": "Keine Neuzugänge in den letzten 30 Tagen."
+      }
+    }
   },
   "tabs": {
     "home": "Start",

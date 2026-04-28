@@ -45,3 +45,37 @@ export interface DashboardRegionRow {
   region: string;
   member_count: number;
 }
+
+// ---------------------------------------------------------------------------
+// Servant dashboard — types for `029_servant_dashboard_rpcs.sql`.
+// ---------------------------------------------------------------------------
+
+export type PersonStatus = 'new' | 'active' | 'inactive' | 'on_break';
+export type PersonPriority = 'high' | 'medium' | 'low' | 'very_low';
+export type RegistrationType = 'quick_add' | 'full';
+
+export interface ServantMyGroupRow {
+  person_id: string;
+  first_name: string;
+  last_name: string;
+  region: string | null;
+  /** ISO-8601 UTC; null when the person has never been marked present at a counted event. */
+  last_attendance_at: string | null;
+  streak: number;
+  /** Priority-specific override or the global default from `alert_config`. */
+  threshold: number;
+  status: PersonStatus;
+  /** YYYY-MM-DD; only meaningful when status === 'on_break'. */
+  paused_until: string | null;
+  priority: PersonPriority;
+}
+
+export interface ServantRecentNewcomerRow {
+  person_id: string;
+  first_name: string;
+  last_name: string;
+  /** ISO-8601 UTC. */
+  registered_at: string;
+  registration_type: RegistrationType;
+  region: string | null;
+}

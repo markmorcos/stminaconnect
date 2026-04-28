@@ -50,7 +50,15 @@ export default function EditPersonScreen() {
       mode={isUpgrade ? 'upgrade' : 'edit'}
       person={data}
       onSubmitSuccess={() => {
-        router.replace(`/persons/${data.id}`);
+        // The underlying profile is still on the stack; pop the edit
+        // screen and let it re-render with the invalidated query.
+        // `replace` would push a second profile entry, so back-pressing
+        // on Android would surface the original profile beneath it.
+        if (router.canGoBack()) {
+          router.back();
+        } else {
+          router.replace(`/persons/${data.id}`);
+        }
       }}
     />
   );

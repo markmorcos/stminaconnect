@@ -84,7 +84,51 @@
     "checkInSubtitle": "Mark attendance for today's events",
     "menu": "Menu",
     "account": "Account",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "servant": {
+      "title": "Home",
+      "sections": {
+        "quickActions": "Quick actions",
+        "myGroup": "My Group",
+        "pendingFollowups": "Pending follow-ups",
+        "recentNewcomers": "Recent newcomers"
+      },
+      "status": {
+        "green": "On track",
+        "yellow": "Slipping",
+        "red": "At risk",
+        "break": "On break"
+      },
+      "lastSeen": {
+        "never": "Never seen",
+        "today": "Seen today",
+        "yesterday": "Seen yesterday",
+        "daysAgo_one": "Seen {{count}} day ago",
+        "daysAgo_other": "Seen {{count}} days ago"
+      },
+      "registeredAgo": {
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "daysAgo_one": "{{count}} day ago",
+        "daysAgo_other": "{{count}} days ago"
+      },
+      "registrationType": {
+        "quick_add": "Quick Add",
+        "full": "Full"
+      },
+      "onBreakUntil": "On break until {{date}}",
+      "onBreakOpen": "On break",
+      "missesLabel_one": "{{count}} miss",
+      "missesLabel_other": "{{count}} misses",
+      "viewAll": "View all",
+      "loadError": "Could not load this section.",
+      "retry": "Retry",
+      "empty": {
+        "myGroup": "Your group is fully checked in.",
+        "followups": "No follow-ups pending.",
+        "newcomers": "No new members in the last 30 days."
+      }
+    }
   },
   "tabs": {
     "home": "Home",

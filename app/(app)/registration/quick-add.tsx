@@ -159,6 +159,7 @@ export default function QuickAddScreen() {
       });
       await queryClient.invalidateQueries({ queryKey: ['persons'] });
       await queryClient.invalidateQueries({ queryKey: ['person'] });
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       router.replace({ pathname: '/', params: { welcome: parsed.first_name } });
     } catch {
       setErrorSnack(t('registration.quickAdd.errorGeneric'));

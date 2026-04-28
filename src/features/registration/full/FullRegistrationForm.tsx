@@ -271,6 +271,7 @@ export function FullRegistrationForm({
       if (!result) return;
       await queryClient.invalidateQueries({ queryKey: ['persons'] });
       await queryClient.invalidateQueries({ queryKey: ['person'] });
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       onSubmitSuccess(result);
     } catch (err) {
       if (err instanceof ReassignmentReasonRequiredError) {

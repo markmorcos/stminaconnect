@@ -63,6 +63,7 @@ export function OnBreakScreen() {
     try {
       await markOnBreak(personId, target);
       await queryClient.invalidateQueries({ queryKey: ['person', personId] });
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
       router.back();
     } catch (e) {
       setErrorSnack((e as Error).message);

@@ -252,6 +252,9 @@ export function RosterScreen() {
       await queryClient.invalidateQueries({
         queryKey: ['attendance', 'event-attendance', eventId],
       });
+      // Streak resets / alert resolutions ripple through the home view.
+      await queryClient.invalidateQueries({ queryKey: ['servant-dashboard'] });
+      await queryClient.invalidateQueries({ queryKey: ['follow-ups', 'pending'] });
       setSnack({ message: t('attendance.roster.successSaved'), tone: 'success' });
     } catch (e) {
       // Log the underlying error so a servant testing in Expo Go can

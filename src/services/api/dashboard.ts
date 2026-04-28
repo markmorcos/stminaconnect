@@ -14,6 +14,8 @@ import type {
   DashboardNewcomerFunnel,
   DashboardOverview,
   DashboardRegionRow,
+  ServantMyGroupRow,
+  ServantRecentNewcomerRow,
 } from '@/types/dashboard';
 
 export async function fetchDashboardOverview(): Promise<DashboardOverview> {
@@ -52,4 +54,26 @@ export async function fetchDashboardRegionBreakdown(top = 8): Promise<DashboardR
   });
   if (error) throw error;
   return (data ?? []) as DashboardRegionRow[];
+}
+
+// ---------------------------------------------------------------------------
+// Servant home — typed wrappers around 029_servant_dashboard_rpcs.sql.
+// ---------------------------------------------------------------------------
+
+export async function getMyGroup(): Promise<ServantMyGroupRow[]> {
+  const { data, error } = await supabase.rpc('servant_my_group', { p_servant_id: null });
+  if (error) throw error;
+  return (data ?? []) as ServantMyGroupRow[];
+}
+
+export async function getPendingFollowupsCount(): Promise<number> {
+  const { data, error } = await supabase.rpc('servant_pending_followups_count');
+  if (error) throw error;
+  return (data ?? 0) as number;
+}
+
+export async function getRecentNewcomers(days = 30): Promise<ServantRecentNewcomerRow[]> {
+  const { data, error } = await supabase.rpc('servant_recent_newcomers', { p_days: days });
+  if (error) throw error;
+  return (data ?? []) as ServantRecentNewcomerRow[];
 }
