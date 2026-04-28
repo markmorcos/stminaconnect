@@ -16,7 +16,14 @@
       "fonts": "Fonts",
       "icons": "Icons",
       "uiLibrary": "UI library",
-      "acknowledgments": "Acknowledgments"
+      "acknowledgments": "Acknowledgments",
+      "diagnostics": "Diagnostics",
+      "syncState": "Sync state",
+      "lastSync": "Last sync",
+      "queueLength": "Pending in queue",
+      "needsAttention": "Needs attention",
+      "env": "Environment",
+      "language": "Language"
     }
   },
   "common": {
@@ -553,7 +560,8 @@
       "queueLength_one": "{{count}} change waiting to sync",
       "queueLength_other": "{{count}} changes waiting to sync",
       "syncNow": "Sync now",
-      "unsynced": "Unsynced changes"
+      "unsynced": "Unsynced changes",
+      "viewIssues": "Sync issues"
     },
     "firstLaunchLoading": "Syncing initial data…",
     "signOutDialog": {
@@ -566,6 +574,22 @@
     "conflictToast": "Your local change to {{name}} was overwritten by a newer version.",
     "errorToast": {
       "fourXX": "Your {{subject}} could not be saved: {{reason}}"
+    }
+  },
+  "syncIssues": {
+    "title": "Sync issues",
+    "loadError": "Could not load the queue.",
+    "empty": "Nothing to review.",
+    "emptyHint": "When the server rejects a change, it appears here so you can inspect or discard it.",
+    "discard": "Discard",
+    "opType": {
+      "mark_attendance": "Check-in",
+      "unmark_attendance": "Uncheck",
+      "create_person": "Add member",
+      "update_person": "Edit member",
+      "soft_delete_person": "Remove member",
+      "assign_person": "Reassign",
+      "mark_notification_read": "Notification read"
     }
   }
 }

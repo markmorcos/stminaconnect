@@ -137,6 +137,21 @@ export async function listAll(): Promise<QueueOp[]> {
   return rows.map(rowToOp);
 }
 
+/** Rows the engine has parked because of a 4xx — surfaced to /sync-issues. */
+export async function listNeedsAttention(): Promise<QueueOp[]> {
+  const db = await getDatabase();
+  const rows = await db.getAllAsync<RawRow>(
+    `SELECT * FROM local_sync_queue WHERE status = 'needs_attention' ORDER BY id ASC`,
+  );
+  return rows.map(rowToOp);
+}
+
+/** Discards a parked op — used by the /sync-issues screen "Discard" button. */
+export async function discardOp(id: number): Promise<void> {
+  const db = await getDatabase();
+  await db.runAsync(`DELETE FROM local_sync_queue WHERE id = ?`, [id]);
+}
+
 /**
  * Backoff schedule: 5s, 15s, 60s, 300s, 600s (capped). Index = attempts
  * already taken. Used by `markAttempt` to compute `next_attempt_at`.

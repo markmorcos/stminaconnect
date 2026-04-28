@@ -65,16 +65,16 @@
 
 ## 7. SecureStore migration
 
-- [ ] 7.1 Install `expo-secure-store`.
-- [ ] 7.2 Adapter `src/services/storage/secureAuthStorage.ts` matching Supabase JS storage adapter shape.
-- [ ] 7.3 Boot-time migration in `app/_layout.tsx`: if AsyncStorage has session and SecureStore doesn't, copy and clear.
-- [ ] 7.4 Configure Supabase client to use SecureStore adapter.
+- [x] 7.1 Install `expo-secure-store`.
+- [x] 7.2 Adapter `src/services/storage/secureAuthStorage.ts` matching Supabase JS storage adapter shape.
+- [x] 7.3 Boot-time migration in `app/_layout.tsx`: if AsyncStorage has session and SecureStore doesn't, copy and clear.
+- [x] 7.4 Configure Supabase client to use SecureStore adapter.
 
 ## 8. Sync Issues screen
 
-- [ ] 8.1 `app/(app)/sync-issues.tsx`: lists `needs_attention` queue items with op type, target person/event display name, last_error, created_at.
-- [ ] 8.2 Per-row "Discard" button removes from queue.
-- [ ] 8.3 Link to this screen from the sync status panel.
+- [x] 8.1 `app/(app)/sync-issues.tsx`: lists `needs_attention` queue items with op type, target person/event display name, last_error, created_at.
+- [x] 8.2 Per-row "Discard" button removes from queue.
+- [x] 8.3 Link to this screen from the sync status panel.
 
 ## 9. Logger
 
@@ -84,7 +84,7 @@
 
 ## 10. About / Diagnostics screen
 
-- [ ] 10.1 `app/(app)/about.tsx`: app version (from `Constants.expoConfig.version`), sync state, last sync, needs-attention count, env, language, build SHA if available.
+- [x] 10.1 `app/(app)/about.tsx`: app version (from `Constants.expoConfig.version`), sync state, last sync, needs-attention count, env, language, build SHA if available.
 
 ## 11. i18n audit
 

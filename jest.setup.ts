@@ -22,6 +22,23 @@ jest.mock('expo-haptics', () => ({
   NotificationFeedbackType: { Success: 'Success', Warning: 'Warning', Error: 'Error' },
 }));
 
+// expo-secure-store mock — backed by an in-memory map so the auth
+// storage adapter behaves like a real Keychain across a single test
+// process. Reset between tests via __resetSecureStoreForTests below.
+jest.mock('expo-secure-store', () => {
+  const store = new Map<string, string>();
+  return {
+    getItemAsync: jest.fn(async (key: string) => store.get(key) ?? null),
+    setItemAsync: jest.fn(async (key: string, value: string) => {
+      store.set(key, value);
+    }),
+    deleteItemAsync: jest.fn(async (key: string) => {
+      store.delete(key);
+    }),
+    __resetSecureStoreForTests: () => store.clear(),
+  };
+});
+
 // react-native-paper-dates pulls in ESM-flavoured modules that Jest
 // doesn't transpile by default. Tests don't render the calendar; stub
 // the surface so production imports compile in the test environment.

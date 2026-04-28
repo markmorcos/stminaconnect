@@ -16,7 +16,14 @@
       "fonts": "Schriften",
       "icons": "Symbole",
       "uiLibrary": "UI-Bibliothek",
-      "acknowledgments": "Danksagungen"
+      "acknowledgments": "Danksagungen",
+      "diagnostics": "Diagnose",
+      "syncState": "Sync-Status",
+      "lastSync": "Letzte Synchronisation",
+      "queueLength": "Ausstehend in der Warteschlange",
+      "needsAttention": "Eingriff erforderlich",
+      "env": "Umgebung",
+      "language": "Sprache"
     }
   },
   "common": {
@@ -553,7 +560,8 @@
       "queueLength_one": "{{count}} Änderung wartet auf Synchronisierung",
       "queueLength_other": "{{count}} Änderungen warten auf Synchronisierung",
       "syncNow": "Jetzt synchronisieren",
-      "unsynced": "Nicht synchronisierte Änderungen"
+      "unsynced": "Nicht synchronisierte Änderungen",
+      "viewIssues": "Synchronisierungsprobleme"
     },
     "firstLaunchLoading": "Initiale Daten werden synchronisiert…",
     "signOutDialog": {
@@ -566,6 +574,22 @@
     "conflictToast": "Deine lokale Änderung an {{name}} wurde von einer neueren Version überschrieben.",
     "errorToast": {
       "fourXX": "{{subject}} konnte nicht gespeichert werden: {{reason}}"
+    }
+  },
+  "syncIssues": {
+    "title": "Synchronisierungsprobleme",
+    "loadError": "Warteschlange konnte nicht geladen werden.",
+    "empty": "Nichts zu prüfen.",
+    "emptyHint": "Wenn der Server eine Änderung ablehnt, erscheint sie hier zur Prüfung oder zum Verwerfen.",
+    "discard": "Verwerfen",
+    "opType": {
+      "mark_attendance": "Check-in",
+      "unmark_attendance": "Check-in entfernen",
+      "create_person": "Mitglied hinzufügen",
+      "update_person": "Mitglied bearbeiten",
+      "soft_delete_person": "Mitglied entfernen",
+      "assign_person": "Neu zuweisen",
+      "mark_notification_read": "Benachrichtigung gelesen"
     }
   }
 }

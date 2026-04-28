@@ -3,6 +3,7 @@
  * showcase navigation through long-press.
  */
 import { fireEvent, render } from '@testing-library/react-native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import About from '@/../app/(app)/about';
 import '@/i18n';
@@ -23,11 +24,18 @@ jest.mock('expo-constants', () => ({
   },
 }));
 
+jest.mock('@/services/db/repositories/queueRepo', () => ({
+  listNeedsAttention: jest.fn(async () => []),
+}));
+
 function renderAbout() {
+  const client = new QueryClient({ defaultOptions: { queries: { retry: false, gcTime: 0 } } });
   return render(
-    <ThemeProvider initialMode="light">
-      <About />
-    </ThemeProvider>,
+    <QueryClientProvider client={client}>
+      <ThemeProvider initialMode="light">
+        <About />
+      </ThemeProvider>
+    </QueryClientProvider>,
   );
 }
 

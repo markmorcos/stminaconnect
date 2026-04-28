@@ -7,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { bootstrapI18n, i18n } from '@/i18n';
+import { migrateAuthStorageOnce } from '@/services/storage/secureAuthStorage';
 import { bootstrapAuth, useIsHydrated } from '@/state/authStore';
 import { ThemeProvider, useTokens } from '@/design/ThemeProvider';
 import { NotificationServiceProvider } from '@/services/notifications/NotificationServiceProvider';
@@ -45,7 +46,20 @@ export default function RootLayout() {
     console.log('Supabase client initialized');
   }, []);
 
-  useEffect(() => bootstrapAuth(), []);
+  useEffect(() => {
+    // Run the AsyncStorage → SecureStore migration before bootstrapAuth
+    // touches the supabase client. Idempotent on subsequent boots.
+    let cancelled = false;
+    let unsubscribe: (() => void) | undefined;
+    void migrateAuthStorageOnce().then(() => {
+      if (cancelled) return;
+      unsubscribe = bootstrapAuth();
+    });
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;

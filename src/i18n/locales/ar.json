@@ -16,7 +16,14 @@
       "fonts": "الخطوط",
       "icons": "الأيقونات",
       "uiLibrary": "مكتبة الواجهة",
-      "acknowledgments": "تقدير خاص"
+      "acknowledgments": "تقدير خاص",
+      "diagnostics": "تشخيص",
+      "syncState": "حالة المزامنة",
+      "lastSync": "آخر مزامنة",
+      "queueLength": "في انتظار المزامنة",
+      "needsAttention": "تحتاج انتباهًا",
+      "env": "البيئة",
+      "language": "اللغة"
     }
   },
   "common": {
@@ -601,7 +608,8 @@
       "queueLength_many": "{{count}} تغييراً في انتظار المزامنة",
       "queueLength_other": "{{count}} تغيير في انتظار المزامنة",
       "syncNow": "زامن الآن",
-      "unsynced": "تغييرات غير متزامنة"
+      "unsynced": "تغييرات غير متزامنة",
+      "viewIssues": "مشاكل المزامنة"
     },
     "firstLaunchLoading": "جارٍ مزامنة البيانات الأولية…",
     "signOutDialog": {
@@ -614,6 +622,22 @@
     "conflictToast": "تم استبدال تغييرك المحلي على {{name}} بإصدار أحدث.",
     "errorToast": {
       "fourXX": "تعذّر حفظ {{subject}}: {{reason}}"
+    }
+  },
+  "syncIssues": {
+    "title": "مشاكل المزامنة",
+    "loadError": "تعذّر تحميل قائمة المزامنة.",
+    "empty": "لا شيء للمراجعة.",
+    "emptyHint": "عند رفض الخادم لأحد التغييرات، يظهر هنا حتى يمكنك مراجعته أو إلغاؤه.",
+    "discard": "إلغاء",
+    "opType": {
+      "mark_attendance": "تسجيل حضور",
+      "unmark_attendance": "إلغاء حضور",
+      "create_person": "إضافة عضو",
+      "update_person": "تعديل عضو",
+      "soft_delete_person": "إزالة عضو",
+      "assign_person": "إعادة إسناد",
+      "mark_notification_read": "تعليم الإشعار كمقروء"
     }
   }
 }

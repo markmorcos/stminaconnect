@@ -9,10 +9,14 @@ import { useRouter } from 'expo-router';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
+import type { TFunction } from 'i18next';
+import { useQuery } from '@tanstack/react-query';
 
 import '@/i18n';
 import { Card, Divider, Stack, Text, useTokens } from '@/design';
 import { church } from '@/branding/church';
+import { listNeedsAttention } from '@/services/db/repositories/queueRepo';
+import { useSyncState } from '@/services/sync/SyncEngine';
 
 const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 
@@ -22,12 +26,26 @@ const BUILD_SHA =
   null;
 
 export default function About() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { colors, spacing } = useTokens();
   const insets = useSafeAreaInsets();
   const router = useRouter();
   const version = Constants.expoConfig?.version ?? '0.0.0';
   const visibleAcknowledgments = church.acknowledgments.filter((a) => a.optIn);
+
+  const syncStatus = useSyncState((s) => s.status);
+  const queueLength = useSyncState((s) => s.queueLength);
+  const lastPullAt = useSyncState((s) => s.lastPullAt);
+  const needsAttention = useQuery({
+    queryKey: ['sync-issues', 'count'],
+    queryFn: async () => (await listNeedsAttention()).length,
+    staleTime: 30_000,
+  });
+  const env =
+    process.env.EXPO_PUBLIC_SUPABASE_URL?.includes('localhost') ||
+    process.env.EXPO_PUBLIC_SUPABASE_URL?.includes('127.0.0.1')
+      ? 'local'
+      : 'production';
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -122,6 +140,30 @@ export default function About() {
 
         <Card>
           <Stack gap="sm">
+            <Text variant="label" color={colors.textMuted}>
+              {t('branding.about.diagnostics')}
+            </Text>
+            <Row label={t('branding.about.syncState')} value={syncStatusLabel(syncStatus, t)} />
+            <Row
+              label={t('branding.about.lastSync')}
+              value={
+                lastPullAt
+                  ? new Date(lastPullAt).toLocaleString(i18n.language)
+                  : t('sync.panel.lastSyncNever')
+              }
+            />
+            <Row label={t('branding.about.queueLength')} value={String(queueLength)} />
+            <Row
+              label={t('branding.about.needsAttention')}
+              value={String(needsAttention.data ?? 0)}
+            />
+            <Row label={t('branding.about.env')} value={env} />
+            <Row label={t('branding.about.language')} value={i18n.language} />
+          </Stack>
+        </Card>
+
+        <Card>
+          <Stack gap="sm">
             <Text variant="bodySm" color={colors.accent}>
               {t('branding.about.privacy')}
             </Text>
@@ -145,6 +187,20 @@ function Row({ label, value }: { label: string; value: string }) {
       <Text variant="body">{value}</Text>
     </Stack>
   );
+}
+
+// Engine states are pulling/pushing/idle/error/offline. The user-facing
+// labels collapse pulling+pushing into the existing `sync.status.syncing`
+// translation rather than introducing two new keys for a diagnostic
+// surface.
+function syncStatusLabel(
+  status: 'idle' | 'pulling' | 'pushing' | 'error' | 'offline',
+  t: TFunction,
+): string {
+  if (status === 'pulling' || status === 'pushing') return t('sync.status.syncing');
+  if (status === 'idle') return t('sync.status.idle');
+  if (status === 'error') return t('sync.status.error');
+  return t('sync.status.offline');
 }
 
 function CreditGroup({ heading, children }: { heading: string; children: React.ReactNode }) {

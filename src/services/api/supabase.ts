@@ -1,5 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+
+import { secureAuthStorage } from '@/services/storage/secureAuthStorage';
 
 const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const anonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
@@ -20,7 +21,11 @@ export const supabase: SupabaseClient = createClient(
   anonKey ?? 'public-anon-key-placeholder',
   {
     auth: {
-      storage: AsyncStorage,
+      // SecureStore-backed adapter — tokens live in the iOS Keychain /
+      // Android Keystore. AsyncStorage was the previous home; the
+      // boot-time migration in `secureAuthStorage` copies any legacy
+      // value across once.
+      storage: secureAuthStorage,
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: false,

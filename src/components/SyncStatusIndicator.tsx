@@ -29,6 +29,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Button as PaperButton, Dialog, Portal } from 'react-native-paper';
+import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 
 import { Icon, Text, useTokens } from '@/design';
@@ -41,6 +42,7 @@ type Variant = 'busy' | 'synced';
 export function SyncStatusIndicator() {
   const { t, i18n } = useTranslation();
   const { colors, spacing } = useTokens();
+  const router = useRouter();
   const status = useSyncState((s) => s.status);
   const queueLength = useSyncState((s) => s.queueLength);
   const lastPullAt = useSyncState((s) => s.lastPullAt);
@@ -165,6 +167,14 @@ export function SyncStatusIndicator() {
             </View>
           </Dialog.Content>
           <Dialog.Actions>
+            <PaperButton
+              onPress={() => {
+                setOpen(false);
+                router.push('/sync-issues');
+              }}
+            >
+              {t('sync.panel.viewIssues')}
+            </PaperButton>
             <PaperButton onPress={() => setOpen(false)}>{t('common.actions.cancel')}</PaperButton>
             <PaperButton
               onPress={() => {
