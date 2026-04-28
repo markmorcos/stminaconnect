@@ -46,7 +46,6 @@ import { streakStatus, type StreakStatus } from '@/features/servantDashboard/str
 import type { ServantMyGroupRow, ServantRecentNewcomerRow } from '@/types/dashboard';
 import { formatDate, formatNumber } from '@/utils/formatNumber';
 
-const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
 // design.md decision 8: 2 minutes — more frequent than the admin dashboard
 // because this screen drives the servant's daily pastoral action.
 const STALE_TIME = 2 * 60 * 1000;
@@ -133,18 +132,11 @@ export function ServantHome() {
           <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
         }
       >
-        <Pressable
-          onLongPress={() => {
-            if (SHOW_DEV_TOOLS) router.push('/dev/showcase');
-          }}
-          delayLongPress={600}
-        >
-          {greeting ? (
-            <Text variant="bodyLg" color={colors.textMuted}>
-              {t('home.signedInAs', { name: greeting })}
-            </Text>
-          ) : null}
-        </Pressable>
+        {greeting ? (
+          <Text variant="bodyLg" color={colors.textMuted}>
+            {t('home.signedInAs', { name: greeting })}
+          </Text>
+        ) : null}
 
         <QuickActionsRow router={router} />
 

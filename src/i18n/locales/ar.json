@@ -103,20 +103,20 @@
       },
       "status": {
         "green": "منتظم",
-        "yellow": "بدأ يتغيّب",
+        "yellow": "غياب متزايد",
         "red": "في خطر",
-        "break": "في إجازة"
+        "break": "في انقطاع"
       },
       "lastSeen": {
         "never": "لم يحضر بعد",
-        "today": "حضر اليوم",
-        "yesterday": "حضر أمس",
-        "daysAgo_zero": "حضر منذ {{count}} يوم",
-        "daysAgo_one": "حضر منذ يوم واحد",
-        "daysAgo_two": "حضر منذ يومين",
-        "daysAgo_few": "حضر منذ {{count}} أيام",
-        "daysAgo_many": "حضر منذ {{count}} يومًا",
-        "daysAgo_other": "حضر منذ {{count}} يوم"
+        "today": "آخر حضور اليوم",
+        "yesterday": "آخر حضور أمس",
+        "daysAgo_zero": "آخر حضور قبل {{count}} يوم",
+        "daysAgo_one": "آخر حضور قبل يوم واحد",
+        "daysAgo_two": "آخر حضور قبل يومين",
+        "daysAgo_few": "آخر حضور قبل {{count}} أيام",
+        "daysAgo_many": "آخر حضور قبل {{count}} يومًا",
+        "daysAgo_other": "آخر حضور قبل {{count}} يوم"
       },
       "registeredAgo": {
         "today": "اليوم",
@@ -132,9 +132,9 @@
         "quick_add": "إضافة سريعة",
         "full": "تسجيل كامل"
       },
-      "onBreakUntil": "في إجازة حتى {{date}}",
-      "onBreakOpen": "في إجازة",
-      "missesLabel_zero": "{{count}} غياب",
+      "onBreakUntil": "في انقطاع حتى {{date}}",
+      "onBreakOpen": "في انقطاع",
+      "missesLabel_zero": "بدون غياب",
       "missesLabel_one": "غياب واحد",
       "missesLabel_two": "غيابان",
       "missesLabel_few": "{{count}} غيابات",
@@ -202,7 +202,7 @@
         "body": "{{consecutiveMisses}} غيابات متتالية. آخرها: {{lastEventTitle}}."
       },
       "welcome_back": {
-        "title": "أهلاً بعودته: {{personName}}",
+        "title": "أهلاً بعودة {{personName}}",
         "body": "حضر {{eventTitle}}."
       },
       "reassignment": {
@@ -293,7 +293,7 @@
       "new": "جديد",
       "active": "نشِط",
       "inactive": "غير نشِط",
-      "on_break": "في فترة راحة"
+      "on_break": "في انقطاع"
     },
     "edit": {
       "title": "تعديل العضو",
@@ -320,15 +320,15 @@
       "button": "تسجيل متابعة"
     },
     "onBreak": {
-      "button": "وضع في إجازة",
-      "dialogTitle": "وضع في إجازة",
+      "button": "وضع في انقطاع",
+      "dialogTitle": "وضع في انقطاع",
       "durationLabel": "إلى متى؟",
-      "untilLabel": "في إجازة حتى",
+      "untilLabel": "في انقطاع حتى",
       "fixedDate": "تاريخ محدد",
-      "openEnded": "مفتوحة",
-      "openEndedHint": "تبقى المراقبة معطّلة حتى تنهي الإجازة يدوياً.",
+      "openEnded": "مفتوح",
+      "openEndedHint": "تبقى المراقبة معطّلة حتى تنهي الانقطاع يدوياً.",
       "save": "حفظ",
-      "endBreak": "إنهاء الإجازة الآن",
+      "endBreak": "إنهاء الانقطاع الآن",
       "success": "تم الحفظ.",
       "errors": {
         "invalidDate": "اختر تاريخاً بصيغة YYYY-MM-DD."
@@ -345,7 +345,7 @@
     "snoozeUntil": "تأجيل حتى",
     "snoozedUntil": "مؤجلة حتى {{date}}",
     "needsFollowUpBadge": "معلّقة",
-    "alertSummary_zero": "لا غيابات متتالية",
+    "alertSummary_zero": "بدون غياب متتالٍ",
     "alertSummary_one": "غياب متتالي واحد",
     "alertSummary_two": "غيابان متتاليان",
     "alertSummary_few": "{{count}} غيابات متتالية",
@@ -358,9 +358,9 @@
     "emptyHint": "ستظهر التنبيهات الجديدة والمتابعات المؤجلة هنا.",
     "errorPermissionUpdate": "يمكن للمنشئ فقط تعديل المتابعة خلال ساعة من تسجيلها.",
     "action": {
-      "called": "اتصلت",
-      "texted": "أرسلت رسالة",
-      "visited": "زرت",
+      "called": "اتصال",
+      "texted": "إرسال رسالة",
+      "visited": "زيارة",
       "no_answer": "لا يوجد رد",
       "other": "أخرى"
     },
@@ -445,8 +445,8 @@
       "atRisk": {
         "title": "في خطر",
         "empty": "لا يوجد أحد في خطر الآن.",
-        "streak_zero": "{{count}} غياب",
-        "streak_one": "{{count}} غياب",
+        "streak_zero": "بدون غياب",
+        "streak_one": "غياب واحد",
         "streak_two": "غيابان",
         "streak_few": "{{count}} غيابات",
         "streak_many": "{{count}} غياباً",
@@ -492,7 +492,7 @@
       }
     },
     "countedEvents": {
-      "title": "الفعاليات المحتسبة",
+      "title": "الاجتماعات المحتسبة",
       "lastSync": "آخر مزامنة",
       "neverSynced": "لم تتم المزامنة بعد",
       "resync": "إعادة المزامنة الآن",
@@ -522,14 +522,14 @@
         "running": "قيد التنفيذ"
       },
       "patterns": {
-        "title": "أنماط الفعاليات المحتسبة",
+        "title": "أنماط الاجتماعات المحتسبة",
         "add": "إضافة نمط",
         "placeholder": "مثال: قداس",
-        "empty": "لا توجد أنماط بعد. أضف نمطاً أعلاه لاحتساب الفعاليات المطابقة.",
+        "empty": "لا توجد أنماط بعد. أضف نمطاً أعلاه لاحتساب الاجتماعات المطابقة.",
         "removeA11y": "إزالة النمط {{pattern}}"
       },
       "preview": {
-        "title": "الفعاليات المحتسبة القادمة (خلال 14 يوماً)",
+        "title": "الاجتماعات المحتسبة القادمة (خلال 14 يوماً)",
         "empty": "لا توجد فعاليات قادمة تطابق الأنماط."
       },
       "errors": {
@@ -556,7 +556,7 @@
       "escalationHint": "عند تعيينها، يُطلق تنبيه ثانٍ عند بلوغ هذا الحد.",
       "escalationPlaceholder": "متوقف",
       "gracePeriod": "مهلة التسجيل المتأخر (أيام)",
-      "gracePeriodHint": "تُتجاهل الفعاليات الحديثة ضمن هذه الفترة، لإعطاء الخدّام وقتاً لإدخال الحضور السابق.",
+      "gracePeriodHint": "تُتجاهل الاجتماعات الحديثة ضمن هذه الفترة، لإعطاء الخدّام وقتاً لإدخال الحضور السابق.",
       "save": "حفظ",
       "recalculate": "إعادة الحساب الآن",
       "success": "تم الحفظ.",

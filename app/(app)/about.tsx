@@ -1,12 +1,12 @@
 /**
  * About screen — read-only app + church identity, credits, and links.
  *
- * Long-pressing the App identity row navigates to `/dev/showcase`
- * when running in a dev build (or with `EXPO_PUBLIC_SHOW_DEV_TOOLS`).
+ * Dev-tooling (the design-system showcase, DB inspector) is reachable
+ * from the kebab menu in `TabHeader` rather than a hidden long-press
+ * on this screen.
  */
 import Constants from 'expo-constants';
-import { useRouter } from 'expo-router';
-import { Pressable, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTranslation } from 'react-i18next';
 import type { TFunction } from 'i18next';
@@ -18,8 +18,6 @@ import { church } from '@/branding/church';
 import { listNeedsAttention } from '@/services/db/repositories/queueRepo';
 import { useSyncState } from '@/services/sync/SyncEngine';
 
-const SHOW_DEV_TOOLS = __DEV__ || process.env.EXPO_PUBLIC_SHOW_DEV_TOOLS === 'true';
-
 const BUILD_SHA =
   process.env.EXPO_PUBLIC_BUILD_SHA ??
   (Constants.expoConfig?.extra as { buildSha?: string } | undefined)?.buildSha ??
@@ -29,7 +27,6 @@ export default function About() {
   const { t, i18n } = useTranslation();
   const { colors, spacing } = useTokens();
   const insets = useSafeAreaInsets();
-  const router = useRouter();
   const version = Constants.expoConfig?.version ?? '0.0.0';
   const visibleAcknowledgments = church.acknowledgments.filter((a) => a.optIn);
 
@@ -61,25 +58,16 @@ export default function About() {
           {t('branding.about.title')}
         </Text>
 
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={t('branding.about.app')}
-          onLongPress={() => {
-            if (SHOW_DEV_TOOLS) router.push('/dev/showcase');
-          }}
-          delayLongPress={600}
-        >
-          <Card>
-            <Stack gap="sm">
-              <Text variant="label" color={colors.textMuted}>
-                {t('branding.about.app')}
-              </Text>
-              <Text variant="headingMd">{t('branding.appName')}</Text>
-              <Row label={t('branding.about.version')} value={version} />
-              {BUILD_SHA ? <Row label={t('branding.about.buildSha')} value={BUILD_SHA} /> : null}
-            </Stack>
-          </Card>
-        </Pressable>
+        <Card>
+          <Stack gap="sm">
+            <Text variant="label" color={colors.textMuted}>
+              {t('branding.about.app')}
+            </Text>
+            <Text variant="headingMd">{t('branding.appName')}</Text>
+            <Row label={t('branding.about.version')} value={version} />
+            {BUILD_SHA ? <Row label={t('branding.about.buildSha')} value={BUILD_SHA} /> : null}
+          </Stack>
+        </Card>
 
         <Card>
           <Stack gap="sm">

@@ -42,7 +42,7 @@
   "auth": {
     "signIn": {
       "welcome": "Willkommen",
-      "subtitle": "Nur für Diener. Bitte verwende deine kirchliche E-Mail-Adresse.",
+      "subtitle": "Nur für Mitarbeitende. Bitte verwende deine kirchliche E-Mail-Adresse.",
       "emailLabel": "E-Mail",
       "passwordLabel": "Passwort",
       "submitPassword": "Anmelden",
@@ -84,7 +84,7 @@
     "settings": "Einstellungen",
     "signOut": "Abmelden",
     "quickAdd": "Schnell hinzufügen",
-    "quickAddSubtitle": "Neuankömmlinge in drei Tipps begrüßen",
+    "quickAddSubtitle": "Neuankömmlinge in drei Antippen begrüßen",
     "registerFull": "Vollständig registrieren",
     "registerFullSubtitle": "Priorität, Zuweisung und Notizen erfassen",
     "personsListSubtitle": "Alle Mitglieder ansehen",
@@ -98,11 +98,11 @@
       "sections": {
         "quickActions": "Schnellzugriff",
         "myGroup": "Meine Gruppe",
-        "pendingFollowups": "Offene Follow-ups",
+        "pendingFollowups": "Offene Nachfassungen",
         "recentNewcomers": "Neuzugänge"
       },
       "status": {
-        "green": "Aktiv",
+        "green": "Auf Kurs",
         "yellow": "Wackelig",
         "red": "Gefährdet",
         "break": "In Pause"
@@ -237,7 +237,7 @@
         "low": "Niedrig",
         "very_low": "Sehr niedrig"
       },
-      "assignedServant": "Zugewiesener Diener",
+      "assignedServant": "Zugewiesener Mitarbeiter",
       "assignedServantCurrent": "Aktuelle Zuweisung",
       "reassignReason": "Grund der Neuzuweisung",
       "comments": "Vertrauliche Notizen",
@@ -246,7 +246,7 @@
       "success": "Gespeichert.",
       "errors": {
         "commentsTooLong": "Notizen dürfen höchstens 1000 Zeichen lang sein",
-        "assignedServantRequired": "Zugewiesener Diener ist erforderlich"
+        "assignedServantRequired": "Zugewiesener Mitarbeiter ist erforderlich"
       }
     }
   },
@@ -264,12 +264,12 @@
       "region": "Region",
       "language": "Bevorzugte Sprache",
       "priority": "Priorität",
-      "assignedServant": "Zugewiesener Diener",
+      "assignedServant": "Zugewiesener Mitarbeiter",
       "status": "Status",
       "registeredAt": "Registriert am",
       "comments": "Vertrauliche Notizen",
       "commentsEmpty": "Noch keine Notizen.",
-      "commentsHidden": "Vertrauliche Notizen sind nur für den zugewiesenen Diener und Admins sichtbar."
+      "commentsHidden": "Vertrauliche Notizen sind nur für den zugewiesenen Mitarbeiter und Admins sichtbar."
     },
     "priority": {
       "high": "Hoch",
@@ -305,7 +305,7 @@
       "success": "Mitglied entfernt."
     },
     "followUp": {
-      "button": "Nachfass-Eintrag"
+      "button": "Nachfassung erfassen"
     },
     "onBreak": {
       "button": "Auf Pause setzen",
@@ -353,7 +353,7 @@
       "snoozed": "Erinnert"
     },
     "sections": {
-      "needs_follow_up": "Nachfass nötig",
+      "needs_follow_up": "Nachfassung nötig",
       "snoozed_returning": "Heute/morgen zurück",
       "recent": "Kürzlich erfasst"
     },
@@ -429,8 +429,8 @@
       "atRisk": {
         "title": "Gefährdet",
         "empty": "Aktuell ist niemand gefährdet.",
-        "streak_one": "{{count}} Fehlen",
-        "streak_other": "{{count}} Fehlmeldungen"
+        "streak_one": "{{count}} Fehlzeit",
+        "streak_other": "{{count}} Fehlzeiten"
       },
       "funnel": {
         "title": "Newcomer-Funnel (90 Tage)",
@@ -446,26 +446,26 @@
       }
     },
     "servants": {
-      "title": "Diener",
-      "invite": "Diener einladen",
+      "title": "Mitarbeitende",
+      "invite": "Mitarbeiter einladen",
       "inviteEmailLabel": "E-Mail",
       "inviteDisplayNameLabel": "Anzeigename",
       "inviteRoleLabel": "Rolle",
       "inviteSubmit": "Einladung senden",
       "inviteCancel": "Abbrechen",
       "roleAdmin": "Admin",
-      "roleServant": "Diener",
+      "roleServant": "Mitarbeiter",
       "stateActive": "Aktiv",
       "stateDeactivated": "Deaktiviert",
       "promote": "Zum Admin befördern",
-      "demote": "Zum Diener herabstufen",
+      "demote": "Zum Mitarbeiter herabstufen",
       "deactivate": "Deaktivieren",
       "reactivate": "Reaktivieren",
       "successInvited": "Einladung gesendet.",
       "successUpdated": "Gespeichert.",
       "errors": {
         "alreadyRegistered": "Diese E-Mail ist bereits registriert.",
-        "invalidEmail": "Bitte gültige E-Mail eingeben.",
+        "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein.",
         "lastAdmin": "Der letzte aktive Admin kann nicht herabgestuft oder deaktiviert werden.",
         "selfDeactivate": "Du kannst dein eigenes Konto nicht deaktivieren.",
         "generic": "Etwas ist schiefgelaufen. Bitte erneut versuchen."

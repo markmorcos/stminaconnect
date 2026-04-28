@@ -61,6 +61,24 @@ export async function triggerCalendarSync(): Promise<TriggerSyncResult> {
   return data as TriggerSyncResult;
 }
 
+export interface SyncIfStaleResult {
+  outcome: 'queued' | 'skipped_recent';
+  request_id?: number;
+}
+
+/**
+ * Non-admin variant of `triggerCalendarSync`, gated on a 10-minute
+ * server-side window. Used on app boot so opening the app pulls fresh
+ * events without granting every user the admin "Resync now" right.
+ * `skipped_recent` is a successful no-op — callers should treat it as
+ * "the mirror is already fresh enough".
+ */
+export async function triggerCalendarSyncIfStale(): Promise<SyncIfStaleResult> {
+  const { data, error } = await supabase.rpc('trigger_calendar_sync_if_stale');
+  if (error) throw error;
+  return data as SyncIfStaleResult;
+}
+
 /**
  * Returns the most recent sync_log row, or null when no sync has ever run.
  * Mirrors the NULL-composite-row caveat from `getPerson`: PostgREST

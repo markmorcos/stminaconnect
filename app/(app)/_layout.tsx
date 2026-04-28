@@ -8,9 +8,11 @@ import { NotificationBanner } from '@/components/NotificationBanner';
 import { SyncConflictSnackbar } from '@/components/SyncConflictSnackbar';
 import { SyncStatusIndicator } from '@/components/SyncStatusIndicator';
 import { Text, useTokens } from '@/design';
+import { triggerCalendarSyncIfStale } from '@/services/api/events';
 import { useInvalidateOnPull } from '@/services/sync/useInvalidateOnPull';
 import { useSyncBootstrap } from '@/services/sync/useSyncBootstrap';
 import { useSyncState } from '@/services/sync/SyncEngine';
+import { logger } from '@/utils/logger';
 import { useAccessibilityStore } from '@/state/accessibilityStore';
 import { useAuthStore } from '@/state/authStore';
 
@@ -29,6 +31,21 @@ export default function AppLayout() {
   useEffect(() => {
     void hydrateA11y();
   }, [hydrateA11y]);
+
+  // Fire a calendar refresh once per app open. The server-side RPC
+  // is rate-limited to once every 10 minutes, so re-mounting this
+  // layout (e.g. after a deep link) doesn't hammer Google Calendar.
+  // Failures are best-effort — events stay readable from the local
+  // cache; the next pg_cron tick (every 30 min) is the safety net.
+  useEffect(() => {
+    if (!session) return;
+    triggerCalendarSyncIfStale().catch((e: unknown) => {
+      logger.warn('calendar sync on app open failed', {
+        error: e instanceof Error ? e.message : String(e),
+      });
+    });
+  }, [session?.user.id]);
+
   if (!session) return <Redirect href="/sign-in" />;
 
   // Block first-launch with a spinner until the SyncEngine completes

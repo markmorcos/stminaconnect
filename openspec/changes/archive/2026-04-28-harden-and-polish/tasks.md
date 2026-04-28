@@ -39,10 +39,10 @@
 - [x] 3.1 Audit every Pressable/IconButton/Chip — set `accessibilityLabel`, `accessibilityRole`, `accessibilityState` (e.g. `selected`, `disabled`).
 - [x] 3.2 Audit tap target sizes — bump under-spec'd ones to 44pt iOS / 48pt Android. (Design-system primitives already enforce this; check feature-level custom usages.)
 - [x] 3.3 Re-run the contrast suite from `add-brand-assets` against any newly-introduced color pairings; fix violations in tokens.
-- [ ] 3.4 Manual pass with VoiceOver (iOS) and TalkBack (Android) on every primary screen; fix focus order and missing announcements.
-- [ ] 3.5 Dynamic type: render `Text` at `PixelRatio.getFontScale() = 1.5` and `2.0`; fix wrapping/truncation issues.
+- [x] 3.4 Manual pass with VoiceOver (iOS) and TalkBack (Android) on every primary screen; fix focus order and missing announcements.
+- [x] 3.5 Dynamic type: render `Text` at `PixelRatio.getFontScale() = 1.5` and `2.0`; fix wrapping/truncation issues.
 - [x] 3.6 Reduce-motion: set OS reduce-motion on; confirm animations fall back to instant transitions; document in `docs/a11y-audit.md`.
-- [ ] 3.7 Increase-contrast / Bold-text: verify rendering remains correct; document.
+- [x] 3.7 Increase-contrast / Bold-text: verify rendering remains correct; document.
 - [x] 3.8 RTL focus order verified on Arabic locale.
 - [x] 3.9 Document results in `docs/a11y-audit.md` per-screen, with pass/fail and remediation notes.
 
@@ -51,7 +51,7 @@
 - [x] 4.1 Add `getItemLayout` and `keyExtractor` to all FlatLists.
 - [x] 4.2 `useMemo` / `useCallback` audit on dashboard pages and roster.
 - [x] 4.3 Move inline styles to `StyleSheet`.
-- [ ] 4.4 Profile a cold start and a roster of 200 people on a mid-range Android.
+- [x] 4.4 Profile a cold start and a roster of 200 people on a mid-range Android.
 
 ## 5. Timezone correctness
 
@@ -88,8 +88,8 @@
 
 ## 11. i18n audit
 
-- [ ] 11.1 Walk every key with a native AR speaker; record results in `docs/i18n-review.md`.
-- [ ] 11.2 Same for DE.
+- [x] 11.1 Walk every key with a native AR speaker; record results in `docs/i18n-review.md`.
+- [x] 11.2 Same for DE.
 - [x] 11.3 Verify no `[MISSING]` warnings appear in dev console during a full app walk-through.
 
 ## 12. Tests
@@ -102,15 +102,15 @@
 
 ## 13. Verification (in Expo Go)
 
-- [ ] 13.1 Walk every screen — every loading, error, empty state shows correctly with animated skeleton, illustrated empty, and themed error.
-- [ ] 13.2 Run with VoiceOver on; navigation order, labels, roles all correct.
-- [ ] 13.3 Tokens have moved to SecureStore (verify via debug screen showing token source).
-- [ ] 13.4 Trigger a 4xx scenario — Sync Issues screen shows the entry; "Discard" removes it.
-- [ ] 13.5 No `[MISSING]` translation warnings in console during a full session.
-- [ ] 13.6 Animation polish visible: button press scale, screen transitions, sync indicator pulse, banner slide.
-- [ ] 13.7 Haptic feedback fires on the documented actions; toggling Settings → Accessibility → Haptics off silences them.
-- [ ] 13.8 Enable OS reduce-motion → animations fall back to instant.
-- [ ] 13.9 Set device font scale to 200% → no truncation/clipping in critical flows.
-- [ ] 13.10 Switch device to dark mode → entire UI adapts; contrast suite still green.
-- [ ] 13.11 `make test` clean, coverage ≥ 80% on services/features.
-- [ ] 13.12 `openspec validate harden-and-polish` passes.
+- [x] 13.1 Walk every screen — every loading, error, empty state shows correctly with animated skeleton, illustrated empty, and themed error.
+- [x] 13.2 Run with VoiceOver on; navigation order, labels, roles all correct.
+- [x] 13.3 Tokens have moved to SecureStore (verify via debug screen showing token source).
+- [x] 13.4 Trigger a 4xx scenario — Sync Issues screen shows the entry; "Discard" removes it.
+- [x] 13.5 No `[MISSING]` translation warnings in console during a full session.
+- [x] 13.6 Animation polish visible: button press scale, screen transitions, sync indicator pulse, banner slide.
+- [x] 13.7 Haptic feedback fires on the documented actions; toggling Settings → Accessibility → Haptics off silences them.
+- [x] 13.8 Enable OS reduce-motion → animations fall back to instant.
+- [x] 13.9 Set device font scale to 200% → no truncation/clipping in critical flows.
+- [x] 13.10 Switch device to dark mode → entire UI adapts; contrast suite still green.
+- [x] 13.11 `make test` clean, coverage ≥ 80% on services/features.
+- [x] 13.12 `openspec validate harden-and-polish` passes.

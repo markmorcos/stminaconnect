@@ -8,19 +8,21 @@ Defines the online check-in flow used to mark attendance against events from the
 
 ### Requirement: Attendance SHALL be recorded as `(event, person)` rows; absence is implicit.
 
-Each present check-in MUST be one row in `attendance` with `is_present=true`. Absence MUST be modeled as the absence of such a row — the system SHALL NOT persist explicit "did not attend" rows. The unique constraint `(event_id, person_id)` MUST be enforced at the schema level so that one row per (event, person) is guaranteed regardless of how many times the toggle is hit.
+Each present check-in MUST be one row in `attendance` with `is_present=true`; absence MUST be modeled as the absence of such a row. From this change forward, the `get_event_attendance` projection MUST include a `deleted` boolean derived from `persons.deleted_at IS NOT NULL`. UI MUST render the display name as the localized "Removed Member" string when `deleted=true`. Historical attendance rows referencing soft-deleted persons MUST remain visible in admin queries — the row itself is not deleted, only its display is anonymized.
 
-#### Scenario: Schema enforces uniqueness
+#### Scenario: Soft-deleted attendee renders as Removed Member
 
-- **GIVEN** an `attendance` row exists for `(E, P)`
-- **WHEN** an INSERT for the same `(E, P)` is attempted
-- **THEN** it is rejected by the unique constraint (or coerced into an upsert by the RPC)
+- **GIVEN** event E with attendance for person P, and P has been soft-deleted
+- **WHEN** any servant opens E's roster (or attendance history view, when added)
+- **THEN** P's row displays the localized "Removed Member" placeholder
+- **AND** the underlying attendance row's `marked_at` and `marked_by` are unchanged
 
-#### Scenario: Absent persons have no row
+#### Scenario: Aggregate stats include soft-deleted-attended events
 
-- **GIVEN** an event E with persons P1 and P2 in the church
-- **AND** P1 is checked in for E; P2 is not
-- **THEN** `select * from attendance where event_id=E` returns exactly one row, for P1
+- **GIVEN** event E had 12 attendees, 1 of whom has since been soft-deleted
+- **WHEN** the admin dashboard renders attendance counts for E
+- **THEN** the count is 12
+- **AND** the soft-deleted person contributes only as an anonymous row
 
 ### Requirement: The Check In flow SHALL start from the home screen and reach a roster in two taps.
 

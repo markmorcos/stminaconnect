@@ -7,7 +7,8 @@
  *   - Read-only SQL REPL (SELECT / PRAGMA only) at the bottom.
  *
  * Mounted under `/dev/db`. Not intended for end users; the route is
- * gated by `SHOW_DEV_TOOLS` in the home / about screens.
+ * gated by `SHOW_DEV_TOOLS` and surfaced through the kebab menu in
+ * the tab header.
  */
 import { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';

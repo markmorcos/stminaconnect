@@ -56,21 +56,29 @@ Servants are the only authenticated users. There is no public sign-up. Two flows
 
 ### Requirement: Sessions SHALL persist across app restarts.
 
-The Supabase JS client SHALL be configured with `persistSession: true` using AsyncStorage. Closing and reopening the app while online MUST NOT require re-entering credentials, provided the refresh token is still valid.
+The Supabase JS client MUST be configured with `persistSession: true`. From this change forward, auth tokens MUST persist via `expo-secure-store` (not AsyncStorage). On first boot post-deploy, a one-way migration MUST copy any existing session from AsyncStorage to SecureStore and clear the AsyncStorage entry. The Supabase client MUST be configured with the SecureStore-backed storage adapter.
 
-#### Scenario: Reopening the app preserves the session
+#### Scenario: Existing AsyncStorage session migrates on boot
 
-- **GIVEN** a servant has signed in and the session is valid
-- **WHEN** the app is killed and reopened in Expo Go
-- **THEN** the auth store's `session` is non-null without any user input
-- **AND** the home screen renders directly
+- **GIVEN** a returning user whose session is stored in AsyncStorage from a prior version
+- **WHEN** the app boots after upgrade
+- **THEN** SecureStore contains the session
+- **AND** AsyncStorage no longer contains the session
+- **AND** the user is signed in without re-entering credentials
 
-#### Scenario: Expired refresh token forces re-auth
+#### Scenario: Subsequent boots skip the migration
 
-- **GIVEN** a refresh token has expired (e.g. >30 days idle)
-- **WHEN** the app reopens and tries to refresh
-- **THEN** the user is redirected to the sign-in screen
-- **AND** stored auth data in AsyncStorage is cleared
+- **GIVEN** SecureStore already has the session
+- **WHEN** the app boots
+- **THEN** the migration code path runs but performs no work
+- **AND** boot completes within normal time
+
+#### Scenario: Fresh install uses SecureStore directly
+
+- **GIVEN** a fresh install on a device with no prior data
+- **WHEN** the user signs in
+- **THEN** the session is written directly to SecureStore
+- **AND** AsyncStorage is never written for auth
 
 ### Requirement: Authenticated routes SHALL be guarded.
 

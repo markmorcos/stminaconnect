@@ -66,11 +66,4 @@ describe('About screen', () => {
     expect(getByText(/Lucide — ISC License/)).toBeTruthy();
     expect(getByText(/React Native Paper — MIT License/)).toBeTruthy();
   });
-
-  it('long-press on app identity navigates to /dev/showcase in dev', () => {
-    const { getByLabelText } = renderAbout();
-    const appCard = getByLabelText('App');
-    fireEvent(appCard, 'longPress');
-    expect(mockPush).toHaveBeenCalledWith('/dev/showcase');
-  });
 });

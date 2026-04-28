@@ -74,7 +74,7 @@ across app restarts.
 
 ## Showcase
 
-`/dev/showcase` (long-press the home title in dev/preview builds) shows
-every token swatch and component variant in both modes — useful for
-catching contrast regressions or token drift before they reach a
-feature screen.
+`/dev/showcase` (open the kebab menu in any tab header in dev/preview
+builds) shows every token swatch and component variant in both modes
+— useful for catching contrast regressions or token drift before they
+reach a feature screen.

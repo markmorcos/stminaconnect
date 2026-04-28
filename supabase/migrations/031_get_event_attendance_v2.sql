@@ -16,7 +16,14 @@
 --     non-null `deleted_at`. Drives the "Removed Member" UI in
 --     historical roster views.
 
-create or replace function public.get_event_attendance(p_event_id uuid)
+-- Postgres rejects `CREATE OR REPLACE` when the OUT-parameter (RETURNS
+-- TABLE) shape changes, so drop the prior signature first. The DROP is
+-- IF EXISTS-guarded so the migration also runs cleanly on a fresh DB
+-- where 016 hasn't been applied yet (defensive — in practice 016 is
+-- always applied before us).
+drop function if exists public.get_event_attendance(uuid);
+
+create function public.get_event_attendance(p_event_id uuid)
 returns table (
   person_id    uuid,
   person_first text,
