@@ -107,5 +107,34 @@ test-coverage: ## Run tests with coverage
 # -------------------------------------------------------------------
 
 .PHONY: expo-start
-expo-start: ## Start the Expo dev server (Expo Go)
+expo-start: ## Start the Expo dev server (Expo Go — legacy; prefer expo-start-dev-client)
 	npx expo start
+
+.PHONY: expo-start-dev-client
+expo-start-dev-client: ## Start the Expo dev server for an installed dev client (canonical from phase 16+)
+	npx expo start --dev-client
+
+# -------------------------------------------------------------------
+# EAS builds (require `eas-cli` installed globally + `eas login`)
+# -------------------------------------------------------------------
+
+.PHONY: build-dev-ios
+build-dev-ios: ## Build a development client for iOS via EAS (~10–30 min on free tier)
+	eas build --profile development --platform ios
+
+.PHONY: build-dev-android
+build-dev-android: ## Build a development client for Android via EAS
+	eas build --profile development --platform android
+
+.PHONY: build-preview
+build-preview: ## Build the preview profile (prod-like, internal distribution) for both platforms
+	eas build --profile preview --platform all
+
+.PHONY: build-prod
+build-prod: ## Build the production profile (signed, store-ready) for both platforms — gated by confirmation
+	@read -p "Confirm production build? This produces signed iOS .ipa + Android .aab artefacts. [y/N] " ans; \
+	if [ "$$ans" != "y" ] && [ "$$ans" != "Y" ]; then \
+		echo "Aborted."; \
+		exit 1; \
+	fi; \
+	eas build --profile production --platform all

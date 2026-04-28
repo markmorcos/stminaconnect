@@ -187,7 +187,16 @@ function QuickActionTile({
       onPress={onPress}
       style={({ pressed }) => [{ flex: 1, opacity: pressed ? 0.85 : 1 }]}
     >
-      <Card padding="md" style={{ alignItems: 'center', gap: spacing.xs, minHeight: 72 }}>
+      <Card
+        padding="md"
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: spacing.xs,
+          minHeight: 72,
+        }}
+      >
         <Icon name={icon} color={colors.primary} size={24} />
         <Text variant="caption" style={{ textAlign: 'center', fontWeight: '600' }}>
           {label}

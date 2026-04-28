@@ -1,17 +1,19 @@
 {
   "expo": {
     "name": "St. Mina Connect",
-    "slug": "st-mina-connect",
-    "version": "0.1.0",
+    "slug": "stminaconnect",
+    "version": "0.99.0",
     "orientation": "portrait",
     "icon": "./assets/branding/icon-source.png",
     "scheme": "stminaconnect",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "tech.morcos.stminaconnect",
-      "icon": "./assets/branding/icon-source.png"
+      "icon": "./assets/branding/icon-source.png",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "tech.morcos.stminaconnect",
@@ -19,7 +21,6 @@
         "foregroundImage": "./assets/branding/icon-foreground.png",
         "backgroundColor": "#8B1E2D"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false
     },
     "runtimeVersion": {
@@ -43,6 +44,13 @@
         }
       ],
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "709cf095-c8d1-4a89-b897-ee734c8d8acd"
+      }
+    },
+    "owner": "markmorcos"
   }
 }

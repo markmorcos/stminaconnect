@@ -2,13 +2,16 @@
 
 Mobile app for the St. Mina Coptic Orthodox Church (Munich) — built with Expo, Supabase, and TypeScript. See `openspec/project.md` for the full project context and roadmap.
 
-## Quick start (Expo Go in ~60 seconds)
+> **Workflow:** from phase 16 onward, daily development runs in a custom **dev client** built via EAS rather than the public Expo Go app. Expo Go is the legacy path — it still works for read-only smoke tests but is not the supported flow. Setup, build, and install instructions live in [`docs/dev-build.md`](docs/dev-build.md).
+
+## Quick start (dev client)
 
 ### Prerequisites
 
 - **Node 20 LTS** (or newer; pinned via `engines` in `package.json`)
 - **Docker Desktop** running locally (Supabase CLI uses it for the local stack)
-- **Expo Go** installed on your iOS or Android device — [iOS App Store](https://apps.apple.com/app/expo-go/id982107779) / [Google Play](https://play.google.com/store/apps/details?id=host.exp.exponent)
+- **`eas-cli`** globally (`npm i -g eas-cli`) and an Expo account
+- A **dev client** installed on your phone — see [`docs/dev-build.md`](docs/dev-build.md) for the one-time `make build-dev-ios` / `make build-dev-android` step
 
 ### Boot
 
@@ -27,8 +30,10 @@ make dev-up
 # ↳ Note the printed `API URL` and `anon key`. Paste them into .env.local under
 #   EXPO_PUBLIC_SUPABASE_URL and EXPO_PUBLIC_SUPABASE_ANON_KEY.
 
-# 4. Start the Expo dev server and scan the QR with Expo Go
-make expo-start
+# 4. Start the Expo dev server for the installed dev client
+make expo-start-dev-client
+# (Legacy Expo Go path: `make expo-start` — works for read-only smoke tests
+#  but no longer supported for daily work.)
 ```
 
 ### Local Supabase URLs
@@ -46,17 +51,15 @@ service_role key: eyJhbGciOiJI...
 
 Copy `API URL` → `EXPO_PUBLIC_SUPABASE_URL`, `anon key` → `EXPO_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`. The `service_role key` is for Edge Functions only — never bundle it into the client.
 
-### Email-code sign-in (Expo Go)
+### Email-code sign-in
 
 The sign-in screen has a fallback "Email me a code instead" mode. In dev:
 
 1. Tap "Email me a code instead" → enter your email → tap **Send code**.
 2. Open Mailpit at http://127.0.0.1:54324. The latest message is titled "Your Magic Link" and contains a 6-digit code (e.g. `Alternatively, enter the code: 763938`).
-3. Type the code into the app → tap **Verify** → home screen.
+3. **Dev client (recommended):** tap the magic-link URL in the email on the same device — the OS opens the dev client via `stminaconnect://auth/callback?code=…` and you land on home with no manual code entry. **Expo Go (legacy):** type the 6-digit code into the app → tap **Verify**.
 
-The same email also carries a `…?token=…&type=magiclink&redirect_to=…` URL. **In Expo Go that link is dormant** — the local GoTrue build silently rejects `exp://` redirect URLs and falls back to `site_url`, which the device can't reach. Production standalone builds (post-phase 16) register the `stminaconnect://` scheme; tapping the link there opens the app directly. Until then, dev verification uses the 6-digit code path.
-
-`additional_redirect_urls` in `supabase/config.toml` lists `stminaconnect://auth/callback` for that future production case.
+`additional_redirect_urls` in `supabase/config.toml` lists `stminaconnect://auth/callback`. Troubleshooting: see [`docs/dev-build.md`](docs/dev-build.md) § 5.
 
 ### Seed accounts (after `make seed`)
 
@@ -88,7 +91,12 @@ make lint            # eslint
 make typecheck       # tsc --noEmit
 make test            # jest
 make test-coverage   # jest --coverage
-make expo-start      # npx expo start
+make expo-start      # npx expo start (legacy Expo Go entry; prefer expo-start-dev-client)
+make expo-start-dev-client  # npx expo start --dev-client (canonical from phase 16+)
+make build-dev-ios   # eas build --profile development --platform ios
+make build-dev-android  # eas build --profile development --platform android
+make build-preview   # eas build --profile preview --platform all
+make build-prod      # eas build --profile production --platform all (gated)
 ```
 
 ## Project layout

@@ -46,13 +46,50 @@ A configured Supabase JS client MUST be exported from `src/services/api/supabase
 
 ### Requirement: The Makefile SHALL be the canonical command surface for development.
 
-All routine developer commands listed in `project.md` §6 (sans dev-build targets, which are added in phase 16) MUST be invocable through `make <target>`. Direct invocations of underlying CLIs are allowed but not required.
+All routine developer commands listed in `project.md` §6 MUST be invocable through `make <target>`. Direct invocations of underlying CLIs are allowed but not required.
 
 #### Scenario: All in-scope Make targets exist
 
 - **WHEN** the developer runs `make help` (or `make` with no target — printing a list)
-- **THEN** the output lists at least: `install`, `dev-up`, `dev-down`, `migrate-up`, `migrate-down`, `migrate-new`, `seed`, `lint`, `typecheck`, `test`, `test-coverage`, `expo-start`, `deploy-functions`, `deploy-migrations`
-- **AND** `expo-start-dev-client` is NOT yet present (it arrives in phase 16)
+- **THEN** the output lists at least: `install`, `dev-up`, `dev-down`, `migrate-up`, `migrate-down`, `migrate-new`, `seed`, `lint`, `typecheck`, `test`, `test-coverage`, `expo-start`, `expo-start-dev-client`, `deploy-functions`, `deploy-migrations`
+
+### Requirement: A development build SHALL be the canonical local-development target.
+
+`expo-dev-client` MUST be installed and the documented daily-development command MUST be `make expo-start-dev-client`. The legacy `make expo-start` (Expo Go) command MUST remain functional but is no longer the recommended path.
+
+#### Scenario: Dev client connects to dev server
+
+- **GIVEN** a dev client is installed on the developer's phone
+- **WHEN** the developer runs `make expo-start-dev-client`
+- **AND** opens the dev client and selects the dev server URL
+- **THEN** the app launches in the dev client
+- **AND** behaves identically to the Expo Go-rendered app for all flows from phases 1–15
+
+### Requirement: EAS profiles SHALL exist for development, preview, and production builds.
+
+`eas.json` MUST define three profiles. The development profile MUST embed `expo-dev-client`. The preview profile MUST be production-like but signed for internal distribution. The production profile MUST produce store-ready iOS and Android binaries.
+
+#### Scenario: Dev profile produces an installable dev client
+
+- **WHEN** `eas build --profile development --platform ios` runs
+- **THEN** the resulting build is an `.ipa`/`.tar.gz` that installs on the dev phone
+- **AND** running it opens the dev client UI
+
+#### Scenario: Production profile env vars
+
+- **WHEN** an admin inspects `eas.json`
+- **THEN** the production profile sets `EXPO_PUBLIC_NOTIFICATION_DISPATCHER=real`
+- **AND** points to the production Supabase URL/anon key
+
+### Requirement: Make targets SHALL drive build operations.
+
+The Makefile MUST include `expo-start-dev-client`, `build-dev-ios`, `build-dev-android`, `build-preview`, and `build-prod`. The production target MUST require interactive confirmation.
+
+#### Scenario: Production build prompts for confirmation
+
+- **WHEN** the developer runs `make build-prod`
+- **THEN** the command prompts: "Confirm production build? [y/N]"
+- **AND** anything other than `y` aborts before invoking EAS
 
 ### Requirement: Pre-commit checks SHALL run lint and typecheck on staged changes.
 

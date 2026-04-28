@@ -1,5 +1,6 @@
 import { Tabs } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Icon, type IconName, useTokens } from '@/design';
 import { isRTLLanguage, useLanguage } from '@/design/useLanguage';
@@ -14,6 +15,7 @@ const TAB_ICON: Record<'index' | 'persons' | 'follow-ups' | 'settings', IconName
 export default function TabsLayout() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
+  const insets = useSafeAreaInsets();
   const lang = useLanguage();
   const labelFont = isRTLLanguage(lang) ? 'IBMPlexSansArabic-Medium' : 'Inter-Medium';
 
@@ -23,9 +25,16 @@ export default function TabsLayout() {
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
+        // With Android `edgeToEdgeEnabled`, the gesture/nav bar overlays
+        // content. Explicitly reserve `insets.bottom` (and a minimum
+        // breathing margin) below the labels so the tab strip doesn't
+        // hug the gesture pill. iOS already pads via the home indicator
+        // inset; using the same value here keeps both platforms aligned.
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
+          paddingBottom: insets.bottom + spacing.xs,
+          height: 56 + insets.bottom,
         },
         tabBarLabelStyle: {
           fontFamily: labelFont,

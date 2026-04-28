@@ -9,6 +9,12 @@ jest.mock('@react-native-async-storage/async-storage', () =>
 // without spinning up the worklet runtime. Components built on
 // reanimated (animated `LoadingSkeleton`, `Button` press scale, sync
 // indicator pulse, roster row bounce) render normally under Jest.
+//
+// SDK 55 split worklets into its own package; reanimated/mock now
+// imports from react-native-worklets which constructs `NativeWorklets`
+// at module load and crashes in Jest. Wire the worklets package's own
+// mock entry point in first so the reanimated mock resolves cleanly.
+jest.mock('react-native-worklets', () => require('react-native-worklets/lib/module/mock'));
 jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
 
 // expo-haptics resolves to native module bindings that aren't linked
