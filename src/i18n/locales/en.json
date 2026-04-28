@@ -145,6 +145,7 @@
       "countedBadge": "Counted",
       "loadError": "Could not load events."
     },
+    "removedMember": "Removed Member",
     "roster": {
       "title": "Roster",
       "myGroup": "My Group",

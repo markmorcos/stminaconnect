@@ -63,6 +63,7 @@ import type { CalendarEvent } from '@/types/event';
 import type { Person } from '@/types/person';
 
 import { haptics } from '@/utils/haptics';
+import { logger } from '@/utils/logger';
 
 import {
   emptyRoster,
@@ -278,7 +279,7 @@ export function RosterScreen() {
       // Log the underlying error so a servant testing in Expo Go can
       // see the supabase-js payload in Metro — the user-facing copy
       // stays translated and stable.
-      if (__DEV__) console.error('[attendance/save]', e);
+      logger.error('attendance/save failed', { error: (e as Error).message });
       const message = (e as Error).message ?? '';
       const userMessage = /edit_window_closed/i.test(message)
         ? t('attendance.roster.errorEditWindowClosed')

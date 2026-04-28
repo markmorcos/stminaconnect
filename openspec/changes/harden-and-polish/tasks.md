@@ -55,13 +55,13 @@
 
 ## 5. Timezone correctness
 
-- [ ] 5.1 `src/utils/formatDate.ts` with Europe/Berlin "today/yesterday" logic; absolute dates in device tz.
-- [ ] 5.2 Unit tests around DST transitions (last Sunday of October 2026, last Sunday of March 2027).
+- [x] 5.1 `src/utils/formatDate.ts` with Europe/Berlin "today/yesterday" logic; absolute dates in device tz.
+- [x] 5.2 Unit tests around DST transitions (last Sunday of October 2026, last Sunday of March 2027).
 
 ## 6. Soft-deleted edge cases
 
-- [ ] 6.1 `get_event_attendance` projection includes a `deleted` boolean for the person; UI shows "Removed Member" when true.
-- [ ] 6.2 Sync queue handling: if the engine encounters a 4xx referencing a soft-deleted person, surface a clear notification.
+- [x] 6.1 `get_event_attendance` projection includes a `deleted` boolean for the person; UI shows "Removed Member" when true.
+- [x] 6.2 Sync queue handling: if the engine encounters a 4xx referencing a soft-deleted person, surface a clear notification.
 
 ## 7. SecureStore migration
 
@@ -78,9 +78,9 @@
 
 ## 9. Logger
 
-- [ ] 9.1 `src/utils/logger.ts`: levels debug/info/warn/error. `__DEV__` prints all; prod build logs error to `logs` table.
-- [ ] 9.2 Migration `030_logs.sql` + nightly retention cron.
-- [ ] 9.3 Refactor `console.log/warn/error` calls to use logger.
+- [x] 9.1 `src/utils/logger.ts`: levels debug/info/warn/error. `__DEV__` prints all; prod build logs error to `logs` table.
+- [x] 9.2 Migration `030_logs.sql` + nightly retention cron.
+- [x] 9.3 Refactor `console.log/warn/error` calls to use logger.
 
 ## 10. About / Diagnostics screen
 

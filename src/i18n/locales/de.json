@@ -145,6 +145,7 @@
       "countedBadge": "Gezählt",
       "loadError": "Veranstaltungen konnten nicht geladen werden."
     },
+    "removedMember": "Entferntes Mitglied",
     "roster": {
       "title": "Anwesenheit",
       "myGroup": "Meine Gruppe",
