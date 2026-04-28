@@ -36,21 +36,21 @@
 
 ## 3. Accessibility
 
-- [ ] 3.1 Audit every Pressable/IconButton/Chip — set `accessibilityLabel`, `accessibilityRole`, `accessibilityState` (e.g. `selected`, `disabled`).
-- [ ] 3.2 Audit tap target sizes — bump under-spec'd ones to 44pt iOS / 48pt Android. (Design-system primitives already enforce this; check feature-level custom usages.)
-- [ ] 3.3 Re-run the contrast suite from `add-brand-assets` against any newly-introduced color pairings; fix violations in tokens.
+- [x] 3.1 Audit every Pressable/IconButton/Chip — set `accessibilityLabel`, `accessibilityRole`, `accessibilityState` (e.g. `selected`, `disabled`).
+- [x] 3.2 Audit tap target sizes — bump under-spec'd ones to 44pt iOS / 48pt Android. (Design-system primitives already enforce this; check feature-level custom usages.)
+- [x] 3.3 Re-run the contrast suite from `add-brand-assets` against any newly-introduced color pairings; fix violations in tokens.
 - [ ] 3.4 Manual pass with VoiceOver (iOS) and TalkBack (Android) on every primary screen; fix focus order and missing announcements.
 - [ ] 3.5 Dynamic type: render `Text` at `PixelRatio.getFontScale() = 1.5` and `2.0`; fix wrapping/truncation issues.
-- [ ] 3.6 Reduce-motion: set OS reduce-motion on; confirm animations fall back to instant transitions; document in `docs/a11y-audit.md`.
+- [x] 3.6 Reduce-motion: set OS reduce-motion on; confirm animations fall back to instant transitions; document in `docs/a11y-audit.md`.
 - [ ] 3.7 Increase-contrast / Bold-text: verify rendering remains correct; document.
-- [ ] 3.8 RTL focus order verified on Arabic locale.
-- [ ] 3.9 Document results in `docs/a11y-audit.md` per-screen, with pass/fail and remediation notes.
+- [x] 3.8 RTL focus order verified on Arabic locale.
+- [x] 3.9 Document results in `docs/a11y-audit.md` per-screen, with pass/fail and remediation notes.
 
 ## 4. Performance
 
-- [ ] 4.1 Add `getItemLayout` and `keyExtractor` to all FlatLists.
-- [ ] 4.2 `useMemo` / `useCallback` audit on dashboard pages and roster.
-- [ ] 4.3 Move inline styles to `StyleSheet`.
+- [x] 4.1 Add `getItemLayout` and `keyExtractor` to all FlatLists.
+- [x] 4.2 `useMemo` / `useCallback` audit on dashboard pages and roster.
+- [x] 4.3 Move inline styles to `StyleSheet`.
 - [ ] 4.4 Profile a cold start and a roster of 200 people on a mid-range Android.
 
 ## 5. Timezone correctness
@@ -90,15 +90,15 @@
 
 - [ ] 11.1 Walk every key with a native AR speaker; record results in `docs/i18n-review.md`.
 - [ ] 11.2 Same for DE.
-- [ ] 11.3 Verify no `[MISSING]` warnings appear in dev console during a full app walk-through.
+- [x] 11.3 Verify no `[MISSING]` warnings appear in dev console during a full app walk-through.
 
 ## 12. Tests
 
-- [ ] 12.1 Component: ErrorState, EmptyState, LoadingState, Skeleton render correctly.
-- [ ] 12.2 Unit: formatDate edge cases.
-- [ ] 12.3 Unit: SecureStore migration is idempotent.
-- [ ] 12.4 Integration: 4xx referring to soft-deleted person produces structured notification.
-- [ ] 12.5 Snapshot regression test of dashboards in DE locale.
+- [x] 12.1 Component: ErrorState, EmptyState, LoadingState, Skeleton render correctly.
+- [x] 12.2 Unit: formatDate edge cases.
+- [x] 12.3 Unit: SecureStore migration is idempotent.
+- [x] 12.4 Integration: 4xx referring to soft-deleted person produces structured notification.
+- [x] 12.5 Snapshot regression test of dashboards in DE locale.
 
 ## 13. Verification (in Expo Go)
 

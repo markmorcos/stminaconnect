@@ -109,6 +109,12 @@ export default function PersonsListScreen() {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={() => void onRefresh()} />
           }
+          // Perf tuning for the largest list in the app. Rows are ~80pt
+          // tall; rendering 12 above the fold and clipping subviews on
+          // Android keeps the initial render snappy on mid-range devices.
+          initialNumToRender={12}
+          windowSize={9}
+          removeClippedSubviews
           renderItem={({ item }) => (
             <PersonRow person={item} onPress={() => router.push(`/persons/${item.id}`)} />
           )}
