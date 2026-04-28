@@ -1,6 +1,6 @@
 ## Why
 
-The earlier phases ship full functionality but accumulate small rough edges: inconsistent error states, missing empty states, accessibility gaps, no SecureStore for tokens, edge cases around timezones / soft-deleted persons / reassignments — and importantly, no motion design or haptics. This change is a comprehensive polish pass before GDPR + dev-build. Skipping it means shipping a v1 that *works* but feels janky.
+The earlier phases ship full functionality but accumulate small rough edges: inconsistent error states, missing empty states, accessibility gaps, no SecureStore for tokens, edge cases around timezones / soft-deleted persons / reassignments — and importantly, no motion design or haptics. This change is a comprehensive polish pass before GDPR + dev-build. Skipping it means shipping a v1 that _works_ but feels janky.
 
 ## What Changes
 
@@ -48,7 +48,7 @@ The earlier phases ship full functionality but accumulate small rough edges: inc
 - **Affected specs**: cross-cutting modifications to `attendance`, `person-management`, `auth`, `offline-sync`, `notifications`, `i18n`, `design-system` — each gets a small additive requirement around polish.
 - **Affected code**: many UI surfaces. Animations and haptics added as design-system extensions. Migration `026_logs.sql` for the logs table.
 - **Breaking changes**: SecureStore migration is one-way (reads from AsyncStorage once, then writes only to SecureStore). Documented.
-- **Migration needs**: one server migration; one client-side migration runner step.
+- **Migration needs**: one server migration (`030_logs.sql`); one client-side migration runner step.
 - **Expo Go compatible**: yes — `expo-secure-store`, `react-native-reanimated` (SDK 50+), and `expo-haptics` all work in Expo Go.
 - **Uses design system**: yes — animations, haptics, and state components extend the design-system primitives rather than introducing parallel UI patterns.
 - **Dependencies**: all prior phases.

@@ -24,7 +24,8 @@
       "cancel": "Abbrechen",
       "restart": "Neu starten",
       "save": "Speichern",
-      "back": "Zurück"
+      "back": "Zurück",
+      "retry": "Erneut versuchen"
     },
     "errors": {
       "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut.",

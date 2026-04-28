@@ -16,6 +16,7 @@ import {
   Button,
   Card,
   EmptyState,
+  ErrorState,
   Input,
   LoadingSkeleton,
   Modal,
@@ -96,7 +97,11 @@ export function ServantsScreen() {
           ))}
         </Stack>
       ) : list.isError ? (
-        <EmptyState icon="alertCircle" title={t('admin.servants.errors.generic')} />
+        <ErrorState
+          title={t('admin.servants.errors.generic')}
+          retryLabel={t('common.actions.retry')}
+          onRetry={() => void list.refetch()}
+        />
       ) : (list.data?.length ?? 0) === 0 ? (
         <EmptyState icon="users" title={t('admin.servants.title')} />
       ) : (

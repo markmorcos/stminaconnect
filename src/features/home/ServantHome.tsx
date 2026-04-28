@@ -29,6 +29,7 @@ import {
   Card,
   Divider,
   EmptyState,
+  ErrorState,
   Icon,
   LoadingSkeleton,
   Snackbar,
@@ -687,13 +688,10 @@ function SectionShell({ title, children }: { title: string; children: React.Reac
 function SectionError({ onRetry }: { onRetry: () => void }) {
   const { t } = useTranslation();
   return (
-    <Card padding="md">
-      <Stack gap="sm" align="center">
-        <Text variant="body">{t('home.servant.loadError')}</Text>
-        <Button variant="secondary" onPress={onRetry}>
-          {t('home.servant.retry')}
-        </Button>
-      </Stack>
-    </Card>
+    <ErrorState
+      title={t('home.servant.loadError')}
+      retryLabel={t('home.servant.retry')}
+      onRetry={onRetry}
+    />
   );
 }

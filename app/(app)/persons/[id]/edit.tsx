@@ -12,7 +12,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 
-import { EmptyState, LoadingSkeleton, Stack } from '@/design';
+import { ErrorState, LoadingSkeleton, Stack } from '@/design';
 import { FullRegistrationForm } from '@/features/registration/full/FullRegistrationForm';
 import { getPerson } from '@/services/api/persons';
 
@@ -42,7 +42,7 @@ export default function EditPersonScreen() {
   }
 
   if (isError || !data) {
-    return <EmptyState icon="alertCircle" title={t('persons.list.error')} />;
+    return <ErrorState title={t('persons.list.error')} />;
   }
 
   return (

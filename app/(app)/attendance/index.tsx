@@ -14,7 +14,16 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 
-import { Badge, Card, EmptyState, LoadingSkeleton, Stack, Text, useTokens } from '@/design';
+import {
+  Badge,
+  Card,
+  EmptyState,
+  ErrorState,
+  LoadingSkeleton,
+  Stack,
+  Text,
+  useTokens,
+} from '@/design';
 import { getAlertConfig } from '@/services/api/alertConfig';
 import { getCheckInEvents } from '@/services/api/events';
 import { getSyncEngine } from '@/services/sync/SyncEngine';
@@ -93,7 +102,11 @@ export default function AttendancePicker() {
   if (isError) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background }}>
-        <EmptyState icon="alertCircle" title={t('attendance.picker.loadError')} />
+        <ErrorState
+          title={t('attendance.picker.loadError')}
+          retryLabel={t('common.actions.retry')}
+          onRetry={() => void refetch()}
+        />
       </View>
     );
   }

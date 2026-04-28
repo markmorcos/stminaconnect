@@ -16,6 +16,7 @@ import {
   Chip,
   Divider,
   EmptyState,
+  ErrorState,
   IconButton,
   Inline,
   Input,
@@ -52,6 +53,7 @@ const cases: Record<string, ReactElement> = {
   Spinner: <Spinner />,
   LoadingSkeleton: <LoadingSkeleton width={100} height={12} />,
   EmptyState: <EmptyState icon="users" title="No people" body="Add someone." />,
+  ErrorState: <ErrorState title="Could not load." retryLabel="Retry" onRetry={() => {}} />,
   Snackbar: (
     <Snackbar visible onDismiss={() => {}}>
       Message

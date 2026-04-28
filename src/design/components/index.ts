@@ -5,6 +5,7 @@ export { Card, type CardProps } from './Card';
 export { Chip, type ChipProps } from './Chip';
 export { Divider, type DividerProps } from './Divider';
 export { EmptyState, type EmptyStateProps } from './EmptyState';
+export { ErrorState, type ErrorStateProps } from './ErrorState';
 export { IconButton, type IconButtonProps } from './IconButton';
 export { Input, type InputProps } from './Input';
 export { LoadingSkeleton, type LoadingSkeletonProps } from './LoadingSkeleton';

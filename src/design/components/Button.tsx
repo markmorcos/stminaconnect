@@ -6,16 +6,27 @@
  * Sizes: `sm` (32 height), `md` (44), `lg` (52). `md` and `lg` meet
  * the 44pt min hit target without hitSlop; `sm` extends via hitSlop.
  *
+ * Press micro-interaction: scales to 0.97 with a slight opacity dip
+ * (reanimated, 100ms). Honours OS reduce-motion: when on, the press
+ * style collapses to opacity-only (matches Pressable's old behaviour).
+ *
+ * The Animated.View wraps the visible body so the press scale is
+ * driven by reanimated without breaking Pressable's `style({pressed})`
+ * callback (which doesn't see worklet shared values).
+ *
  * a11y: forwards `accessibilityLabel`. Loading state sets `aria-busy`
  * via Paper's wiring on the underlying Pressable.
  */
+import { useEffect, useState } from 'react';
 import {
+  AccessibilityInfo,
   ActivityIndicator,
   Pressable,
   type PressableProps,
   StyleSheet,
   type ViewStyle,
 } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 import { useTheme, useTokens } from '../ThemeProvider';
 import { Text } from './Text';
@@ -33,6 +44,8 @@ export interface ButtonProps extends Omit<PressableProps, 'children' | 'style'> 
 }
 
 const HEIGHT: Record<ButtonSize, number> = { sm: 32, md: 44, lg: 52 };
+const PRESS_DURATION_MS = 100;
+const PRESS_SCALE = 0.97;
 
 export function Button({
   variant = 'primary',
@@ -46,6 +59,24 @@ export function Button({
 }: ButtonProps) {
   const { colors, radii, spacing: sp } = useTokens();
   const { isDark } = useTheme();
+
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    let mounted = true;
+    AccessibilityInfo.isReduceMotionEnabled().then((value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', (value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    return () => {
+      mounted = false;
+      sub.remove();
+    };
+  }, []);
+
+  const scale = useSharedValue(1);
+  const animatedStyle = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
 
   const bg =
     variant === 'primary'
@@ -87,14 +118,28 @@ export function Button({
       accessibilityState={{ disabled: disabled || loading, busy: loading }}
       hitSlop={size === 'sm' ? { top: 6, bottom: 6, left: 6, right: 6 } : undefined}
       disabled={disabled || loading}
+      onPressIn={() => {
+        if (reduceMotion) return;
+        scale.value = withTiming(PRESS_SCALE, { duration: PRESS_DURATION_MS });
+      }}
+      onPressOut={() => {
+        if (reduceMotion) return;
+        scale.value = withTiming(1, { duration: PRESS_DURATION_MS });
+      }}
       onPress={onPress}
       {...rest}
-      style={({ pressed }) => [containerStyle, pressed ? { opacity: 0.8 } : null, style]}
+      style={({ pressed }) => [pressed ? { opacity: 0.8 } : null, style]}
     >
-      {loading ? <ActivityIndicator color={fg} size="small" style={styles.spinner} /> : null}
-      <Text variant={size === 'sm' ? 'bodySm' : 'bodyLg'} color={fg} style={{ fontWeight: '600' }}>
-        {children}
-      </Text>
+      <Animated.View style={[containerStyle, animatedStyle]}>
+        {loading ? <ActivityIndicator color={fg} size="small" style={styles.spinner} /> : null}
+        <Text
+          variant={size === 'sm' ? 'bodySm' : 'bodyLg'}
+          color={fg}
+          style={{ fontWeight: '600' }}
+        >
+          {children}
+        </Text>
+      </Animated.View>
     </Pressable>
   );
 }

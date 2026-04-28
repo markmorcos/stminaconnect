@@ -14,7 +14,20 @@
  * members without leaving the roster.
  */
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FlatList, Pressable, RefreshControl, View, type ListRenderItem } from 'react-native';
+import {
+  AccessibilityInfo,
+  FlatList,
+  Pressable,
+  RefreshControl,
+  View,
+  type ListRenderItem,
+} from 'react-native';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { useLocalSearchParams } from 'expo-router';
 import { Banner, FAB } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
@@ -24,6 +37,7 @@ import {
   Avatar,
   Card,
   EmptyState,
+  ErrorState,
   Icon,
   Input,
   LoadingSkeleton,
@@ -385,7 +399,16 @@ export function RosterScreen() {
   if (isError) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background }}>
-        <EmptyState icon="alertCircle" title={t('attendance.roster.loadError')} />
+        <ErrorState
+          title={t('attendance.roster.loadError')}
+          retryLabel={t('common.actions.retry')}
+          onRetry={() => {
+            void eventQuery.refetch();
+            void myGroupQuery.refetch();
+            void attendanceQuery.refetch();
+            void editWindowQuery.refetch();
+          }}
+        />
       </View>
     );
   }
@@ -450,12 +473,45 @@ interface RosterRowViewProps {
 function RosterRowView({ row, checked, disabled, onPress }: RosterRowViewProps) {
   const { colors, spacing, radii } = useTokens();
   const fullName = `${row.first_name} ${row.last_name}`;
+  const checkScale = useSharedValue(1);
+  const animatedCheckStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: checkScale.value }],
+  }));
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    let mounted = true;
+    AccessibilityInfo.isReduceMotionEnabled().then((value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', (value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    return () => {
+      mounted = false;
+      sub.remove();
+    };
+  }, []);
+
+  const onPressWithBounce = () => {
+    if (!reduceMotion) {
+      // Tap bounce: dip → pop → settle. Mirrors the spec's
+      // 0.95 → 1.05 → 1.0 sequence so the toggle feels acknowledged.
+      checkScale.value = withSequence(
+        withTiming(0.95, { duration: 60 }),
+        withTiming(1.05, { duration: 90 }),
+        withTiming(1, { duration: 90 }),
+      );
+    }
+    onPress();
+  };
+
   return (
     <Pressable
       accessibilityRole="checkbox"
       accessibilityState={{ checked, disabled }}
       accessibilityLabel={fullName}
-      onPress={onPress}
+      onPress={onPressWithBounce}
       disabled={disabled}
     >
       <Card padding="md" style={{ opacity: disabled ? 0.6 : 1 }}>
@@ -471,20 +527,23 @@ function RosterRowView({ row, checked, disabled, onPress }: RosterRowViewProps) 
               </Text>
             ) : null}
           </View>
-          <View
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: radii.full,
-              borderWidth: 2,
-              borderColor: checked ? colors.success : colors.border,
-              backgroundColor: checked ? colors.success : 'transparent',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
+          <Animated.View
+            style={[
+              {
+                width: 28,
+                height: 28,
+                borderRadius: radii.full,
+                borderWidth: 2,
+                borderColor: checked ? colors.success : colors.border,
+                backgroundColor: checked ? colors.success : 'transparent',
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+              animatedCheckStyle,
+            ]}
           >
             {checked ? <Icon name="check" size={18} color={colors.textInverse} /> : null}
-          </View>
+          </Animated.View>
         </View>
       </Card>
     </Pressable>

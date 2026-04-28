@@ -55,7 +55,16 @@ export default function AppLayout() {
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
       <View style={{ flex: 1 }}>
-        <Stack screenOptions={{ headerShown: false }} />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            // slide-from-right for push routes; modal-presented routes
+            // (e.g. on-break, follow-up) declare `presentation: 'modal'`
+            // in their own screen options to slide up + fade instead.
+            animation: 'slide_from_right',
+            animationDuration: 250,
+          }}
+        />
       </View>
 
       <View

@@ -20,7 +20,14 @@
  * (3-dot menu etc.) the vast majority of the time.
  */
 import { useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Pressable, View } from 'react-native';
+import { AccessibilityInfo, ActivityIndicator, Pressable, View } from 'react-native';
+import Animated, {
+  cancelAnimation,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated';
 import { Button as PaperButton, Dialog, Portal } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
 
@@ -60,6 +67,36 @@ export function SyncStatusIndicator() {
     return undefined;
   }, [busy]);
 
+  // Subtle pulse loop while pulling/pushing — drops 0.7 → 1.0 opacity
+  // every ~900ms so the bar feels alive without becoming a strobe.
+  // Honours OS reduce-motion: collapses to a static fully-opaque bar.
+  const [reduceMotion, setReduceMotion] = useState(false);
+  useEffect(() => {
+    let mounted = true;
+    AccessibilityInfo.isReduceMotionEnabled().then((value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', (value) => {
+      if (mounted) setReduceMotion(value);
+    });
+    return () => {
+      mounted = false;
+      sub.remove();
+    };
+  }, []);
+
+  const pulseOpacity = useSharedValue(1);
+  useEffect(() => {
+    if (isInFlight && !reduceMotion) {
+      pulseOpacity.value = 0.7;
+      pulseOpacity.value = withRepeat(withTiming(1, { duration: 900 }), -1, true);
+    } else {
+      cancelAnimation(pulseOpacity);
+      pulseOpacity.value = 1;
+    }
+  }, [isInFlight, reduceMotion, pulseOpacity]);
+  const pulseStyle = useAnimatedStyle(() => ({ opacity: pulseOpacity.value }));
+
   if (!busy && !showSyncedPulse) return null;
 
   const variant: Variant = busy ? 'busy' : 'synced';
@@ -86,29 +123,31 @@ export function SyncStatusIndicator() {
 
   return (
     <>
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel={label}
-        onPress={() => setOpen(true)}
-        style={{
-          backgroundColor: bg,
-          paddingVertical: spacing.xs,
-          paddingHorizontal: spacing.md,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: spacing.xs,
-        }}
-      >
-        {variant === 'busy' && isInFlight ? (
-          <ActivityIndicator size="small" color={fg} />
-        ) : (
-          <Icon name={variant === 'busy' ? 'alertCircle' : 'check'} size={14} color={fg} />
-        )}
-        <Text variant="bodySm" color={fg} style={{ fontWeight: '600' }}>
-          {label}
-        </Text>
-      </Pressable>
+      <Animated.View style={pulseStyle}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={label}
+          onPress={() => setOpen(true)}
+          style={{
+            backgroundColor: bg,
+            paddingVertical: spacing.xs,
+            paddingHorizontal: spacing.md,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: spacing.xs,
+          }}
+        >
+          {variant === 'busy' && isInFlight ? (
+            <ActivityIndicator size="small" color={fg} />
+          ) : (
+            <Icon name={variant === 'busy' ? 'alertCircle' : 'check'} size={14} color={fg} />
+          )}
+          <Text variant="bodySm" color={fg} style={{ fontWeight: '600' }}>
+            {label}
+          </Text>
+        </Pressable>
+      </Animated.View>
 
       <Portal>
         <Dialog visible={open} onDismiss={() => setOpen(false)}>

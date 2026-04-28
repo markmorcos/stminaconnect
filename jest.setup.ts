@@ -4,6 +4,13 @@ jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
 
+// react-native-reanimated ships a Jest-friendly mock that resolves
+// `useSharedValue`, `useAnimatedStyle`, and the worklet primitives
+// without spinning up the worklet runtime. Components built on
+// reanimated (animated `LoadingSkeleton`, `Button` press scale, sync
+// indicator pulse, roster row bounce) render normally under Jest.
+jest.mock('react-native-reanimated', () => require('react-native-reanimated/mock'));
+
 // react-native-paper-dates pulls in ESM-flavoured modules that Jest
 // doesn't transpile by default. Tests don't render the calendar; stub
 // the surface so production imports compile in the test environment.

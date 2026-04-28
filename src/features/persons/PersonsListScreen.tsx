@@ -14,6 +14,7 @@ import {
   Badge,
   Card,
   EmptyState,
+  ErrorState,
   Input,
   LoadingSkeleton,
   Stack,
@@ -93,7 +94,11 @@ export default function PersonsListScreen() {
           ))}
         </Stack>
       ) : isError ? (
-        <EmptyState icon="alertCircle" title={t('persons.list.error')} />
+        <ErrorState
+          title={t('persons.list.error')}
+          retryLabel={t('common.actions.retry')}
+          onRetry={() => void refetch()}
+        />
       ) : (data?.length ?? 0) === 0 ? (
         <EmptyState icon="users" title={t('persons.list.empty')} />
       ) : (

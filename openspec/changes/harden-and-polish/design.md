@@ -46,7 +46,7 @@ This is the "make it feel finished" pass before the dev-build switch. Polish wor
 
 ## Migration Plan
 
-- Server: one migration for `logs` + cleanup cron.
+- Server: one migration for `logs` + cleanup cron (`030_logs.sql`).
 - Client: SecureStore migration runs on first boot post-deploy; no rollback needed (migration is one-way and forward-compatible).
 
 ## Open Questions

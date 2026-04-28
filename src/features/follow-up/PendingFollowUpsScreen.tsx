@@ -15,7 +15,17 @@ import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 
-import { Avatar, Badge, Card, EmptyState, LoadingSkeleton, Stack, Text, useTokens } from '@/design';
+import {
+  Avatar,
+  Badge,
+  Card,
+  EmptyState,
+  ErrorState,
+  LoadingSkeleton,
+  Stack,
+  Text,
+  useTokens,
+} from '@/design';
 import {
   listPendingFollowUps,
   type PendingRow,
@@ -97,7 +107,11 @@ export function PendingFollowUpsScreen() {
           ))}
         </Stack>
       ) : isError ? (
-        <EmptyState icon="alertCircle" title={t('followUps.loadError')} />
+        <ErrorState
+          title={t('followUps.loadError')}
+          retryLabel={t('common.actions.retry')}
+          onRetry={() => void refetch()}
+        />
       ) : rows.length === 0 ? (
         <EmptyState icon="check" title={t('followUps.empty')} body={t('followUps.emptyHint')} />
       ) : (

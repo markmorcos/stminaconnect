@@ -28,7 +28,7 @@ import {
   Button,
   Card,
   Divider,
-  EmptyState,
+  ErrorState,
   LoadingSkeleton,
   Snackbar,
   Stack,
@@ -100,7 +100,7 @@ export default function PersonProfile() {
     );
   }
   if (isError || !data) {
-    return <EmptyState icon="alertCircle" title={t('persons.list.error')} />;
+    return <ErrorState title={t('persons.list.error')} />;
   }
 
   const isAdmin = servant?.role === 'admin';

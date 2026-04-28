@@ -24,7 +24,8 @@
       "cancel": "Cancel",
       "restart": "Restart",
       "save": "Save",
-      "back": "Back"
+      "back": "Back",
+      "retry": "Retry"
     },
     "errors": {
       "generic": "Something went wrong. Please try again.",

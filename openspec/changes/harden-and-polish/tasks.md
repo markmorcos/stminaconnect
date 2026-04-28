@@ -2,24 +2,24 @@
 
 ## 1. State components polish
 
-- [ ] 1.1 The `ErrorState`, `EmptyState`, `LoadingSkeleton` components already exist in design-system. Wire them everywhere a list or async surface lacks a state.
-- [ ] 1.2 Add localized illustrations: each `EmptyState` consumer accepts an `iconName` (lucide); curate the per-list icon mapping (e.g., persons list → `users`, follow-ups → `mail`, today's events → `calendar`).
-- [ ] 1.3 Verify EVERY list screen (Persons, Today's events, Roster, Notifications inbox, Pending follow-ups, Servant home My Group, Admin dashboard sections) handles loading, empty, and error states with the design-system primitives.
+- [x] 1.1 The `ErrorState`, `EmptyState`, `LoadingSkeleton` components already exist in design-system. Wire them everywhere a list or async surface lacks a state.
+- [x] 1.2 Add localized illustrations: each `EmptyState` consumer accepts an `iconName` (lucide); curate the per-list icon mapping (e.g., persons list → `users`, follow-ups → `mail`, today's events → `calendar`).
+- [x] 1.3 Verify EVERY list screen (Persons, Today's events, Roster, Notifications inbox, Pending follow-ups, Servant home My Group, Admin dashboard sections) handles loading, empty, and error states with the design-system primitives.
 
 ## 2. Animated skeletons
 
-- [ ] 2.1 Install `react-native-reanimated` (verify Expo Go SDK ≥ 50).
-- [ ] 2.2 Upgrade `LoadingSkeleton` in `src/design/components/LoadingSkeleton.tsx`: shimmer animation honoring `AccessibilityInfo.isReduceMotionEnabled()` (falls back to static).
-- [ ] 2.3 Persons list, Today's events, Roster, Notifications inbox, Pending follow-ups, Servant home, Admin dashboard sections all show the animated skeleton during loads.
+- [x] 2.1 Install `react-native-reanimated` (verify Expo Go SDK ≥ 50).
+- [x] 2.2 Upgrade `LoadingSkeleton` in `src/design/components/LoadingSkeleton.tsx`: shimmer animation honoring `AccessibilityInfo.isReduceMotionEnabled()` (falls back to static).
+- [x] 2.3 Persons list, Today's events, Roster, Notifications inbox, Pending follow-ups, Servant home, Admin dashboard sections all show the animated skeleton during loads.
 
 ## 2b. Motion polish
 
-- [ ] 2b.1 Screen transitions: configure Expo Router stack with `slide_from_right` for push and `modal` (slide up + fade) for modal routes; tune durations to design-system motion tokens.
-- [ ] 2b.2 `Button` press micro-interaction: scale 0.97 + opacity 0.9 on press, returning on release. Reduce-motion respects.
-- [ ] 2b.3 Sync status indicator pulse while `state === 'pulling' | 'pushing'` (subtle scale + opacity loop). Reduce-motion respects.
-- [ ] 2b.4 Notification banner slide-in from top + slide-out on dismiss (250ms `motion.durationBase`).
-- [ ] 2b.5 Roster row check toggle: scale bounce on tap (0.95 → 1.05 → 1.0).
-- [ ] 2b.6 Welcome-back banner subtle shimmer (matches "joyful" feedback intent).
+- [x] 2b.1 Screen transitions: configure Expo Router stack with `slide_from_right` for push and `modal` (slide up + fade) for modal routes; tune durations to design-system motion tokens.
+- [x] 2b.2 `Button` press micro-interaction: scale 0.97 + opacity 0.9 on press, returning on release. Reduce-motion respects.
+- [x] 2b.3 Sync status indicator pulse while `state === 'pulling' | 'pushing'` (subtle scale + opacity loop). Reduce-motion respects.
+- [x] 2b.4 Notification banner slide-in from top + slide-out on dismiss (250ms `motion.durationBase`).
+- [x] 2b.5 Roster row check toggle: scale bounce on tap (0.95 → 1.05 → 1.0).
+- [x] 2b.6 Welcome-back banner subtle shimmer (matches "joyful" feedback intent).
 
 ## 2c. Haptic feedback
 
@@ -79,7 +79,7 @@
 ## 9. Logger
 
 - [ ] 9.1 `src/utils/logger.ts`: levels debug/info/warn/error. `__DEV__` prints all; prod build logs error to `logs` table.
-- [ ] 9.2 Migration `026_logs.sql` + nightly retention cron.
+- [ ] 9.2 Migration `030_logs.sql` + nightly retention cron.
 - [ ] 9.3 Refactor `console.log/warn/error` calls to use logger.
 
 ## 10. About / Diagnostics screen

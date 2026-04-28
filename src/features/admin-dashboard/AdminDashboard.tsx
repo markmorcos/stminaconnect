@@ -15,10 +15,10 @@ import { useQuery } from '@tanstack/react-query';
 import { LineChart } from 'react-native-chart-kit';
 
 import {
-  Button,
   Card,
   Divider,
   EmptyState,
+  ErrorState,
   Icon,
   LoadingSkeleton,
   Stack,
@@ -595,14 +595,11 @@ function SectionShell({ title, children }: { title: string; children: React.Reac
 function SectionError({ onRetry }: { onRetry: () => void }) {
   const { t } = useTranslation();
   return (
-    <Card padding="md">
-      <Stack gap="sm" align="center">
-        <Text variant="body">{t('admin.dashboard.error')}</Text>
-        <Button variant="secondary" onPress={onRetry}>
-          {t('admin.dashboard.retry')}
-        </Button>
-      </Stack>
-    </Card>
+    <ErrorState
+      title={t('admin.dashboard.error')}
+      retryLabel={t('admin.dashboard.retry')}
+      onRetry={onRetry}
+    />
   );
 }
 
