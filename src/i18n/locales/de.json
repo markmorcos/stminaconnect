@@ -436,6 +436,16 @@
       "revokeFailed": "Zustimmung konnte nicht widerrufen werden. Bitte erneut versuchen.",
       "revokeNothingToRevoke": "Keine aktive Zustimmung zum Widerruf.",
       "loading": "Lädt …"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "quietHours": "Ruhezeiten",
+      "enable": "Ruhezeiten aktivieren",
+      "enableHint": "Push-Benachrichtigungen werden in diesem Zeitfenster stummgeschaltet. In-App-Banner funktionieren weiterhin, wenn die App geöffnet ist.",
+      "start": "Beginn",
+      "end": "Ende",
+      "save": "Speichern",
+      "success": "Benachrichtigungseinstellungen gespeichert."
     }
   },
   "admin": {
@@ -668,6 +678,14 @@
       "soft_delete_person": "Mitglied entfernen",
       "assign_person": "Neu zuweisen",
       "mark_notification_read": "Benachrichtigung gelesen"
+    }
+  },
+  "permissions": {
+    "notifications": {
+      "deniedTitle": "Benachrichtigungen vom System deaktiviert",
+      "deniedBody": "Push-Benachrichtigungen sind in den Geräteeinstellungen deaktiviert. Öffne die Systemeinstellungen, um sie für St. Mina Connect zuzulassen — In-App-Banner funktionieren in jedem Fall weiter.",
+      "openSystemSettings": "Systemeinstellungen öffnen",
+      "allowLater": "Später erlauben"
     }
   }
 }

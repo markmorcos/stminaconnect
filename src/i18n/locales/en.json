@@ -436,6 +436,16 @@
       "revokeFailed": "Could not revoke your consent. Please try again.",
       "revokeNothingToRevoke": "No active consent to revoke.",
       "loading": "Loading…"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "quietHours": "Quiet hours",
+      "enable": "Enable quiet hours",
+      "enableHint": "Push notifications are silenced during this window. In-app banners still work when you're using the app.",
+      "start": "Start",
+      "end": "End",
+      "save": "Save",
+      "success": "Notification settings saved."
     }
   },
   "admin": {
@@ -668,6 +678,14 @@
       "soft_delete_person": "Remove member",
       "assign_person": "Reassign",
       "mark_notification_read": "Notification read"
+    }
+  },
+  "permissions": {
+    "notifications": {
+      "deniedTitle": "Notifications disabled by OS",
+      "deniedBody": "Push notifications are turned off in your device's settings. Open system settings to allow notifications for St. Mina Connect — in-app banners continue to work either way.",
+      "openSystemSettings": "Open system settings",
+      "allowLater": "Allow later"
     }
   }
 }

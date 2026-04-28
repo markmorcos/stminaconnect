@@ -2,30 +2,30 @@
 
 ## 1. Schema
 
-- [ ] 1.1 `027_expo_push_tokens.sql`: tokens table; RLS owns rows by servant; index on `(servant_id, deactivated_at)`.
-- [ ] 1.2 `028_quiet_hours.sql`: add columns to `servants`: `language`, `quiet_hours_enabled`, `quiet_hours_start`, `quiet_hours_end`.
-- [ ] 1.3 RPC `update_my_notification_settings(language, quiet_hours_enabled, quiet_hours_start, quiet_hours_end)`.
-- [ ] 1.4 RPC `register_push_token(token, device_info)` and `deactivate_push_token(token)`.
+- [x] 1.1 `037_expo_push_tokens.sql`: tokens table; RLS owns rows by servant; index on `(servant_id, deactivated_at)`. (`027` was taken; renumbered to `037`.)
+- [x] 1.2 `038_quiet_hours.sql`: add columns to `servants`: `language`, `quiet_hours_enabled`, `quiet_hours_start`, `quiet_hours_end`. (Renumbered from `028`.)
+- [x] 1.3 RPC `update_my_notification_settings(language, quiet_hours_enabled, quiet_hours_start, quiet_hours_end)` (in `038_quiet_hours.sql`).
+- [x] 1.4 RPC `register_push_token(token, device_info)` and `deactivate_push_token(token)` (in `037_expo_push_tokens.sql`).
 
 ## 2. Edge function
 
-- [ ] 2.1 `supabase/functions/send-push-notification/index.ts`:
+- [x] 2.1 `supabase/functions/send-push-notification/index.ts` (+ `quietHours.ts`, `translate.ts`, `expoPush.ts`):
   - Receives notification id (from trigger payload).
   - Reads notification + recipient + tokens.
   - Computes localized title/body using a small translation table mirrored from app (or via i18next on Deno).
   - Skips if within recipient's quiet hours.
   - POSTs to Expo Push API; processes response receipts; deactivates DeviceNotRegistered tokens.
-- [ ] 2.2 Trigger on `notifications` insert calling the Edge Function via pg_net (admin-mode HTTP).
+- [x] 2.2 Trigger on `notifications` insert calling the Edge Function via pg_net (admin-mode HTTP) (`039_push_dispatch_trigger.sql`; Vault entries seeded via `seed.sql`).
 
 ## 3. Mobile real service
 
-- [ ] 3.1 `src/services/notifications/RealNotificationService.ts`:
-  - `subscribe`: same Realtime subscription as mock.
+- [x] 3.1 `src/services/notifications/RealNotificationService.ts`:
+  - `subscribe`: same Realtime subscription as mock (delegated to a composed `MockNotificationService`).
   - On sign-in: request permission, register token, persist via `register_push_token`.
   - On foreground: refresh token, compare, upsert if changed.
   - On sign-out: call `deactivate_push_token`.
   - Background message handler registers `Notifications.addNotificationResponseReceivedListener` to deep-link via the same `notificationRouter`.
-- [ ] 3.2 Update factory in `src/services/notifications/index.ts` to honour `real` env value.
+- [x] 3.2 Update factory in `src/services/notifications/index.ts` to honour `real` env value.
 
 ## 4. Settings screen
 

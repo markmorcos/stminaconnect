@@ -17,6 +17,7 @@
     },
     "android": {
       "package": "tech.morcos.stminaconnect",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/branding/icon-foreground.png",
         "backgroundColor": "#8B1E2D"
@@ -37,6 +38,7 @@
           "image": "./assets/branding/splash-light.png",
           "resizeMode": "contain",
           "backgroundColor": "#FBF8F4",
+          "enableFullScreenImage_legacy": true,
           "dark": {
             "image": "./assets/branding/splash-dark.png",
             "backgroundColor": "#15110E"

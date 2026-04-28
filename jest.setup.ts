@@ -50,6 +50,7 @@ jest.mock('expo-secure-store', () => {
 // the surface so production imports compile in the test environment.
 jest.mock('react-native-paper-dates', () => ({
   DatePickerModal: () => null,
+  TimePickerModal: () => null,
   registerTranslation: jest.fn(),
   en: {},
   ar: {},

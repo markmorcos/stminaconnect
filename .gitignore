@@ -42,3 +42,7 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+service-account.json
+
+# Supabase Studio's per-developer SQL scratch
+supabase/snippets/

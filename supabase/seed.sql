@@ -339,7 +339,12 @@ begin
   -- Wipe prior entries so re-running is safe (vault.secrets has a
   -- unique constraint on `name`).
   delete from vault.secrets
-   where name in ('sync_calendar_function_url', 'sync_calendar_service_role_key');
+   where name in (
+     'sync_calendar_function_url',
+     'sync_calendar_service_role_key',
+     'send_push_function_url',
+     'send_push_service_role_key'
+   );
 
   -- From inside the Postgres container, the host's 127.0.0.1 is
   -- `host.docker.internal`. Kong serves Edge Functions on the same
@@ -352,6 +357,20 @@ begin
   perform vault.create_secret(
     service_role_key,
     'sync_calendar_service_role_key'
+  );
+
+  -- Phase 17 (`replace-mock-with-real-push`): the AFTER INSERT trigger
+  -- on `notifications` POSTs the row id to `send-push-notification`,
+  -- which fans the dispatch out to Expo Push for every active token of
+  -- the recipient.
+  perform vault.create_secret(
+    'http://host.docker.internal:54321/functions/v1/send-push-notification',
+    'send_push_function_url'
+  );
+
+  perform vault.create_secret(
+    service_role_key,
+    'send_push_service_role_key'
   );
 end
 $$;

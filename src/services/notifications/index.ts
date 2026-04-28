@@ -2,18 +2,26 @@
  * Public entry point for the notifications service.
  *
  * Picks the implementation by `EXPO_PUBLIC_NOTIFICATION_DISPATCHER`
- * (default: `'mock'`). The `'real'` value is documented but currently
- * resolves to the mock — the real implementation lands in phase 17 and
- * will replace the right-hand side of the switch without changing
- * callers. The `useNotificationService()` hook is the only way feature
- * code is allowed to dispatch notifications (see the notifications
- * capability spec).
+ * (default: `'mock'`). `'real'` selects `RealNotificationService` —
+ * the real-push impl that registers an Expo push token, surfaces OS
+ * notifications, and forwards taps to `notificationRouter`. The mock
+ * stays available for tests and for environments without dev-build
+ * native modules. The `useNotificationService()` hook is the only way
+ * feature code is allowed to dispatch notifications (see the
+ * notifications capability spec).
  */
 import { createContext, useContext } from 'react';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 import { useAuthStore } from '@/state/authStore';
 
 import { MockNotificationService } from './MockNotificationService';
+import {
+  RealNotificationService,
+  type ConstantsApi,
+  type NotificationsApi,
+} from './RealNotificationService';
 import type { NotificationService } from './NotificationService';
 
 export type DispatcherImpl = 'mock' | 'real';
@@ -26,13 +34,26 @@ function readDispatcherEnv(): DispatcherImpl {
 export function createNotificationService(
   impl: DispatcherImpl = readDispatcherEnv(),
 ): NotificationService {
-  // 'real' falls through to the mock today — the slot exists so phase 17
-  // can land without touching callers. Don't throw: that would crash any
-  // app that ships with the env flag set early.
-  void impl;
-  return new MockNotificationService({
-    getServantId: () => useAuthStore.getState().servant?.id ?? null,
-  });
+  const getServantId = () => useAuthStore.getState().servant?.id ?? null;
+
+  if (impl === 'real') {
+    // Adapt the real expo-notifications + expo-constants modules to the
+    // narrow interfaces RealNotificationService accepts. The cast is
+    // safe: the runtime shape matches; the narrow types simply scope
+    // what we depend on so tests can stub easily.
+    const notificationsApi = Notifications as unknown as NotificationsApi;
+    const constantsApi: ConstantsApi = {
+      expoConfig: Constants.expoConfig as ConstantsApi['expoConfig'],
+      deviceName: Constants.deviceName ?? null,
+    };
+    return new RealNotificationService({
+      getServantId,
+      notifications: notificationsApi,
+      constants: constantsApi,
+    });
+  }
+
+  return new MockNotificationService({ getServantId });
 }
 
 export const NotificationServiceContext = createContext<NotificationService | null>(null);

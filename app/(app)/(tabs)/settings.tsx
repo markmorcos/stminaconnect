@@ -36,6 +36,12 @@ export default function SettingsTab() {
       href: '/settings/language',
     },
     {
+      key: 'notifications',
+      label: t('settings.notifications.title'),
+      icon: 'messageCircle',
+      href: '/settings/notifications',
+    },
+    {
       key: 'accessibility',
       label: t('settings.accessibility.title'),
       icon: 'heart',

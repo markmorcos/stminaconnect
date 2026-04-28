@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1077502091892",
+    "project_id": "stminaconnect",
+    "storage_bucket": "stminaconnect.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077502091892:android:f15615e7430233f14ba721",
+        "android_client_info": {
+          "package_name": "tech.morcos.stminaconnect"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE9q3_OpgMCr4LANzZA-fN4bQsSc7E1zw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
