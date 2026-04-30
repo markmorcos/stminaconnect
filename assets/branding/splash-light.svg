@@ -1,17 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1284 2778" width="1284" height="2778">
-  <title>St. Mina Connect — Splash (Light)</title>
-  <rect width="1284" height="2778" fill="#FBF8F4"/>
-  <!-- Glyph centered at ~56% of the shorter dimension. -->
-  <g transform="translate(642 1389) scale(0.7)">
-    <g transform="translate(-512 -512)">
-      <g fill="#8B1E2D">
-        <rect x="432" y="208" width="160" height="608" rx="16"/>
-        <rect x="208" y="432" width="608" height="160" rx="16"/>
-      </g>
-      <g fill="#C9A961">
-        <rect x="488" y="304" width="48" height="416" rx="8"/>
-        <rect x="304" y="488" width="416" height="48" rx="8"/>
-      </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>St. Mina Connect — Splash Logo (Light)</title>
+  <g fill="#8B1E2D">
+    <rect x="432" y="48" width="160" height="928" rx="16"/>
+    <rect x="48" y="432" width="928" height="160" rx="16"/>
+  </g>
+  <g fill="#C9A961">
+    <rect x="488" y="160" width="48" height="704" rx="8"/>
+    <rect x="160" y="488" width="704" height="48" rx="8"/>
   </g>
 </svg>

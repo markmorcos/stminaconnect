@@ -237,7 +237,7 @@ keeps the universal English name; everything else is translated.
 - `assets/branding/icon.svg` — source SVG of the icon glyph
 - `assets/branding/icon-source.png` — 1024 × 1024 raster (iOS)
 - `assets/branding/icon-foreground.png` — 432 × 432 transparent (Android)
-- `assets/branding/splash-light.png` — 1284 × 2778 light splash
-- `assets/branding/splash-dark.png` — 1284 × 2778 dark splash
+- `assets/branding/splash-light.png` — 1024 × 1024 transparent splash logo (light)
+- `assets/branding/splash-dark.png` — 1024 × 1024 transparent splash logo (dark)
 - `src/design/components/Logo.tsx` — component (mark + combined variants)
 - `src/branding/church.ts` — church identity (read by About screen)
