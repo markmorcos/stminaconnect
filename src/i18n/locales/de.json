@@ -603,7 +603,27 @@
         },
         "row": "{{action}} bei {{target}} — {{when}}",
         "empty": "Keine Audit-Einträge passen.",
-        "loadMore": "Mehr laden"
+        "loadMore": "Mehr laden",
+        "actions": {
+          "consent": {
+            "accept": "Einwilligung erteilt",
+            "revoke": "Einwilligung widerrufen"
+          },
+          "data": {
+            "export": {
+              "self": "Eigener Datenexport",
+              "person": "Personen-Datenexport"
+            }
+          },
+          "member": {
+            "erase": "Person gelöscht"
+          },
+          "servant": {
+            "self_erase": "Konto gelöscht",
+            "role_change": "Rolle geändert",
+            "activation_change": "Aktivierung geändert"
+          }
+        }
       }
     }
   },

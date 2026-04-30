@@ -603,7 +603,27 @@
         },
         "row": "{{action}} on {{target}} — {{when}}",
         "empty": "No audit entries match.",
-        "loadMore": "Load more"
+        "loadMore": "Load more",
+        "actions": {
+          "consent": {
+            "accept": "Consent accepted",
+            "revoke": "Consent revoked"
+          },
+          "data": {
+            "export": {
+              "self": "Self data export",
+              "person": "Person data export"
+            }
+          },
+          "member": {
+            "erase": "Person erased"
+          },
+          "servant": {
+            "self_erase": "Account erased",
+            "role_change": "Role changed",
+            "activation_change": "Activation changed"
+          }
+        }
       }
     }
   },

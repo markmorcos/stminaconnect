@@ -172,7 +172,9 @@ export default function AdminComplianceScreen() {
                 <View style={{ padding: spacing.lg }}>
                   <Text variant="body">
                     {t('admin.compliance.audit.row', {
-                      action: row.action,
+                      action: t(`admin.compliance.audit.actions.${row.action}`, {
+                        defaultValue: row.action,
+                      }),
                       target:
                         row.target_type && row.target_id
                           ? `${row.target_type}:${row.target_id.slice(0, 8)}`

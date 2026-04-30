@@ -639,7 +639,27 @@
         },
         "row": "{{action}} على {{target}} — {{when}}",
         "empty": "لا توجد إدخالات تدقيق مطابقة.",
-        "loadMore": "تحميل المزيد"
+        "loadMore": "تحميل المزيد",
+        "actions": {
+          "consent": {
+            "accept": "تم قبول الموافقة",
+            "revoke": "تم سحب الموافقة"
+          },
+          "data": {
+            "export": {
+              "self": "تصدير بيانات شخصية",
+              "person": "تصدير بيانات مخدوم"
+            }
+          },
+          "member": {
+            "erase": "تم حذف المخدوم"
+          },
+          "servant": {
+            "self_erase": "تم حذف الحساب",
+            "role_change": "تم تغيير الدور",
+            "activation_change": "تم تغيير التفعيل"
+          }
+        }
       }
     }
   },

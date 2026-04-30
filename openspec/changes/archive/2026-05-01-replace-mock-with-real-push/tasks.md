@@ -29,29 +29,29 @@
 
 ## 4. Settings screen
 
-- [ ] 4.1 `app/(app)/settings/notifications.tsx`: enable toggle + two time pickers + save.
-- [ ] 4.2 If OS permission denied: show "Notifications disabled by OS" + button → `Linking.openSettings()`.
+- [x] 4.1 `app/(app)/settings/notifications.tsx`: enable toggle + two time pickers + save.
+- [x] 4.2 If OS permission denied: show "Notifications disabled by OS" + button → `Linking.openSettings()`.
 
 ## 5. Translations
 
-- [ ] 5.1 `settings.notifications.*`: title, quietHours, enable, start, end, save, success.
-- [ ] 5.2 `permissions.notifications.*`: deniedTitle, deniedBody, openSystemSettings, allowLater.
+- [x] 5.1 `settings.notifications.*`: title, quietHours, enable, start, end, save, success.
+- [x] 5.2 `permissions.notifications.*`: deniedTitle, deniedBody, openSystemSettings, allowLater.
 
 ## 6. Tests
 
-- [ ] 6.1 Unit (Deno): quiet-hours window logic including midnight crossover.
-- [ ] 6.2 Unit (Deno): translation fallback to en.
-- [ ] 6.3 Integration (mocked Expo Push API): notification with recipient in quiet hours skips Expo POST but still creates in-app row.
-- [ ] 6.4 Integration: DeviceNotRegistered receipt deactivates token.
-- [ ] 6.5 Component: settings form persists and reloads.
-- [ ] 6.6 Component: factory returns RealNotificationService when env var is `real`.
+- [x] 6.1 Unit (Deno): quiet-hours window logic including midnight crossover.
+- [x] 6.2 Unit (Deno): translation fallback to en.
+- [x] 6.3 Integration (mocked Expo Push API): notification with recipient in quiet hours skips Expo POST but still creates in-app row.
+- [x] 6.4 Integration: DeviceNotRegistered receipt deactivates token.
+- [x] 6.5 Component: settings form persists and reloads.
+- [x] 6.6 Component: factory returns RealNotificationService when env var is `real`.
 
 ## 7. Verification (in dev client)
 
-- [ ] 7.1 Sign in → permission prompt accepted → token row appears in DB.
-- [ ] 7.2 Trigger an absence detection while app is backgrounded → OS push notification appears in tray; tap → app opens to person profile.
-- [ ] 7.3 Foreground app + insert another notification → in-app banner (no OS tray duplicate).
-- [ ] 7.4 Set quiet hours 22:00–07:00; trigger notification at 23:00 → no OS push; in-app row created; on next foreground banner appears.
-- [ ] 7.5 Sign out → token deactivated; subsequent dispatch produces no push.
-- [ ] 7.6 Uninstall app; trigger dispatch → Expo returns DeviceNotRegistered; token deactivated automatically.
-- [ ] 7.7 `openspec validate replace-mock-with-real-push` passes.
+- [x] 7.1 Sign in → permission prompt accepted → token row appears in DB.
+- [x] 7.2 Trigger an absence detection while app is backgrounded → OS push notification appears in tray; tap → app opens to person profile.
+- [x] 7.3 Foreground app + insert another notification → in-app banner (no OS tray duplicate).
+- [x] 7.4 Set quiet hours 22:00–07:00; trigger notification at 23:00 → no OS push; in-app row created; on next foreground banner appears.
+- [x] 7.5 Sign out → token deactivated; subsequent dispatch produces no push.
+- [x] 7.6 Uninstall app; trigger dispatch → Expo returns DeviceNotRegistered; token deactivated automatically.
+- [x] 7.7 `openspec validate replace-mock-with-real-push` passes.

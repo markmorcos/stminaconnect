@@ -55,8 +55,15 @@ export interface DispatchOutcome {
 }
 
 interface Deps {
-  /** Service-role Supabase client. */
-  db: ReturnType<typeof createClient>;
+  /**
+   * Service-role Supabase client. Typed as `unknown`-ish because the
+   * `createClient` generic surface (schema name, table types) shifts
+   * across `@supabase/supabase-js` minor versions and the dispatch
+   * code only depends on the narrow `from(...).select/.eq/.update`
+   * shape — which both production and the test fakes satisfy.
+   */
+  // deno-lint-ignore no-explicit-any
+  db: any;
   /** Client over the Expo Push API. */
   expo: ExpoPushClient;
   /** Override "now" in tests. */
@@ -163,39 +170,45 @@ async function readNotificationId(req: Request): Promise<string | null> {
   }
 }
 
-// @ts-ignore — Deno.serve provided by Edge Runtime.
-Deno.serve(async (req: Request) => {
-  if (req.method !== 'POST') {
-    return new Response(JSON.stringify({ outcome: 'error', error: 'method not allowed' }), {
-      status: 405,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
+// `Deno.serve` is only started when this module is the entrypoint —
+// when the test runner imports `dispatch` it must not bind a port (the
+// default sandboxed `deno test` has no `--allow-net`).
+// @ts-ignore — `import.meta.main` is provided by Deno.
+if (import.meta.main) {
+  // @ts-ignore — Deno.serve provided by Edge Runtime.
+  Deno.serve(async (req: Request) => {
+    if (req.method !== 'POST') {
+      return new Response(JSON.stringify({ outcome: 'error', error: 'method not allowed' }), {
+        status: 405,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
 
-  const notificationId = await readNotificationId(req);
-  if (!notificationId) {
-    return new Response(JSON.stringify({ outcome: 'error', error: 'notification_id missing' }), {
-      status: 400,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
+    const notificationId = await readNotificationId(req);
+    if (!notificationId) {
+      return new Response(JSON.stringify({ outcome: 'error', error: 'notification_id missing' }), {
+        status: 400,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
 
-  try {
-    const supabaseUrl = readEnvOrThrow('SUPABASE_URL');
-    const serviceRoleKey = readEnvOrThrow('SUPABASE_SERVICE_ROLE_KEY');
-    const db = createClient(supabaseUrl, serviceRoleKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
-    const expo = createExpoPushClient();
-    const result = await dispatch(notificationId, { db, expo });
-    return new Response(JSON.stringify(result), {
-      status: 200,
-      headers: { 'content-type': 'application/json' },
-    });
-  } catch (e) {
-    return new Response(JSON.stringify({ outcome: 'error', error: (e as Error).message }), {
-      status: 500,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
-});
+    try {
+      const supabaseUrl = readEnvOrThrow('SUPABASE_URL');
+      const serviceRoleKey = readEnvOrThrow('SUPABASE_SERVICE_ROLE_KEY');
+      const db = createClient(supabaseUrl, serviceRoleKey, {
+        auth: { persistSession: false, autoRefreshToken: false },
+      });
+      const expo = createExpoPushClient();
+      const result = await dispatch(notificationId, { db, expo });
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers: { 'content-type': 'application/json' },
+      });
+    } catch (e) {
+      return new Response(JSON.stringify({ outcome: 'error', error: (e as Error).message }), {
+        status: 500,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
+  });
+}
