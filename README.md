@@ -51,27 +51,27 @@ service_role key: eyJhbGciOiJI...
 
 Copy `API URL` → `EXPO_PUBLIC_SUPABASE_URL`, `anon key` → `EXPO_PUBLIC_SUPABASE_ANON_KEY` in `.env.local`. The `service_role key` is for Edge Functions only — never bundle it into the client.
 
-### Email-code sign-in
+### Sign-in (magic link)
 
-The sign-in screen has a fallback "Email me a code instead" mode. In dev:
+Magic link is the only sign-in path. In dev:
 
-1. Tap "Email me a code instead" → enter your email → tap **Send code**.
-2. Open Mailpit at http://127.0.0.1:54324. The latest message is titled "Your Magic Link" and contains a 6-digit code (e.g. `Alternatively, enter the code: 763938`).
-3. **Dev client (recommended):** tap the magic-link URL in the email on the same device — the OS opens the dev client via `stminaconnect://auth/callback?code=…` and you land on home with no manual code entry. **Expo Go (legacy):** type the 6-digit code into the app → tap **Verify**.
+1. Sign-in screen → enter email → tap **Send magic link**.
+2. Open Mailpit at http://127.0.0.1:54324. The latest message contains a `stminaconnect://auth/callback?code=…` URL.
+3. Tap the link **on the same device** as the dev client. The OS opens the app, the callback exchanges the PKCE code, and you land on home.
 
 `additional_redirect_urls` in `supabase/config.toml` lists `stminaconnect://auth/callback`. Troubleshooting: see [`docs/dev-build.md`](docs/dev-build.md) § 5.
 
 ### Seed accounts (after `make seed`)
 
-`make seed` resets the dev fixture every time it runs. Sign in with:
+`make seed` resets the dev fixture every time it runs. Each seed user is signed in via magic link — request one from the sign-in screen and tap it from Mailpit.
 
-| Email                | Password      | Role    |
-| -------------------- | ------------- | ------- |
-| `priest@stmina.de`   | `password123` | admin   |
-| `servant1@stmina.de` | `password123` | servant |
-| `servant2@stmina.de` | `password123` | servant |
-| `servant3@stmina.de` | `password123` | servant |
-| `servant4@stmina.de` | `password123` | servant |
+| Email                | Role    |
+| -------------------- | ------- |
+| `priest@stmina.de`   | admin   |
+| `servant1@stmina.de` | servant |
+| `servant2@stmina.de` | servant |
+| `servant3@stmina.de` | servant |
+| `servant4@stmina.de` | servant |
 
 The fixture also inserts 20 sample persons across regions and languages so
 the persons list and profile screens have content to render.

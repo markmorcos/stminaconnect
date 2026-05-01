@@ -15,16 +15,14 @@ export interface AuthState {
    */
   isHydrated: boolean;
   /**
-   * True while an action (signIn / verifyEmailOtp / signOut / …) is
-   * in flight. Screens use this to disable buttons; layouts MUST NOT
+   * True while an action (signInWithMagicLink / signOut / …) is in
+   * flight. Screens use this to disable buttons; layouts MUST NOT
    * gate on it (toggling it during a sign-in would otherwise unmount
    * the screen and lose its local form state).
    */
   isLoading: boolean;
   error: string | null;
-  signIn: (email: string, password: string) => Promise<void>;
   signInWithMagicLink: (email: string, redirectTo?: string) => Promise<void>;
-  verifyEmailOtp: (email: string, token: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
   /**
@@ -33,12 +31,6 @@ export interface AuthState {
    * a round-trip back to `fetchMyServant`.
    */
   setServant: (partial: Partial<ServantRow>) => void;
-  /**
-   * Re-fetches the joined servant row and replaces the store value.
-   * Used after auth-side mutations (password change) where the row
-   * itself is unchanged but a refresh keeps the contract consistent.
-   */
-  refreshServant: () => Promise<void>;
 }
 
 // eslint-disable-next-line import/no-named-as-default-member -- i18next exposes its API on the default export
@@ -46,14 +38,12 @@ const orphanError = (): string => i18next.t('auth.errors.orphan');
 // eslint-disable-next-line import/no-named-as-default-member
 const signInFailedError = (): string => i18next.t('auth.errors.signInFailed');
 // eslint-disable-next-line import/no-named-as-default-member
-const invalidCodeError = (): string => i18next.t('auth.errors.invalidOrExpiredCode');
-// eslint-disable-next-line import/no-named-as-default-member
 const loadProfileError = (): string => i18next.t('auth.errors.loadServantFailed');
 
 /**
  * Translates a Supabase AuthError into a user-facing string. We map
- * the handful of codes a user actually hits during sign-in / OTP and
- * fall through to a generic message for the rest — better than
+ * the handful of codes a user actually hits during magic-link send
+ * and fall through to a generic message for the rest — better than
  * showing GoTrue's English `error.message` when the UI is in
  * Arabic / German.
  */
@@ -69,12 +59,6 @@ function mapAuthError(error: AuthError | null | undefined, fallback: () => strin
     return i18next.t('auth.errors.network');
   }
   switch (error.code) {
-    case 'invalid_credentials':
-      // eslint-disable-next-line import/no-named-as-default-member
-      return i18next.t('auth.errors.invalidCredentials');
-    case 'email_not_confirmed':
-      // eslint-disable-next-line import/no-named-as-default-member
-      return i18next.t('auth.errors.emailNotConfirmed');
     case 'over_request_rate_limit':
     case 'over_email_send_rate_limit':
       // eslint-disable-next-line import/no-named-as-default-member
@@ -122,33 +106,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
-  async signIn(email, password) {
-    set({ isLoading: true, error: null });
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error || !data.session) {
-      set({
-        isLoading: false,
-        error: mapAuthError(error, signInFailedError),
-        session: null,
-        servant: null,
-      });
-      return;
-    }
-    try {
-      const servant = await fetchMyServant();
-      if (!servant) {
-        await supabase.auth.signOut();
-        set({ session: null, servant: null, isLoading: false, error: orphanError() });
-        return;
-      }
-      set({ session: data.session, servant, isLoading: false, error: null });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : loadProfileError();
-      await supabase.auth.signOut();
-      set({ session: null, servant: null, isLoading: false, error: message });
-    }
-  },
-
   async signInWithMagicLink(email, redirectTo) {
     set({ isLoading: true, error: null });
     const { error } = await supabase.auth.signInWithOtp({
@@ -165,32 +122,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: false, error: null });
   },
 
-  async verifyEmailOtp(email, token) {
-    set({ isLoading: true, error: null });
-    const { data, error } = await supabase.auth.verifyOtp({
-      email,
-      token,
-      type: 'email',
-    });
-    if (error || !data.session) {
-      set({ isLoading: false, error: mapAuthError(error, invalidCodeError) });
-      return;
-    }
-    try {
-      const servant = await fetchMyServant();
-      if (!servant) {
-        await supabase.auth.signOut();
-        set({ session: null, servant: null, isLoading: false, error: orphanError() });
-        return;
-      }
-      set({ session: data.session, servant, isLoading: false, error: null });
-    } catch (err) {
-      const message = err instanceof Error ? err.message : loadProfileError();
-      await supabase.auth.signOut();
-      set({ session: null, servant: null, isLoading: false, error: message });
-    }
-  },
-
   async signOut() {
     set({ isLoading: true });
     await supabase.auth.signOut().catch(() => null);
@@ -201,18 +132,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     const current = get().servant;
     if (!current) return;
     set({ servant: { ...current, ...partial } });
-  },
-
-  async refreshServant() {
-    const session = get().session;
-    if (!session) return;
-    try {
-      const servant = await fetchMyServant();
-      if (!servant) return;
-      set({ servant });
-    } catch {
-      /* best-effort; failure is silent — caller can retry */
-    }
   },
 }));
 
@@ -238,9 +157,10 @@ export function bootstrapAuth(): () => void {
       return;
     }
     // Don't toggle isLoading here — the action that triggered the auth
-    // change (e.g. verifyEmailOtp) already manages it, and layouts are
-    // gated on isHydrated, not isLoading. We just refresh the joined
-    // servant row whenever the underlying session changes.
+    // change (e.g. exchangeCodeForSession on the callback screen)
+    // already manages it, and layouts are gated on isHydrated, not
+    // isLoading. We just refresh the joined servant row whenever the
+    // underlying session changes.
     useAuthStore.setState({ session });
     fetchMyServant()
       .then(async (servant) => {

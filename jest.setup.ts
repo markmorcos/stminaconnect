@@ -101,12 +101,11 @@ jest.mock('@/services/api/supabase', () => ({
   supabase: {
     auth: {
       getSession: jest.fn(async () => ({ data: { session: null }, error: null })),
-      signInWithPassword: jest.fn(),
       signInWithOtp: jest.fn(),
-      verifyOtp: jest.fn(),
       signOut: jest.fn(async () => ({ error: null })),
       onAuthStateChange: jest.fn(() => ({ data: { subscription: { unsubscribe: jest.fn() } } })),
       exchangeCodeForSession: jest.fn(),
+      setSession: jest.fn(),
     },
     rpc: jest.fn(async () => ({ data: null, error: null })),
     from: jest.fn(() => ({

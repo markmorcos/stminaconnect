@@ -85,23 +85,23 @@ Configured in `eas.json`:
 
 ## 5. Magic-link deep link (`stminaconnect://auth/callback`)
 
-The custom URL scheme `stminaconnect` is registered in `app.json` and is wired through to the dev client by EAS. After installing the dev client:
+The custom URL scheme `stminaconnect` is registered in `app.json` and is wired through to the dev client by EAS. The magic-link flow is the **only** sign-in path:
 
-1. Sign-in screen → "Email me a code instead" → enter email → "Send code".
+1. Sign-in screen → enter email → "Send magic link".
 2. Open the email **on the same device** as the dev client.
-3. Tap the magic link (the URL starting with `stminaconnect://auth/callback?code=…`).
-4. The OS opens the dev client; `app/(auth)/callback.tsx` calls `exchangeCodeForSession`, the auth store hydrates, and you land on the home screen — no manual code entry.
+3. Tap the link (the URL starting with `stminaconnect://auth/callback?code=…`).
+4. The OS opens the dev client; `app/auth/callback.tsx` calls `exchangeCodeForSession`, the auth store hydrates, and you land on the home screen.
 
-The OTP code in the same email keeps working as a fallback when the email is opened on a different device.
+The callback screen wraps the exchange in a 10-second wall-clock timeout. If the exchange never resolves (e.g., the app was reinstalled and the PKCE code-verifier was lost from SecureStore), the screen redirects to `/sign-in` rather than spinning indefinitely.
 
 ### Troubleshooting magic-link
 
 If tapping the link doesn't open the app:
 
 - Confirm the scheme is registered: open the dev-client build's `Info.plist` (iOS) or `AndroidManifest.xml` (Android) — should contain `stminaconnect`. If not, rebuild the dev client.
-- Confirm Supabase's redirect allow-list contains `stminaconnect://auth/callback` (`supabase/config.toml` `additional_redirect_urls`).
+- Confirm Supabase's redirect allow-list contains `stminaconnect://auth/callback` (`supabase/config.toml` `additional_redirect_urls` for local; Authentication → URL Configuration on the hosted dashboard).
 - Check the GoTrue version: older versions silently fall back to `site_url` for unknown schemes. Local Supabase CLI usually keeps GoTrue current.
-- Worst case: paste the 6-digit OTP code instead. The link path is a UX nicety, not a security boundary.
+- If the callback redirects you back to `/sign-in` within ~10 seconds, the device is missing the PKCE code-verifier (most often after a reinstall). Re-request a fresh link from the sign-in screen.
 
 ## 6. Versioning
 

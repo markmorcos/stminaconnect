@@ -8,34 +8,18 @@ import { z, type ZodSchema } from 'zod';
 import { Button, Input, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
 
-type Mode = 'password' | 'magic-link';
-
-function buildSchemas(t: ReturnType<typeof useTranslation>['t']) {
-  const passwordSchema = z.object({
-    email: z.string().email(t('auth.signIn.errors.invalidEmail')),
-    password: z.string().min(6, t('auth.signIn.errors.passwordTooShort')),
-  });
-  const magicLinkSchema = z.object({
+function buildSchema(t: ReturnType<typeof useTranslation>['t']) {
+  return z.object({
     email: z.string().email(t('auth.signIn.errors.invalidEmail')),
   });
-  const otpSchema = z.object({
-    token: z
-      .string()
-      .min(6, t('auth.signIn.errors.codeLength'))
-      .max(6, t('auth.signIn.errors.codeLength'))
-      .regex(/^\d+$/, t('auth.signIn.errors.codeDigitsOnly')),
-  });
-  return { passwordSchema, magicLinkSchema, otpSchema };
 }
 
-type PasswordValues = { email: string; password: string };
 type MagicLinkValues = { email: string };
-type OtpValues = { token: string };
 
 /**
- * Tiny Zod resolver — avoids pulling in `@hookform/resolvers` for two
- * forms. Mirrors the official adapter's shape closely enough that the
- * upgrade path is a one-line swap when more forms appear.
+ * Tiny Zod resolver — avoids pulling in `@hookform/resolvers` for a
+ * single form. Matches the official adapter's shape closely enough that
+ * the upgrade path is a one-line swap if more forms appear.
  */
 function zodResolver<T extends Record<string, unknown>>(schema: ZodSchema<T>): Resolver<T> {
   return async (values) => {
@@ -58,10 +42,16 @@ function zodResolver<T extends Record<string, unknown>>(schema: ZodSchema<T>): R
 export default function SignInScreen() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
-  const { signIn, signInWithMagicLink, verifyEmailOtp, isLoading, error } = useAuth();
-  const [mode, setMode] = useState<Mode>('password');
+  const { signInWithMagicLink, isLoading, error } = useAuth();
   const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const [snack, setSnack] = useState<string | null>(null);
+
+  async function sendLink(email: string) {
+    const redirectTo = Linking.createURL('/auth/callback');
+    await signInWithMagicLink(email, redirectTo);
+    setPendingEmail(email);
+    setSnack(t('auth.signIn.linkSentSnack'));
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -82,51 +72,23 @@ export default function SignInScreen() {
           </Text>
         </Stack>
 
-        {mode === 'password' ? (
-          <PasswordModeForm
+        {pendingEmail === null ? (
+          <MagicLinkForm
             disabled={isLoading}
             onSubmit={async (values) => {
-              await signIn(values.email.trim(), values.password);
-            }}
-          />
-        ) : pendingEmail === null ? (
-          <MagicLinkModeForm
-            disabled={isLoading}
-            onSubmit={async (values) => {
-              // Production standalone builds with the `stminaconnect://`
-              // scheme can tap the magic-link URL in the email. Expo Go
-              // ignores it and follows the 6-digit OTP path below — the
-              // local GoTrue silently rejects `exp://` redirects.
-              const redirectTo = Linking.createURL('/auth/callback');
-              await signInWithMagicLink(values.email.trim(), redirectTo);
-              setPendingEmail(values.email.trim());
-              setSnack(t('auth.signIn.codeSentSnack'));
+              await sendLink(values.email.trim());
             }}
           />
         ) : (
-          <OtpModeForm
+          <CheckYourInbox
             email={pendingEmail}
             disabled={isLoading}
-            onSubmit={async (values) => {
-              await verifyEmailOtp(pendingEmail, values.token);
+            onResend={async () => {
+              await sendLink(pendingEmail);
             }}
-            onBack={() => setPendingEmail(null)}
+            onUseDifferentEmail={() => setPendingEmail(null)}
           />
         )}
-
-        {pendingEmail === null ? (
-          <Pressable
-            accessibilityRole="link"
-            onPress={() => setMode((m) => (m === 'password' ? 'magic-link' : 'password'))}
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          >
-            <Text variant="body" color={colors.primary} align="center">
-              {mode === 'password'
-                ? t('auth.signIn.switchToMagicLink')
-                : t('auth.signIn.switchToPassword')}
-            </Text>
-          </Pressable>
-        ) : null}
       </ScrollView>
 
       <Snackbar
@@ -145,65 +107,7 @@ export default function SignInScreen() {
   );
 }
 
-function PasswordModeForm({
-  disabled,
-  onSubmit,
-}: {
-  disabled: boolean;
-  onSubmit: (values: PasswordValues) => Promise<void>;
-}) {
-  const { t } = useTranslation();
-  const { passwordSchema } = buildSchemas(t);
-  const { control, handleSubmit, formState } = useForm<PasswordValues>({
-    defaultValues: { email: '', password: '' },
-    resolver: zodResolver(passwordSchema),
-  });
-  return (
-    <Stack gap="md">
-      <Controller
-        control={control}
-        name="email"
-        render={({ field }) => (
-          <Input
-            label={t('auth.signIn.emailLabel')}
-            autoCapitalize="none"
-            autoComplete="email"
-            keyboardType="email-address"
-            value={field.value}
-            onChangeText={field.onChange}
-            onBlur={field.onBlur}
-            error={formState.errors.email?.message}
-          />
-        )}
-      />
-      <Controller
-        control={control}
-        name="password"
-        render={({ field }) => (
-          <Input
-            label={t('auth.signIn.passwordLabel')}
-            secureTextEntry
-            autoCapitalize="none"
-            autoComplete="password"
-            value={field.value}
-            onChangeText={field.onChange}
-            onBlur={field.onBlur}
-            error={formState.errors.password?.message}
-          />
-        )}
-      />
-      <Button
-        onPress={handleSubmit(onSubmit)}
-        loading={disabled || formState.isSubmitting}
-        disabled={disabled || formState.isSubmitting}
-      >
-        {t('auth.signIn.submitPassword')}
-      </Button>
-    </Stack>
-  );
-}
-
-function MagicLinkModeForm({
+function MagicLinkForm({
   disabled,
   onSubmit,
 }: {
@@ -211,10 +115,10 @@ function MagicLinkModeForm({
   onSubmit: (values: MagicLinkValues) => Promise<void>;
 }) {
   const { t } = useTranslation();
-  const { magicLinkSchema } = buildSchemas(t);
+  const schema = buildSchema(t);
   const { control, handleSubmit, formState } = useForm<MagicLinkValues>({
     defaultValues: { email: '' },
-    resolver: zodResolver(magicLinkSchema),
+    resolver: zodResolver(schema),
   });
   return (
     <Stack gap="md">
@@ -245,55 +149,37 @@ function MagicLinkModeForm({
   );
 }
 
-function OtpModeForm({
+function CheckYourInbox({
   email,
   disabled,
-  onSubmit,
-  onBack,
+  onResend,
+  onUseDifferentEmail,
 }: {
   email: string;
   disabled: boolean;
-  onSubmit: (values: OtpValues) => Promise<void>;
-  onBack: () => void;
+  onResend: () => Promise<void>;
+  onUseDifferentEmail: () => void;
 }) {
   const { t } = useTranslation();
-  const { otpSchema } = buildSchemas(t);
   const { colors } = useTokens();
-  const { control, handleSubmit, formState } = useForm<OtpValues>({
-    defaultValues: { token: '' },
-    resolver: zodResolver(otpSchema),
-  });
   return (
     <Stack gap="md">
       <Text variant="body" color={colors.textMuted}>
-        {t('auth.signIn.otpInstruction', { email })}
+        {t('auth.signIn.checkYourInbox', { email })}
       </Text>
-      <Controller
-        control={control}
-        name="token"
-        render={({ field }) => (
-          <Input
-            label={t('auth.signIn.otpLabel')}
-            keyboardType="number-pad"
-            autoComplete="one-time-code"
-            maxLength={6}
-            value={field.value}
-            onChangeText={field.onChange}
-            onBlur={field.onBlur}
-            error={formState.errors.token?.message}
-          />
-        )}
-      />
-      <Button
-        onPress={handleSubmit(onSubmit)}
-        loading={disabled || formState.isSubmitting}
-        disabled={disabled || formState.isSubmitting}
-      >
-        {t('auth.signIn.submitOtp')}
-      </Button>
       <Pressable
         accessibilityRole="link"
-        onPress={onBack}
+        onPress={onResend}
+        disabled={disabled}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+      >
+        <Text variant="body" color={colors.primary} align="center">
+          {t('auth.signIn.resendLink')}
+        </Text>
+      </Pressable>
+      <Pressable
+        accessibilityRole="link"
+        onPress={onUseDifferentEmail}
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       >
         <Text variant="body" color={colors.primary} align="center">

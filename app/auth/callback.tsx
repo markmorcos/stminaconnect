@@ -10,17 +10,25 @@ import { supabase } from '@/services/api/supabase';
 type Status = 'pending' | 'done' | 'error';
 
 /**
+ * Wall-clock cap on the supabase auth round-trip. Without this, a
+ * missing PKCE code-verifier (e.g. link tapped after reinstall) leaves
+ * `exchangeCodeForSession` awaiting indefinitely on storage that will
+ * never have the value, and the user sits on the spinner forever.
+ */
+const EXCHANGE_TIMEOUT_MS = 10_000;
+
+/**
  * Handles the magic-link redirect. Two URL shapes can land here:
  *
- *   1. PKCE / OTP flow → `?code=…` query param. Exchanged via
+ *   1. PKCE flow → `?code=…` query param. Exchanged via
  *      `exchangeCodeForSession`. This is the path `signInWithOtp` uses.
  *   2. Implicit flow (Supabase invite emails) → `#access_token=…&
  *      refresh_token=…&type=invite` in the URL fragment. Set directly
  *      via `setSession`.
  *
  * The screen also subscribes to live URL events: if the app is already
- * running in Expo Go when the user taps the email link, the OS pushes
- * the URL through the Linking listener rather than the cold-start
+ * running when the user taps the email link, the OS pushes the URL
+ * through the Linking listener rather than the cold-start
  * `getInitialURL` call.
  */
 export default function AuthCallback() {
@@ -41,24 +49,27 @@ export default function AuthCallback() {
         const refreshToken = fragment.get('refresh_token');
 
         if (code) {
-          const { error } = await supabase.auth.exchangeCodeForSession(code);
+          const { error } = await withTimeout(
+            supabase.auth.exchangeCodeForSession(code),
+            EXCHANGE_TIMEOUT_MS,
+          );
           if (error) throw error;
           if (!cancelled) setStatus('done');
         } else if (accessToken && refreshToken) {
-          const { error } = await supabase.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          });
+          const { error } = await withTimeout(
+            supabase.auth.setSession({
+              access_token: accessToken,
+              refresh_token: refreshToken,
+            }),
+            EXCHANGE_TIMEOUT_MS,
+          );
           if (error) throw error;
           if (!cancelled) setStatus('done');
         } else {
-          // No auth payload reached us. On Android Expo Go this is the
-          // expected outcome of an invite/magic-link tap: the OS strips
-          // the URL path + fragment when handing off the custom scheme,
-          // so the access_token never reaches the app. Bail to sign-in
-          // immediately rather than spinning — the user can paste the
-          // 6-digit code from the email if their flow includes one, or
-          // open the link from a dev-build (which preserves the URL).
+          // No auth payload reached us. On Android with custom URL
+          // schemes the OS sometimes strips the URL path + fragment
+          // when handing off, so the access_token never reaches the
+          // app. Bail to sign-in immediately rather than spinning.
           if (!cancelled) setStatus('error');
         }
       } catch {
@@ -99,4 +110,27 @@ function extractFragment(url: string): URLSearchParams {
   const hashIdx = url.indexOf('#');
   if (hashIdx === -1) return new URLSearchParams();
   return new URLSearchParams(url.slice(hashIdx + 1));
+}
+
+/**
+ * Race a promise against a wall-clock timer. The timer is cleared on
+ * resolve/reject so we don't leak a setTimeout into the next render.
+ * On timeout the result rejects with a synthetic Error — `consume()`'s
+ * try/catch maps that into the `error` status the same way as a real
+ * GoTrue failure.
+ */
+function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('auth callback timed out')), ms);
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err) => {
+        clearTimeout(timer);
+        reject(err);
+      },
+    );
+  });
 }

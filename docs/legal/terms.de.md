@@ -21,7 +21,7 @@ Mit der Nutzung der App verpflichten Sie sich:
 - Wahrheitsgemäße Daten einzugeben und keine bewusst falschen Eintragungen vorzunehmen.
 - Den Wunsch eines Mitglieds nach Löschung oder Nichtkontaktierung zu respektieren und solche Anliegen unverzüglich an die Datenschutzkontaktstelle weiterzuleiten.
 - Keine Mitgliederdaten aus der App heraus zu exportieren, zu kopieren, zu fotografieren oder anderweitig auf private Geräte außerhalb der App zu übertragen.
-- Ein starkes, einzigartiges Passwort zu verwenden und die Anmeldedaten zu schützen. Bei Verdacht auf unbefugten Zugriff ist die Gemeinde unverzüglich zu informieren.
+- Den Zugriff auf das eigene E-Mail-Konto zu schützen. Die Anmeldung erfolgt über einen einmaligen Link per E-Mail; wer Zugriff auf das Postfach hat, kann sich als du anmelden. Bei Verdacht auf unbefugten Zugriff ist die Gemeinde unverzüglich zu informieren.
 
 Diese Pflichten sind Bestandteil Ihrer ehrenamtlichen Verpflichtung und Voraussetzung für die rechtmäßige Verarbeitung der seelsorglichen Daten durch die Gemeinde.
 

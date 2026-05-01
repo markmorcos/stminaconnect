@@ -292,7 +292,7 @@ Servants (volunteers) and clergy authorised by the parish leadership. Members do
 - Enter accurate information.
 - Respect a member's request to be removed; forward such requests to the privacy contact.
 - Do not export, copy, or photograph member data outside the app.
-- Use a strong unique password; report any suspected unauthorised access.
+- Keep your sign-in email account secure. Sign-in is via a one-time link emailed to you; anyone with access to your inbox can sign in as you. Report any suspected unauthorised access.
 
 ## Acceptable use
 
@@ -350,7 +350,7 @@ Diener (Ehrenamtliche) und Geistliche, autorisiert durch die Gemeindeleitung. Mi
 - Wahrheitsgemäße Angaben.
 - Löschwünsche von Mitgliedern respektieren und an die Datenschutzkontaktstelle weiterleiten.
 - Keine Mitgliederdaten exportieren, kopieren oder fotografieren außerhalb der App.
-- Starkes, einzigartiges Passwort; Verdacht auf unbefugten Zugriff sofort melden.
+- Den Zugriff auf das eigene E-Mail-Konto schützen — die Anmeldung erfolgt über einen einmaligen Link per E-Mail. Verdacht auf unbefugten Zugriff sofort melden.
 
 ## Zulässige Nutzung
 
@@ -408,7 +408,7 @@ export const TERMS_AR = `version: 2026-04-28
 - إدخال بيانات صحيحة.
 - احترام طلبات الحذف وإحالتها إلى جهة الاتصال للخصوصيّة.
 - عدم تصدير بيانات المخدومين أو نسخها أو تصويرها خارج التطبيق.
-- استخدام كلمة مرور قويّة فريدة والإبلاغ عن أيّ اشتباه بوصول غير مصرّح به.
+- حماية بريدك الإلكتروني — يتمّ تسجيل الدخول عبر رابط لمرّة واحدة يُرسَل إلى بريدك. الإبلاغ عن أيّ اشتباه بوصول غير مصرّح به.
 
 ## الاستخدام المقبول
 

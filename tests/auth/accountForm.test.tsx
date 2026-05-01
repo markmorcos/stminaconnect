@@ -1,19 +1,10 @@
 /**
- * AccountForm — verifies the three sections render, Save is disabled when
+ * AccountForm — verifies the two sections render, Save is disabled when
  * the display name is unchanged, and validation errors block submission.
  */
 /* eslint-disable import/first -- jest.mock() must precede imports */
 jest.mock('@/services/api/account', () => ({
   updateMyServant: jest.fn(),
-}));
-
-jest.mock('@/services/api/supabase', () => ({
-  supabase: {
-    auth: {
-      signInWithPassword: jest.fn(),
-      updateUser: jest.fn(),
-    },
-  },
 }));
 
 const mockUseAuth = jest.fn();
@@ -58,12 +49,12 @@ beforeEach(() => {
 });
 
 describe('AccountForm', () => {
-  it('renders all three sections', () => {
-    const { getAllByText, getByText } = renderForm();
+  it('renders display name and email sections', () => {
+    const { getAllByText, getByText, queryByText } = renderForm();
     expect(getAllByText('Display name').length).toBeGreaterThan(0);
     expect(getAllByText('Email').length).toBeGreaterThan(0);
     expect(getByText('Contact an admin to change.')).toBeTruthy();
-    expect(getByText('Change password')).toBeTruthy();
+    expect(queryByText('Change password')).toBeNull();
   });
 
   it('Save is disabled when the display name is unchanged', async () => {

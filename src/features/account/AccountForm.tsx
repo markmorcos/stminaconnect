@@ -1,7 +1,7 @@
 /**
- * AccountForm — three sections: Display name (editable), Email (read-only),
- * Change password (button → modal). Server-authoritative on display-name
- * save: the auth-store servant is replaced with whatever the RPC returned.
+ * AccountForm — two sections: Display name (editable), Email (read-only).
+ * Server-authoritative on display-name save: the auth-store servant is
+ * replaced with whatever the RPC returned.
  */
 import { useEffect, useMemo, useState } from 'react';
 import { ScrollView, View } from 'react-native';
@@ -19,8 +19,6 @@ import { Button, Card, Input, Snackbar, Stack, Text, useTokens } from '@/design'
 import { useAuth } from '@/hooks/useAuth';
 import { i18n } from '@/i18n';
 import { updateMyServant } from '@/services/api/account';
-
-import { PasswordChangeModal } from './PasswordChangeModal';
 
 interface FormValues {
   display_name: string;
@@ -78,7 +76,6 @@ export function AccountForm() {
 
   const [submitting, setSubmitting] = useState(false);
   const [snack, setSnack] = useState<{ message: string; tone: 'success' | 'error' } | null>(null);
-  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
   const onSave = handleSubmit(async (values) => {
     if (!servant) return;
@@ -143,28 +140,9 @@ export function AccountForm() {
                 helper={t('settings.account.emailReadOnly')}
               />
             </Stack>
-
-            <Stack gap="xs">
-              <Text variant="label" color={colors.textMuted}>
-                {t('settings.account.passwordSection')}
-              </Text>
-              <Button variant="secondary" onPress={() => setPasswordModalOpen(true)}>
-                {t('settings.account.changePassword')}
-              </Button>
-            </Stack>
           </Stack>
         </Card>
       </ScrollView>
-
-      <PasswordChangeModal
-        visible={passwordModalOpen}
-        email={email}
-        onDismiss={() => setPasswordModalOpen(false)}
-        onSuccess={() => {
-          setPasswordModalOpen(false);
-          setSnack({ message: t('settings.account.passwordChanged'), tone: 'success' });
-        }}
-      />
 
       <Snackbar visible={snack !== null} onDismiss={() => setSnack(null)} duration={4000}>
         {snack?.message ?? ''}

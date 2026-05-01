@@ -1,15 +1,15 @@
 /**
- * Sign-in screen renders both modes; submitting forwards form values
- * to the appropriate store action.
+ * Sign-in screen — single mode (magic link). Asserts no password input,
+ * no OTP input, and that the post-submit "check your inbox" empty-state
+ * exposes resend + use-different-email links that drive the right
+ * behaviours.
  */
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
 import SignInScreen from '@/../app/(auth)/sign-in';
 import { ThemeProvider } from '@/design/ThemeProvider';
 
-const mockSignIn = jest.fn();
 const mockSignInWithMagicLink = jest.fn();
-const mockVerifyEmailOtp = jest.fn();
 
 jest.mock('@/hooks/useAuth', () => ({
   useAuth: () => ({
@@ -17,9 +17,7 @@ jest.mock('@/hooks/useAuth', () => ({
     servant: null,
     isLoading: false,
     error: null,
-    signIn: mockSignIn,
     signInWithMagicLink: mockSignInWithMagicLink,
-    verifyEmailOtp: mockVerifyEmailOtp,
     signOut: jest.fn(),
   }),
 }));
@@ -38,50 +36,26 @@ function renderScreen() {
 
 describe('Sign-in screen', () => {
   beforeEach(() => {
-    mockSignIn.mockReset();
     mockSignInWithMagicLink.mockReset();
-    mockVerifyEmailOtp.mockReset();
   });
 
-  it('renders password mode by default with email + password fields', () => {
-    const { getByText, getByLabelText } = renderScreen();
+  it('renders email field and Send button only — no password, no OTP, no mode toggle', () => {
+    const { getByText, getByLabelText, queryByLabelText, queryByText } = renderScreen();
     expect(getByText('Welcome')).toBeTruthy();
-    expect(getByText('Sign in')).toBeTruthy();
     expect(getByLabelText('Email')).toBeTruthy();
-    expect(getByLabelText('Password')).toBeTruthy();
-  });
-
-  it('toggles to email-code mode and back', () => {
-    const { getByText, queryByLabelText } = renderScreen();
-    fireEvent.press(getByText('Email me a code instead'));
+    expect(getByText('Send magic link')).toBeTruthy();
     expect(queryByLabelText('Password')).toBeNull();
-    expect(getByText('Send code')).toBeTruthy();
-    fireEvent.press(getByText('Use email and password instead'));
-    expect(queryByLabelText('Password')).toBeTruthy();
+    expect(queryByLabelText('6-digit code')).toBeNull();
+    expect(queryByText('Email me a code instead')).toBeNull();
+    expect(queryByText('Use email and password instead')).toBeNull();
   });
 
-  it('submits password form with form values', async () => {
-    mockSignIn.mockResolvedValue(undefined);
-    const { getByLabelText, getByText } = renderScreen();
-    fireEvent.changeText(getByLabelText('Email'), 'priest@stmina.de');
-    fireEvent.changeText(getByLabelText('Password'), 'correctPassword!');
-    await act(async () => {
-      fireEvent.press(getByText('Sign in'));
-    });
-    await waitFor(() =>
-      expect(mockSignIn).toHaveBeenCalledWith('priest@stmina.de', 'correctPassword!'),
-    );
-  });
-
-  it('sends the code, then verifies the entered OTP', async () => {
+  it('submits the email to signInWithMagicLink with the redirect URL', async () => {
     mockSignInWithMagicLink.mockResolvedValue(undefined);
-    mockVerifyEmailOtp.mockResolvedValue(undefined);
-    const { getByLabelText, getByText, findByLabelText } = renderScreen();
-
-    fireEvent.press(getByText('Email me a code instead'));
+    const { getByLabelText, getByText } = renderScreen();
     fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
     await act(async () => {
-      fireEvent.press(getByText('Send code'));
+      fireEvent.press(getByText('Send magic link'));
     });
     await waitFor(() =>
       expect(mockSignInWithMagicLink).toHaveBeenCalledWith(
@@ -89,14 +63,56 @@ describe('Sign-in screen', () => {
         'exp://test/--/auth/callback',
       ),
     );
+  });
 
-    const codeInput = await findByLabelText('6-digit code');
-    fireEvent.changeText(codeInput, '123456');
+  it('after submit, shows the "check your inbox" empty-state with resend + use-different-email', async () => {
+    mockSignInWithMagicLink.mockResolvedValue(undefined);
+    const { getByLabelText, getByText, findByText, queryByLabelText } = renderScreen();
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
     await act(async () => {
-      fireEvent.press(getByText('Verify'));
+      fireEvent.press(getByText('Send magic link'));
+    });
+
+    expect(await findByText(/We sent a sign-in link to volunteer@stmina.de/i)).toBeTruthy();
+    expect(getByText("Didn't receive it? Send again")).toBeTruthy();
+    expect(getByText('Use a different email')).toBeTruthy();
+    expect(queryByLabelText('Email')).toBeNull();
+  });
+
+  it('"Use a different email" returns to the email form', async () => {
+    mockSignInWithMagicLink.mockResolvedValue(undefined);
+    const { getByLabelText, getByText, findByText } = renderScreen();
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    await act(async () => {
+      fireEvent.press(getByText('Send magic link'));
+    });
+    await findByText(/We sent a sign-in link/i);
+
+    await act(async () => {
+      fireEvent.press(getByText('Use a different email'));
+    });
+    expect(getByLabelText('Email')).toBeTruthy();
+    expect(getByText('Send magic link')).toBeTruthy();
+  });
+
+  it('resend re-invokes signInWithMagicLink with the same email', async () => {
+    mockSignInWithMagicLink.mockResolvedValue(undefined);
+    const { getByLabelText, getByText, findByText } = renderScreen();
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    await act(async () => {
+      fireEvent.press(getByText('Send magic link'));
+    });
+    await findByText(/We sent a sign-in link/i);
+
+    mockSignInWithMagicLink.mockClear();
+    await act(async () => {
+      fireEvent.press(getByText("Didn't receive it? Send again"));
     });
     await waitFor(() =>
-      expect(mockVerifyEmailOtp).toHaveBeenCalledWith('volunteer@stmina.de', '123456'),
+      expect(mockSignInWithMagicLink).toHaveBeenCalledWith(
+        'volunteer@stmina.de',
+        'exp://test/--/auth/callback',
+      ),
     );
   });
 });

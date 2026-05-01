@@ -21,7 +21,7 @@ By using the app you agree to:
 - Enter accurate information; do not knowingly enter false data.
 - Respect a member's request to be removed or to be left alone. Forward such requests to the privacy contact promptly.
 - Do not export, copy, photograph, or otherwise extract member data from the app for storage on personal devices outside the app.
-- Use a strong, unique password and protect your sign-in credentials. Notify the parish immediately if you suspect unauthorised access.
+- Keep your sign-in email account secure. Sign-in is via a one-time link sent to your email; anyone with access to your inbox can sign in as you. Notify the parish immediately if you suspect unauthorised access.
 
 These obligations are part of your volunteer commitment and are essential to the parish's lawful processing of pastoral data.
 

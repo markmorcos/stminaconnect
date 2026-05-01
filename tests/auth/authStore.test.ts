@@ -6,7 +6,6 @@
 jest.mock('@/services/api/supabase', () => {
   const auth = {
     getSession: jest.fn(),
-    signInWithPassword: jest.fn(),
     signInWithOtp: jest.fn(),
     signOut: jest.fn(),
     onAuthStateChange: jest.fn(),
@@ -20,12 +19,10 @@ jest.mock('@/services/api/servants', () => ({
 }));
 
 import { __resetAuthStoreForTests, useAuthStore } from '@/state/authStore';
-import { fetchMyServant } from '@/services/api/servants';
 import { supabase } from '@/services/api/supabase';
 /* eslint-enable import/first */
 
 const mockedAuth = supabase.auth as unknown as Record<string, jest.Mock>;
-const mockedFetch = fetchMyServant as jest.MockedFunction<typeof fetchMyServant>;
 
 const SESSION = { access_token: 't', user: { id: 'u1', email: 'a@b' } } as any;
 const SERVANT = {
@@ -41,69 +38,6 @@ const SERVANT = {
 beforeEach(() => {
   jest.clearAllMocks();
   __resetAuthStoreForTests();
-});
-
-describe('authStore.signIn', () => {
-  it('stores session and servant on success', async () => {
-    mockedAuth.signInWithPassword.mockResolvedValue({ data: { session: SESSION }, error: null });
-    mockedFetch.mockResolvedValue(SERVANT);
-
-    await useAuthStore.getState().signIn('a@b', 'pw');
-
-    const state = useAuthStore.getState();
-    expect(state.session).toBe(SESSION);
-    expect(state.servant).toEqual(SERVANT);
-    expect(state.isLoading).toBe(false);
-    expect(state.error).toBeNull();
-  });
-
-  it('maps invalid_credentials to the localized message and clears state', async () => {
-    mockedAuth.signInWithPassword.mockResolvedValue({
-      data: { session: null },
-      error: {
-        name: 'AuthApiError',
-        message: 'Invalid login credentials',
-        status: 400,
-        code: 'invalid_credentials',
-      },
-    });
-
-    await useAuthStore.getState().signIn('a@b', 'bad');
-
-    const state = useAuthStore.getState();
-    expect(state.session).toBeNull();
-    expect(state.servant).toBeNull();
-    expect(state.error).toBe('Email or password is incorrect.');
-    expect(state.isLoading).toBe(false);
-  });
-
-  it('falls back to the generic message for unmapped auth error codes', async () => {
-    mockedAuth.signInWithPassword.mockResolvedValue({
-      data: { session: null },
-      error: {
-        name: 'AuthApiError',
-        message: 'mystery server message',
-        status: 422,
-        code: 'something_we_havent_mapped',
-      },
-    });
-
-    await useAuthStore.getState().signIn('a@b', 'bad');
-    expect(useAuthStore.getState().error).toBe('Something went wrong. Please try again.');
-  });
-
-  it('signs out + surfaces orphan error when servant row is missing', async () => {
-    mockedAuth.signInWithPassword.mockResolvedValue({ data: { session: SESSION }, error: null });
-    mockedFetch.mockResolvedValue(null);
-    mockedAuth.signOut.mockResolvedValue({ error: null });
-
-    await useAuthStore.getState().signIn('orphan@b', 'pw');
-
-    expect(mockedAuth.signOut).toHaveBeenCalled();
-    const state = useAuthStore.getState();
-    expect(state.session).toBeNull();
-    expect(state.error).toBe('Account not configured. Contact your admin.');
-  });
 });
 
 describe('authStore.signInWithMagicLink', () => {
