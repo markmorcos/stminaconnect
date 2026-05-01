@@ -1,4 +1,4 @@
-name: Build (manual)
+name: Build mobile app (EAS)
 
 on:
   workflow_dispatch:
