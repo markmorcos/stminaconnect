@@ -60,3 +60,21 @@ Servants are the only authenticated users. There is no public sign-up. A single 
 - **WHEN** an Authentication → Providers admin view is consulted
 - **THEN** the Email provider's "Enable Email password" toggle is off
 - **AND** a direct `POST /auth/v1/token?grant_type=password` request returns an error rather than a session
+
+### Requirement: The auth store SHALL expose role information for downstream features.
+
+`useAuth()` MUST return `{ session, servant, isLoading, error, signInWithMagicLink, signOut, setServant }`. The auth store separately exposes `isHydrated` (true once the initial session check has settled), which layouts use to gate route redirects so that in-flight actions do not unmount the active screen. The `servant.role` field is the canonical role identifier; later phases SHALL consume it to gate admin-only screens. No admin-only screens exist in this phase.
+
+#### Scenario: Auth store exposes role on a signed-in admin
+
+- **GIVEN** a signed-in admin
+- **WHEN** a component calls `useAuth().servant.role`
+- **THEN** it returns the string `'admin'`
+
+## REMOVED Requirements
+
+### Requirement: A signed-in servant SHALL be able to change their password after re-verifying the current one.
+
+**Reason**: Magic-link sign-in is now the only auth path; passwords are no longer used (and disabled at the Supabase project level). The `PasswordChangeModal` component, locale keys, and tests have been deleted. The Account screen is reduced to display name + read-only email.
+
+**Migration**: Existing users with valid passwords lose that access path; their next sign-in goes via magic link. No data migration needed — `auth.users.encrypted_password` rows are inert and can be left as-is. If a future change re-introduces password auth (not anticipated), it would need to re-add the modal, the locale keys, and re-enable the Email/Password provider in Supabase.

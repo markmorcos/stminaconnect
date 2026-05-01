@@ -2,57 +2,70 @@
 
 ## Purpose
 
-The auth capability gates every authenticated surface in the app. Servants are the only logged-in users — there is no public sign-up, no member auth, and no native-module-dependent provider in v1. Two flows are supported: email/password (default) and an emailed 6-digit one-time code (alternate). Sessions persist across app restarts. A `servants` row joined on `auth.users.id` is the canonical identity record (display name, role); RLS keeps each servant's row visible only to themselves and to admins.
+The auth capability gates every authenticated surface in the app. Servants are the only logged-in users — there is no public sign-up, no member auth, and no native-module-dependent provider in v1. A single sign-in flow is supported: the user enters their email, receives a magic-link email from Supabase Auth, and taps the link, which routes through `stminaconnect://auth/callback` and exchanges the PKCE code for a session. Email/password sign-in and 6-digit OTP-typing are not supported by the app, and email/password is disabled at the Supabase project level. Sessions persist across app restarts. A `servants` row joined on `auth.users.id` is the canonical identity record (display name, role); RLS keeps each servant's row visible only to themselves and to admins.
 
 ## Requirements
 
-### Requirement: The system SHALL authenticate servants via Supabase Auth using email/password or an emailed one-time code.
+### Requirement: The system SHALL authenticate servants via Supabase Auth using an emailed magic link as the sole sign-in path.
 
-Servants are the only authenticated users. There is no public sign-up. Two flows are supported: email/password (default) and an emailed 6-digit one-time code (alternate). The same Supabase email also includes a magic-link URL — production standalone builds with the `stminaconnect://` scheme MAY honour it, but the canonical path the app drives in v1 is the 6-digit code (it works in Expo Go without depending on a redirect-URL allow-list). Sessions persist across app restarts. The system SHALL NOT integrate Google Sign-In, Apple Sign-In, or any other native-module-dependent provider in v1.
+Servants are the only authenticated users. There is no public sign-up. A single sign-in flow is supported: the user enters their email, receives a magic-link email from Supabase Auth, and taps the link. The link uses the custom `stminaconnect://` scheme and routes to `app/auth/callback.tsx`, which exchanges the PKCE code for a session. Email/password sign-in is NOT supported by the app and SHALL be disabled at the Supabase project level (Authentication → Providers → Email: Password disabled). The 6-digit OTP code that Supabase embeds in the same email is also not consumed by the app. Sessions persist across app restarts. The system SHALL NOT integrate Google Sign-In, Apple Sign-In, or any other native-module-dependent provider in v1.
 
-#### Scenario: Successful email/password sign-in
+#### Scenario: Magic-link sign-in completes via `stminaconnect://`
 
-- **GIVEN** a `servants` row exists for `priest@stmina.de` with role `admin`
-- **AND** the corresponding `auth.users` row has password `correctPassword!`
-- **WHEN** the servant enters `priest@stmina.de` and `correctPassword!` and taps "Sign in"
-- **THEN** the auth store's `session` becomes non-null
-- **AND** the auth store's `servant` becomes the joined row with `role = 'admin'`
-- **AND** the user is redirected to the authenticated home screen
+- **GIVEN** a dev-client / preview / production build with the `stminaconnect://` scheme registered
+- **AND** a servant row exists for `volunteer@stmina.de`
+- **WHEN** the user enters that email and taps "Send magic link"
+- **THEN** `signInWithOtp` is invoked which stores a PKCE `code_verifier` in `secureAuthStorage`
+- **AND** the screen shows a "check your email" confirmation, surfacing the email address
+- **AND** the user taps the magic link in the email on the same device, in the same app install
+- **AND** the OS opens the app via `stminaconnect://auth/callback?code=…`
+- **AND** the callback route exchanges the code for a session via `exchangeCodeForSession`
+- **AND** the auth store's `session` becomes non-null and `servant` becomes the joined row
+- **AND** the user lands on the authenticated home screen
 
-#### Scenario: Failed sign-in surfaces a clear error
+#### Scenario: Send-link failure surfaces a clear error
 
-- **GIVEN** any servant row with a known password
-- **WHEN** a sign-in attempt is made with the wrong password
-- **THEN** no session is established
-- **AND** the screen displays an error message via Paper Snackbar
+- **GIVEN** a malformed email or a Supabase Auth error response (e.g. rate limited, invalid recipient)
+- **WHEN** the user taps "Send magic link"
+- **THEN** no transition to the "check your inbox" state occurs
+- **AND** the screen displays an error message via Snackbar
 - **AND** the form remains usable for retry
 
-#### Scenario: Email-code sign-in completes via the 6-digit OTP
+#### Scenario: Magic-link callback fails fast when the code verifier is missing
 
-- **GIVEN** a servant row exists for `volunteer@stmina.de`
-- **WHEN** the user taps "Email me a code instead", enters that email, and taps "Send code"
-- **AND** receives the email and reads the 6-digit code
-- **AND** types the code into the in-app field and taps "Verify"
-- **THEN** `supabase.auth.verifyOtp({ type: 'email' })` returns a session
-- **AND** the auth store is populated with the joined servant row
-- **AND** the user lands on the authenticated home screen
-
-#### Scenario: Magic-link deep link completes via `stminaconnect://` (production builds)
-
-- **GIVEN** a standalone build with the `stminaconnect://` scheme registered
-- **AND** a servant row exists for `volunteer@stmina.de`
-- **WHEN** the user taps "Email me a code instead", enters that email, and taps "Send code"
-- **AND** instead of typing the 6-digit code, taps the magic link in the email on the device
-- **THEN** the OS opens the app via `stminaconnect://auth/callback?code=…`
-- **AND** the callback route exchanges the code for a session
-- **AND** the user lands on the authenticated home screen
-- **NOTE** Expo Go does not exercise this path — the `exp://` redirect is silently rejected by the local GoTrue build, so dev verification uses the 6-digit code instead. The deep-link route remains wired and becomes the production flow once `switch-to-development-build` (phase 16) ships a dev client with the `stminaconnect://` scheme registered. Until that phase verifies the round-trip end-to-end, the OTP-code path is the canonical sign-in alternate; the deep-link scenario above is aspirational. Acceptance for the deep-link path lives in phase 16's `tasks.md` § 5a.
+- **GIVEN** the user opened a magic link without a matching `code_verifier` (e.g. the app was reinstalled, the link was generated outside the app via the Supabase dashboard, or the link was tapped on a different device)
+- **WHEN** `app/auth/callback.tsx` calls `exchangeCodeForSession`
+- **THEN** the call is bounded by a 10-second timeout
+- **AND** within 10 seconds the callback resolves to an error state
+- **AND** the user is redirected to `/sign-in`
+- **AND** the sign-in screen is usable for re-requesting the link
 
 #### Scenario: Sign-up is not available
 
 - **WHEN** the sign-in screen is rendered
 - **THEN** there is no "Sign up" / "Create account" affordance visible
 - **AND** the Supabase project has email/password sign-up disabled at the project level
+
+#### Scenario: Password sign-in is not exposed
+
+- **WHEN** the sign-in screen is rendered in any state
+- **THEN** there is no password input field
+- **AND** there is no "Sign in with password" affordance, mode toggle, or hidden path
+- **AND** the auth store does NOT export a `signIn(email, password)` action
+
+#### Scenario: 6-digit OTP code input is not exposed
+
+- **WHEN** the sign-in screen is rendered in any state
+- **THEN** there is no input field accepting a 6-digit code
+- **AND** there is no UI affordance to "verify code" or similar
+- **AND** the auth store does NOT export a `verifyEmailOtp` action
+
+#### Scenario: Email/password provider is disabled at the Supabase project level
+
+- **GIVEN** the Supabase project (preview or production)
+- **WHEN** an Authentication → Providers admin view is consulted
+- **THEN** the Email provider's "Enable Email password" toggle is off
+- **AND** a direct `POST /auth/v1/token?grant_type=password` request returns an error rather than a session
 
 ### Requirement: Sessions SHALL persist across app restarts.
 
@@ -187,7 +200,7 @@ Tapping "Sign out" from the temporary Account screen MUST clear the Supabase ses
 
 ### Requirement: The auth store SHALL expose role information for downstream features.
 
-`useAuth()` MUST return `{ session, servant, isLoading, error, signIn, signInWithMagicLink, verifyEmailOtp, signOut }`. The auth store separately exposes `isHydrated` (true once the initial session check has settled), which layouts use to gate route redirects so that in-flight actions do not unmount the active screen. The `servant.role` field is the canonical role identifier; later phases SHALL consume it to gate admin-only screens. No admin-only screens exist in this phase.
+`useAuth()` MUST return `{ session, servant, isLoading, error, signInWithMagicLink, signOut, setServant }`. The auth store separately exposes `isHydrated` (true once the initial session check has settled), which layouts use to gate route redirects so that in-flight actions do not unmount the active screen. The `servant.role` field is the canonical role identifier; later phases SHALL consume it to gate admin-only screens. No admin-only screens exist in this phase.
 
 #### Scenario: Auth store exposes role on a signed-in admin
 
@@ -220,41 +233,6 @@ The app MUST surface an Account screen at `/settings/account` reachable from the
 - **WHEN** S submits a 200-character `display_name`
 - **THEN** `update_my_servant` rejects with an error
 - **AND** the screen surfaces a localized error
-
-### Requirement: A signed-in servant SHALL be able to change their password after re-verifying the current one.
-
-The Account screen MUST expose a "Change password" action that opens a Paper modal with three fields: current password, new password, confirm password. On submit the app MUST first call `supabase.auth.signInWithPassword` against the current servant's email with the provided current password; on success it MUST call `supabase.auth.updateUser({ password: new })`. The new password MUST be at least 8 characters and MUST differ from the current password (client-side check). The active session SHALL remain valid throughout — the verification call's session is discarded.
-
-#### Scenario: Successful password change
-
-- **GIVEN** servant S is signed in with email `s@example.com` and current password `oldPass123`
-- **WHEN** S opens the password modal, types `oldPass123`, `newPass456`, `newPass456`, and taps Save
-- **THEN** `signInWithPassword({ email: 's@example.com', password: 'oldPass123' })` succeeds
-- **AND** `updateUser({ password: 'newPass456' })` succeeds
-- **AND** the modal closes and a localized success snackbar appears
-- **AND** the active session is still valid (no sign-out occurred)
-
-#### Scenario: Wrong current password rejects
-
-- **GIVEN** servant S in the password modal
-- **WHEN** S types a wrong current password and taps Save
-- **THEN** `signInWithPassword` fails
-- **AND** an inline localized error appears on the current-password field
-- **AND** `updateUser` is not called
-
-#### Scenario: New password too short rejects client-side
-
-- **GIVEN** servant S in the password modal
-- **WHEN** the new password is fewer than 8 characters
-- **THEN** the form surfaces an inline localized error
-- **AND** no RPC is called
-
-#### Scenario: New password equal to current rejects client-side
-
-- **GIVEN** servant S in the password modal with `current = 'sameOne1'`
-- **WHEN** the new password is also `'sameOne1'`
-- **THEN** the form surfaces an inline localized error
-- **AND** no RPC is called
 
 ### Requirement: Email SHALL be displayed as read-only on the account screen.
 
