@@ -46,7 +46,7 @@
       "emailLabel": "Email",
       "submitMagicLink": "Send magic link",
       "checkYourInbox": "We sent a sign-in link to {{email}}. Open the email on this device and tap the link.",
-      "linkSentSnack": "Link sent. Check your email (or Mailpit in dev).",
+      "linkSentSnack": "Link sent. Check your email.",
       "resendLink": "Didn't receive it? Send again",
       "useDifferentEmail": "Use a different email",
       "errors": {

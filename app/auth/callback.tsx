@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Redirect } from 'expo-router';
+import { Redirect, useLocalSearchParams } from 'expo-router';
 import { ActivityIndicator, View } from 'react-native';
 import * as Linking from 'expo-linking';
 import { useTranslation } from 'react-i18next';
@@ -18,28 +18,59 @@ type Status = 'pending' | 'done' | 'error';
 const EXCHANGE_TIMEOUT_MS = 10_000;
 
 /**
- * Handles the magic-link redirect. Two URL shapes can land here:
+ * Hard ceiling for the whole screen — covers the case where neither
+ * `Linking.getInitialURL()` nor `addEventListener('url')` ever delivers
+ * a URL (cold-start race: expo-router consumed the initial URL for
+ * routing before this screen's listener was attached, so the URL
+ * fell on the floor and `exchangeCodeForSession` was never called,
+ * meaning the per-call timeout never started either).
+ */
+const SCREEN_TIMEOUT_MS = 12_000;
+
+/**
+ * Handles the magic-link redirect. Three URL shapes can land here:
  *
  *   1. PKCE flow → `?code=…` query param. Exchanged via
- *      `exchangeCodeForSession`. This is the path `signInWithOtp` uses.
- *   2. Implicit flow (Supabase invite emails) → `#access_token=…&
- *      refresh_token=…&type=invite` in the URL fragment. Set directly
- *      via `setSession`.
+ *      `exchangeCodeForSession`. This is the path `signInWithOtp` uses
+ *      under `flowType: 'pkce'`.
+ *   2. Implicit flow (legacy / Supabase invite emails) →
+ *      `#access_token=…&refresh_token=…&type=invite` in the URL
+ *      fragment. Set directly via `setSession`.
+ *   3. Error from Supabase verify (expired/used token) → `?error=…`
+ *      in the query string. No code, no fragment — falls through to the
+ *      synchronous `error` status and redirects to /sign-in.
  *
- * The screen also subscribes to live URL events: if the app is already
- * running when the user taps the email link, the OS pushes the URL
- * through the Linking listener rather than the cold-start
- * `getInitialURL` call.
+ * URL delivery: we read `code` from expo-router's `useLocalSearchParams`
+ * first because that survives the cold-start race where
+ * `Linking.getInitialURL()` returns null after expo-router has already
+ * consumed the URL for routing. The Linking APIs are still wired up for
+ * warm-start (app already running when the link is tapped) and for the
+ * fragment-based path that expo-router doesn't surface in params.
  */
 export default function AuthCallback() {
   const { t } = useTranslation();
   const { colors } = useTokens();
   const [status, setStatus] = useState<Status>('pending');
+  const params = useLocalSearchParams<{ code?: string }>();
+  const codeFromParams = typeof params.code === 'string' ? params.code : null;
 
   useEffect(() => {
     let cancelled = false;
 
-    async function consume(url: string | null): Promise<void> {
+    async function exchangeWithCode(code: string): Promise<void> {
+      try {
+        const { error } = await withTimeout(
+          supabase.auth.exchangeCodeForSession(code),
+          EXCHANGE_TIMEOUT_MS,
+        );
+        if (error) throw error;
+        if (!cancelled) setStatus('done');
+      } catch {
+        if (!cancelled) setStatus('error');
+      }
+    }
+
+    async function consumeUrl(url: string | null): Promise<void> {
       if (!url || cancelled) return;
       try {
         const parsed = Linking.parse(url);
@@ -49,12 +80,7 @@ export default function AuthCallback() {
         const refreshToken = fragment.get('refresh_token');
 
         if (code) {
-          const { error } = await withTimeout(
-            supabase.auth.exchangeCodeForSession(code),
-            EXCHANGE_TIMEOUT_MS,
-          );
-          if (error) throw error;
-          if (!cancelled) setStatus('done');
+          await exchangeWithCode(code);
         } else if (accessToken && refreshToken) {
           const { error } = await withTimeout(
             supabase.auth.setSession({
@@ -66,10 +92,8 @@ export default function AuthCallback() {
           if (error) throw error;
           if (!cancelled) setStatus('done');
         } else {
-          // No auth payload reached us. On Android with custom URL
-          // schemes the OS sometimes strips the URL path + fragment
-          // when handing off, so the access_token never reaches the
-          // app. Bail to sign-in immediately rather than spinning.
+          // Most likely an `?error=…` from Supabase verify (expired or
+          // already-used token). No code, no fragment → bail to sign-in.
           if (!cancelled) setStatus('error');
         }
       } catch {
@@ -77,15 +101,37 @@ export default function AuthCallback() {
       }
     }
 
-    void Linking.getInitialURL().then((url) => consume(url));
+    // 1. Cold-start path: expo-router has already routed us with the
+    //    code as a query param. Use it directly so we don't depend on
+    //    `Linking.getInitialURL` (which races with the router on
+    //    cold-start and can return null).
+    if (codeFromParams) {
+      void exchangeWithCode(codeFromParams);
+    } else {
+      // 2. Cold-start fallback: try the raw URL for the fragment-based
+      //    implicit flow that doesn't surface in router params.
+      void Linking.getInitialURL().then((url) => consumeUrl(url));
+    }
+
+    // 3. Warm-start: the OS pushes the URL through the Linking listener
+    //    when the app is already running.
     const sub = Linking.addEventListener('url', ({ url }) => {
-      void consume(url);
+      void consumeUrl(url);
     });
+
+    // 4. Hard screen-level deadline. Belt-and-braces: even if every
+    //    URL-delivery mechanism above failed silently, the screen
+    //    refuses to spin past SCREEN_TIMEOUT_MS.
+    const screenTimer = setTimeout(() => {
+      if (!cancelled) setStatus((prev) => (prev === 'pending' ? 'error' : prev));
+    }, SCREEN_TIMEOUT_MS);
+
     return () => {
       cancelled = true;
       sub.remove();
+      clearTimeout(screenTimer);
     };
-  }, []);
+  }, [codeFromParams]);
 
   if (status === 'done') return <Redirect href="/" />;
   if (status === 'error') return <Redirect href="/sign-in" />;

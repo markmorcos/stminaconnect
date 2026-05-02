@@ -46,7 +46,7 @@
       "emailLabel": "E-Mail",
       "submitMagicLink": "Anmelde-Link senden",
       "checkYourInbox": "Wir haben einen Anmelde-Link an {{email}} gesendet. Öffne die E-Mail auf diesem Gerät und tippe auf den Link.",
-      "linkSentSnack": "Link gesendet. Prüfe deine E-Mails (oder Mailpit in der Dev-Umgebung).",
+      "linkSentSnack": "Link gesendet. Prüfe deine E-Mails.",
       "resendLink": "Nichts erhalten? Erneut senden",
       "useDifferentEmail": "Andere E-Mail verwenden",
       "errors": {
