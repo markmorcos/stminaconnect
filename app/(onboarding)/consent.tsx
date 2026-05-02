@@ -7,6 +7,7 @@
 import { useCallback, useRef, useState } from 'react';
 import {
   Alert,
+  type LayoutChangeEvent,
   type NativeScrollEvent,
   type NativeSyntheticEvent,
   ScrollView,
@@ -54,9 +55,24 @@ export default function ConsentScreen() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const submittedRef = useRef(false);
+  // Track viewport + content sizes so we can auto-mark "scrolled to end"
+  // when the legal text fits without scrolling at all (short docs +
+  // tall screens). Without this, scrolledToEnd would never flip to
+  // true and the Accept button would stay disabled forever.
+  const viewportHeight = useRef(0);
+  const contentHeight = useRef(0);
+
+  const checkAtBottom = useCallback(() => {
+    if (contentHeight.current === 0 || viewportHeight.current === 0) return;
+    if (contentHeight.current <= viewportHeight.current + SCROLL_BOTTOM_THRESHOLD_PX) {
+      setScrolledToEnd(true);
+    }
+  }, []);
 
   const handleScroll = useCallback((e: NativeSyntheticEvent<NativeScrollEvent>) => {
     const { layoutMeasurement, contentOffset, contentSize } = e.nativeEvent;
+    viewportHeight.current = layoutMeasurement.height;
+    contentHeight.current = contentSize.height;
     if (
       layoutMeasurement.height + contentOffset.y >=
       contentSize.height - SCROLL_BOTTOM_THRESHOLD_PX
@@ -64,6 +80,22 @@ export default function ConsentScreen() {
       setScrolledToEnd(true);
     }
   }, []);
+
+  const handleScrollViewLayout = useCallback(
+    (e: LayoutChangeEvent) => {
+      viewportHeight.current = e.nativeEvent.layout.height;
+      checkAtBottom();
+    },
+    [checkAtBottom],
+  );
+
+  const handleContentSizeChange = useCallback(
+    (_w: number, h: number) => {
+      contentHeight.current = h;
+      checkAtBottom();
+    },
+    [checkAtBottom],
+  );
 
   const onAccept = async () => {
     if (submittedRef.current || submitting) return;
@@ -127,7 +159,11 @@ export default function ConsentScreen() {
       <ScrollView
         testID="consent-scroll"
         onScroll={handleScroll}
-        scrollEventThrottle={64}
+        onMomentumScrollEnd={handleScroll}
+        onScrollEndDrag={handleScroll}
+        onLayout={handleScrollViewLayout}
+        onContentSizeChange={handleContentSizeChange}
+        scrollEventThrottle={16}
         contentContainerStyle={{
           padding: spacing.lg,
           gap: spacing.lg,
@@ -180,25 +216,25 @@ export default function ConsentScreen() {
             {submitError}
           </Text>
         ) : null}
-        <View style={{ flexDirection: 'row', gap: spacing.sm, paddingBottom: spacing.md }}>
-          <Button
-            variant="ghost"
-            size="md"
-            onPress={onDecline}
-            style={{ flex: 1 }}
-            disabled={submitting}
-          >
-            {t('consent.decline')}
-          </Button>
+        {/*
+          Buttons stack vertically: keeps each label on a single line in
+          every supported locale. German "Akzeptieren und fortfahren" and
+          equivalents wrap awkwardly when forced into half a phone width.
+          Primary action on top so it's the obvious affordance after
+          ticking the agreement.
+        */}
+        <View style={{ gap: spacing.sm, paddingBottom: spacing.md }}>
           <Button
             variant="primary"
             size="md"
             onPress={onAccept}
             disabled={acceptDisabled}
             loading={submitting}
-            style={{ flex: 1 }}
           >
             {t('consent.accept')}
+          </Button>
+          <Button variant="ghost" size="md" onPress={onDecline} disabled={submitting}>
+            {t('consent.decline')}
           </Button>
         </View>
       </View>
