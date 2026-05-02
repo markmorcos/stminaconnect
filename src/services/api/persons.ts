@@ -36,8 +36,65 @@ function currentServantIdOrThrow(): string {
   return id;
 }
 
+/**
+ * Network-first: fetches the visibility-filtered persons set from the
+ * server (`sync_persons_since` with `since=null` = full snapshot),
+ * upserts the result into the SQLite mirror so the next offline read
+ * has it, and applies the screen-side filter client-side. Falls back to
+ * the SQLite mirror when the network call fails (offline, auth lag,
+ * RPC error, etc.).
+ *
+ * Why network-first: the SyncEngine's incremental pull (since=watermark)
+ * can race with first-launch auth propagation — if the very first pull
+ * fires before the supabase client's session header is fully attached,
+ * the RPC returns 0 rows under server-side visibility filtering, the
+ * watermark advances anyway, and subsequent incremental pulls never
+ * re-fetch the missed rows. Reading from the server on every list-mount
+ * sidesteps that race entirely, costs ~one round-trip per screen open
+ * (cheap for a parish-sized dataset), and keeps SQLite in sync as a
+ * proper offline cache.
+ */
 export async function listPersons(filter: PersonsFilter = {}): Promise<Person[]> {
-  return repoList(filter);
+  try {
+    const { data, error } = await supabase.rpc('sync_persons_since', { since: null });
+    if (error) throw error;
+    const all = (data ?? []) as Person[];
+    if (all.length > 0) {
+      await upsertPersons(all, 'synced');
+    }
+    return applyPersonsFilter(
+      all.filter((r) => r.deleted_at == null),
+      filter,
+    );
+  } catch {
+    // Network / auth / RPC failure → serve from the SQLite mirror so
+    // the screen still renders something useful when offline.
+    return repoList(filter);
+  }
+}
+
+function applyPersonsFilter(rows: readonly Person[], filter: PersonsFilter): Person[] {
+  let out = rows.slice();
+  if (filter.assigned_servant) {
+    out = out.filter((r) => r.assigned_servant === filter.assigned_servant);
+  }
+  if (filter.region) {
+    out = out.filter((r) => r.region === filter.region);
+  }
+  if (filter.status) {
+    out = out.filter((r) => r.status === filter.status);
+  }
+  if (filter.search) {
+    const needle = filter.search.toLowerCase();
+    out = out.filter(
+      (r) =>
+        r.first_name.toLowerCase().includes(needle) || r.last_name.toLowerCase().includes(needle),
+    );
+  }
+  out.sort(
+    (a, b) => a.last_name.localeCompare(b.last_name) || a.first_name.localeCompare(b.first_name),
+  );
+  return out;
 }
 
 /**
