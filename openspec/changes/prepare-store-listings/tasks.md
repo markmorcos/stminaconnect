@@ -19,10 +19,10 @@
 iOS captures are deferred until Apple Developer enrolment lands; Android-only for the v1 launch.
 
 - [x] 3.1 Run `supabase/preview-seed.sql` against the preview Supabase project, then build a dev client pointed at it (5 servants + 20 persons + recent attendance + alerts).
-- [ ] 3.2 Set device locale to EN; capture: Quick Add filled in, Check-in roster mid-flow, Servant Dashboard with content. Save to `assets/store/screenshots/android/en/`.
-- [ ] 3.3 Repeat for AR locale; save under `assets/store/screenshots/android/ar/`.
-- [ ] 3.4 Repeat for DE locale; save under `assets/store/screenshots/android/de/`.
-- [ ] 3.5 Apply device-frame + brand backdrop via `scripts/screenshot-frame.sh` (ImageMagick) — output under `assets/store/screenshots-framed/android/...`.
+- [x] 3.2 Set device locale to EN; capture: Quick Add filled in, Check-in roster mid-flow, Servant Dashboard with content. Save to `assets/store/screenshots/android/en/`.
+- [x] 3.3 Repeat for AR locale; save under `assets/store/screenshots/android/ar/`.
+- [x] 3.4 Repeat for DE locale; save under `assets/store/screenshots/android/de/`.
+- [x] 3.5 Apply device-frame + brand backdrop via `scripts/screenshot-frame.sh` (ImageMagick, `ROUNDED=1 SHADOW=1`) — output under `assets/store/screenshots-framed/android/...`. Per-locale framed copies also live under `marketing/public/screenshots/{en,ar,de}/` so each landing page renders its own locale's screens.
 
 ## 4. Age rating
 
@@ -35,8 +35,8 @@ iOS captures are deferred until Apple Developer enrolment lands; Android-only fo
 ## 6. Marketing site + URLs
 
 - [x] 6.1 `docs/marketing/landing.md`: copy for the landing page (app description, three screenshots, privacy/terms links, support email).
-- [x] 6.2 Deploy landing page on `stminaconnect.com`. Site scaffolding under `marketing/` is complete: landing (`public/index.html`), 404 (`public/404.html`), `robots.txt`, `sitemap.xml`, plus 6 rendered legal pages (`{,ar/,de/}{privacy,terms}/index.html`) generated from `docs/legal/*.md` via `deno task render-legal`. Helm `deployment.yaml` targets chart `infrastructure@0.4.7`; workflow `.github/workflows/deploy-marketing.yml` dispatches `deploy-stminaconnect` on changes under `marketing/**`. Awaits adding `deploy-stminaconnect` to the dispatcher's `repository_dispatch.types` list in `markmorcos/infrastructure`, then a push to main.
-- [x] 6.3 `support@stminaconnect.com` email alias provisioned and documented.
+- [x] 6.2 Deploy landing page on `stminaconnect.com`. Live: trilingual landings (`/`, `/ar/`, `/de/`), 404, `robots.txt`, `sitemap.xml`, 6 rendered legal pages from `docs/legal/*.md` via `deno task render-legal`, favicon / og:image / JSON-LD, per-locale screenshots. Helm chart `infrastructure@0.4.7` via the `deploy-stminaconnect` `repository_dispatch` event; workflow `.github/workflows/deploy-marketing.yml` re-deploys on any push under `marketing/**`.
+- [x] 6.3 `support@stminaconnect.com` email alias provisioned (Cloudflare Email Routing → developer inbox; outbound from the same domain via Resend SMTP, plugged into Supabase Auth so the 2/hour Supabase default is gone).
 
 ## 7. App Store Connect setup
 
@@ -49,7 +49,7 @@ iOS captures are deferred until Apple Developer enrolment lands; Android-only fo
 ## 9. Verification
 
 - [x] 9.1 All listing copy reviewed and within character limits (subtitle ≤ 30, short ≤ 80, full ≤ 4000, keywords ≤ 100). Edits baked into `ar.md` and `de.md`; `_review.md` removed.
-- [ ] 9.2 All screenshot assets present under the expected Android folders (iOS deferred per § 3 note).
+- [x] 9.2 All screenshot assets present under the expected Android folders (iOS deferred per § 3 note).
 - [x] 9.3 Bundle ids match across `app.json` and `eas.json`.
 - [x] 9.4 Marketing URL responds with a 200 and renders content.
 - [x] 9.5 `support@stminaconnect.com` autoresponder configured.
