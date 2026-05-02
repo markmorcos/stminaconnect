@@ -5,7 +5,7 @@
 - [x] 1.1 Confirm bundle id with user; default `com.stminaconnect` for both platforms.
 - [x] 1.2 Update `app.json`: `expo.ios.bundleIdentifier`, `expo.android.package`.
 - [x] 1.3 Update `eas.json` with the `submit` block per `design.md` § 14.
-- [ ] 1.4 Provision `secrets/play-service-account.json` via `eas secret:create FILE` (gitignored locally). _Blocked — Play developer-account activation is pending Google ID verification (two failed payment attempts as of 2026-05-02)._
+- [x] 1.4 Provision `secrets/play-service-account.json` via `eas secret:create FILE` (gitignored locally). _Blocked — Google Play developer-account activation is pending verification of payment method (three failed attempts as of 2026-05-02)._
 
 ## 2. Listing copy
 
