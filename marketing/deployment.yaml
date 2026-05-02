@@ -1,0 +1,15 @@
+version: 0.4.7
+
+namespace: stminaconnect
+project: stminaconnect
+
+services:
+  - name: marketing
+    context: marketing
+    image: ghcr.io/markmorcos/stminaconnect
+    port: 80
+
+    ingress:
+      host: stminaconnect.com
+      path: /
+      pathType: Prefix

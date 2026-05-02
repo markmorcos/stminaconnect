@@ -16,6 +16,9 @@ module.exports = [
       // `Deno` globals don't resolve under the Node ESLint config.
       // They're type-checked via excluded tsconfig + tested via `deno test`.
       'supabase/functions/**',
+      // marketing/ contains a Deno-based legal-page renderer (npm:
+      // specifiers, `Deno` global). Excluded for the same reason.
+      'marketing/**',
       'Makefile',
       '**/*.md',
     ],

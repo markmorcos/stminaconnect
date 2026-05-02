@@ -1,0 +1,6 @@
+# Tooling for the local legal-page renderer — not part of the image.
+README.md
+deno.jsonc
+deno.lock
+scripts/
+templates/

@@ -1,0 +1,391 @@
+:root {
+  --brand: #8b1e2d;
+  --brand-dark: #6e1622;
+  --bg: #fbf8f4;
+  --bg-alt: #f3eee5;
+  --text: #15110e;
+  --text-muted: #5b524a;
+  --border: #e3dccb;
+  --max-width: 960px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  background: linear-gradient(180deg, var(--brand) 0%, var(--brand-dark) 100%);
+  color: #fff;
+  padding: 4rem 0 3rem;
+  text-align: center;
+}
+
+.hero-lang {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-lang a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  margin: 0 0.2rem;
+}
+
+.hero-lang a:hover {
+  color: #fff;
+}
+
+.hero-lang a.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+.hero-lang span {
+  opacity: 0.5;
+}
+
+html[dir="rtl"] .hero-lang {
+  right: auto;
+  left: 1.25rem;
+}
+
+.hero-logo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 1.25rem;
+  border-radius: 22%; /* matches iOS app-icon "squircle" curvature */
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero .tagline {
+  font-size: 1.4rem;
+  margin: 0 0 1rem;
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+.hero .sub {
+  font-size: 1.05rem;
+  max-width: 540px;
+  margin: 0 auto 2rem;
+  opacity: 0.88;
+}
+
+.cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.4rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: background 0.15s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.btn-disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.btn-disabled:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Screenshots */
+.screenshots {
+  padding: 3rem 0;
+  background: var(--bg);
+}
+
+.screenshot-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.screenshot-row figure {
+  margin: 0;
+  text-align: center;
+}
+
+.screenshot-row img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(21, 17, 14, 0.08);
+  background: var(--bg-alt);
+  aspect-ratio: 9 / 19;
+  object-fit: cover;
+}
+
+.screenshot-row figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+@media (max-width: 720px) {
+  .screenshot-row {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
+/* Features */
+.features {
+  padding: 3rem 0 4rem;
+  background: var(--bg-alt);
+}
+
+.features h2 {
+  font-size: 2rem;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.features article {
+  margin-bottom: 2rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features h3 {
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+  color: var(--brand);
+}
+
+.features p {
+  margin: 0;
+  color: var(--text);
+}
+
+/* Footer */
+footer {
+  background: var(--text);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+footer nav {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+}
+
+footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer span {
+  opacity: 0.5;
+}
+
+footer .copy {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+/* Legal pages (privacy / terms / 404) */
+.legal-body {
+  background: var(--bg);
+}
+
+.legal-header {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+}
+
+.legal-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.legal-header .brand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.lang-switch {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.lang-switch a {
+  color: var(--text-muted);
+  text-decoration: none;
+  margin: 0 0.15rem;
+}
+
+.lang-switch a:hover {
+  color: var(--brand);
+}
+
+.lang-switch span {
+  opacity: 0.4;
+}
+
+.legal-content {
+  padding: 2.5rem 1.5rem 4rem;
+  max-width: 740px;
+}
+
+.legal-content h1 {
+  font-size: 2rem;
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.legal-content h2 {
+  font-size: 1.35rem;
+  margin: 2.25rem 0 0.6rem;
+  color: var(--brand);
+}
+
+.legal-content h3 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.4rem;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--text);
+}
+
+.legal-content a {
+  color: var(--brand);
+}
+
+.legal-content code {
+  background: var(--bg-alt);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.legal-content pre {
+  background: var(--bg-alt);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.88em;
+}
+
+.legal-content blockquote {
+  border-left: 3px solid var(--border);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--text-muted);
+}
+
+.legal-content table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 0.95rem;
+}
+
+.legal-content th,
+.legal-content td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.legal-content th {
+  background: var(--bg-alt);
+  font-weight: 600;
+}
+
+/* RTL: align text/cells to the right; flip the language-switch and
+   blockquote border accordingly. */
+html[dir="rtl"] .legal-content,
+html[dir="rtl"] .legal-content th,
+html[dir="rtl"] .legal-content td {
+  text-align: right;
+}
+
+html[dir="rtl"] .legal-content blockquote {
+  border-left: none;
+  border-right: 3px solid var(--border);
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+/* 404 — center the small body */
+.legal-content.not-found {
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.legal-content.not-found h1 {
+  font-size: 4rem;
+  color: var(--brand);
+  margin-bottom: 0.5rem;
+}

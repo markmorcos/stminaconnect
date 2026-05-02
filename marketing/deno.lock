@@ -1,0 +1,16 @@
+{
+  "version": "4",
+  "specifiers": {
+    "npm:marked@14": "14.1.4"
+  },
+  "npm": {
+    "marked@14.1.4": {
+      "integrity": "sha512-vkVZ8ONmUdPnjCKc5uTRvmkRbx4EAi2OkTOXmfTDhZz3OFqMNBM1oTTWwTr4HY4uAEojhzPf+Fy8F1DWa3Sndg=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:marked@14"
+    ]
+  }
+}

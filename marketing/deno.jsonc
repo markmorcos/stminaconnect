@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "render-legal": "deno run --allow-read --allow-write scripts/render-legal.ts"
+  },
+  "imports": {
+    "marked": "npm:marked@14"
+  }
+}
