@@ -46,27 +46,29 @@ body {
   position: absolute;
   top: 1rem;
   right: 1.25rem;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
 }
 
 .hero-lang a {
-  color: rgba(255, 255, 255, 0.85);
+  color: #fff;
   text-decoration: none;
-  margin: 0 0.2rem;
+  margin: 0 0.25rem;
+  font-weight: 500;
 }
 
 .hero-lang a:hover {
-  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .hero-lang a.active {
-  color: #fff;
-  font-weight: 600;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .hero-lang span {
-  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.55);
 }
 
 html[dir="rtl"] .hero-lang {

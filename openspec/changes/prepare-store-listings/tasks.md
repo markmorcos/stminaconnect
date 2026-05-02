@@ -18,7 +18,7 @@
 
 iOS captures are deferred until Apple Developer enrolment lands; Android-only for the v1 launch.
 
-- [ ] 3.1 Run `supabase/preview-seed.sql` against the preview Supabase project, then build a dev client pointed at it (5 servants + 20 persons + recent attendance + alerts).
+- [x] 3.1 Run `supabase/preview-seed.sql` against the preview Supabase project, then build a dev client pointed at it (5 servants + 20 persons + recent attendance + alerts).
 - [ ] 3.2 Set device locale to EN; capture: Quick Add filled in, Check-in roster mid-flow, Servant Dashboard with content. Save to `assets/store/screenshots/android/en/`.
 - [ ] 3.3 Repeat for AR locale; save under `assets/store/screenshots/android/ar/`.
 - [ ] 3.4 Repeat for DE locale; save under `assets/store/screenshots/android/de/`.
@@ -35,8 +35,8 @@ iOS captures are deferred until Apple Developer enrolment lands; Android-only fo
 ## 6. Marketing site + URLs
 
 - [x] 6.1 `docs/marketing/landing.md`: copy for the landing page (app description, three screenshots, privacy/terms links, support email).
-- [ ] 6.2 Deploy landing page on `stminaconnect.com`. Site scaffolding under `marketing/` is complete: landing (`public/index.html`), 404 (`public/404.html`), `robots.txt`, `sitemap.xml`, plus 6 rendered legal pages (`{,ar/,de/}{privacy,terms}/index.html`) generated from `docs/legal/*.md` via `deno task render-legal`. Helm `deployment.yaml` targets chart `infrastructure@0.4.7`; workflow `.github/workflows/deploy-marketing.yml` dispatches `deploy-stminaconnect` on changes under `marketing/**`. Awaits adding `deploy-stminaconnect` to the dispatcher's `repository_dispatch.types` list in `markmorcos/infrastructure`, then a push to main.
-- [ ] 6.3 `support@stminaconnect.com` email alias provisioned and documented.
+- [x] 6.2 Deploy landing page on `stminaconnect.com`. Site scaffolding under `marketing/` is complete: landing (`public/index.html`), 404 (`public/404.html`), `robots.txt`, `sitemap.xml`, plus 6 rendered legal pages (`{,ar/,de/}{privacy,terms}/index.html`) generated from `docs/legal/*.md` via `deno task render-legal`. Helm `deployment.yaml` targets chart `infrastructure@0.4.7`; workflow `.github/workflows/deploy-marketing.yml` dispatches `deploy-stminaconnect` on changes under `marketing/**`. Awaits adding `deploy-stminaconnect` to the dispatcher's `repository_dispatch.types` list in `markmorcos/infrastructure`, then a push to main.
+- [x] 6.3 `support@stminaconnect.com` email alias provisioned and documented.
 
 ## 7. App Store Connect setup
 
@@ -51,6 +51,6 @@ iOS captures are deferred until Apple Developer enrolment lands; Android-only fo
 - [x] 9.1 All listing copy reviewed and within character limits (subtitle ≤ 30, short ≤ 80, full ≤ 4000, keywords ≤ 100). Edits baked into `ar.md` and `de.md`; `_review.md` removed.
 - [ ] 9.2 All screenshot assets present under the expected Android folders (iOS deferred per § 3 note).
 - [x] 9.3 Bundle ids match across `app.json` and `eas.json`.
-- [ ] 9.4 Marketing URL responds with a 200 and renders content.
-- [ ] 9.5 `support@stminaconnect.com` autoresponder configured.
+- [x] 9.4 Marketing URL responds with a 200 and renders content.
+- [x] 9.5 `support@stminaconnect.com` autoresponder configured.
 - [x] 9.6 `openspec validate prepare-store-listings` passes.
