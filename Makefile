@@ -74,13 +74,68 @@ seed: docker-check ## Seed the local DB (5 priests + 20 servants + 200 persons +
 # Deploys (placeholders — wired in later phases)
 # -------------------------------------------------------------------
 
-.PHONY: deploy-functions
-deploy-functions: ## Deploy Edge Functions (placeholder)
-	@echo "deploy-functions: no-op until phase 10 (add-google-calendar-sync)"
+# PROJECT=preview|prod (defaults to preview to keep prod ops explicit). The
+# Supabase CLI must already be linked to the corresponding project ref —
+# `supabase link --project-ref <ref>` once per checkout, persisted under
+# `supabase/.temp/`. The CI deploy workflow at
+# `.github/workflows/deploy-supabase.yml` is the canonical path; these
+# targets exist for local debugging when CI is unhealthy or for ad-hoc
+# operations under the developer's eye.
+PROJECT ?= preview
+PREVIEW_REF := ljnuaefrsfscqnywvojd
+PROD_REF    := hdcwafpagxujovqivzzz
+
+# Edge Functions deployed in lockstep. Keep this list in sync with the
+# `FUNCTIONS` env in `.github/workflows/deploy-supabase.yml`.
+SUPABASE_FUNCTIONS := \
+	sync-calendar-events \
+	send-push-notification \
+	detect-absences \
+	invite-servant \
+	delete-auth-user \
+	weekly-backup
+
+.PHONY: _project-ref
+_project-ref:
+	@if [ "$(PROJECT)" = "prod" ]; then \
+		echo "$(PROD_REF)"; \
+	elif [ "$(PROJECT)" = "preview" ]; then \
+		echo "$(PREVIEW_REF)"; \
+	else \
+		echo "ERROR: PROJECT must be 'preview' or 'prod' (got '$(PROJECT)')" >&2; \
+		exit 1; \
+	fi
+
+.PHONY: _confirm-prod
+_confirm-prod:
+	@if [ "$(PROJECT)" = "prod" ] && [ -t 0 ] && [ "$$ASSUME_YES" != "1" ]; then \
+		read -p "About to operate on the PROD Supabase project ($(PROD_REF)). Continue? [y/N] " ans; \
+		if [ "$$ans" != "y" ] && [ "$$ans" != "Y" ]; then \
+			echo "Aborted."; \
+			exit 1; \
+		fi; \
+	fi
 
 .PHONY: deploy-migrations
-deploy-migrations: ## Deploy migrations to remote Supabase (placeholder)
-	@echo "deploy-migrations: no-op until phase 22 (setup-production-deployment)"
+deploy-migrations: ## Push migrations to a Supabase project: make deploy-migrations PROJECT=preview|prod
+	@$(MAKE) -s _confirm-prod
+	@REF=$$($(MAKE) -s _project-ref); \
+	echo "Linking to $$REF"; \
+	supabase link --project-ref $$REF; \
+	echo "Pushing migrations to $$REF"; \
+	supabase db push
+
+.PHONY: deploy-functions
+deploy-functions: ## Deploy Edge Functions to a Supabase project: make deploy-functions PROJECT=preview|prod
+	@$(MAKE) -s _confirm-prod
+	@REF=$$($(MAKE) -s _project-ref); \
+	echo "Linking to $$REF"; \
+	supabase link --project-ref $$REF; \
+	echo "Deploying $(SUPABASE_FUNCTIONS)"; \
+	supabase functions deploy $(SUPABASE_FUNCTIONS) --project-ref $$REF
+
+.PHONY: deploy-supabase
+deploy-supabase: deploy-migrations deploy-functions ## Push migrations + deploy all Edge Functions in one shot
 
 # -------------------------------------------------------------------
 # Quality gates

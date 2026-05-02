@@ -127,4 +127,19 @@ openspec/             Spec-driven development workspace (proposals, specs, archi
 - **Conventional Commits.** `feat:`, `fix:`, `chore:`, `test:`, `docs:`, etc.
 - **Pre-commit hook** runs `lint-staged` (lint + format on staged files) and `npm run typecheck`.
 
+## Production
+
+Live at <https://stminaconnect.com> (marketing) and the Supabase project `hdcwafpagxujovqivzzz` (Frankfurt). Operations:
+
+- **First-time setup**: [`docs/production-setup.md`](docs/production-setup.md)
+- **Ongoing ops** (invite servant, GDPR erasure, backup verification, version bumps, key rotation): [`docs/runbook.md`](docs/runbook.md)
+- **Outage triage** (auth / sync / push / marketing site / backup): [`docs/incident-response.md`](docs/incident-response.md)
+- **Per-store submission playbooks**: [`docs/store/submission-ios.md`](docs/store/submission-ios.md), [`docs/store/submission-android.md`](docs/store/submission-android.md)
+
+Mobile distribution:
+
+- **iOS / TestFlight** — deferred until Apple Developer enrolment lands (per the v1 "no Apple yet" decision).
+- **Android / Play Console** — deferred until the Google Play developer account is reactivated (closed for inactivity; refund + reactivation pending).
+- **Interim Android distribution** — production-signed APK from `eas build --profile production --platform android`, sideloaded directly to parish testers.
+
 For everything else, see `openspec/project.md`.

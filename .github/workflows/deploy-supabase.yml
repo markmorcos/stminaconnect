@@ -6,6 +6,7 @@ on:
     paths:
       - 'supabase/migrations/**'
       - 'supabase/functions/**'
+      - 'Makefile'
       - '.github/workflows/deploy-supabase.yml'
   workflow_dispatch:
 
@@ -13,13 +14,11 @@ concurrency:
   group: deploy-supabase-${{ github.ref }}
   cancel-in-progress: false
 
-env:
-  FUNCTIONS: >-
-    sync-calendar-events
-    send-push-notification
-    detect-absences
-    invite-servant
-    delete-auth-user
+# Both jobs use the same Makefile targets a developer would run locally
+# (`make deploy-migrations` / `make deploy-functions`). The Makefile
+# derives the project ref from `PROJECT=preview|prod` and skips its
+# interactive confirmation when stdin is not a TTY (CI runners aren't),
+# so no extra wiring is needed.
 
 jobs:
   deploy-preview:
@@ -28,18 +27,15 @@ jobs:
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-      PROJECT_REF: ljnuaefrsfscqnywvojd
     steps:
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
         with:
           version: latest
-      - name: Link
-        run: supabase link --project-ref $PROJECT_REF
       - name: Push migrations
-        run: supabase db push
+        run: make deploy-migrations PROJECT=preview
       - name: Deploy functions
-        run: supabase functions deploy $FUNCTIONS --project-ref $PROJECT_REF
+        run: make deploy-functions PROJECT=preview
 
   deploy-production:
     needs: deploy-preview
@@ -48,15 +44,12 @@ jobs:
     env:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
-      PROJECT_REF: hdcwafpagxujovqivzzz
     steps:
       - uses: actions/checkout@v4
       - uses: supabase/setup-cli@v1
         with:
           version: latest
-      - name: Link
-        run: supabase link --project-ref $PROJECT_REF
       - name: Push migrations
-        run: supabase db push
+        run: make deploy-migrations PROJECT=prod
       - name: Deploy functions
-        run: supabase functions deploy $FUNCTIONS --project-ref $PROJECT_REF
+        run: make deploy-functions PROJECT=prod

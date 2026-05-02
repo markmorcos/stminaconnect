@@ -2,7 +2,7 @@
   "expo": {
     "name": "St. Mina Connect",
     "slug": "stminaconnect",
-    "version": "0.99.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/branding/icon-source.png",
     "scheme": "stminaconnect",
