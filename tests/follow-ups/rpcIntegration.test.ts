@@ -86,10 +86,10 @@ describeIntegration('follow-ups + on-break + return-detection (live Supabase)', 
 
     beforeAll(async () => {
       svc = adminClient();
-      s1 = await signInAs('servant1@stmina.de');
-      s2 = await signInAs('servant2@stmina.de');
-      admin = await signInAs('priest@stmina.de');
-      s1Id = await getServantId(svc, 'servant1@stmina.de');
+      s1 = await signInAs('servant1@stminaconnect.com');
+      s2 = await signInAs('servant2@stminaconnect.com');
+      admin = await signInAs('priest@stminaconnect.com');
+      s1Id = await getServantId(svc, 'servant1@stminaconnect.com');
       personId = await pickPersonAssignedTo(svc, s1Id);
       await svc.from('follow_ups').delete().eq('person_id', personId);
     });
@@ -157,8 +157,8 @@ describeIntegration('follow-ups + on-break + return-detection (live Supabase)', 
 
     beforeAll(async () => {
       svc = adminClient();
-      s1 = await signInAs('servant1@stmina.de');
-      s1Id = await getServantId(svc, 'servant1@stmina.de');
+      s1 = await signInAs('servant1@stminaconnect.com');
+      s1Id = await getServantId(svc, 'servant1@stminaconnect.com');
       personId = await pickPersonAssignedTo(svc, s1Id);
       const { data } = await svc
         .from('persons')
@@ -227,7 +227,7 @@ describeIntegration('follow-ups + on-break + return-detection (live Supabase)', 
 
     beforeAll(async () => {
       svc = adminClient();
-      s1Id = await getServantId(svc, 'servant1@stmina.de');
+      s1Id = await getServantId(svc, 'servant1@stminaconnect.com');
       personId = await pickPersonAssignedTo(svc, s1Id);
       const { data } = await svc
         .from('persons')
@@ -279,8 +279,8 @@ describeIntegration('follow-ups + on-break + return-detection (live Supabase)', 
 
     beforeAll(async () => {
       svc = adminClient();
-      s1 = await signInAs('servant1@stmina.de');
-      s1Id = await getServantId(svc, 'servant1@stmina.de');
+      s1 = await signInAs('servant1@stminaconnect.com');
+      s1Id = await getServantId(svc, 'servant1@stminaconnect.com');
       personId = await pickPersonAssignedTo(svc, s1Id);
       const { data } = await svc
         .from('persons')

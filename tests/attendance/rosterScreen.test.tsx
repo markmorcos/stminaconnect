@@ -126,7 +126,7 @@ beforeEach(() => {
   mockUseAuth.mockReturnValue({
     servant: {
       id: 'servant-1',
-      email: 'servant1@stmina.de',
+      email: 'servant1@stminaconnect.com',
       display_name: 'Servant One',
       role: 'servant',
     },

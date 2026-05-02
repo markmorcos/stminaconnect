@@ -75,7 +75,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      servant = await signInAs('servant1@stmina.de');
+      servant = await signInAs('servant1@stminaconnect.com');
       await clearTestEvents(svc);
       const { data: cfg } = await svc
         .from('alert_config')
@@ -174,7 +174,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      servant = await signInAs('servant1@stmina.de');
+      servant = await signInAs('servant1@stminaconnect.com');
       await clearTestEvents(svc);
 
       const { data: ev } = await svc
@@ -235,7 +235,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      servant = await signInAs('servant1@stmina.de');
+      servant = await signInAs('servant1@stminaconnect.com');
       await clearTestEvents(svc);
       const { data: cfg } = await svc
         .from('alert_config')
@@ -294,7 +294,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      servant = await signInAs('servant1@stmina.de');
+      servant = await signInAs('servant1@stminaconnect.com');
       await clearTestEvents(svc);
     });
 
@@ -347,7 +347,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
     let servant: SupabaseClient;
 
     beforeAll(async () => {
-      servant = await signInAs('servant1@stmina.de');
+      servant = await signInAs('servant1@stminaconnect.com');
     });
 
     it('returns at most 25 rows', async () => {
@@ -378,7 +378,7 @@ describeIntegration('attendance RPCs (live Supabase)', () => {
       const target = list as { id: string; first_name: string; last_name: string };
 
       // Soft-delete via the RPC (admin only).
-      const admin = await signInAs('priest@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
       await admin.rpc('soft_delete_person', { person_id: target.id });
 
       try {

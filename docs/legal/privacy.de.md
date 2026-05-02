@@ -6,13 +6,13 @@ version: 2026-04-28
 
 St. Mina Koptisch-Orthodoxe Kirche
 München, Deutschland
-E-Mail: privacy@stmina.de
+E-Mail: privacy@stminaconnect.com
 
 Eine Postanschrift der Gemeinde wird auf Anfrage mitgeteilt und vor einer öffentlichen Veröffentlichung in diese Erklärung aufgenommen.
 
 ## 2. Datenschutzkontakt
 
-Datenschutzfragen, Anträge zur Wahrnehmung von Betroffenenrechten und Beschwerden richten Sie bitte an **privacy@stmina.de**.
+Datenschutzfragen, Anträge zur Wahrnehmung von Betroffenenrechten und Beschwerden richten Sie bitte an **privacy@stminaconnect.com**.
 
 Die Gemeinde hat keinen formalen Datenschutzbeauftragten nach Art. 37 DSGVO / § 38 BDSG bestellt, da die gesetzlichen Schwellen (Kerntätigkeit, große Mengen besonderer Kategorien personenbezogener Daten) für diese kleine, interne App nicht erreicht werden. Die genannte Adresse ist die Datenschutzkontaktstelle der Gemeinde und erreicht die für den Datenschutz zuständige ehrenamtlich tätige Person.
 
@@ -97,12 +97,12 @@ Diese Fristen sind in `docs/legal/retention.md` festgehalten und werden dort bes
 
 Sie haben das Recht auf:
 
-- **Auskunft** (Art. 15) — Einstellungen → Datenschutz → „Meine Daten herunterladen" liefert einen JSON-Export. Mitglieder wenden sich an privacy@stmina.de.
+- **Auskunft** (Art. 15) — Einstellungen → Datenschutz → „Meine Daten herunterladen" liefert einen JSON-Export. Mitglieder wenden sich an privacy@stminaconnect.com.
 - **Berichtigung** (Art. 16) — der zugewiesene Diener kann Datensätze korrigieren; Diener bearbeiten ihre eigenen Daten in den Einstellungen.
 - **Löschung** (Art. 17, „Recht auf Vergessenwerden") — Einstellungen → Datenschutz → „Mein Konto löschen" für Diener. Mitglieder wenden sich an die Gemeinde; ein/e Administrierende/r führt eine Hart-Löschung durch, die den Datensatz vollständig entfernt und zugehörige Anwesenheitseinträge anonymisiert.
-- **Einschränkung der Verarbeitung** (Art. 18) — Antrag an privacy@stmina.de. Bearbeitung durch Administrierende.
+- **Einschränkung der Verarbeitung** (Art. 18) — Antrag an privacy@stminaconnect.com. Bearbeitung durch Administrierende.
 - **Datenübertragbarkeit** (Art. 20) — der oben genannte JSON-Export liegt in einem maschinenlesbaren Format vor.
-- **Widerspruch** (Art. 21) — gegen eine auf Art. 6 Abs. 1 lit. f gestützte Verarbeitung jederzeit per E-Mail an privacy@stmina.de. Die Gemeinde stellt die Verarbeitung ein, sofern sie keine zwingenden schutzwürdigen Gründe nachweist; ein Widerspruch eines Mitglieds gegen die seelsorgliche Nachverfolgung wird in jedem Fall respektiert.
+- **Widerspruch** (Art. 21) — gegen eine auf Art. 6 Abs. 1 lit. f gestützte Verarbeitung jederzeit per E-Mail an privacy@stminaconnect.com. Die Gemeinde stellt die Verarbeitung ein, sofern sie keine zwingenden schutzwürdigen Gründe nachweist; ein Widerspruch eines Mitglieds gegen die seelsorgliche Nachverfolgung wird in jedem Fall respektiert.
 - **Widerruf der Einwilligung** — soweit Verarbeitungen auf Einwilligung beruhen (z. B. Annahme dieser Erklärung als Voraussetzung der Nutzung), kann diese jederzeit widerrufen werden; die Rechtmäßigkeit bisheriger Verarbeitung bleibt unberührt.
 - **Keine ausschließlich automatisierten Entscheidungen** (Art. 22) — finden in dieser App nicht statt.
 
@@ -121,7 +121,7 @@ Sie können sich auch an die Aufsichtsbehörde Ihres gewöhnlichen Aufenthalts o
 
 ## 13. Minderjährige
 
-Die Gemeinde ist eine Gemeinschaftsorganisation; Kinder von Gemeindemitgliedern können von ihren Eltern oder mit deren Wissen durch einen Diener registriert werden und Gegenstand seelsorglicher Folgeaktionen sein. Soweit ein Mitglied minderjährig ist, stützt sich die Gemeinde auf das Wissen der Eltern und auf dieselbe Rechtsgrundlage des berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) in Verbindung mit den Grundsätzen des Art. 8 DSGVO für einwilligungsbedürftige Verarbeitungen. Die App erhebt nicht direkt Daten von Kindern: Mitglieder melden sich nicht an, und sämtliche Daten zu Minderjährigen werden von einem volljährigen Diener stellvertretend eingegeben. Eltern oder Sorgeberechtigte können jederzeit Auskunft, Berichtigung oder Löschung des Datensatzes eines Minderjährigen über privacy@stmina.de anfordern.
+Die Gemeinde ist eine Gemeinschaftsorganisation; Kinder von Gemeindemitgliedern können von ihren Eltern oder mit deren Wissen durch einen Diener registriert werden und Gegenstand seelsorglicher Folgeaktionen sein. Soweit ein Mitglied minderjährig ist, stützt sich die Gemeinde auf das Wissen der Eltern und auf dieselbe Rechtsgrundlage des berechtigten Interesses (Art. 6 Abs. 1 lit. f DSGVO) in Verbindung mit den Grundsätzen des Art. 8 DSGVO für einwilligungsbedürftige Verarbeitungen. Die App erhebt nicht direkt Daten von Kindern: Mitglieder melden sich nicht an, und sämtliche Daten zu Minderjährigen werden von einem volljährigen Diener stellvertretend eingegeben. Eltern oder Sorgeberechtigte können jederzeit Auskunft, Berichtigung oder Löschung des Datensatzes eines Minderjährigen über privacy@stminaconnect.com anfordern.
 
 ## 14. Kein Tracking
 
@@ -147,4 +147,4 @@ Die akzeptierte Version dieser Erklärung wird gespeichert. Bei Aktualisierungen
 
 ## 17. Kontakt
 
-privacy@stmina.de
+privacy@stminaconnect.com

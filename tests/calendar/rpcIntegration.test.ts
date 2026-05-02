@@ -7,7 +7,7 @@
  *  - `trigger_calendar_sync` rate limit blocks within 60s (9.5)
  *
  * Gated on RUN_INTEGRATION_TESTS=1 — needs a running Supabase stack
- * with all migrations applied + seed.sql loaded (priest@stmina.de is
+ * with all migrations applied + seed.sql loaded (priest@stminaconnect.com is
  * the admin used here). Bypassed otherwise so the unit suite stays
  * green offline.
  *
@@ -71,7 +71,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      admin = await signInAs('priest@stmina.de');
+      admin = await signInAs('priest@stminaconnect.com');
       await clearTestPatterns(svc);
       await svc.from('counted_event_patterns').insert({ pattern: 'Liturgy' });
     });
@@ -110,7 +110,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      admin = await signInAs('priest@stmina.de');
+      admin = await signInAs('priest@stminaconnect.com');
       await clearTestPatterns(svc);
       await clearTestEvents(svc);
 
@@ -186,7 +186,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
     });
 
     it('rejects non-admin upsert', async () => {
-      const servant = await signInAs('servant1@stmina.de');
+      const servant = await signInAs('servant1@stminaconnect.com');
       const { error } = await servant.rpc('upsert_counted_event_pattern', {
         new_pattern: 'Vespers',
       });
@@ -204,7 +204,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      admin = await signInAs('priest@stmina.de');
+      admin = await signInAs('priest@stminaconnect.com');
       await clearTestEvents(svc);
 
       // Build a `start_at` that lands on "today" in Berlin but is the
@@ -261,7 +261,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
 
     beforeAll(async () => {
       svc = adminClient();
-      admin = await signInAs('priest@stmina.de');
+      admin = await signInAs('priest@stminaconnect.com');
       await clearRecentSyncLog(svc);
     });
 
@@ -286,7 +286,7 @@ describeIntegration('calendar RPCs (live Supabase)', () => {
     });
 
     it('rejects non-admin callers regardless of rate-limit state', async () => {
-      const servant = await signInAs('servant1@stmina.de');
+      const servant = await signInAs('servant1@stminaconnect.com');
       const { error } = await servant.rpc('trigger_calendar_sync');
       expect(error).not.toBeNull();
       expect(error?.message ?? '').toMatch(/admin only/i);

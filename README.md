@@ -65,13 +65,13 @@ Magic link is the only sign-in path. In dev:
 
 `make seed` resets the dev fixture every time it runs. Each seed user is signed in via magic link — request one from the sign-in screen and tap it from Mailpit.
 
-| Email                | Role    |
-| -------------------- | ------- |
-| `priest@stmina.de`   | admin   |
-| `servant1@stmina.de` | servant |
-| `servant2@stmina.de` | servant |
-| `servant3@stmina.de` | servant |
-| `servant4@stmina.de` | servant |
+| Email                        | Role    |
+| ---------------------------- | ------- |
+| `priest@stminaconnect.com`   | admin   |
+| `servant1@stminaconnect.com` | servant |
+| `servant2@stminaconnect.com` | servant |
+| `servant3@stminaconnect.com` | servant |
+| `servant4@stminaconnect.com` | servant |
 
 The fixture also inserts 20 sample persons across regions and languages so
 the persons list and profile screens have content to render.

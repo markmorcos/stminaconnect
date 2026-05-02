@@ -42,7 +42,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
     });
 
     it('returns the seeded persons for a signed-in servant', async () => {
-      const client = await signInAs('servant1@stmina.de');
+      const client = await signInAs('servant1@stminaconnect.com');
       const { data, error } = await client.rpc('list_persons', { filter: {} });
       expect(error).toBeNull();
       expect(Array.isArray(data)).toBe(true);
@@ -52,7 +52,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
 
   describe('get_person comments visibility', () => {
     it('includes comments when caller is the assigned servant', async () => {
-      const admin = await signInAs('priest@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
       const list = (await admin.rpc('list_persons', { filter: {} })).data as {
         id: string;
         assigned_servant: string;
@@ -72,7 +72,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
     });
 
     it('hides comments when caller is a non-admin non-assigned servant', async () => {
-      const admin = await signInAs('priest@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
       const list = (await admin.rpc('list_persons', { filter: {} })).data as {
         id: string;
         assigned_servant: string;
@@ -81,7 +81,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
       if (!target) throw new Error('seed missing assigned person');
       // Pick a servant who is NOT the assigned one.
       const otherEmail = ['servant1', 'servant2', 'servant3', 'servant4']
-        .map((p) => `${p}@stmina.de`)
+        .map((p) => `${p}@stminaconnect.com`)
         .find(async (email) => {
           const { data } = await admin.from('servants').select('id').eq('email', email).single();
           return (data as { id: string }).id !== target.assigned_servant;
@@ -93,7 +93,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
     });
 
     it('admins always see comments', async () => {
-      const admin = await signInAs('priest@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
       const list = (await admin.rpc('list_persons', { filter: {} })).data as { id: string }[];
       const target = list[0];
       const { data } = await admin.rpc('get_person', { person_id: target.id });
@@ -105,7 +105,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
 
   describe('create_person validation', () => {
     it('rejects a payload missing required fields', async () => {
-      const client = await signInAs('priest@stmina.de');
+      const client = await signInAs('priest@stminaconnect.com');
       const { error } = await client.rpc('create_person', {
         payload: { first_name: 'X' },
       });
@@ -113,11 +113,11 @@ describeIntegration('person RPCs (live Supabase)', () => {
     });
 
     it('succeeds with a valid payload and stamps registered_by', async () => {
-      const admin = await signInAs('priest@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
       const { data: adminRow } = await admin
         .from('servants')
         .select('id')
-        .eq('email', 'priest@stmina.de')
+        .eq('email', 'priest@stminaconnect.com')
         .single();
       const adminId = (adminRow as { id: string }).id;
       const { data: id, error } = await admin.rpc('create_person', {
@@ -139,7 +139,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
 
   describe('assign_person admin gating', () => {
     it('rejects from a non-admin servant', async () => {
-      const client = await signInAs('servant1@stmina.de');
+      const client = await signInAs('servant1@stminaconnect.com');
       const { error } = await client.rpc('assign_person', {
         person_id: '00000000-0000-0000-0000-000000000000',
         servant_id: '00000000-0000-0000-0000-000000000000',
@@ -151,7 +151,7 @@ describeIntegration('person RPCs (live Supabase)', () => {
 
   describe('soft_delete_person', () => {
     it('rejects from a non-admin servant', async () => {
-      const client = await signInAs('servant1@stmina.de');
+      const client = await signInAs('servant1@stminaconnect.com');
       const { error } = await client.rpc('soft_delete_person', {
         person_id: '00000000-0000-0000-0000-000000000000',
       });

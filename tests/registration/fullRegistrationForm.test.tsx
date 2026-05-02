@@ -35,14 +35,14 @@ jest.mock('@/services/api/persons', () => ({
 
 const adminServant = {
   id: 'admin-id',
-  email: 'admin@stmina.de',
+  email: 'admin@stminaconnect.com',
   display_name: 'Admin',
   role: 'admin' as const,
 };
 
 const regularServant = {
   id: 'servant-1',
-  email: 'servant1@stmina.de',
+  email: 'servant1@stminaconnect.com',
   display_name: 'Servant One',
   role: 'servant' as const,
 };

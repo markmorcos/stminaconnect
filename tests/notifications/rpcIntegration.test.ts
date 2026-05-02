@@ -39,8 +39,8 @@ async function getServantIdByEmail(client: SupabaseClient, email: string): Promi
 describeIntegration('notifications RPCs (live Supabase)', () => {
   describe('dispatch_notification', () => {
     it('rejects non-admin direct calls', async () => {
-      const client = await signInAs('servant1@stmina.de');
-      const adminId = await getServantIdByEmail(client, 'servant1@stmina.de');
+      const client = await signInAs('servant1@stminaconnect.com');
+      const adminId = await getServantIdByEmail(client, 'servant1@stminaconnect.com');
       const { error } = await client.rpc('dispatch_notification', {
         recipient: adminId,
         type: 'system',
@@ -51,8 +51,8 @@ describeIntegration('notifications RPCs (live Supabase)', () => {
     });
 
     it('succeeds for an admin caller and returns a uuid', async () => {
-      const admin = await signInAs('priest@stmina.de');
-      const recipientId = await getServantIdByEmail(admin, 'servant1@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
+      const recipientId = await getServantIdByEmail(admin, 'servant1@stminaconnect.com');
       const { data, error } = await admin.rpc('dispatch_notification', {
         recipient: recipientId,
         type: 'system',
@@ -65,8 +65,8 @@ describeIntegration('notifications RPCs (live Supabase)', () => {
 
   describe('mark_notification_read', () => {
     it("only succeeds for the caller's own notification", async () => {
-      const admin = await signInAs('priest@stmina.de');
-      const recipientId = await getServantIdByEmail(admin, 'servant1@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
+      const recipientId = await getServantIdByEmail(admin, 'servant1@stminaconnect.com');
       const { data: notifId, error: dispatchErr } = await admin.rpc('dispatch_notification', {
         recipient: recipientId,
         type: 'system',
@@ -77,7 +77,7 @@ describeIntegration('notifications RPCs (live Supabase)', () => {
 
       // A different (non-owner) servant tries to mark it — RPC returns
       // false because the WHERE clause doesn't match their auth.uid().
-      const otherClient = await signInAs('servant2@stmina.de');
+      const otherClient = await signInAs('servant2@stminaconnect.com');
       const { data: otherResult, error: otherErr } = await otherClient.rpc(
         'mark_notification_read',
         { notification_id: notifId as string },
@@ -86,7 +86,7 @@ describeIntegration('notifications RPCs (live Supabase)', () => {
       expect(otherResult).toBe(false);
 
       // The owner succeeds.
-      const ownerClient = await signInAs('servant1@stmina.de');
+      const ownerClient = await signInAs('servant1@stminaconnect.com');
       const { data: ownerResult, error: ownerErr } = await ownerClient.rpc(
         'mark_notification_read',
         { notification_id: notifId as string },
@@ -98,15 +98,15 @@ describeIntegration('notifications RPCs (live Supabase)', () => {
 
   describe('RLS', () => {
     it("a servant cannot read another servant's notifications", async () => {
-      const admin = await signInAs('priest@stmina.de');
-      const recipientId = await getServantIdByEmail(admin, 'servant1@stmina.de');
+      const admin = await signInAs('priest@stminaconnect.com');
+      const recipientId = await getServantIdByEmail(admin, 'servant1@stminaconnect.com');
       const { data: notifId } = await admin.rpc('dispatch_notification', {
         recipient: recipientId,
         type: 'system',
         payload: { message: 'rls test' },
       });
 
-      const otherClient = await signInAs('servant2@stmina.de');
+      const otherClient = await signInAs('servant2@stminaconnect.com');
       const { data, error } = await otherClient
         .from('notifications')
         .select('*')

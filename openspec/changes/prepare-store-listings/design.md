@@ -19,8 +19,8 @@ Stores have idiosyncratic requirements (screenshot dimensions, character counts,
 
 ## Decisions
 
-1. **Bundle identifier**: `tech.morcos.stminaconnect` for both platforms. Reasons:
-   - Reverse-DNS uses developer's domain `morcos.tech`.
+1. **Bundle identifier**: `com.stminaconnect` for both platforms. Reasons:
+   - Reverse-DNS uses developer's domain `stminaconnect.com`.
    - Clear, brandable, future-proof.
    - Confirmed via amendment prompt; will request user confirmation in case it should be `de.stmina.connect` or similar.
 2. **Category**: Lifestyle as primary, no secondary. Reasons:
@@ -48,9 +48,9 @@ Stores have idiosyncratic requirements (screenshot dimensions, character counts,
 8. **Age rating**: Apple's questionnaire answers all "None" for objectionable categories → 4+. Google's content rating: target Everyone. Documented in `docs/store/age-rating.md`.
 9. **Privacy nutrition label** (iOS): drafted in `add-gdpr-compliance`; this phase finalizes and uploads via App Store Connect. Categories from that doc (Contact Info, User Content, Identifiers, Diagnostics) — all linked to user, none used for tracking.
 10. **Marketing URL**:
-    - `https://stmina.morcos.tech` — a simple landing page. Stack: same static-site host as the legal docs (Cloudflare Pages or GitHub Pages).
+    - `https://stminaconnect.com` — a simple landing page. Stack: same static-site host as the legal docs (Cloudflare Pages or GitHub Pages).
     - Page contains: app description (matching store description), screenshots, privacy/terms links, contact email.
-11. **Support contact**: `support@morcos.tech` or `support@stmina.morcos.tech`. Documented; mailbox setup is a sub-task.
+11. **Support contact**: `support@stminaconnect.com`. Documented; mailbox setup is a sub-task.
 12. **Distribution scope**:
     - **iOS**: Germany only, expandable.
     - **Android**: Germany only, expandable.
@@ -90,6 +90,6 @@ Stores have idiosyncratic requirements (screenshot dimensions, character counts,
 
 ## Open Questions
 
-- Confirm bundle ID `tech.morcos.stminaconnect` with user.
-- Confirm marketing domain `stmina.morcos.tech` with user.
+- Confirm bundle ID `com.stminaconnect` with user.
+- Confirm marketing domain `stminaconnect.com` with user.
 - None. Apple Developer enrolment is a documented release gate (see `setup-production-deployment` design § 14); solo developer enrols personally before this phase's submission tasks run.

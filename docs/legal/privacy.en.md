@@ -6,13 +6,13 @@ version: 2026-04-28
 
 St. Mina Coptic Orthodox Church
 Munich, Germany
-Email: privacy@stmina.de
+Email: privacy@stminaconnect.com
 
 A postal address for the parish is provided on request and will be added to this Policy before public release.
 
 ## 2. Privacy contact
 
-Privacy questions, rights requests and complaints can be sent to **privacy@stmina.de**.
+Privacy questions, rights requests and complaints can be sent to **privacy@stminaconnect.com**.
 
 The parish has not formally designated a Data Protection Officer under Art. 37 GDPR / §38 BDSG, because the threshold conditions (large-scale or core-activity processing of special categories) are not met for this small internal app. The address above is the parish's privacy contact and reaches the volunteer responsible for data protection.
 
@@ -97,12 +97,12 @@ These durations are reflected in `docs/legal/retention.md` and enforced as descr
 
 You have the right to:
 
-- **Access** (Art. 15) — Settings → Privacy → "Download my data" delivers a JSON copy. For members, contact privacy@stmina.de.
+- **Access** (Art. 15) — Settings → Privacy → "Download my data" delivers a JSON copy. For members, contact privacy@stminaconnect.com.
 - **Rectification** (Art. 16) — your assigned servant can correct your record; servants edit their own account in Settings.
 - **Erasure** (Art. 17, "right to be forgotten") — Settings → Privacy → "Delete my account" for servants. For members, contact the parish; an admin will perform a hard-erasure that removes the personal record entirely and anonymises related attendance rows.
-- **Restriction of processing** (Art. 18) — request via privacy@stmina.de. Handled by the parish admin.
+- **Restriction of processing** (Art. 18) — request via privacy@stminaconnect.com. Handled by the parish admin.
 - **Data portability** (Art. 20) — the JSON export above is in a machine-readable format suitable for portability where applicable.
-- **Object** (Art. 21) — for processing based on Art. 6(1)(f), at any time, by emailing privacy@stmina.de. The parish will stop processing unless it can demonstrate compelling legitimate grounds, and in any case will respect an objection by a member to the use of their data for pastoral follow-up.
+- **Object** (Art. 21) — for processing based on Art. 6(1)(f), at any time, by emailing privacy@stminaconnect.com. The parish will stop processing unless it can demonstrate compelling legitimate grounds, and in any case will respect an objection by a member to the use of their data for pastoral follow-up.
 - **Withdraw consent** — where any processing is based on consent (e.g. acceptance of this Policy as a condition of using the app), you can withdraw at any time; withdrawal does not affect prior lawful processing.
 - **Not be subject to solely automated decisions** (Art. 22) — none take place in this app.
 
@@ -121,7 +121,7 @@ You may also contact the supervisory authority of your habitual residence or pla
 
 ## 13. Children
 
-The parish is a community organisation; children of community members may be registered by their parents or by a servant with parental knowledge, and may be the subject of pastoral follow-up. Where a member is a minor, the parish relies on parental knowledge and the same legitimate-interest basis (Art. 6(1)(f)) read together with Art. 8 GDPR principles for any processing that requires consent. The app does not knowingly collect data from children directly: members do not log in, and any data about a minor is entered by an adult servant on their behalf. Parents or guardians can request access, correction, or erasure of a minor's record at any time via privacy@stmina.de.
+The parish is a community organisation; children of community members may be registered by their parents or by a servant with parental knowledge, and may be the subject of pastoral follow-up. Where a member is a minor, the parish relies on parental knowledge and the same legitimate-interest basis (Art. 6(1)(f)) read together with Art. 8 GDPR principles for any processing that requires consent. The app does not knowingly collect data from children directly: members do not log in, and any data about a minor is entered by an adult servant on their behalf. Parents or guardians can request access, correction, or erasure of a minor's record at any time via privacy@stminaconnect.com.
 
 ## 14. No tracking
 
@@ -147,4 +147,4 @@ We log the version of this Policy that you accepted. When the Policy is updated,
 
 ## 17. Contact
 
-privacy@stmina.de
+privacy@stminaconnect.com

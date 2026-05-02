@@ -47,7 +47,7 @@ Solo developer, low budget, free-tier-first, EU-region requirement. Production d
 11. **Observability**: built-in Supabase Logs Explorer for backend; our `logs` table for app-side errors; manual review weekly. No third-party APM in v1.
 12. **Incident response**: small. Document `docs/incident-response.md` with three categories — auth outage, sync outage, push outage — each with first-five-minute checks (Supabase status page, recent migrations, recent Edge Function deploys, recent app submission).
 
-13. **Bundle identifier (final)**: locked to `tech.morcos.stminaconnect` for both iOS `bundleIdentifier` and Android `package`. Set in `init-project-scaffolding`, confirmed in `prepare-store-listings`, and used here for App Store Connect / Play Console app records. Reverse-DNS uses the developer's domain `morcos.tech`.
+13. **Bundle identifier (final)**: locked to `com.stminaconnect` for both iOS `bundleIdentifier` and Android `package`. Set in `init-project-scaffolding`, confirmed in `prepare-store-listings`, and used here for App Store Connect / Play Console app records. Reverse-DNS uses the developer's domain `stminaconnect.com`.
 
 14. **Apple Developer enrolment**: paid Apple Developer Program membership is required before this phase can run. Solo developer enrols personally; the church does not need its own team membership in v1. Tracked as a v1 release gate; documented in `docs/runbook.md`.
 

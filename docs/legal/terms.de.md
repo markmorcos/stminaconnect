@@ -4,7 +4,7 @@ version: 2026-04-28
 
 ## 1. Anbieter
 
-St. Mina Connect wird von der St. Mina Koptisch-Orthodoxen Kirche, München, Deutschland („wir", „uns", „die Gemeinde") betrieben. Kontakt: privacy@stmina.de.
+St. Mina Connect wird von der St. Mina Koptisch-Orthodoxen Kirche, München, Deutschland („wir", „uns", „die Gemeinde") betrieben. Kontakt: privacy@stminaconnect.com.
 
 ## 2. Nutzerkreis
 
@@ -81,4 +81,4 @@ Wir können die Bedingungen aktualisieren. Bei wesentlichen Änderungen ist eine
 
 ## 13. Kontakt
 
-privacy@stmina.de
+privacy@stminaconnect.com

@@ -22,7 +22,7 @@ import { updateMyServant } from '@/services/api/account';
 
 const baseServant = {
   id: 'servant-1',
-  email: 's1@stmina.de',
+  email: 's1@stminaconnect.com',
   display_name: 'Servant One',
   role: 'servant' as const,
   created_at: '2026-01-01T00:00:00Z',

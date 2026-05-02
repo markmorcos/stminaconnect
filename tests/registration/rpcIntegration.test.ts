@@ -35,8 +35,8 @@ async function servantIdByEmail(client: SupabaseClient, email: string): Promise<
 
 describeIntegration('find_potential_duplicate (live Supabase)', () => {
   it('returns the matching row id when an exact match exists', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const adminId = await servantIdByEmail(admin, 'priest@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const adminId = await servantIdByEmail(admin, 'priest@stminaconnect.com');
 
     const phone = `+4917000${Math.floor(Math.random() * 1_000_000)
       .toString()
@@ -63,7 +63,7 @@ describeIntegration('find_potential_duplicate (live Supabase)', () => {
   });
 
   it('returns null when there is no match', async () => {
-    const client = await signInAs('priest@stmina.de');
+    const client = await signInAs('priest@stminaconnect.com');
     const { data: matchId } = await client.rpc('find_potential_duplicate', {
       first: 'Nobody',
       last: 'AtAll',
@@ -73,8 +73,8 @@ describeIntegration('find_potential_duplicate (live Supabase)', () => {
   });
 
   it('ignores soft-deleted matches', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const adminId = await servantIdByEmail(admin, 'priest@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const adminId = await servantIdByEmail(admin, 'priest@stminaconnect.com');
     const phone = `+4917001${Math.floor(Math.random() * 1_000_000)
       .toString()
       .padStart(6, '0')}`;
@@ -104,11 +104,11 @@ describeIntegration('find_potential_duplicate (live Supabase)', () => {
 
 describeIntegration('create_person assignment rules (live Supabase)', () => {
   it('non-admin caller: payload assigned_servant is ignored, caller becomes the servant', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const otherServantId = await servantIdByEmail(admin, 'servant2@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const otherServantId = await servantIdByEmail(admin, 'servant2@stminaconnect.com');
 
-    const servant = await signInAs('servant1@stmina.de');
-    const callerId = await servantIdByEmail(servant, 'servant1@stmina.de');
+    const servant = await signInAs('servant1@stminaconnect.com');
+    const callerId = await servantIdByEmail(servant, 'servant1@stminaconnect.com');
 
     const { data: id, error } = await servant.rpc('create_person', {
       payload: {
@@ -129,8 +129,8 @@ describeIntegration('create_person assignment rules (live Supabase)', () => {
   });
 
   it('admin caller: explicit assigned_servant in payload is honored', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const targetId = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const targetId = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
 
     const { data: id, error } = await admin.rpc('create_person', {
       payload: {

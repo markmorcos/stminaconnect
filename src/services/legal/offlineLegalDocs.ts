@@ -36,7 +36,7 @@ export const PRIVACY_EN = `version: 2026-04-28
 ## Data Controller
 
 St. Mina Coptic Orthodox Church, Munich, Germany.
-Privacy contact: privacy@stmina.de.
+Privacy contact: privacy@stminaconnect.com.
 No formal Data Protection Officer is designated under Art. 37 GDPR / §38 BDSG; the email above is the parish privacy contact.
 
 ## What this app is
@@ -90,13 +90,13 @@ Data is stored in the EU (Frankfurt). **No transfers outside the EU/EEA take pla
 
 ## Your rights (Art. 15–22 GDPR)
 
-Access, rectification, erasure, restriction, portability, objection, withdrawal of consent, no automated decisions. Servants use Settings → Privacy. Members exercise these rights by emailing privacy@stmina.de. We respond within one month.
+Access, rectification, erasure, restriction, portability, objection, withdrawal of consent, no automated decisions. Servants use Settings → Privacy. Members exercise these rights by emailing privacy@stminaconnect.com. We respond within one month.
 
 You can lodge a complaint with the **Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)**, Promenade 18, 91522 Ansbach, Germany — https://www.lda.bayern.de/ — or with the supervisory authority of your habitual residence or place of work.
 
 ## Children
 
-Members may include minors registered by a servant with parental knowledge. The app does not collect data from children directly. Parents/guardians can request access, correction, or erasure via privacy@stmina.de.
+Members may include minors registered by a servant with parental knowledge. The app does not collect data from children directly. Parents/guardians can request access, correction, or erasure via privacy@stminaconnect.com.
 
 ## No tracking
 
@@ -108,7 +108,7 @@ Encryption at rest (AES-256) and in transit (TLS); Row-Level Security; RPC-only 
 
 ## Contact
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export const PRIVACY_DE = `version: 2026-04-28
@@ -118,7 +118,7 @@ export const PRIVACY_DE = `version: 2026-04-28
 ## Verantwortliche Stelle
 
 St. Mina Koptisch-Orthodoxe Kirche, München, Deutschland.
-Datenschutzkontakt: privacy@stmina.de.
+Datenschutzkontakt: privacy@stminaconnect.com.
 Ein formaler Datenschutzbeauftragter nach Art. 37 DSGVO / § 38 BDSG ist nicht bestellt; die o. g. Adresse ist die Datenschutzkontaktstelle der Gemeinde.
 
 ## Zweck der App
@@ -171,13 +171,13 @@ Speicherung in der EU (Frankfurt). **Keine Übermittlung außerhalb des EU/EWR.*
 
 ## Ihre Rechte (Art. 15–22 DSGVO)
 
-Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch, Widerruf der Einwilligung, keine automatisierten Entscheidungen. Diener nutzen Einstellungen → Datenschutz. Mitglieder wenden sich an privacy@stmina.de. Antwort innerhalb eines Monats.
+Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch, Widerruf der Einwilligung, keine automatisierten Entscheidungen. Diener nutzen Einstellungen → Datenschutz. Mitglieder wenden sich an privacy@stminaconnect.com. Antwort innerhalb eines Monats.
 
 Beschwerderecht beim **Bayerischen Landesamt für Datenschutzaufsicht (BayLDA)**, Promenade 18, 91522 Ansbach — https://www.lda.bayern.de/ — oder bei der Aufsichtsbehörde des gewöhnlichen Aufenthalts oder Arbeitsplatzes.
 
 ## Minderjährige
 
-Mitglieder können Minderjährige sein, die mit Wissen der Eltern von einem Diener registriert werden. Die App erhebt keine Daten direkt von Kindern. Eltern/Sorgeberechtigte können Auskunft, Berichtigung oder Löschung über privacy@stmina.de anfordern.
+Mitglieder können Minderjährige sein, die mit Wissen der Eltern von einem Diener registriert werden. Die App erhebt keine Daten direkt von Kindern. Eltern/Sorgeberechtigte können Auskunft, Berichtigung oder Löschung über privacy@stminaconnect.com anfordern.
 
 ## Kein Tracking
 
@@ -189,7 +189,7 @@ Verschlüsselung im Ruhezustand (AES-256) und in der Übertragung (TLS); Row-Lev
 
 ## Kontakt
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export const PRIVACY_AR = `version: 2026-04-28
@@ -199,7 +199,7 @@ export const PRIVACY_AR = `version: 2026-04-28
 ## المسؤول عن البيانات
 
 كنيسة الشهيد مار مينا القبطية الأرثوذكسية، ميونخ، ألمانيا.
-جهة الاتصال للخصوصيّة: privacy@stmina.de.
+جهة الاتصال للخصوصيّة: privacy@stminaconnect.com.
 لم تُعيَّن مسؤول حماية بيانات رسمي بموجب المادة ٣٧ من اللائحة / § ٣٨ BDSG؛ العنوان أعلاه هو جهة الاتصال للخصوصيّة في الكنيسة.
 
 ## ما هذا التطبيق
@@ -252,13 +252,13 @@ export const PRIVACY_AR = `version: 2026-04-28
 
 ## حقوقك (المواد ١٥–٢٢)
 
-الاطّلاع، التصحيح، الحذف، التقييد، قابليّة النقل، الاعتراض، سحب الموافقة، عدم الخضوع لقرارات آليّة بحتة. الخدّام عبر الإعدادات → الخصوصيّة. المخدومون عبر privacy@stmina.de. الردّ خلال شهر.
+الاطّلاع، التصحيح، الحذف، التقييد، قابليّة النقل، الاعتراض، سحب الموافقة، عدم الخضوع لقرارات آليّة بحتة. الخدّام عبر الإعدادات → الخصوصيّة. المخدومون عبر privacy@stminaconnect.com. الردّ خلال شهر.
 
 الحقّ في الشكوى أمام **Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)**، Promenade 18, 91522 Ansbach — https://www.lda.bayern.de/ — أو لدى السلطة الإشرافيّة في مكان إقامتك المعتاد أو مكان عملك.
 
 ## الأطفال
 
-قد يكون المخدومون قاصرين يُسجَّلون بمعرفة الوالدَين. لا يجمع التطبيق بياناتٍ من الأطفال مباشرةً. الوالدان أو الوصيّ يطلبون الاطّلاع أو التصحيح أو الحذف عبر privacy@stmina.de.
+قد يكون المخدومون قاصرين يُسجَّلون بمعرفة الوالدَين. لا يجمع التطبيق بياناتٍ من الأطفال مباشرةً. الوالدان أو الوصيّ يطلبون الاطّلاع أو التصحيح أو الحذف عبر privacy@stminaconnect.com.
 
 ## لا تتبّع
 
@@ -270,7 +270,7 @@ export const PRIVACY_AR = `version: 2026-04-28
 
 ## الاتصال
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export const TERMS_EN = `version: 2026-04-28
@@ -279,7 +279,7 @@ export const TERMS_EN = `version: 2026-04-28
 
 ## Operator
 
-St. Mina Coptic Orthodox Church, Munich, Germany. Contact: privacy@stmina.de.
+St. Mina Coptic Orthodox Church, Munich, Germany. Contact: privacy@stminaconnect.com.
 
 ## Audience
 
@@ -328,7 +328,7 @@ Material changes require re-acceptance on next sign-in. The accepted version is 
 
 ## Contact
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export const TERMS_DE = `version: 2026-04-28
@@ -337,7 +337,7 @@ export const TERMS_DE = `version: 2026-04-28
 
 ## Anbieter
 
-St. Mina Koptisch-Orthodoxe Kirche, München, Deutschland. Kontakt: privacy@stmina.de.
+St. Mina Koptisch-Orthodoxe Kirche, München, Deutschland. Kontakt: privacy@stminaconnect.com.
 
 ## Nutzerkreis
 
@@ -386,7 +386,7 @@ Wesentliche Änderungen erfordern eine erneute Bestätigung bei der nächsten An
 
 ## Kontakt
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export const TERMS_AR = `version: 2026-04-28
@@ -395,7 +395,7 @@ export const TERMS_AR = `version: 2026-04-28
 
 ## الجهة المُشَغِّلة
 
-كنيسة الشهيد مار مينا القبطيّة الأرثوذكسيّة، ميونخ، ألمانيا. الاتصال: privacy@stmina.de.
+كنيسة الشهيد مار مينا القبطيّة الأرثوذكسيّة، ميونخ، ألمانيا. الاتصال: privacy@stminaconnect.com.
 
 ## الفئة المستهدفة
 
@@ -444,7 +444,7 @@ export const TERMS_AR = `version: 2026-04-28
 
 ## الاتصال
 
-privacy@stmina.de
+privacy@stminaconnect.com
 `;
 
 export function getOfflineLegalDoc(kind: LegalDocKind, lang: LegalLang): string {

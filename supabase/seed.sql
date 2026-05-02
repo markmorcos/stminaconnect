@@ -10,8 +10,8 @@
 --      `seed` target prepends a `SET` before piping this file).
 --
 -- Login (dev only): every account uses `password123`.
---   priest1@stmina.de … priest5@stmina.de    — admin role
---   servant1@stmina.de … servant20@stmina.de — servant role
+--   priest1@stminaconnect.com … priest5@stminaconnect.com    — admin role
+--   servant1@stminaconnect.com … servant20@stminaconnect.com — servant role
 --
 -- Re-runnable: every block deletes its prior seeded rows first, so the
 -- script can be replayed to refresh fixtures without manual cleanup.
@@ -29,9 +29,9 @@ begin;
 
 with seeded_servant_ids as (
   select id from public.servants
-   where email like 'priest%@stmina.de'
-      or email like 'servant%@stmina.de'
-      or email = 'priest@stmina.de'         -- legacy single-priest fixture
+   where email like 'priest%@stminaconnect.com'
+      or email like 'servant%@stminaconnect.com'
+      or email = 'priest@stminaconnect.com'         -- legacy single-priest fixture
 )
 delete from public.attendance
  where person_id in (
@@ -42,21 +42,21 @@ delete from public.attendance
 delete from public.persons
  where assigned_servant in (
    select id from public.servants
-    where email like 'priest%@stmina.de'
-       or email like 'servant%@stmina.de'
-       or email = 'priest@stmina.de'
+    where email like 'priest%@stminaconnect.com'
+       or email like 'servant%@stminaconnect.com'
+       or email = 'priest@stminaconnect.com'
  )
     or registered_by in (
    select id from public.servants
-    where email like 'priest%@stmina.de'
-       or email like 'servant%@stmina.de'
-       or email = 'priest@stmina.de'
+    where email like 'priest%@stminaconnect.com'
+       or email like 'servant%@stminaconnect.com'
+       or email = 'priest@stminaconnect.com'
  );
 
 delete from auth.users
- where email like 'priest%@stmina.de'
-    or email like 'servant%@stmina.de'
-    or email = 'priest@stmina.de';
+ where email like 'priest%@stminaconnect.com'
+    or email like 'servant%@stminaconnect.com'
+    or email = 'priest@stminaconnect.com';
 
 -- ---------------------------------------------------------------------------
 -- 2. People — 5 priests (admin) + 20 servants + 200 persons.
@@ -161,7 +161,7 @@ declare
 begin
   -- 2a. auth.users — 5 priests then 20 servants.
   for i in 1..5 loop
-    email := format('priest%s@stmina.de', i);
+    email := format('priest%s@stminaconnect.com', i);
     display_name := priest_names[i];
     insert into auth.users (
       instance_id, id, aud, role, email, encrypted_password,
@@ -179,7 +179,7 @@ begin
   end loop;
 
   for i in 1..20 loop
-    email := format('servant%s@stmina.de', i);
+    email := format('servant%s@stminaconnect.com', i);
     display_name := servant_names[i];
     insert into auth.users (
       instance_id, id, aud, role, email, encrypted_password,
@@ -199,12 +199,12 @@ begin
   -- 2b. public.servants — same UUIDs, with role.
   for i in 1..5 loop
     insert into public.servants (id, email, display_name, role) values
-      (priest_ids[i], format('priest%s@stmina.de', i), priest_names[i], 'admin');
+      (priest_ids[i], format('priest%s@stminaconnect.com', i), priest_names[i], 'admin');
   end loop;
 
   for i in 1..20 loop
     insert into public.servants (id, email, display_name, role) values
-      (servant_ids[i], format('servant%s@stmina.de', i), servant_names[i], 'servant');
+      (servant_ids[i], format('servant%s@stminaconnect.com', i), servant_names[i], 'servant');
   end loop;
 
   -- 2c. 200 persons. Distribution rules:

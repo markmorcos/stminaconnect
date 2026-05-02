@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1077502091892:android:f15615e7430233f14ba721",
+        "mobilesdk_app_id": "1:1077502091892:android:276c92d9c3b007fb4ba721",
         "android_client_info": {
-          "package_name": "tech.morcos.stminaconnect"
+          "package_name": "com.stminaconnect"
         }
       },
       "oauth_client": [],

@@ -53,13 +53,13 @@ describe('Sign-in screen', () => {
   it('submits the email to signInWithMagicLink with the redirect URL', async () => {
     mockSignInWithMagicLink.mockResolvedValue(undefined);
     const { getByLabelText, getByText } = renderScreen();
-    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stminaconnect.com');
     await act(async () => {
       fireEvent.press(getByText('Send magic link'));
     });
     await waitFor(() =>
       expect(mockSignInWithMagicLink).toHaveBeenCalledWith(
-        'volunteer@stmina.de',
+        'volunteer@stminaconnect.com',
         'exp://test/--/auth/callback',
       ),
     );
@@ -68,12 +68,12 @@ describe('Sign-in screen', () => {
   it('after submit, shows the "check your inbox" empty-state with resend + use-different-email', async () => {
     mockSignInWithMagicLink.mockResolvedValue(undefined);
     const { getByLabelText, getByText, findByText, queryByLabelText } = renderScreen();
-    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stminaconnect.com');
     await act(async () => {
       fireEvent.press(getByText('Send magic link'));
     });
 
-    expect(await findByText(/We sent a sign-in link to volunteer@stmina.de/i)).toBeTruthy();
+    expect(await findByText(/We sent a sign-in link to volunteer@stminaconnect.com/i)).toBeTruthy();
     expect(getByText("Didn't receive it? Send again")).toBeTruthy();
     expect(getByText('Use a different email')).toBeTruthy();
     expect(queryByLabelText('Email')).toBeNull();
@@ -82,7 +82,7 @@ describe('Sign-in screen', () => {
   it('"Use a different email" returns to the email form', async () => {
     mockSignInWithMagicLink.mockResolvedValue(undefined);
     const { getByLabelText, getByText, findByText } = renderScreen();
-    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stminaconnect.com');
     await act(async () => {
       fireEvent.press(getByText('Send magic link'));
     });
@@ -98,7 +98,7 @@ describe('Sign-in screen', () => {
   it('resend re-invokes signInWithMagicLink with the same email', async () => {
     mockSignInWithMagicLink.mockResolvedValue(undefined);
     const { getByLabelText, getByText, findByText } = renderScreen();
-    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stmina.de');
+    fireEvent.changeText(getByLabelText('Email'), 'volunteer@stminaconnect.com');
     await act(async () => {
       fireEvent.press(getByText('Send magic link'));
     });
@@ -110,7 +110,7 @@ describe('Sign-in screen', () => {
     });
     await waitFor(() =>
       expect(mockSignInWithMagicLink).toHaveBeenCalledWith(
-        'volunteer@stmina.de',
+        'volunteer@stminaconnect.com',
         'exp://test/--/auth/callback',
       ),
     );

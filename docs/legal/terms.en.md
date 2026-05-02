@@ -4,7 +4,7 @@ version: 2026-04-28
 
 ## 1. Who runs this service
 
-St. Mina Connect is operated by St. Mina Coptic Orthodox Church, Munich, Germany ("we", "us", "the church"). Contact: privacy@stmina.de.
+St. Mina Connect is operated by St. Mina Coptic Orthodox Church, Munich, Germany ("we", "us", "the church"). Contact: privacy@stminaconnect.com.
 
 ## 2. Who the service is for
 
@@ -81,4 +81,4 @@ We may update these Terms. On material changes you will be asked to re-accept on
 
 ## 13. Contact
 
-privacy@stmina.de
+privacy@stminaconnect.com

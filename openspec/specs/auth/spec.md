@@ -13,7 +13,7 @@ Servants are the only authenticated users. There is no public sign-up. A single 
 #### Scenario: Magic-link sign-in completes via `stminaconnect://`
 
 - **GIVEN** a dev-client / preview / production build with the `stminaconnect://` scheme registered
-- **AND** a servant row exists for `volunteer@stmina.de`
+- **AND** a servant row exists for `volunteer@stminaconnect.com`
 - **WHEN** the user enters that email and taps "Send magic link"
 - **THEN** `signInWithOtp` is invoked which stores a PKCE `code_verifier` in `secureAuthStorage`
 - **AND** the screen shows a "check your email" confirmation, surfacing the email address

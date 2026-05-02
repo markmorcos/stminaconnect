@@ -14,7 +14,7 @@ jest.mock('@/hooks/useAuth', () => ({
   useAuth: () => ({
     servant: {
       id: 'u1',
-      email: 's1@stmina.de',
+      email: 's1@stminaconnect.com',
       display_name: 'Maryam Saad',
       role: 'servant',
       created_at: '2026-01-01T00:00:00Z',

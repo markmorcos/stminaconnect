@@ -69,9 +69,9 @@ A `/admin/servants` screen MUST list all servants and provide:
 #### Scenario: Inviting a new servant sends a magic link
 
 - **GIVEN** an admin on the servants screen
-- **WHEN** the admin invites `new@stmina.de` with display name "John" and role `servant`
+- **WHEN** the admin invites `new@stminaconnect.com` with display name "John" and role `servant`
 - **THEN** the Edge Function creates an `auth.users` row and a `servants` row
-- **AND** Supabase sends a magic-link email to `new@stmina.de`
+- **AND** Supabase sends a magic-link email to `new@stminaconnect.com`
 
 #### Scenario: Non-admin cannot invite
 

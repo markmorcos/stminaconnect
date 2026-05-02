@@ -35,21 +35,21 @@ async function servantIdByEmail(client: SupabaseClient, email: string): Promise<
 
 describeIntegration('update_my_servant (live Supabase)', () => {
   it('accepts a valid display name', async () => {
-    const client = await signInAs('servant1@stmina.de');
+    const client = await signInAs('servant1@stminaconnect.com');
     const { data, error } = await client.rpc('update_my_servant', { display_name: 'Servant One' });
     expect(error).toBeNull();
     expect((data as { display_name: string }).display_name).toBe('Servant One');
   });
 
   it('rejects an empty display name', async () => {
-    const client = await signInAs('servant1@stmina.de');
+    const client = await signInAs('servant1@stminaconnect.com');
     const { error } = await client.rpc('update_my_servant', { display_name: '   ' });
     expect(error).not.toBeNull();
     expect(error?.message ?? '').toMatch(/empty/);
   });
 
   it('rejects a display name longer than 100 chars', async () => {
-    const client = await signInAs('servant1@stmina.de');
+    const client = await signInAs('servant1@stminaconnect.com');
     const { error } = await client.rpc('update_my_servant', { display_name: 'x'.repeat(101) });
     expect(error).not.toBeNull();
     expect(error?.message ?? '').toMatch(/too long/);
@@ -58,8 +58,8 @@ describeIntegration('update_my_servant (live Supabase)', () => {
 
 describeIntegration('update_servant (live Supabase)', () => {
   it('admin updates another servant display name', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const targetId = await servantIdByEmail(admin, 'servant2@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const targetId = await servantIdByEmail(admin, 'servant2@stminaconnect.com');
     const { data, error } = await admin.rpc('update_servant', {
       servant_id: targetId,
       payload: { display_name: 'Servant Two' },
@@ -69,9 +69,9 @@ describeIntegration('update_servant (live Supabase)', () => {
   });
 
   it('rejects non-admin callers with admin-only', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const targetId = await servantIdByEmail(admin, 'servant2@stmina.de');
-    const servant = await signInAs('servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const targetId = await servantIdByEmail(admin, 'servant2@stminaconnect.com');
+    const servant = await signInAs('servant1@stminaconnect.com');
     const { error } = await servant.rpc('update_servant', {
       servant_id: targetId,
       payload: { display_name: 'should not work' },
@@ -81,8 +81,8 @@ describeIntegration('update_servant (live Supabase)', () => {
   });
 
   it('ignores unknown payload keys', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const targetId = await servantIdByEmail(admin, 'servant2@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const targetId = await servantIdByEmail(admin, 'servant2@stminaconnect.com');
     const before = await admin.from('servants').select('role').eq('id', targetId).single();
     const beforeRole = (before.data as { role: string }).role;
 

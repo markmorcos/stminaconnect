@@ -35,7 +35,7 @@ async function servantIdByEmail(client: SupabaseClient, email: string): Promise<
 
 describeIntegration('compliance RPCs (live Supabase)', () => {
   it('record_consent + get_my_latest_consent round-trip', async () => {
-    const client = await signInAs('priest@stmina.de');
+    const client = await signInAs('priest@stminaconnect.com');
     const { data: rec, error } = await client.rpc('record_consent', {
       p_policy_version: '2026-04-28-test',
       p_terms_version: '2026-04-28-test',
@@ -55,7 +55,7 @@ describeIntegration('compliance RPCs (live Supabase)', () => {
   });
 
   it('export_my_data returns a JSON envelope tied to the caller', async () => {
-    const client = await signInAs('priest@stmina.de');
+    const client = await signInAs('priest@stminaconnect.com');
     const { data, error } = await client.rpc('export_my_data');
     expect(error).toBeNull();
     expect(data).toBeTruthy();
@@ -65,11 +65,11 @@ describeIntegration('compliance RPCs (live Supabase)', () => {
 
   it('export_person_data is admin-only', async () => {
     // Sign in as a non-admin servant. Seed includes at least one
-    // servant@stmina.de (or a similarly-named row); fall back to
+    // servant@stminaconnect.com (or a similarly-named row); fall back to
     // priest@ if none exists locally.
     const nonAdmin = freshClient();
     const { error: nonAdminError } = await nonAdmin.auth.signInWithPassword({
-      email: 'servant1@stmina.de',
+      email: 'servant1@stminaconnect.com',
       password: 'password123',
     });
     if (nonAdminError) {
@@ -78,8 +78,8 @@ describeIntegration('compliance RPCs (live Supabase)', () => {
       console.warn('No non-admin servant in seed; skipping admin-only assertion.');
       return;
     }
-    const admin = await signInAs('priest@stmina.de');
-    const adminId = await servantIdByEmail(admin, 'priest@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const adminId = await servantIdByEmail(admin, 'priest@stminaconnect.com');
 
     // Create a person to target.
     const { data: pid } = await admin.rpc('create_person', {
@@ -101,7 +101,7 @@ describeIntegration('compliance RPCs (live Supabase)', () => {
   it('audit_log is admin-readable; non-admin SELECT returns no rows', async () => {
     const nonAdmin = freshClient();
     const { error: nonAdminError } = await nonAdmin.auth.signInWithPassword({
-      email: 'servant1@stmina.de',
+      email: 'servant1@stminaconnect.com',
       password: 'password123',
     });
     if (nonAdminError) {
@@ -113,8 +113,8 @@ describeIntegration('compliance RPCs (live Supabase)', () => {
   });
 
   it('erase_person_data hard-erases the person and anonymizes attendance', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const adminId = await servantIdByEmail(admin, 'priest@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const adminId = await servantIdByEmail(admin, 'priest@stminaconnect.com');
 
     const { data: pid } = await admin.rpc('create_person', {
       payload: {

@@ -59,11 +59,11 @@ async function createPersonAssignedTo(
 
 describeIntegration('update_person field-level permissions (live Supabase)', () => {
   it('non-admin servant: succeeds for first_name change', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const servantId = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const servantId = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
     const personId = await createPersonAssignedTo(admin, servantId);
 
-    const servant = await signInAs('servant1@stmina.de');
+    const servant = await signInAs('servant1@stminaconnect.com');
     const { error } = await servant.rpc('update_person', {
       person_id: personId,
       payload: { first_name: 'RenamedByServant' },
@@ -75,11 +75,11 @@ describeIntegration('update_person field-level permissions (live Supabase)', () 
   });
 
   it('non-admin servant: rejected when payload contains priority', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const servantId = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const servantId = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
     const personId = await createPersonAssignedTo(admin, servantId);
 
-    const servant = await signInAs('servant1@stmina.de');
+    const servant = await signInAs('servant1@stminaconnect.com');
     const { error } = await servant.rpc('update_person', {
       person_id: personId,
       payload: { priority: 'high' },
@@ -89,8 +89,8 @@ describeIntegration('update_person field-level permissions (live Supabase)', () 
   });
 
   it('admin: can update all whitelisted fields in one call', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const servantId = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const servantId = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
     const personId = await createPersonAssignedTo(admin, servantId);
 
     const { error } = await admin.rpc('update_person', {
@@ -110,8 +110,8 @@ describeIntegration('update_person field-level permissions (live Supabase)', () 
   });
 
   it('any caller: payload containing assigned_servant is rejected', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const servantId = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const servantId = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
     const personId = await createPersonAssignedTo(admin, servantId);
 
     const { error } = await admin.rpc('update_person', {
@@ -123,12 +123,12 @@ describeIntegration('update_person field-level permissions (live Supabase)', () 
   });
 
   it('non-assigned non-admin: comments change is rejected', async () => {
-    const admin = await signInAs('priest@stmina.de');
-    const assignedTo = await servantIdByEmail(admin, 'servant1@stmina.de');
+    const admin = await signInAs('priest@stminaconnect.com');
+    const assignedTo = await servantIdByEmail(admin, 'servant1@stminaconnect.com');
     const personId = await createPersonAssignedTo(admin, assignedTo);
 
     // Sign in as a different servant and try to write comments.
-    const otherServant = await signInAs('servant2@stmina.de');
+    const otherServant = await signInAs('servant2@stminaconnect.com');
     const { error } = await otherServant.rpc('update_person', {
       person_id: personId,
       payload: { comments: 'Sneaky note' },

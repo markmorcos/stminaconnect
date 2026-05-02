@@ -115,12 +115,12 @@ The `app/index.tsx` route MUST render a Paper `Surface` containing the text "St.
 
 ### Requirement: Bundle identifier and asset folder structure SHALL be configured for downstream phases.
 
-The `app.json` file MUST set `expo.ios.bundleIdentifier` and `expo.android.package` to `tech.morcos.stminaconnect` (or the value confirmed with the user). The repository MUST contain `assets/branding/`, `assets/icons/`, `assets/fonts/`, `assets/images/`, each with at minimum a `.gitkeep` placeholder. A placeholder app icon and splash MUST be configured so the app boots without errors before `add-brand-assets` lands.
+The `app.json` file MUST set `expo.ios.bundleIdentifier` and `expo.android.package` to `com.stminaconnect` (or the value confirmed with the user). The repository MUST contain `assets/branding/`, `assets/icons/`, `assets/fonts/`, `assets/images/`, each with at minimum a `.gitkeep` placeholder. A placeholder app icon and splash MUST be configured so the app boots without errors before `add-brand-assets` lands.
 
 #### Scenario: Bundle id present
 
 - **WHEN** a reviewer inspects `app.json`
-- **THEN** `expo.ios.bundleIdentifier` and `expo.android.package` are both `tech.morcos.stminaconnect`
+- **THEN** `expo.ios.bundleIdentifier` and `expo.android.package` are both `com.stminaconnect`
 
 #### Scenario: Asset folders exist
 

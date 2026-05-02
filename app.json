@@ -9,14 +9,14 @@
     "userInterfaceStyle": "automatic",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "tech.morcos.stminaconnect",
+      "bundleIdentifier": "com.stminaconnect",
       "icon": "./assets/branding/icon-source.png",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
-      "package": "tech.morcos.stminaconnect",
+      "package": "com.stminaconnect",
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/branding/icon-foreground.png",
