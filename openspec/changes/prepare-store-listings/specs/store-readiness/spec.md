@@ -4,7 +4,7 @@
 
 ### Requirement: A canonical bundle identifier SHALL be configured for both stores.
 
-The iOS `bundleIdentifier` and Android `package` MUST both be `tech.morcos.stminaconnect` (or the value confirmed with the user). The identifier MUST appear in `app.json` and MUST match the EAS submit config in `eas.json`.
+The iOS `bundleIdentifier` and Android `package` MUST both be `com.stminaconnect` (or the value confirmed with the user). The identifier MUST appear in `app.json` and MUST match the EAS submit config in `eas.json`.
 
 #### Scenario: Bundle id consistent across config
 
@@ -14,32 +14,36 @@ The iOS `bundleIdentifier` and Android `package` MUST both be `tech.morcos.stmin
 ### Requirement: Store listing copy SHALL exist in EN, AR, and DE.
 
 For each language, the repository MUST contain:
+
 - App name and subtitle.
 - Short description (≤ 80 chars).
 - Full description (≤ 4000 chars).
 - Keywords / search tags.
 
-The content lives under `docs/store/listings/{en,ar,de}.md`. AR and DE drafts MUST be reviewed by a native speaker and marked off in `_review.md` before any store submission.
+The content lives under `docs/store/listings/{en,ar,de}.md`. AR and DE drafts MUST be reviewed for grammar, idiomatic phrasing, and character-count compliance before any store submission.
 
 #### Scenario: All three language files exist and are reviewed
 
 - **WHEN** a reviewer inspects `docs/store/listings/`
-- **THEN** `en.md`, `ar.md`, `de.md`, `_review.md` all exist
-- **AND** `_review.md` records the reviewer name and date for AR and DE
+- **THEN** `en.md`, `ar.md`, `de.md` all exist
+- **AND** each file is within its store's character limits (subtitle ≤ 30, short ≤ 80, full ≤ 4000, keywords ≤ 100)
 
 ### Requirement: At least three localized screenshots per platform SHALL exist.
 
-`assets/store/screenshots-framed/{ios,android}/{en,ar,de}/` MUST each contain at least three image files corresponding to:
+`assets/store/screenshots-framed/android/{en,ar,de}/` MUST each contain at least three image files corresponding to:
+
 - Quick Add screen (mid-fill).
 - Check-in roster (mid-toggle).
 - Servant Dashboard (with content).
 
 Images MUST be captured against the design-system theme using realistic seeded data.
 
+iOS screenshot folders (`assets/store/screenshots-framed/ios/...`) follow the same shape; populating them is OPTIONAL for the v1 launch since iOS submission is deferred until Apple Developer enrolment is in place. The capture script and folder layout already accommodate iOS once enrolment lands.
+
 #### Scenario: Folder structure complete
 
 - **WHEN** a reviewer inspects `assets/store/screenshots-framed/`
-- **THEN** the six locale-platform folders each contain ≥ 3 framed PNG files
+- **THEN** the three Android locale folders each contain ≥ 3 framed PNG files
 
 ### Requirement: Age rating answers SHALL be documented.
 
@@ -61,7 +65,7 @@ Images MUST be captured against the design-system theme using realistic seeded d
 
 ### Requirement: A marketing URL and a support contact SHALL be live.
 
-The marketing URL `https://stmina.morcos.tech` MUST be reachable, return HTTP 200, and render content matching the store description. A support email (`support@morcos.tech` or equivalent) MUST be provisioned and capable of receiving mail before any store submission.
+The marketing URL `https://stminaconnect.com` MUST be reachable, return HTTP 200, and render content matching the store description. A support email (`support@stminaconnect.com` or equivalent) MUST be provisioned and capable of receiving mail before any store submission.
 
 #### Scenario: Marketing site live
 
