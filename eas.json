@@ -49,6 +49,16 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "<apple-id>",
+        "ascAppId": "<asc-app-id>",
+        "appleTeamId": "<apple-team-id>"
+      },
+      "android": {
+        "serviceAccountKeyPath": "./secrets/play-service-account.json",
+        "track": "internal"
+      }
+    }
   }
 }

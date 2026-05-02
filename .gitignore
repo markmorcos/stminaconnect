@@ -46,3 +46,8 @@ service-account.json
 
 # Supabase Studio's per-developer SQL scratch
 supabase/snippets/
+
+# Store-submission secrets (Play service account JSON, etc.) — provisioned via `eas secret:create FILE`
+secrets/*
+!secrets/.gitkeep
+!secrets/README.md
