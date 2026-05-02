@@ -29,6 +29,13 @@ export const supabase: SupabaseClient = createClient(
       autoRefreshToken: true,
       persistSession: true,
       detectSessionInUrl: false,
+      // PKCE puts the post-verify token in `?code=` (query) instead of
+      // `#access_token=` (fragment). Android's deep-link dispatcher drops
+      // the fragment when handing off `stminaconnect://` to the app, which
+      // is the implicit-flow magic-link "stuck forever" symptom. With PKCE
+      // the callback at `app/auth/callback.tsx` reads `?code=` and runs
+      // `exchangeCodeForSession`.
+      flowType: 'pkce',
     },
   },
 );
