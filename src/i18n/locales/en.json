@@ -49,14 +49,12 @@
       "linkSentSnack": "Link sent. Check your email.",
       "resendLink": "Didn't receive it? Send again",
       "useDifferentEmail": "Use a different email",
-      "reviewDialog": {
-        "title": "Sign in",
-        "body": "Tap the button below to sign in.",
-        "signIn": "Sign in"
-      },
       "errors": {
         "invalidEmail": "Enter a valid email"
       }
+    },
+    "reviewer": {
+      "signedInToast": "Signed in with the App Review test account."
     },
     "callback": {
       "signingIn": "Signing you in…"

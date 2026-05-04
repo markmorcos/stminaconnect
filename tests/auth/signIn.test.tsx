@@ -2,7 +2,9 @@
  * Sign-in screen — single mode (magic link). Asserts no password input,
  * no OTP input, and that the post-submit "check your inbox" empty-state
  * exposes resend + use-different-email links that drive the right
- * behaviours.
+ * behaviours. The reviewer-bypass path skips this screen entirely (the
+ * auth gate redirects on session change), so its behaviour is covered
+ * by `authStore.test.ts` rather than here.
  */
 import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
@@ -10,8 +12,7 @@ import SignInScreen from '@/../app/(auth)/sign-in';
 import { ThemeProvider } from '@/design/ThemeProvider';
 
 const mockSignInWithMagicLink = jest.fn();
-const mockClearReviewLink = jest.fn();
-let mockReviewLink: string | null = null;
+let mockReviewerJustSignedIn = false;
 
 jest.mock('@/hooks/useAuth', () => ({
   useAuth: () => ({
@@ -19,26 +20,24 @@ jest.mock('@/hooks/useAuth', () => ({
     servant: null,
     isLoading: false,
     error: null,
-    reviewLink: mockReviewLink,
+    reviewerJustSignedIn: mockReviewerJustSignedIn,
     signInWithMagicLink: mockSignInWithMagicLink,
     signOut: jest.fn(),
-    clearReviewLink: mockClearReviewLink,
+    clearReviewerJustSignedIn: jest.fn(),
   }),
 }));
 
-// Mirror the auth store's reviewLink for the screen's
-// `useAuthStore.getState().reviewLink` post-action read.
+// The screen reads `reviewerJustSignedIn` from the store directly after
+// the sign-in action awaits, to decide whether to skip the "check your
+// inbox" transition. Mirror it here.
 jest.mock('@/state/authStore', () => ({
   useAuthStore: {
-    getState: () => ({ reviewLink: mockReviewLink }),
+    getState: () => ({ reviewerJustSignedIn: mockReviewerJustSignedIn }),
   },
 }));
 
-const mockOpenURL = jest.fn();
-
 jest.mock('expo-linking', () => ({
   createURL: (path: string) => `exp://test/--${path}`,
-  openURL: (...args: unknown[]) => mockOpenURL(...args),
 }));
 
 function renderScreen() {
@@ -52,9 +51,7 @@ function renderScreen() {
 describe('Sign-in screen', () => {
   beforeEach(() => {
     mockSignInWithMagicLink.mockReset();
-    mockClearReviewLink.mockReset();
-    mockOpenURL.mockReset();
-    mockReviewLink = null;
+    mockReviewerJustSignedIn = false;
   });
 
   it('renders email field and Send button only — no password, no OTP, no mode toggle', () => {
@@ -113,39 +110,21 @@ describe('Sign-in screen', () => {
     expect(getByText('Send magic link')).toBeTruthy();
   });
 
-  describe('reviewer-bypass dialog', () => {
-    it('renders the dialog with the link and a Sign in button when reviewLink is set', async () => {
-      mockReviewLink = 'https://example.supabase.co/auth/v1/verify?token=abc';
-      const { findByText, queryByText } = renderScreen();
-
-      // Dialog content
-      expect(await findByText('Tap the button below to sign in.')).toBeTruthy();
-      // The link itself is shown selectable as a fallback
-      expect(queryByText('https://example.supabase.co/auth/v1/verify?token=abc')).toBeTruthy();
+  it('skips the "check your inbox" transition when the reviewer-bypass auto-signed in', async () => {
+    // Simulate the auth store flipping the flag during signInWithMagicLink
+    // (the real store does this synchronously on a verifyOtp success).
+    mockSignInWithMagicLink.mockImplementation(async () => {
+      mockReviewerJustSignedIn = true;
     });
-
-    it('opens the link via Linking.openURL and clears the state when Sign in is pressed', async () => {
-      mockReviewLink = 'https://example.supabase.co/auth/v1/verify?token=abc';
-      mockOpenURL.mockResolvedValue(undefined);
-      const { getAllByText } = renderScreen();
-
-      // Two "Sign in" labels can match (header + button); press the last (button).
-      const signInElements = getAllByText('Sign in');
-      await act(async () => {
-        fireEvent.press(signInElements[signInElements.length - 1]);
-      });
-
-      expect(mockClearReviewLink).toHaveBeenCalledTimes(1);
-      expect(mockOpenURL).toHaveBeenCalledWith(
-        'https://example.supabase.co/auth/v1/verify?token=abc',
-      );
+    const { getByLabelText, getByText, queryByText } = renderScreen();
+    fireEvent.changeText(getByLabelText('Email'), 'playreview-7f3a9c2d@stminaconnect.app');
+    await act(async () => {
+      fireEvent.press(getByText('Send magic link'));
     });
-
-    it('does not render the dialog for real users (reviewLink null)', () => {
-      mockReviewLink = null;
-      const { queryByText } = renderScreen();
-      expect(queryByText('Tap the button below to sign in.')).toBeNull();
-    });
+    // No inbox empty-state, no link-sent snackbar — the auth gate is
+    // about to redirect away from this screen.
+    expect(queryByText(/We sent a sign-in link/i)).toBeNull();
+    expect(getByLabelText('Email')).toBeTruthy();
   });
 
   it('resend re-invokes signInWithMagicLink with the same email', async () => {

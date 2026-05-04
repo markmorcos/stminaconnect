@@ -5,7 +5,7 @@ import * as Linking from 'expo-linking';
 import { useTranslation } from 'react-i18next';
 import { z, type ZodSchema } from 'zod';
 
-import { Button, Input, Modal, Snackbar, Stack, Text, useTokens } from '@/design';
+import { Button, Input, Snackbar, Stack, Text, useTokens } from '@/design';
 import { useAuth } from '@/hooks/useAuth';
 import { useAuthStore } from '@/state/authStore';
 
@@ -43,19 +43,18 @@ function zodResolver<T extends Record<string, unknown>>(schema: ZodSchema<T>): R
 export default function SignInScreen() {
   const { t } = useTranslation();
   const { colors, spacing } = useTokens();
-  const { signInWithMagicLink, isLoading, error, reviewLink, clearReviewLink } = useAuth();
+  const { signInWithMagicLink, isLoading, error } = useAuth();
   const [pendingEmail, setPendingEmail] = useState<string | null>(null);
   const [snack, setSnack] = useState<string | null>(null);
 
   async function sendLink(email: string) {
     const redirectTo = Linking.createURL('/auth/callback');
     await signInWithMagicLink(email, redirectTo);
-    // If the reviewer-bypass kicked in, the auth store populates
-    // `reviewLink` synchronously before this awaits returns. Read it
-    // from the store directly — the `reviewLink` from `useAuth` was
-    // captured at render time and doesn't reflect the post-action
-    // state until React re-renders.
-    if (useAuthStore.getState().reviewLink) return;
+    // If the reviewer-bypass kicked in, verifyOtp already created a
+    // session and the auth gate is about to navigate away from this
+    // screen — skip the "check your inbox" transition so the reviewer
+    // doesn't see a flash of the wrong UI before the redirect.
+    if (useAuthStore.getState().reviewerJustSignedIn) return;
     setPendingEmail(email);
     setSnack(t('auth.signIn.linkSentSnack'));
   }
@@ -110,40 +109,6 @@ export default function SignInScreen() {
       <Snackbar visible={Boolean(snack)} onDismiss={() => setSnack(null)} duration={4000}>
         {snack ?? ''}
       </Snackbar>
-
-      {/*
-        Reviewer-bypass dialog. Visible only when the auth store's
-        `reviewLink` is non-null, which happens exclusively when the
-        typed email matches the server-only `REVIEW_BYPASS_EMAIL` secret
-        (see `src/state/authStore.ts` and the `review-login` Edge
-        Function). For real users this branch is never rendered.
-       */}
-      <Modal
-        visible={Boolean(reviewLink)}
-        onDismiss={clearReviewLink}
-        accessibilityLabel={t('auth.signIn.reviewDialog.title')}
-      >
-        <Stack gap="md">
-          <Text variant="headingMd" accessibilityRole="header">
-            {t('auth.signIn.reviewDialog.title')}
-          </Text>
-          <Text variant="body" color={colors.textMuted}>
-            {t('auth.signIn.reviewDialog.body')}
-          </Text>
-          <Text variant="bodySm" color={colors.textMuted} selectable>
-            {reviewLink ?? ''}
-          </Text>
-          <Button
-            onPress={async () => {
-              const link = reviewLink;
-              clearReviewLink();
-              if (link) await Linking.openURL(link);
-            }}
-          >
-            {t('auth.signIn.reviewDialog.signIn')}
-          </Button>
-        </Stack>
-      </Modal>
     </View>
   );
 }

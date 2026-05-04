@@ -23,18 +23,19 @@ export interface AuthState {
   isLoading: boolean;
   error: string | null;
   /**
-   * Set to a fresh Supabase `action_link` URL when the typed email
-   * matches the server-configured Play / App Store reviewer email.
-   * The sign-in screen renders a dialog with this URL and a "Sign in"
-   * button that opens it via `Linking.openURL`. Null for every other
-   * sign-in attempt — real users go through the standard "check your
-   * email" flow with no dialog and no behavioural change.
+   * Set to true for one render after the reviewer-bypass auto-signed the
+   * caller in. The authenticated layout renders a one-shot snackbar so
+   * the reviewer (and anyone watching the screen) understands they were
+   * signed in via the reviewer test account, not a real flow. Cleared
+   * by `clearReviewerJustSignedIn` once shown.
+   *
+   * Always false for real users (the bypass branch never fires for them).
    */
-  reviewLink: string | null;
+  reviewerJustSignedIn: boolean;
   signInWithMagicLink: (email: string, redirectTo?: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
-  clearReviewLink: () => void;
+  clearReviewerJustSignedIn: () => void;
   /**
    * Replaces the in-memory servant row with the given partial. Used by
    * the account screen to reflect a successful display-name save without
@@ -85,7 +86,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   isHydrated: false,
   isLoading: false,
   error: null,
-  reviewLink: null,
+  reviewerJustSignedIn: false,
 
   async refresh() {
     const { data, error } = await supabase.auth.getSession();
@@ -118,28 +119,41 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   async signInWithMagicLink(email, redirectTo) {
-    set({ isLoading: true, error: null, reviewLink: null });
+    set({ isLoading: true, error: null, reviewerJustSignedIn: false });
 
     // Reviewer-bypass probe: every sign-in attempt is offered to the
     // `review-login` Edge Function first, which compares the supplied
     // email to a server-only `REVIEW_BYPASS_EMAIL` secret. For real
-    // users it returns `{ link: null }` and we fall through to the
-    // standard magic-link send below — no behavioural change. For the
-    // single configured Play / App Store reviewer email it returns a
-    // freshly-minted `action_link` URL that the sign-in screen surfaces
-    // via a dialog. See `openspec/changes/add-play-review-login-bypass/`.
+    // users it returns `{ token_hash: null, type: null }` and we fall
+    // through to the standard magic-link send below — no behavioural
+    // change. For the single configured Play / App Store reviewer email
+    // it returns a freshly-minted token_hash, which we feed directly to
+    // `verifyOtp` to mint a session inline (no browser, no deeplink, no
+    // callback screen). See `docs/store/review-account.md`.
     //
     // The function is wrapped in try/catch and falls through to
     // `signInWithOtp` on ANY failure (network error, function down,
     // 5xx, malformed body) so an Edge Function outage degrades to
     // today's behaviour rather than locking real users out.
     try {
-      const { data } = await supabase.functions.invoke<{ link: string | null }>('review-login', {
-        body: { email, redirectTo },
+      const { data } = await supabase.functions.invoke<{
+        token_hash: string | null;
+        type: 'magiclink' | null;
+      }>('review-login', {
+        body: { email },
       });
-      if (data?.link) {
-        set({ isLoading: false, error: null, reviewLink: data.link });
-        return;
+      if (data?.token_hash && data.type) {
+        const { error: verifyError } = await supabase.auth.verifyOtp({
+          token_hash: data.token_hash,
+          type: data.type,
+        });
+        if (!verifyError) {
+          set({ isLoading: false, error: null, reviewerJustSignedIn: true });
+          return;
+        }
+        if (__DEV__) {
+          console.warn('reviewer verifyOtp failed; falling through to signInWithOtp', verifyError);
+        }
       }
     } catch (e) {
       if (__DEV__) {
@@ -161,8 +175,8 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ isLoading: false, error: null });
   },
 
-  clearReviewLink() {
-    set({ reviewLink: null });
+  clearReviewerJustSignedIn() {
+    set({ reviewerJustSignedIn: false });
   },
 
   async signOut() {
@@ -245,6 +259,6 @@ export function __resetAuthStoreForTests() {
     isHydrated: false,
     isLoading: false,
     error: null,
-    reviewLink: null,
+    reviewerJustSignedIn: false,
   });
 }

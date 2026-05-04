@@ -10,6 +10,7 @@ jest.mock('@/services/api/supabase', () => {
     signOut: jest.fn(),
     onAuthStateChange: jest.fn(),
     exchangeCodeForSession: jest.fn(),
+    verifyOtp: jest.fn(),
   };
   const functions = { invoke: jest.fn() };
   return { supabase: { auth, functions } };
@@ -44,10 +45,13 @@ beforeEach(() => {
 
 describe('authStore.signInWithMagicLink', () => {
   beforeEach(() => {
-    // Default: review-login probe returns null for every email, so all
-    // existing tests fall through to signInWithOtp unchanged. Reviewer
-    // tests below override this for the matching email.
-    mockedFunctions.invoke.mockResolvedValue({ data: { link: null }, error: null });
+    // Default: review-login probe returns the no-match shape for every
+    // email, so all existing tests fall through to signInWithOtp
+    // unchanged. Reviewer-specific tests below override this.
+    mockedFunctions.invoke.mockResolvedValue({
+      data: { token_hash: null, type: null },
+      error: null,
+    });
   });
 
   it('clears error on success', async () => {
@@ -87,53 +91,80 @@ describe('authStore.signInWithMagicLink', () => {
   });
 
   describe('reviewer-bypass probe', () => {
-    it('falls through to signInWithOtp when review-login returns null link', async () => {
-      mockedFunctions.invoke.mockResolvedValue({ data: { link: null }, error: null });
+    it('falls through to signInWithOtp when review-login returns the no-match shape', async () => {
+      mockedFunctions.invoke.mockResolvedValue({
+        data: { token_hash: null, type: null },
+        error: null,
+      });
       mockedAuth.signInWithOtp.mockResolvedValue({ data: {}, error: null });
 
       await useAuthStore.getState().signInWithMagicLink('real-user@stminaconnect.com', 'exp://r');
 
       expect(mockedFunctions.invoke).toHaveBeenCalledWith('review-login', {
-        body: { email: 'real-user@stminaconnect.com', redirectTo: 'exp://r' },
+        body: { email: 'real-user@stminaconnect.com' },
       });
+      expect(mockedAuth.verifyOtp).not.toHaveBeenCalled();
       expect(mockedAuth.signInWithOtp).toHaveBeenCalledTimes(1);
-      expect(useAuthStore.getState().reviewLink).toBeNull();
+      expect(useAuthStore.getState().reviewerJustSignedIn).toBe(false);
     });
 
     it('falls through to signInWithOtp when review-login throws (graceful degradation)', async () => {
-      // Suppress the dev-only console.warn the auth store emits on probe failure.
       const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
       mockedFunctions.invoke.mockRejectedValue(new Error('function unavailable'));
       mockedAuth.signInWithOtp.mockResolvedValue({ data: {}, error: null });
 
       await useAuthStore.getState().signInWithMagicLink('real-user@stminaconnect.com');
 
+      expect(mockedAuth.verifyOtp).not.toHaveBeenCalled();
       expect(mockedAuth.signInWithOtp).toHaveBeenCalledTimes(1);
-      expect(useAuthStore.getState().reviewLink).toBeNull();
+      expect(useAuthStore.getState().reviewerJustSignedIn).toBe(false);
       expect(useAuthStore.getState().error).toBeNull();
       warnSpy.mockRestore();
     });
 
-    it('surfaces the link and skips signInWithOtp when review-login returns a non-null link', async () => {
+    it('verifies the OTP and sets reviewerJustSignedIn when review-login returns a token_hash', async () => {
       mockedFunctions.invoke.mockResolvedValue({
-        data: { link: 'https://example.supabase.co/auth/v1/verify?token=abc' },
+        data: { token_hash: 'abc123', type: 'magiclink' },
         error: null,
       });
+      mockedAuth.verifyOtp.mockResolvedValue({ data: {}, error: null });
 
       await useAuthStore.getState().signInWithMagicLink('playreview-7f3a9c2d@stminaconnect.app');
 
+      expect(mockedAuth.verifyOtp).toHaveBeenCalledWith({
+        token_hash: 'abc123',
+        type: 'magiclink',
+      });
       expect(mockedAuth.signInWithOtp).not.toHaveBeenCalled();
-      expect(useAuthStore.getState().reviewLink).toBe(
-        'https://example.supabase.co/auth/v1/verify?token=abc',
-      );
+      expect(useAuthStore.getState().reviewerJustSignedIn).toBe(true);
       expect(useAuthStore.getState().isLoading).toBe(false);
       expect(useAuthStore.getState().error).toBeNull();
     });
 
-    it('clearReviewLink resets the dialog state', () => {
-      useAuthStore.setState({ reviewLink: 'https://x' });
-      useAuthStore.getState().clearReviewLink();
-      expect(useAuthStore.getState().reviewLink).toBeNull();
+    it('falls through to signInWithOtp when verifyOtp errors after a token_hash hit', async () => {
+      const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+      mockedFunctions.invoke.mockResolvedValue({
+        data: { token_hash: 'abc123', type: 'magiclink' },
+        error: null,
+      });
+      mockedAuth.verifyOtp.mockResolvedValue({
+        data: {},
+        error: { name: 'AuthApiError', message: 'invalid token', status: 400 },
+      });
+      mockedAuth.signInWithOtp.mockResolvedValue({ data: {}, error: null });
+
+      await useAuthStore.getState().signInWithMagicLink('playreview-7f3a9c2d@stminaconnect.app');
+
+      expect(mockedAuth.verifyOtp).toHaveBeenCalledTimes(1);
+      expect(mockedAuth.signInWithOtp).toHaveBeenCalledTimes(1);
+      expect(useAuthStore.getState().reviewerJustSignedIn).toBe(false);
+      warnSpy.mockRestore();
+    });
+
+    it('clearReviewerJustSignedIn flips the flag back to false', () => {
+      useAuthStore.setState({ reviewerJustSignedIn: true });
+      useAuthStore.getState().clearReviewerJustSignedIn();
+      expect(useAuthStore.getState().reviewerJustSignedIn).toBe(false);
     });
   });
 });

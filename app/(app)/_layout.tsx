@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { NotificationBanner } from '@/components/NotificationBanner';
 import { SyncConflictSnackbar } from '@/components/SyncConflictSnackbar';
 import { SyncStatusIndicator } from '@/components/SyncStatusIndicator';
-import { Text, useTokens } from '@/design';
+import { Snackbar, Text, useTokens } from '@/design';
 import { getMyLatestConsent } from '@/services/api/compliance';
 import { triggerCalendarSyncIfStale } from '@/services/api/events';
 import { CURRENT_LEGAL_VERSIONS } from '@/services/legal/getLegalDoc';
@@ -21,6 +21,8 @@ import { useAuthStore } from '@/state/authStore';
 
 export default function AppLayout() {
   const session = useAuthStore((s) => s.session);
+  const reviewerJustSignedIn = useAuthStore((s) => s.reviewerJustSignedIn);
+  const clearReviewerJustSignedIn = useAuthStore((s) => s.clearReviewerJustSignedIn);
   const { colors, spacing } = useTokens();
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
@@ -166,6 +168,21 @@ export default function AppLayout() {
       </View>
 
       <SyncConflictSnackbar />
+
+      {/*
+        One-shot toast confirming the reviewer-bypass auto-sign-in. Fires
+        only when `reviewerJustSignedIn` is set by the auth store after a
+        successful `verifyOtp` against the configured reviewer email — so
+        real users never see this. Auto-clears on dismiss / 6 s timeout
+        so it doesn't reappear on subsequent renders.
+       */}
+      <Snackbar
+        visible={reviewerJustSignedIn}
+        onDismiss={clearReviewerJustSignedIn}
+        duration={6000}
+      >
+        {t('auth.reviewer.signedInToast')}
+      </Snackbar>
     </View>
   );
 }

@@ -17,10 +17,10 @@ export function useAuth() {
       servant: s.servant,
       isLoading: s.isLoading,
       error: s.error,
-      reviewLink: s.reviewLink,
+      reviewerJustSignedIn: s.reviewerJustSignedIn,
       signInWithMagicLink: s.signInWithMagicLink,
       signOut: s.signOut,
-      clearReviewLink: s.clearReviewLink,
+      clearReviewerJustSignedIn: s.clearReviewerJustSignedIn,
       setServant: s.setServant,
     })),
   );

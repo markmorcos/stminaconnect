@@ -1,35 +1,43 @@
 /**
- * review-login — Edge Function that issues a fresh Supabase magic link
- * for the single configured Play Console / App Store reviewer email.
+ * review-login — Edge Function that mints a one-shot OTP token-hash for the
+ * single configured Play Console / App Store reviewer email so the app can
+ * sign the reviewer in inline (no email, no SMS, no browser, no deeplink).
  *
- * Why this exists: Play Console and App Store review run on a clean
- * test device with no inbox, no SMS, and no second-account setup, so a
- * reviewer cannot click an email magic link. Supabase magic links are
- * also single-use and expire (default 1h, max 24h) — far shorter than
- * the typical review window — so a baked-in link does not work either.
- * This function returns a *freshly-minted* `action_link` on every call,
- * so a stable in-app affordance ("type the reviewer email → tap the
- * link in the dialog that appears") works indefinitely.
+ * Why this exists: app-store review runs on a clean device with no inbox
+ * and no second-account access, so a normal magic-link email cannot reach
+ * the reviewer. Supabase magic links are also single-use and expire (1h
+ * default, 24h max) — a baked-in link in the listing dies long before
+ * review starts. This function returns a *freshly-minted* `token_hash` on
+ * every call, so a stable in-app affordance ("type the reviewer email →
+ * tap Continue") works indefinitely.
  *
- * Why it is the sole bypass mechanism: `auth.admin.generateLink` requires
- * the service role, which can never ship to the client. Routing every
- * sign-in through this function (rather than client-side branching)
- * keeps the bypass email exclusively in Edge Function secrets — never
- * in the JS bundle, `app.json`, `eas.json`, or any `EXPO_PUBLIC_*` var.
+ * Why token_hash instead of action_link: an earlier iteration returned the
+ * full `action_link` URL and let the client open it in the browser (which
+ * 302s back into the app via `stminaconnect://auth/callback`). That works
+ * for real users (PKCE flow surfaces the auth code as a query param) but
+ * not for `generateLink({ type: 'magiclink' })` — there is no PKCE pairing,
+ * so the redirect uses the implicit fragment flow, and the warm-start URL
+ * listener in `app/auth/callback.tsx` races the deeplink delivery and
+ * misses the URL → screen times out → reviewer bounced to /sign-in. The
+ * token_hash path bypasses the browser entirely: the client calls
+ * `supabase.auth.verifyOtp({ token_hash, type })` directly, which mints a
+ * session locally with no redirect, no listener race, and no callback
+ * screen involvement.
+ *
+ * Why server-only: `auth.admin.generateLink` requires the service role,
+ * which can never ship to the client. Routing every sign-in attempt
+ * through this function (rather than client-side branching on the email)
+ * keeps `REVIEW_BYPASS_EMAIL` exclusively in Edge Function secrets — it
+ * never appears in the JS bundle, `app.json`, `eas.json`, or any
+ * `EXPO_PUBLIC_*` var.
  *
  * Body shape: { email: string }
  *
  * Responses:
- *   200 { link: string | null }     — `link` is a fresh action_link when
- *                                     `email` matches REVIEW_BYPASS_EMAIL
- *                                     (case-insensitive, trimmed); null
- *                                     for every other case (mismatch,
- *                                     missing/invalid body, generateLink
- *                                     failure, or a missing secret).
- *                                     The shape is identical so callers
- *                                     can fall through to the normal
- *                                     `signInWithOtp` flow on null.
- *   405 { error: 'method_not_allowed' } — non-POST.
+ *   200 { token_hash, type }                                   — match: token_hash + verification type ('magiclink')
+ *   200 { token_hash: null, type: null }                       — no match, missing/invalid body, generateLink failure, or missing secret.
+ *                                                                Same shape so callers can fall through to the normal `signInWithOtp` flow.
+ *   405 { error: 'method_not_allowed' }                        — non-POST.
  *
  * Logging: matches log `{ outcome: 'issued', email, ip, ua, ts }`;
  * mismatches log `{ outcome: 'no-match', ip, ua, ts }` *without* the
@@ -49,8 +57,11 @@ declare const Deno: {
   serve: (h: (req: Request) => Promise<Response>) => void;
 };
 
+type ReviewVerificationType = 'magiclink';
+
 interface ReviewLoginResponse {
-  link: string | null;
+  token_hash: string | null;
+  type: ReviewVerificationType | null;
 }
 
 function jsonResponse(status: number, body: unknown): Response {
@@ -60,9 +71,11 @@ function jsonResponse(status: number, body: unknown): Response {
   });
 }
 
-function ok(link: string | null): Response {
-  return jsonResponse(200, { link } satisfies ReviewLoginResponse);
+function ok(payload: ReviewLoginResponse): Response {
+  return jsonResponse(200, payload);
 }
+
+const NULL_RESPONSE: ReviewLoginResponse = { token_hash: null, type: null };
 
 function clientIp(req: Request): string | null {
   // Supabase fronts Edge Functions with a proxy that sets x-forwarded-for.
@@ -90,21 +103,12 @@ Deno.serve(async (req: Request): Promise<Response> => {
   try {
     payload = await req.json();
   } catch {
-    return ok(null);
+    return ok(NULL_RESPONSE);
   }
 
   const suppliedEmail =
     typeof (payload as { email?: unknown })?.email === 'string'
       ? (payload as { email: string }).email.trim().toLowerCase()
-      : '';
-  // Forwarded to `generateLink`'s `options.redirectTo` so Supabase's verify
-  // endpoint 302s straight to the app's custom-scheme deeplink instead of
-  // the project's default Site URL (which would land in a browser and the
-  // app's `/auth/callback` would never fire). Same `Linking.createURL(...)`
-  // value the standard `signInWithOtp` flow already uses.
-  const redirectTo =
-    typeof (payload as { redirectTo?: unknown })?.redirectTo === 'string'
-      ? (payload as { redirectTo: string }).redirectTo.trim()
       : '';
 
   if (!REVIEW_BYPASS_EMAIL || suppliedEmail.length === 0) {
@@ -117,7 +121,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
         ts: new Date().toISOString(),
       }),
     );
-    return ok(null);
+    return ok(NULL_RESPONSE);
   }
 
   if (suppliedEmail !== REVIEW_BYPASS_EMAIL.trim().toLowerCase()) {
@@ -130,31 +134,30 @@ Deno.serve(async (req: Request): Promise<Response> => {
         ts: new Date().toISOString(),
       }),
     );
-    return ok(null);
+    return ok(NULL_RESPONSE);
   }
 
   const supabaseUrl = Deno.env.get('SUPABASE_URL');
   const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
   if (!supabaseUrl || !serviceRoleKey) {
     console.error('review-login: missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
-    return ok(null);
+    return ok(NULL_RESPONSE);
   }
 
   const admin = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  let actionLink: string | null = null;
+  let tokenHash: string | null = null;
   try {
     const { data, error } = await admin.auth.admin.generateLink({
       type: 'magiclink',
       email: REVIEW_BYPASS_EMAIL,
-      options: redirectTo ? { redirectTo } : undefined,
     });
     if (error) {
       console.error('review-login: generateLink failed', error);
     } else {
-      actionLink = data.properties?.action_link ?? null;
+      tokenHash = data.properties?.hashed_token ?? null;
     }
   } catch (e) {
     console.error('review-login: generateLink threw', e);
@@ -163,7 +166,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
   console.info(
     JSON.stringify({
       fn: 'review-login',
-      outcome: actionLink ? 'issued' : 'generate-failed',
+      outcome: tokenHash ? 'issued' : 'generate-failed',
       email: REVIEW_BYPASS_EMAIL,
       ip,
       ua,
@@ -171,5 +174,5 @@ Deno.serve(async (req: Request): Promise<Response> => {
     }),
   );
 
-  return ok(actionLink);
+  return ok(tokenHash ? { token_hash: tokenHash, type: 'magiclink' } : NULL_RESPONSE);
 });
