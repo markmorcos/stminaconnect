@@ -58,6 +58,24 @@ For each locale (EN/AR/DE):
    - **Phone screenshots**: drag the framed PNGs from `assets/store/screenshots-framed/android/<locale>/` (minimum 2, max 8; we provide 3).
 4. **Save**.
 
+## 4b. App access (reviewer credentials)
+
+The app is sign-in-only (servants only — no public sign-up). Play Console reviewers run on a clean test device with no inbox, so a normal magic-link cannot be delivered. The `review-login` Edge Function plus the canonical reviewer email (provisioned once via `scripts/provision-review-user.mjs`; full setup in `docs/store/review-account.md`) gives the reviewer a tap-only sign-in path.
+
+1. Play Console → app → **Policy → App content → App access → Manage**.
+2. **All or some functionality is restricted** → select **Yes**.
+3. **Add new instructions**:
+   - **Username**: leave blank.
+   - **Password**: leave blank.
+   - **Email**: paste the canonical reviewer email from `docs/store/review-account.md`.
+   - **Any other access information**:
+     ```
+     Open the app, type the email above on the sign-in screen, then tap "Sign in" in the dialog that appears. No email link, SMS code, or second account is required.
+     ```
+4. **Save**.
+
+If the email or instructions ever change (rotation), update both this section and the `REVIEW_BYPASS_EMAIL` Supabase secret in the same PR — the runbook (`docs/store/review-account.md`) is the source of truth.
+
 ## 5. Content rating
 
 1. Play Console → app → **Policy → App content → Content ratings → Start questionnaire**.

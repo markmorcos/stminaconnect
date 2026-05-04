@@ -135,6 +135,7 @@ Live at <https://stminaconnect.com> (marketing) and the Supabase project `hdcwaf
 - **Ongoing ops** (invite servant, GDPR erasure, backup verification, version bumps, key rotation): [`docs/runbook.md`](docs/runbook.md)
 - **Outage triage** (auth / sync / push / marketing site / backup): [`docs/incident-response.md`](docs/incident-response.md)
 - **Per-store submission playbooks**: [`docs/store/submission-ios.md`](docs/store/submission-ios.md), [`docs/store/submission-android.md`](docs/store/submission-android.md)
+- **Reviewer test account** (one-time provisioning + rotation): [`docs/store/review-account.md`](docs/store/review-account.md). Provision with `node scripts/provision-review-user.mjs --email <bypass email>` (requires `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` in env).
 
 Mobile distribution:
 

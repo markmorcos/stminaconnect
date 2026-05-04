@@ -1,39 +1,74 @@
 # Apple/Google Review Account
 
-Apple App Review and (occasionally) Google Play Review require working credentials to sign in to the app and verify it functions. Members do not log in — only servants do — so the review account must be a **servant** account.
+App Store Review and (occasionally) Play Console Review require working sign-in credentials. Members do not log in — only servants do — so the review account must be a **servant** account.
 
-## Requirements
+Magic-link auth (the only sign-in path on this app) is fundamentally incompatible with how reviewers operate: a reviewer runs the build on a clean test device with no inbox, no SMS, and no second-account setup, so they cannot click an email link. Supabase magic links are also single-use and expire (default 1 h), so a baked-in link in the listing dies long before review starts.
 
-- An email reviewers can use to sign in to St. Mina Connect.
-- Magic-link auth is in place (see `magic-link-only-auth` archived change). Reviewers receive an OTP after entering the email.
-- Apple's review form does not allow magic-link delivery to a reviewer mailbox during review. We work around it by **pre-generating** a review OTP and pasting it into the App Review Information notes — see "Provisioning" below.
+The fix: a **server-issued reviewer-bypass** that a stable in-app affordance triggers. The reviewer types a configured email; an Edge Function detects it and returns a freshly-minted magic link; the app surfaces the link in a dialog with a "Sign in" button. See `openspec/changes/add-play-review-login-bypass/` for the full design.
 
-## Provisioning workflow
+## Components
 
-Run this **before each App Store submission** (the OTP rotates):
+- **Edge Function**: `supabase/functions/review-login/index.ts`. Compares the typed email to the `REVIEW_BYPASS_EMAIL` Supabase secret server-side, calls `auth.admin.generateLink({ type: 'magiclink' })` on a match, returns `{ link }`. Returns `{ link: null }` for every other email — the response shape is identical so callers fall through to the normal `signInWithOtp`.
+- **Auth store wiring**: `src/state/authStore.ts` `signInWithMagicLink` calls the function before `signInWithOtp`. On a non-null `link` it sets `reviewLink` state and stops. On any error it falls through, so a function outage degrades to today's behaviour for real users.
+- **Sign-in UI**: `app/(auth)/sign-in.tsx` renders a dialog with the link and a "Sign in" button when `reviewLink` is set. Tap → `Linking.openURL` → Supabase verify → deeplink back to `stminaconnect://auth/callback` → existing fragment-based session handler.
+- **Provisioned identity**: a real `auth.users` row + matching `servants` row for the bypass email, created once via `scripts/provision-review-user.mjs`.
+- **Secret**: `REVIEW_BYPASS_EMAIL` lives in Supabase Edge Function secrets — never in `app.json`, `eas.json`, any `EXPO_PUBLIC_*` var, or the JS bundle.
 
-1. **Create or reuse the review servant.** In the production Supabase project, ensure a servant row exists for `review@stminaconnect.com`:
-   - Role: `servant` (not admin — review the app from a typical user's perspective).
-   - Display name: `App Review`.
-   - Assigned to a small synthetic congregation with seed data so the dashboard has something to show.
-2. **Generate a one-time OTP.**
-   - Supabase Studio → Auth → Users → find `review@stminaconnect.com` → "Send magic link" — Supabase emails the OTP to the address.
-   - **Forward the OTP** from `review@stminaconnect.com` to the developer's inbox so it can be pasted into App Review Information.
-   - Alternatively: run an admin Supabase Edge Function that mints an OTP and returns it directly (see `supabase/functions/admin-mint-review-otp/` — TODO if magic-link forwarding is fragile).
-3. **Update the App Review Information** in App Store Connect (and the equivalent Play "Notes for review" if requested):
+## Canonical reviewer email
+
+> **Action**: when first provisioning, generate a non-guessable local-part to defeat enumeration. Record the value in this file once (and only once); the same email then flows into Play Console / App Store Connect reviewer-instructions fields, the Edge Function secret, and the provisioned auth user.
+
+```bash
+printf 'playreview-%s@stminaconnect.app\n' $(openssl rand -hex 4)
+```
+
+| Environment | Canonical reviewer email          |
+| ----------- | --------------------------------- |
+| Production  | _record after first provisioning_ |
+| Preview     | _optional; usually skipped_       |
+
+## Provisioning workflow (one-time per environment)
+
+You only need to run this once per environment. After that the reviewer's sign-in works indefinitely — every tap of the dialog mints a fresh, valid magic link automatically.
+
+1. **Generate the bypass email** (above) and record it in the table.
+2. **Set the Edge Function secret**:
+   ```bash
+   make supabase-secrets-set NAME=REVIEW_BYPASS_EMAIL VALUE=<email> PROJECT=prod
+   # or directly:
+   supabase secrets set REVIEW_BYPASS_EMAIL=<email> --project-ref <prod ref>
    ```
-   Email:       review@stminaconnect.com
-   Magic-link OTP (single-use, valid 1 hour): 123456
+3. **Provision the auth user + servants row**:
+   ```bash
+   SUPABASE_URL=https://<prod ref>.supabase.co \
+   SUPABASE_SERVICE_ROLE_KEY=<service role from supabase dashboard> \
+     node scripts/provision-review-user.mjs --email <email>
    ```
-4. **Submit for review.**
-5. **After review** (approved or rejected), invalidate the OTP by signing out the review session in Supabase Auth → Users → review row → "Sign out user".
+   The script is idempotent — re-running on an already-provisioned project is a no-op.
+4. **Wait for CI to deploy the Edge Function** (next push to `main` triggers `deploy-supabase.yml`), or deploy manually:
+   ```bash
+   make deploy-functions PROJECT=prod
+   ```
+5. **Smoke-test** on a fresh production-channel build: type the bypass email on the sign-in screen → confirm the dialog appears with a working link → tap "Sign in" → confirm the home screen renders.
 
-## Why magic-link survives review
+## What the reviewer sees / does
 
-Apple Reviewer Guidelines explicitly accept a single-use OTP supplied in the App Review Information notes (Guideline 5.1.1, "Demo accounts may include a one-time code"). Magic-link auth is therefore acceptable as long as:
+> Open the app → enter the email **`<bypass email>`** → tap **Sign in** in the dialog that appears.
 
-- The OTP works for at least 24h after submission.
-- The reviewer can resend the OTP if it expires (we provide a "Resend code" button on the magic-link screen).
+That's it. No email, no SMS, no second account. The dialog stays on-screen until tapped or dismissed; tapping opens the system browser, which redirects back into the app with a valid session.
+
+## Rotation
+
+Treat the bypass email like a password: rotate when leaked or after suspicious access patterns. Rotation is cheap:
+
+1. Generate a new local-part.
+2. Update the Edge Function secret (`supabase secrets set REVIEW_BYPASS_EMAIL=<new email>`).
+3. Re-run `scripts/provision-review-user.mjs --email <new email>` to create the new auth user + servants row.
+4. Optional: delete the old auth user via the Supabase dashboard.
+5. Update Play Console / App Store Connect reviewer instructions to reference the new email.
+6. Update the table above.
+
+No app rebuild required — the email is server-side only.
 
 ## Seed data the reviewer should see
 
@@ -43,8 +78,11 @@ After signing in, the review account must show:
 - A recent attendance event so Check-in is meaningful.
 - One absence alert / follow-up so the Follow-ups screen has content.
 
-Source: the realistic seed at `supabase/seed.sql` (see `add-quick-add-registration` and `add-attendance-online-only`). Apply it to the production Supabase project before review submissions, or maintain a separate `review-seed.sql` if production data shouldn't be polluted.
+Source: the realistic seed at `supabase/seed.sql`. Apply to the production project before review submissions, or maintain a separate `review-seed.sql` if production data shouldn't be polluted.
 
-## Cleanup post-launch
+## Security posture
 
-Once approved, the review account stays — Apple may re-review when subsequent updates ship. Just rotate the OTP at every release and re-paste into App Review Information.
+- Email is non-guessable (8 hex chars random) → enumeration via repeated probes is computationally infeasible.
+- Edge Function logs every issuance (timestamp, IP, user-agent) for audit; mismatches log only the IP.
+- Reviewer account uses the **minimum role** needed (default: non-admin servant). Escalate to `admin` only if review explicitly tests admin-only screens.
+- A graceful-degradation `try/catch` around the Edge Function invoke ensures real users can still sign in if the function is down.

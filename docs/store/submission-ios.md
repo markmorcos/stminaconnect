@@ -87,19 +87,26 @@ Follow `docs/store/ios-privacy-label-final.md` exactly. The submission UI flow i
 
 1. Version → scroll to **App Review Information**.
 2. **First name / Last name / Phone / Email**: developer's contact details.
-3. **Notes**: paste:
+3. **Notes**: paste (replace `<bypass email>` with the canonical reviewer email from `docs/store/review-account.md`):
 
    ```
    St. Mina Connect is a pastoral-care companion for Coptic Orthodox parishes in Germany. The app is used by volunteer church servants to register parish members, mark attendance at services, and follow up with members who have not been seen recently. Members do not log in; only servants and admins do.
 
-   To test the app, please use:
-     Email:    review@stminaconnect.com    (set this up via Test User instructions below)
-     Password: <single-use review password — generate one before submission>
+   To test the app:
+     1. Open the app on a clean device.
+     2. On the sign-in screen, enter the email: <bypass email>
+     3. Tap "Sign in" in the dialog that appears.
+
+   No email link, SMS code, or second account is required — the app issues a one-tap session for this specific reviewer email via a server-side bypass.
 
    The icon contains a Coptic cross as a brand identity mark; this is documented in our submission notes (docs/store/age-rating.md). The app contains no proselytizing content.
    ```
 
-4. **Demo Account** (sign-in required): provide the credentials above. Generate via Supabase Auth in the production project; mark as a magic-link account with a known temporary OTP. See `docs/store/review-account.md` (TODO before submission).
+4. **Sign-in required** → **Yes**. Provide:
+   - **User name**: paste the canonical reviewer email from `docs/store/review-account.md`.
+   - **Password**: leave blank (the reviewer-bypass mechanism does not use a password — see the Notes above).
+
+   Backing infrastructure: `supabase/functions/review-login/` plus the `REVIEW_BYPASS_EMAIL` Supabase secret. Provisioning is one-time via `scripts/provision-review-user.mjs`; the full runbook is `docs/store/review-account.md`.
 
 ## 9. Build upload via `eas submit`
 

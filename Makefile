@@ -93,7 +93,8 @@ SUPABASE_FUNCTIONS := \
 	detect-absences \
 	invite-servant \
 	delete-auth-user \
-	weekly-backup
+	weekly-backup \
+	review-login
 
 .PHONY: _project-ref
 _project-ref:

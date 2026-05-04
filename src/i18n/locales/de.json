@@ -49,6 +49,11 @@
       "linkSentSnack": "Link gesendet. Prüfe deine E-Mails.",
       "resendLink": "Nichts erhalten? Erneut senden",
       "useDifferentEmail": "Andere E-Mail verwenden",
+      "reviewDialog": {
+        "title": "Anmelden",
+        "body": "Tippe unten auf die Schaltfläche, um dich anzumelden.",
+        "signIn": "Anmelden"
+      },
       "errors": {
         "invalidEmail": "Bitte gib eine gültige E-Mail-Adresse ein"
       }

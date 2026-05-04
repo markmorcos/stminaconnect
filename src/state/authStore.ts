@@ -22,9 +22,19 @@ export interface AuthState {
    */
   isLoading: boolean;
   error: string | null;
+  /**
+   * Set to a fresh Supabase `action_link` URL when the typed email
+   * matches the server-configured Play / App Store reviewer email.
+   * The sign-in screen renders a dialog with this URL and a "Sign in"
+   * button that opens it via `Linking.openURL`. Null for every other
+   * sign-in attempt — real users go through the standard "check your
+   * email" flow with no dialog and no behavioural change.
+   */
+  reviewLink: string | null;
   signInWithMagicLink: (email: string, redirectTo?: string) => Promise<void>;
   signOut: () => Promise<void>;
   refresh: () => Promise<void>;
+  clearReviewLink: () => void;
   /**
    * Replaces the in-memory servant row with the given partial. Used by
    * the account screen to reflect a successful display-name save without
@@ -75,6 +85,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   isHydrated: false,
   isLoading: false,
   error: null,
+  reviewLink: null,
 
   async refresh() {
     const { data, error } = await supabase.auth.getSession();
@@ -107,7 +118,35 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   async signInWithMagicLink(email, redirectTo) {
-    set({ isLoading: true, error: null });
+    set({ isLoading: true, error: null, reviewLink: null });
+
+    // Reviewer-bypass probe: every sign-in attempt is offered to the
+    // `review-login` Edge Function first, which compares the supplied
+    // email to a server-only `REVIEW_BYPASS_EMAIL` secret. For real
+    // users it returns `{ link: null }` and we fall through to the
+    // standard magic-link send below — no behavioural change. For the
+    // single configured Play / App Store reviewer email it returns a
+    // freshly-minted `action_link` URL that the sign-in screen surfaces
+    // via a dialog. See `openspec/changes/add-play-review-login-bypass/`.
+    //
+    // The function is wrapped in try/catch and falls through to
+    // `signInWithOtp` on ANY failure (network error, function down,
+    // 5xx, malformed body) so an Edge Function outage degrades to
+    // today's behaviour rather than locking real users out.
+    try {
+      const { data } = await supabase.functions.invoke<{ link: string | null }>('review-login', {
+        body: { email },
+      });
+      if (data?.link) {
+        set({ isLoading: false, error: null, reviewLink: data.link });
+        return;
+      }
+    } catch (e) {
+      if (__DEV__) {
+        console.warn('review-login probe failed; falling through to signInWithOtp', e);
+      }
+    }
+
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
@@ -120,6 +159,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       return;
     }
     set({ isLoading: false, error: null });
+  },
+
+  clearReviewLink() {
+    set({ reviewLink: null });
   },
 
   async signOut() {
@@ -202,5 +245,6 @@ export function __resetAuthStoreForTests() {
     isHydrated: false,
     isLoading: false,
     error: null,
+    reviewLink: null,
   });
 }
