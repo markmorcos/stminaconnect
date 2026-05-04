@@ -2,7 +2,7 @@
   "expo": {
     "name": "St. Mina Connect",
     "slug": "stminaconnect",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/branding/icon-source.png",
     "scheme": "stminaconnect",
@@ -17,6 +17,7 @@
     },
     "android": {
       "package": "com.stminaconnect",
+      "versionCode": 2,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/branding/icon-foreground.png",
@@ -53,6 +54,9 @@
         "projectId": "709cf095-c8d1-4a89-b897-ee734c8d8acd"
       }
     },
-    "owner": "markmorcos"
+    "owner": "markmorcos",
+    "updates": {
+      "url": "https://u.expo.dev/709cf095-c8d1-4a89-b897-ee734c8d8acd"
+    }
   }
 }
