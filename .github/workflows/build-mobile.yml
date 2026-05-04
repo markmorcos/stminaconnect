@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       profile:
-        description: EAS build profile
+        description: EAS build profile (production = APK sideload, production-aab = AAB for Play Store)
         required: true
         default: development
         type: choice
@@ -12,6 +12,7 @@ on:
           - development
           - preview
           - production
+          - production-aab
       platform:
         description: Target platform
         required: true

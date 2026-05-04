@@ -142,5 +142,6 @@ Mobile distribution:
 - **iOS / TestFlight** — deferred until Apple Developer enrolment lands (per the v1 "no Apple yet" decision).
 - **Android / Play Console** — deferred until the Google Play developer account is reactivated (closed for inactivity; refund + reactivation pending).
 - **Interim Android distribution** — production-signed APK from `eas build --profile production --platform android`, sideloaded directly to parish testers.
+- **Play Store upload** — production-signed AAB from `eas build --profile production-aab --platform android`. Same env / channel / signing as `production`; only `android.buildType` differs (`app-bundle` vs `apk`). Available in the `Build mobile app (EAS)` GitHub Action under the `profile` dropdown.
 
 For everything else, see `openspec/project.md`.
