@@ -94,7 +94,7 @@ describe('authStore.signInWithMagicLink', () => {
       await useAuthStore.getState().signInWithMagicLink('real-user@stminaconnect.com', 'exp://r');
 
       expect(mockedFunctions.invoke).toHaveBeenCalledWith('review-login', {
-        body: { email: 'real-user@stminaconnect.com' },
+        body: { email: 'real-user@stminaconnect.com', redirectTo: 'exp://r' },
       });
       expect(mockedAuth.signInWithOtp).toHaveBeenCalledTimes(1);
       expect(useAuthStore.getState().reviewLink).toBeNull();

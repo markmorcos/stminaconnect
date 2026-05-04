@@ -135,7 +135,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     // today's behaviour rather than locking real users out.
     try {
       const { data } = await supabase.functions.invoke<{ link: string | null }>('review-login', {
-        body: { email },
+        body: { email, redirectTo },
       });
       if (data?.link) {
         set({ isLoading: false, error: null, reviewLink: data.link });

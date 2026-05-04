@@ -97,6 +97,15 @@ Deno.serve(async (req: Request): Promise<Response> => {
     typeof (payload as { email?: unknown })?.email === 'string'
       ? (payload as { email: string }).email.trim().toLowerCase()
       : '';
+  // Forwarded to `generateLink`'s `options.redirectTo` so Supabase's verify
+  // endpoint 302s straight to the app's custom-scheme deeplink instead of
+  // the project's default Site URL (which would land in a browser and the
+  // app's `/auth/callback` would never fire). Same `Linking.createURL(...)`
+  // value the standard `signInWithOtp` flow already uses.
+  const redirectTo =
+    typeof (payload as { redirectTo?: unknown })?.redirectTo === 'string'
+      ? (payload as { redirectTo: string }).redirectTo.trim()
+      : '';
 
   if (!REVIEW_BYPASS_EMAIL || suppliedEmail.length === 0) {
     console.info(
@@ -140,6 +149,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
     const { data, error } = await admin.auth.admin.generateLink({
       type: 'magiclink',
       email: REVIEW_BYPASS_EMAIL,
+      options: redirectTo ? { redirectTo } : undefined,
     });
     if (error) {
       console.error('review-login: generateLink failed', error);
