@@ -31,12 +31,23 @@
  *                                     `signInWithOtp` flow on null.
  *   405 { error: 'method_not_allowed' } — non-POST.
  *
- * Logging: matches log `{ outcome: 'issued', email, ip, ua, ts }`;
+ * Logging: matches log `{ outcome, email, provisioned, ip, ua, ts }`,
+ * where `provisioned` is true when this call had to (re-)create the
+ * reviewer's auth user + servants row before minting the link;
  * mismatches log `{ outcome: 'no-match', ip, ua, ts }` *without* the
  * supplied email (it would be PII for real users who mistyped).
  *
+ * Self-healing: if `generateLink('magiclink')` fails (typically a 500
+ * "Database error finding user" when the reviewer's auth.users row is
+ * absent), the function falls back to provisioning the reviewer
+ * identity via `auth.admin.createUser` + a `servants` insert (matching
+ * `scripts/provision-review-user.mjs`), then retries. Keeps the bypass
+ * working when the one-shot provisioning step was skipped or the row
+ * was deleted.
+ *
  * Secrets:
- *   REVIEW_BYPASS_EMAIL — provisioned per environment by ops.
+ *   REVIEW_BYPASS_EMAIL — provisioned per environment by ops; when
+ *     missing, the function self-provisions on first matching call.
  *   SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY — auto-injected by Supabase.
  */
 
@@ -135,19 +146,20 @@ Deno.serve(async (req: Request): Promise<Response> => {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 
-  let actionLink: string | null = null;
-  try {
-    const { data, error } = await admin.auth.admin.generateLink({
-      type: 'magiclink',
-      email: REVIEW_BYPASS_EMAIL,
-    });
-    if (error) {
-      console.error('review-login: generateLink failed', error);
-    } else {
-      actionLink = data.properties?.action_link ?? null;
+  let actionLink = await tryGenerateLink(admin);
+  let provisioned = false;
+
+  // generateLink('magiclink') fails with 500 "Database error finding user"
+  // when the reviewer's auth.users row is missing. The provisioning script
+  // (scripts/provision-review-user.mjs) is meant to handle this once per
+  // environment, but if it was skipped or the row was deleted, recover
+  // here: ensure the auth user + matching servants row exist, then retry.
+  // Idempotent — re-running once provisioned is a single listUsers call.
+  if (!actionLink) {
+    provisioned = await ensureReviewerProvisioned(admin);
+    if (provisioned) {
+      actionLink = await tryGenerateLink(admin);
     }
-  } catch (e) {
-    console.error('review-login: generateLink threw', e);
   }
 
   console.info(
@@ -155,6 +167,7 @@ Deno.serve(async (req: Request): Promise<Response> => {
       fn: 'review-login',
       outcome: actionLink ? 'issued' : 'generate-failed',
       email: REVIEW_BYPASS_EMAIL,
+      provisioned,
       ip,
       ua,
       ts: new Date().toISOString(),
@@ -163,3 +176,76 @@ Deno.serve(async (req: Request): Promise<Response> => {
 
   return ok(actionLink);
 });
+
+// deno-lint-ignore no-explicit-any
+async function tryGenerateLink(admin: any): Promise<string | null> {
+  try {
+    const { data, error } = await admin.auth.admin.generateLink({
+      type: 'magiclink',
+      email: REVIEW_BYPASS_EMAIL,
+    });
+    if (error) {
+      console.error('review-login: generateLink failed', error);
+      return null;
+    }
+    return data.properties?.action_link ?? null;
+  } catch (e) {
+    console.error('review-login: generateLink threw', e);
+    return null;
+  }
+}
+
+// Locates the reviewer's auth user by email, creating it (and the matching
+// servants row) if missing. Returns true when, on exit, both rows exist.
+// deno-lint-ignore no-explicit-any
+async function ensureReviewerProvisioned(admin: any): Promise<boolean> {
+  const email = REVIEW_BYPASS_EMAIL!;
+  const target = email.trim().toLowerCase();
+
+  let userId: string | null = null;
+  for (let page = 1; page <= 5; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) {
+      console.error('review-login: listUsers failed', error);
+      return false;
+    }
+    // deno-lint-ignore no-explicit-any
+    const match = data.users.find((u: any) => (u.email ?? '').toLowerCase() === target);
+    if (match) {
+      userId = match.id;
+      break;
+    }
+    if (data.users.length < 200) break;
+  }
+
+  if (!userId) {
+    const { data, error } = await admin.auth.admin.createUser({
+      email,
+      email_confirm: true,
+      user_metadata: { display_name: 'App Review' },
+    });
+    if (error || !data.user) {
+      console.error('review-login: createUser failed', error);
+      return false;
+    }
+    userId = data.user.id;
+    console.warn('review-login: provisioned missing reviewer auth user', { userId });
+  }
+
+  // Insert the matching servants row. Without it, the auth store's
+  // post-sign-in fetchMyServant returns null and signs the reviewer out
+  // as an orphan. Idempotent: a unique-violation (23505) means a row
+  // already exists, which is the desired terminal state.
+  const { error: insertError } = await admin.from('servants').insert({
+    id: userId,
+    email,
+    display_name: 'App Review',
+    role: 'servant',
+  });
+  if (insertError && insertError.code !== '23505') {
+    console.error('review-login: servants insert failed', insertError);
+    return false;
+  }
+
+  return true;
+}
